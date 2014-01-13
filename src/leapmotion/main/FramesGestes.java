@@ -1,5 +1,6 @@
 package leapmotion.main;
 import com.leapmotion.leap.*;
+
 import java.util.ArrayList;
 
 public class FramesGestes {
@@ -22,7 +23,11 @@ public class FramesGestes {
 		return liste.get(20).tools().count();
 	}
 	
-	
+	public static Vector getHandTranslation(){
+		
+		Hand hand = liste.get(20).hands().get(0);
+		return hand.translation(liste.get(30));
+	}
 	
 	
 	

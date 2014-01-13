@@ -1,5 +1,4 @@
 package leapmotion.main;
-
 import java.util.ArrayList;
 import com.leapmotion.leap.*;
 
@@ -20,6 +19,7 @@ public class MyListener extends Listener{
         	frameList.add(i,controller.frame(i));
         }
         
+        
         // Détection d'un mouvement
         if (frameList.get(1).hands().count()>0){
         	if (frame.hands().count()==0){
@@ -34,6 +34,7 @@ public class MyListener extends Listener{
         		System.out.println("Nombre de doigts : " + FramesGestes.getFingersCount());
         		System.out.println("Nombre de mains : " + FramesGestes.getHandsCount());
         		System.out.println("Nombre d'outils : " + FramesGestes.getToolsCount());
+        		System.out.println("Vecteur de translation : " + FramesGestes.getHandTranslation());
         	}
         }
     }
