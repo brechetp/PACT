@@ -1,19 +1,20 @@
 package leapmotion.main;
 
 import java.io.IOException;
-import java.lang.Math;
-import com.leapmotion.leap.*;
-import com.leapmotion.leap.Gesture.State;
 
-class Sample {
-    public static void main(String[] args) {
-        // Create a sample listener and controller
-        SampleListener listener = new SampleListener();
+import com.leapmotion.leap.Controller;
+
+public class LeapMotionMain {
+
+	public static void main(String[] args) {
+		
+		 // Create a sample listener and controller
+        MyListener listener = new MyListener();
         Controller controller = new Controller();
 
         // Have the sample listener receive events from the controller
         controller.addListener(listener);
-
+        
         // Keep this process running until Enter is pressed
         System.out.println("Press Enter to quit...");
         try {
@@ -24,5 +25,7 @@ class Sample {
 
         // Remove the sample listener when done
         controller.removeListener(listener);
-    }
+
+	}
+
 }
