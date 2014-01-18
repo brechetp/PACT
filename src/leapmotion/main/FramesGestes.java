@@ -23,10 +23,16 @@ public class FramesGestes {
 		return liste.get(20).tools().count();
 	}
 	
-	public static Vector getHandTranslation(){
+	public static ArrayList<Vector> getHandTranslation(){
 		
-		Hand hand = liste.get(20).hands().get(0);
-		return hand.translation(liste.get(30));
+		ArrayList<Vector> mouvementDeTranslation = new ArrayList<Vector>();
+		
+		for (int i=0 ; i<10 ; i++){
+			Hand hand = liste.get(20+i).hands().get(0);	
+			mouvementDeTranslation.add(i, hand.translation(liste.get(30+i)));
+		}
+
+		return mouvementDeTranslation;
 	}
 	
 	

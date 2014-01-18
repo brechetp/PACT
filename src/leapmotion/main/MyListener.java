@@ -34,7 +34,11 @@ public class MyListener extends Listener{
         		System.out.println("Nombre de doigts : " + FramesGestes.getFingersCount());
         		System.out.println("Nombre de mains : " + FramesGestes.getHandsCount());
         		System.out.println("Nombre d'outils : " + FramesGestes.getToolsCount());
-        		System.out.println("Vecteur de translation : " + FramesGestes.getHandTranslation());
+        		System.out.println("Vecteurs de translation :");
+        		for (int i=0 ; i<10 ; i++){
+        			System.out.println(FramesGestes.getHandTranslation().get(i));
+        		}
+        		
         	}
         }
     }
