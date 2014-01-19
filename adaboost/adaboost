@@ -1,0 +1,25 @@
+fonction adaboost (matrice d'aprentisage: M, Vecteur de classe: Y, nombre d'itération: T,fonction donnant un classificateur simple et son erreur sur la base: FonctionClassificateur)
+
+m <- taille de M
+tableau D de taille m
+tableau H de taille T
+tableau a de taille T
+Pour i de 1 à m Faire
+	initialiser D[i]=1/m
+FinFaire
+
+Pour t de 1 à T Faire
+	h[t] <- FonctionClassificateur(D,M,Y)[1]
+	e[t] <- FonctionPerformance(D,M,Y)[2]
+	a[t] <- 1/2*ln((1-e[t])/e[t])
+	Pour i de 1 à m Faire
+		 D[i]<-D[i]exp(a[t]) si h[t]( M[i] ) <> Y[i]
+		 D[i]<-D[i]exp(-a[t]) sinon
+	FinFaire
+	Denom = somme (D[i],i=1..m)
+	Pour i de 1 à m Faire
+		D[i]<-D[i]/Denom
+	FinFaire
+FinFaire
+
+Renvoyer a et H
