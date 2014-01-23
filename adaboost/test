@@ -1,8 +1,11 @@
-fonction ClassiFInal(vecteur d'attribut x)
-vecteur de coef a calculé par adaboost
-vecteur de classifieur H calculé par adaboost
+Prerequis:
+Vecteur d'attribut X
+Vecteur de coef calculer par adaboost A
+vecteur de classifieur calculer par adaboost H
+
 retour<-0
-Pour chaque élément en place k des vecteur Faire
+nbClassif <- taille de H
+Pour k de 1 a nbClassif Faire
 	retour<-retour+a[k]*H[k](x)
 FinFaire
 revoie le signe de retour 

@@ -1,16 +1,26 @@
-fonction FonctionClassificateur( tableau de poid D, matrice d'apprentissage M, vecteur de classe Y)
+Prerequis:
+Vecteur de poid D
+Matrice d'apprentissage M
+Vecteur de classe Y
+un fonction qui creer un classificateur de type souche etant donné un attribut et un seuil ClassifSouche
+
 indiceAtribut<-1
 gesteMin <- 1
 erreurMin <- 1
-Pour chaque colone j de M (chaque attribut)
-	Pour chaque ligne i de M (chaque instance de geste)
+hauteur <- hauteur de M
+longueur <- longueur de M
+
+Pour j de 1 a longueur Faire 		//Parcours des attributs
+	POur i de 1 a hauteur Faire			//Parcours de geste
 		erreur<-0
-		ClassifSouche(j,M[i][j]) //creation d'un classificateur de type souche suivant l'attribut j et le seuil M[i][j]
-		Pour chaque ligne k de M (chaque instance de geste) Faire
-	 		Si ClassifSouche(M[k][d])<>Y[k] then 
+		ClassifSouche(j,M[i][j]) 		//creation d'un classificateur de type souche suivant l'attribut j et le seuil M[i][j]
+		
+		Pour k de 1 a hauteur Faire 		//Parcours des gestes pour calculer l'erreur du classificateur sur la base
+	 		Si ClassifSouche(M[k][d])<>Y[k]) then 
 	 			erreur <- erreur+D[k]
 	 		FinSi
 	 	FinFaire
+	 	
 	 	Si erreur<erreurMin alors
 	 		erreurMin <- erreur
 	 		gesteMin <- k
@@ -18,4 +28,4 @@ Pour chaque colone j de M (chaque attribut)
 	 	FinSi
 	 FinFaire
 FinFaire
-renvoie  [ClassifSouche(indiceAttribut,M[gesteMin][indiceAttribut]) ,erreurMin]
+renvoie  ClassifSouche(indiceAttribut,M[gesteMin][indiceAttribut]) et erreurMin

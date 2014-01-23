@@ -1,25 +1,32 @@
-fonction adaboost (matrice d'aprentisage: M, Vecteur de classe: Y, nombre d'itération: T,fonction donnant un classificateur simple et son erreur sur la base: FonctionClassificateur)
+Prerequis:
+Matrice d'apprentissage M
+Vecteur de classe Y
+Nombre d'iteration T
+Fonction donnant le classificateur a souche a decision le plus efficase CreerClassificateur
 
-m <- taille de M
+m <- hauteur de M 		//m est le nombre de geste different de la base
 tableau D de taille m
 tableau H de taille T
 tableau a de taille T
-Pour i de 1 à m Faire
-	initialiser D[i]=1/m
+
+Pour i de 1 a m Faire
+	D[i]=1/m 		 //On initialise la distribution avec des poids identiques
 FinFaire
 
-Pour t de 1 à T Faire
-	h[t] <- FonctionClassificateur(D,M,Y)[1]
-	e[t] <- FonctionPerformance(D,M,Y)[2]
-	a[t] <- 1/2*ln((1-e[t])/e[t])
-	Pour i de 1 à m Faire
+Pour t de 1 a T Faire
+	appel a la fonction CreerClassificateur
+	H[t] <- le classificateur obtenu 		//On garde le classificateur en memoire
+	a[t] <- 1/2*ln((1-e[t])/e[t])   		//e[t] represente l'erreur que fait le classificateur sur la base
+	
+	Pour i de 1 a m Faire 					//Debut du calcul des nouveaus coefficients
 		 D[i]<-D[i]exp(a[t]) si h[t]( M[i] ) <> Y[i]
 		 D[i]<-D[i]exp(-a[t]) sinon
 	FinFaire
-	Denom = somme (D[i],i=1..m)
-	Pour i de 1 à m Faire
+	Denom = somme (D[i],i=1..m) 		//On calcule la somme totale des D[i] pour ensuite les normaliser
+	Pour i de 1 a m Faire
 		D[i]<-D[i]/Denom
 	FinFaire
+	
 FinFaire
 
 Renvoyer a et H
