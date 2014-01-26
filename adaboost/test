@@ -1,11 +1,13 @@
-Prerequis:
-Vecteur d'attribut X
-Vecteur de coef calculer par adaboost A
-vecteur de classifieur calculer par adaboost H
+Pre-requis:
+-Vecteur d'attribut X
+-Vecteur de coefficient calcule par adaboost A
+-Vecteur de classifieur calcule par adaboost H
 
 retour<-0
 nbClassif <- taille de H
+
 Pour k de 1 a nbClassif Faire
-	retour<-retour+a[k]*H[k](x)
+	retour<-retour+A[k]*H[k](x)
 FinFaire
-revoie le signe de retour 
+
+Renvoie le signe de retour 
