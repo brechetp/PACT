@@ -46,7 +46,7 @@ public class BinaryImage {
 									.getWestNeighbor().getTag());
 						}
 						taggedBinaryImage[i][j].setTag(connectionTable[e]);
-						// mise ˆ jour de la table de la table de correspondance
+						// mise ï¿½ jour de la table de la table de correspondance
 						int a = taggedBinaryImage[i][j].getNorthNeighbor()
 								.getTag();
 						if (connectionTable[a] != connectionTable[e]) {
