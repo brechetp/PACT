@@ -14,54 +14,55 @@ public class BinaryImage {
 	private int size;
 	private int maxNbTags;
 
-	// algorithme de double passage
-	public int[][] connectedComponents() {
+	public int getFrameValue(int x, int y) {
+		return frame[x][y];
+	}
 
-		int k = 2;
+	// algorithme de double passage
+	public void connectedComponents() {
+
+		int k = 1;
 
 		// initialisation de la table de correspondance
-		for (int i = 2; i < maxNbTags; i++) {
+		for (int i = 1; i < maxNbTags; i++) {
 			connectionTable[i] = i;
 		}
 
 		// Premier passage
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				if (taggedBinaryImage[i][j].getNorthNeighbor().getTag() == 0
-						&& taggedBinaryImage[i][j].getWestNeighbor().getTag() == 0) {
-					taggedBinaryImage[i][j].setTag(k);
+				// si les voisins de gauche et du haut ne sont pas etiquetes
+				if (taggedBinaryImage[i - 1][j] == 0
+						&& taggedBinaryImage[i][j - 1] == 0) {
+
+					taggedBinaryImage[i][j] = k;
 					k++;
 				} else {
-					if (taggedBinaryImage[i][j].getNorthNeighbor().getTag() == taggedBinaryImage[i][j]
-							.getWestNeighbor().getTag()) {
-						taggedBinaryImage[i][j].setTag(taggedBinaryImage[i][j]
-								.getNorthNeighbor().getTag());
+					// si les voisins gauche et haut ont la meme etiquete
+					if (taggedBinaryImage[i - 1][j] == taggedBinaryImage[i][j - 1]) {
+
+						taggedBinaryImage[i][j] = taggedBinaryImage[i - 1][j];
 					} else {
-						int e = min(taggedBinaryImage[i][j].getNorthNeighbor()
-								.getTag(), taggedBinaryImage[i][j]
-								.getWestNeighbor().getTag());
+						int e = Math.min(taggedBinaryImage[i - 1][j],
+								taggedBinaryImage[i][j - 1]);
+						// si l'un des deux voisins n'est pas etiquete, on prend
+						// l'etiquete max (celle qui est > 0)
 						if (e == 0) {
-							e = max(taggedBinaryImage[i][j].getNorthNeighbor()
-									.getTag(), taggedBinaryImage[i][j]
-									.getWestNeighbor().getTag());
+							e = Math.max(taggedBinaryImage[i - 1][j],
+									taggedBinaryImage[i][j - 1]);
 						}
-						taggedBinaryImage[i][j].setTag(connectionTable[e]);
-						// mise ˆ jour de la table de la table de correspondance
-						int a = taggedBinaryImage[i][j].getNorthNeighbor()
-								.getTag();
-						if (connectionTable[a] != connectionTable[e]) {
-							while (connectionTable[a] != a) {
-								int l = connectionTable[a];
-								connectionTable[a] = connectionTable[e];
-								a = l;
-							}
-						}
-						a = taggedBinaryImage[i][j].getWestNeighbor().getTag();
-						if (connectionTable[a] != connectionTable[e]) {
-							while (connectionTable[a] != a) {
-								int l = connectionTable[a];
-								connectionTable[a] = connectionTable[e];
-								a = l;
+						taggedBinaryImage[i][j] = e;
+						// mise a jour de la table de la table de correspondance
+						if (taggedBinaryImage[i - 1][j] > 0
+								&& taggedBinaryImage[i][j - 1] > 0) {
+							int a = Math.max(taggedBinaryImage[i - 1][j],
+									taggedBinaryImage[i][j - 1]);
+							if (connectionTable[a] != connectionTable[e]) {
+								while (connectionTable[a] != a) {
+									int l = connectionTable[a];
+									connectionTable[a] = connectionTable[e];
+									a = l;
+								}
 							}
 						}
 					}
@@ -70,32 +71,8 @@ public class BinaryImage {
 			}
 		}
 
-		// actualisation de T
-		for (int m = 2; m < maxNbTags; m++) {
-			int n = m;
-			while (connectionTable[n] != n) {
-				n = connectionTable[n];
-				connectionTable[m] = n;
-			}
-		}
+		return;
 
-		// second balayage
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				if (taggedBinaryImage[i][j].getTag() != 0) {
-					taggedBinaryImage[i][j]
-							.setTag(connectionTable[taggedBinaryImage[i][j]
-									.getTag()]);
-				}
-			}
-		}
-
-		return connectedComponents();
-
-	}
-
-	public int getFrameValue(int x, int y) {
-		return frame[x][y];
 	}
 
 }
