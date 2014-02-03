@@ -1,7 +1,6 @@
 package logiqueDeJeux;
 
-import structure.Annonce;
-import structure.Carte;
+import structure.*;
 
 public class JoueurDistant implements JoueurDistantInterface
 {
@@ -9,25 +8,31 @@ public class JoueurDistant implements JoueurDistantInterface
 	
 	
 	@Override
-	public void sendCard(Carte cate) {
+	public void sendCard(CarteInterface cate) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Carte waitCard() {
+	public CarteInterface waitCard() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Annonce waitAnnonce() {
+	public AnnonceInterface waitAnnonce() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void sendAnnonce(Annonce annonce) {
+	public void sendAnnonce(AnnonceInterface annonce) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addCard(CarteInterface carte) {
 		// TODO Auto-generated method stub
 		
 	}

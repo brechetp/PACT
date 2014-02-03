@@ -1,5 +1,7 @@
 package machineEtat;
 
+import logiqueDeJeux.*;
+
 public class StateMachine 
 {
 	private enum State {Distribution,
@@ -9,10 +11,14 @@ public class StateMachine
 						MontreCarte1,MontreCarte2,MontreCarte3,MontreCarte4,
 						ResteDesTours, };
 	private State state;
+	private EtatDuJeuInterface etat;
+	private JoueurDistantInterface joueur;
 	
-	 public StateMachine() 
+	 public StateMachine(JoueurDistantInterface joueur) 
 	 {
 		    this.state = State.Distribution;
+		    this.etat = new EtatDuJeu();
+		    this.joueur = joueur;
 	 }
 	 
 	 public void eventCarte(CardEvent carte) 
@@ -21,49 +27,53 @@ public class StateMachine
 		 
 /*********************** Distribution *******************/		 
 		 case Distribution:
-			 //Action
-			 if (true /*carte valide*/)
-				 //Action
+			 if (etat.valide(carte.getCarte()))
+			 {
+				 joueur.addCard(carte.getCarte());
 				 this.state = State.Distribution;
+			 }
 			 break;
 			 
 /*********************** Premier Tour **********************/			 
 		 case DebutTour:
-			 if (true /*carte valide*/)
+			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.add(carte.getCarte());
 				 this.state = State.DebutTour1;
+			 }
 			 break;
 		 case DebutTour1:
-			 if (true /*carte valide*/)
+			 if (etat.valide(carte.getCarte()))
 				 this.state = State.DebutTour2;
 			 break;
 		 case DebutTour2:
-			 if (true /*carte valide*/)
+			 if (etat.valide(carte.getCarte()))
 				 this.state = State.DebutTour3;
 			 break;
 		 case DebutTour3:
-			 if (true /*carte valide*/)
+			 if (etat.valide(carte.getCarte()))
 				 this.state = State.DebutTour4;
 			 break;
 		 case DebutTour4:
-			 if (true /*carte valide*/)
+			 if (etat.valide(carte.getCarte()))
 				 this.state = State.FinDebutTour;
 			 break;
 			 
 /************************ Second Tour ************************/			 
 		 case SecondTour:
-			 if (true /*carte valide*/)
+			 if (etat.valide(carte.getCarte()))
 				 this.state = State.SecondTour1;
 			 break;
 		 case SecondTour1:
-			 if (true /*carte valide*/)
+			 if (etat.valide(carte.getCarte()))
 				 this.state = State.SecondTour2;
 			 break;
 		 case SecondTour2:
-			 if (true /*carte valide*/)
+			 if (etat.valide(carte.getCarte()))
 				 this.state = State.SecondTour3;
 			 break;
 		 case SecondTour3:
-			 if (true /*carte valide*/)
+			 if (etat.valide(carte.getCarte()))
 				 this.state = State.SecondTour4;
 			 break;
 			 
@@ -104,28 +114,29 @@ public class StateMachine
 		 switch(this.state) 
 		 {
 		 case Annonce:
-			 //Action
+			 etat.joueurSuivant();
 			 this.state = State.AnnoncePasse1;
 			 break;
 		 case AnnoncePasse1:
-			 //Action
+			 etat.joueurSuivant();
 			 this.state = State.AnnoncePasse2;
 			 break;
 		 case AnnoncePasse2:
-			 //Action
+			 etat.joueurSuivant();
 			 this.state = State.AnnoncePasse3;
 			 break;
-		 case AnnonceAFaire:
-			 //Action
-			 this.state = State.AnnoncePasse1;
-			 break;
 		 case AnnoncePasse3:
-			 if (true /*si il y a un annonce de faite*/)
-				 //Action
+			 if (etat.annonceFaite())
+			 {
+				 etat.joueurSuivant();
 				 this.state = State.DebutTour;
+			 }
 			 else /*annonce pas faite*/
-				 //Action
+			 {
+				 etat.joueurSuivant();
+				 etat.joueurSuivant();
 				 this.state = State.Distribution;
+			 }
 			 break;
 			 
 		 default:
@@ -146,7 +157,10 @@ public class StateMachine
 				 this.state = State.AnnonceAFaire;
 			 break;
 		 case AnnoncePasse1:
-			 if (true /*bon geste*/)
+			 if (true /*coinche*/)
+				 //Action
+				 this.state = State.DebutTour;
+			 else if(true /*bon geste*/)
 				 //Action
 				 this.state = State.AnnonceAFaire;
 			 break;

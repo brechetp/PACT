@@ -1,21 +1,23 @@
 package logiqueDeJeux;
 
-import structure.Annonce;
-import structure.Carte;
+import structure.*;
 
 public interface JoueurDistantInterface 
 {
 	//Envoi la carte joué au joueur distant
-	public void sendCard(Carte cate);
+	public void sendCard(CarteInterface cate);
 	
 	//Attend que le joueur distant joue une carte
-	public Carte waitCard();
+	public CarteInterface waitCard();
 	
 	//Attend que le joueur fasse son annonce
-	public Annonce waitAnnonce();
+	public AnnonceInterface waitAnnonce();
 	
 	//Envoi l'annonce faite
-	public void sendAnnonce(Annonce annonce);
+	public void sendAnnonce(AnnonceInterface annonce);
+	
+	//ajoute un carte au joeur distant
+	public void addCard(CarteInterface carte);
 	
 	
 }

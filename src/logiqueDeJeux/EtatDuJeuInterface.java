@@ -1,8 +1,8 @@
 package logiqueDeJeux;
 
-import structure.Annonce;
-import structure.Carte;
-import structure.CarteList;
+import machineEtat.CardEvent;
+import structure.*;
+
 
 public interface EtatDuJeuInterface 
 {
@@ -12,12 +12,24 @@ public interface EtatDuJeuInterface
 	//renvoi l'anonce faite
 	public Annonce getAnnonce();
 	
-	//renvoi la liste des cartes joué
+	//renvoi true si une anonce a ete faite
+	public boolean annonceFaite();
+	
+	//renvoi la liste des cartes jouer
 	public CarteList getPlayedCard();
 	
 	//renvoi la liste des carte sur la table
 	public CarteList getCardOnTable();
 	
-	//Ajoute une nouvelle carte joué
-	public void add(Carte carte);
+	//Ajoute une nouvelle carte jouer
+	public void add(CarteInterface carte);
+	
+	//non jouer et valide. Renvoi true si c'est le cas
+	public boolean valide(CarteInterface carte);
+	
+	//donne le numéro du joueur actuel
+	public int getNumJoueur();
+	
+	//passe au joueur suivant
+	public void joueurSuivant();
 }
