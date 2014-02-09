@@ -1,22 +1,24 @@
 Pre-requis:
--Matrice d'apprentissage M
+-Matrice d'apprentissage M de n exemple chaqun decrit par l attribut
 -Vecteur de classe Y
 -Nombre d'iteration T
--Fonction donnant le classificateur a souche de decision le plus efficace : CreerClassificateur
+-Fonction donnant le classificateur a souche de decision le plus efficace : FonctionClassificateur
 
-m <- hauteur de M 		//m est le nombre de gestes differents de la base
-Tableau D de taille m
+Sorties:
+-Vecteur de coefficient A
+-Vecteur de classificateur souche H
+
+Tableau D de taille n
 Tableau H de taille T
 Tableau A de taille T
 
-Pour i de 1 a m, Faire
-	D[i]=1/m 		 	//On initialise la distribution avec des poids identiques
+Pour i de 1 a n, Faire
+	D[i]=1/n 		 	//On initialise la distribution avec des poids identiques
 FinFaire
 
 
 Pour t de 1 a T, Faire
-	-appel a la fonction CreerClassificateur
-	-H[t] <- le classificateur obtenu 	//On garde le classificateur en memoire
+	-H[t] <- FonctionClassifieur(D,X,Y)
 	-A[t] <- 1/2*ln((1-e[t])/e[t])   	//e[t] represente l'erreur que fait le 	classificateur sur la base
 	
 	-Pour i de 1 a m Faire 			//Debut du calcul des nouveaus coefficients
