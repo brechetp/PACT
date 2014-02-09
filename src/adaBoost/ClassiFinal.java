@@ -1,3 +1,5 @@
+package adaBoost;
+
 import java.io.Serializable;
 
 
