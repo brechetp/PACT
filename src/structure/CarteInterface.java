@@ -6,7 +6,7 @@ public interface CarteInterface
 	public String getLabelNum();
 	
 	//Renvoi la couleur de la carte
-	public String getcolor();
+	public String getSuit();
 	
 	//Renvoi la position sur la table de la carte
 	public Integer[] getPos();

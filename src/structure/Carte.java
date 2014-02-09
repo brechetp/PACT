@@ -1,36 +1,53 @@
 package structure;
 
+import logiqueDeJeux.EtatDuJeu;
+
 public class Carte implements CarteInterface
 {
+	private String labelNum;
+	private Integer[] pos;
+	private String suit;
+	private EtatDuJeu etat;
 
-	@Override
-	public String getLabelNum() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getLabelNum() 
+	{
+		return labelNum;
+	}
+
+	public Integer[] getPos() 
+	{
+		return pos;
+	}
+
+	public int getValue() 
+	{
+		if (labelNum=="10")
+			return 10;
+		else if (labelNum=="roi")
+			return 4;
+		else if (labelNum=="reine")
+			return 3;
+		else if (labelNum=="as")
+			return 11;
+		else if (labelNum=="valet"&&isAtout())
+			return 20;
+		else if (labelNum=="valet")
+			return 2;
+		else if (labelNum=="9"&&isAtout())
+			return 14;
+		else return 0;
+	}
+
+
+	public String getSuit() 
+	{
+		return suit;
 	}
 
 	@Override
-	public Integer[] getPos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getValue() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String getcolor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isAtout() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isAtout() 
+	{
+		return etat.isAtout(this);
 	}
 	
 

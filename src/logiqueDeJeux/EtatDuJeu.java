@@ -1,49 +1,52 @@
 package logiqueDeJeux;
 
-import machineEtat.CardEvent;
-import structure.Annonce;
+import structure.AnnonceInterface;
 import structure.Carte;
 import structure.CarteInterface;
 import structure.CarteList;
+import structure.CarteListInterface;
 
 public class EtatDuJeu implements EtatDuJeuInterface
 {
 
-	private Annonce annonce;
-	private CarteList PlayedCard;
-	private CarteList CardOnTable;
-	private CarteList CardTeam1;
-	private CarteList CardTeam2;
+	private AnnonceInterface annonce;
+	private CarteListInterface playedCard;
+	private CarteListInterface cardOnTable;
+	private CarteListInterface cardTeam1;
+	private CarteListInterface cardTeam2;
 	private int numJoueur = 1;
+	private int pointsTeam1 = 0;
+	private int pointsTeam2 = 0;
 	
 	@Override
-	public String getAtout() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getAtout() 
+	{
+		return annonce.getAtout();
 	}
 
 	@Override
-	public Annonce getAnnonce() {
-		// TODO Auto-generated method stub
-		return null;
+	public AnnonceInterface getAnnonce() 
+	{
+		return annonce;
 	}
 
 	@Override
-	public CarteList getPlayedCard() {
-		// TODO Auto-generated method stub
-		return null;
+	public CarteListInterface getPlayedCard() 
+	{
+		return playedCard;
 	}
 
 	@Override
-	public CarteList getCardOnTable() {
-		// TODO Auto-generated method stub
-		return null;
+	public CarteListInterface getCardOnTable() 
+	{
+		return cardOnTable;
 	}
 
 	@Override
-	public void add(CarteInterface carte) {
-		// TODO Auto-generated method stub
-		
+	public void joue(CarteInterface carte) 
+	{
+		playedCard.ajoute(carte);
+		cardOnTable.ajoute(carte);
 	}
 
 	@Override
@@ -53,21 +56,38 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	}
 
 	@Override
-	public int getNumJoueur() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getNumJoueur() 
+	{
+		return numJoueur;
 	}
 
 	@Override
-	public boolean annonceFaite() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean annonceFaite()
+	{
+		return (annonce!=null);
 	}
 
 	@Override
-	public void joueurSuivant() {
-		// TODO Auto-generated method stub
+	public void joueurSuivant() 
+	{
+		this.numJoueur = (numJoueur%4) +1;
+	}
+	
+	public void finpli() 
+	{
+		//choix des gagnant
+		this.cardOnTable = new CarteList();
+	}
+
+	@Override
+	public void mancheTerminer() 
+	{
 		
+	}
+
+	public boolean isAtout(Carte carte) 
+	{
+		return (annonce.getAtout()==carte.getSuit());
 	}
 
 }

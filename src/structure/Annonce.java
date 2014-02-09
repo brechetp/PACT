@@ -2,21 +2,24 @@ package structure;
 
 public class Annonce implements AnnonceInterface
 {
-	private String Suit;
-	private int Value;
-
+	private String suit;
+	private int value;
+	private int team; 
+	
 	@Override
-	public int getValue() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getValue() 
+	{
+		return value;
 	}
 
 	@Override
-	public String getAtout() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getAtout() 
+	{
+		return suit;
+	}
+
+	public int getTeam() {
+		return team;
 	}
 	
-	
-
 }

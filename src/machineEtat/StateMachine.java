@@ -38,43 +38,67 @@ public class StateMachine
 		 case DebutTour:
 			 if (etat.valide(carte.getCarte()))
 			 {
-				 etat.add(carte.getCarte());
+				 etat.joue(carte.getCarte());
 				 this.state = State.DebutTour1;
 			 }
 			 break;
 		 case DebutTour1:
 			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.joue(carte.getCarte());
 				 this.state = State.DebutTour2;
+			 }
 			 break;
 		 case DebutTour2:
 			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.joue(carte.getCarte());
 				 this.state = State.DebutTour3;
+			 }
 			 break;
 		 case DebutTour3:
 			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.joue(carte.getCarte());
 				 this.state = State.DebutTour4;
+			 }
 			 break;
 		 case DebutTour4:
 			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.joue(carte.getCarte());
 				 this.state = State.FinDebutTour;
+			 }
 			 break;
 			 
 /************************ Second Tour ************************/			 
 		 case SecondTour:
 			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.joue(carte.getCarte());
 				 this.state = State.SecondTour1;
+			 }
 			 break;
 		 case SecondTour1:
 			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.joue(carte.getCarte());
 				 this.state = State.SecondTour2;
+			 }
 			 break;
 		 case SecondTour2:
 			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.joue(carte.getCarte());
 				 this.state = State.SecondTour3;
+			 }
 			 break;
 		 case SecondTour3:
 			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.joue(carte.getCarte());
 				 this.state = State.SecondTour4;
+			 }
 			 break;
 			 
 /********************* Montre Cartes ************************/
@@ -98,8 +122,11 @@ public class StateMachine
 			 
 /********************* Reste Des Tours **********************/			 
 		 case ResteDesTours:
-			 if (true /*carte valide*/)
-				 this.state = State.ResteDesTours;	 
+			 if (etat.valide(carte.getCarte()))
+			 {
+				 etat.joue(carte.getCarte());
+				 this.state = State.ResteDesTours;
+			 }
 			 break;
 			 
 			 
@@ -180,69 +207,39 @@ public class StateMachine
 				 this.state = State.AnnoncePasse1;
 			 break;
 			 
-/*********************** Premier Tour **********************/			 
-		 case DebutTour1:
-			 if (true /*bon geste*/)
-				 //Action
-				 this.state = State.DebutTour1;
-			 break;
-		 case DebutTour2:
-			 if (true /*bon geste*/)
-				 //Action
-				 this.state = State.DebutTour2;
-			 break;
-		 case DebutTour3:
-			 if (true /*bon geste*/)
-				 //Action
-				 this.state = State.DebutTour3;
-			 break;
-		 case DebutTour4:
-			 if (true /*bon geste*/)
-				 //Action
-				 this.state = State.DebutTour4;
-			 break;
-			 
 /************************ Second Tour/Montre Carte **********************/
 		 case SecondTour1:
 			 if (true /*bon geste*/)
-				 //Action
 				 this.state = State.MontreCarte1;
 			 break;
 		 case SecondTour2:
 			 if (true /*bon geste*/)
-				 //Action
 				 this.state = State.MontreCarte2;
 			 break;
 		 case SecondTour3:
 			 if (true /*bon geste*/)
-				 //Action
 				 this.state = State.MontreCarte3;
 			 break;
 		 case SecondTour4:
 			 if (true /*bon geste*/)
-				 //Action
 				 this.state = State.MontreCarte4;
 			 break;
 			 
 			 
 		 case MontreCarte1:
 			 if (true /*bon geste*/)
-				 //Action
 				 this.state = State.SecondTour1;
 			 break;
 		 case MontreCarte2:
 			 if (true /*bon geste*/)
-				 //Action
 				 this.state = State.SecondTour2;
 			 break;
 		 case MontreCarte3:
 			 if (true /*bon geste*/)
-				 //Action
 				 this.state = State.SecondTour3;
 			 break;
 		 case MontreCarte4:
 			 if (true /*bon geste*/)
-				 //Action
 				 this.state = State.SecondTour4;
 			 break;
 			 
@@ -257,16 +254,17 @@ public class StateMachine
 		switch(this.state)
 		{
 			case DebutTour4:
-				//Action
+				etat.finpli();
 				this.state = State.SecondTour;
 				break;
 				
 			case SecondTour4:
-				//Action
+				etat.finpli();
 				this.state = State.ResteDesTours;
 				break;
 				
 			case ResteDesTours:
+				etat.finpli();
 				this.state = State.ResteDesTours;
 				break;
 				
@@ -275,12 +273,13 @@ public class StateMachine
 			
 		}
 	}
-	public void eventDistributionTerminer()
+	public void eventDistributionTerminer(CardEvent Carte)
 	{
 		 switch(this.state) 
 		 {
 		 	 
 		 case Distribution:
+			 joueur.addCard(Carte.getCarte());
 				 this.state = State.Annonce;
 				 
 		default:
@@ -294,7 +293,8 @@ public class StateMachine
 		switch (this.state)
 		{
 		case ResteDesTours:
-			//Action
+			etat.finpli();
+			etat.mancheTerminer();
 			this.state = State.Distribution;
 			
 		default:

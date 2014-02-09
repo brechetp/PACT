@@ -1,30 +1,36 @@
 package structure;
 
-public class CarteList implements CarteListInterface
+import java.util.HashSet;
+import java.util.Iterator;
+
+public class CarteList extends HashSet<CarteInterface>
+implements CarteListInterface 
 {
 
-	@Override
-	public void add(CarteInterface carte) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public void ajoute(CarteInterface carte) 
+	{
+		this.add(carte);
 	}
 
-	@Override
-	public void remove(CarteInterface carte) {
-		// TODO Auto-generated method stub
-		
+	public boolean contain(CarteInterface carte) 
+	{
+		return this.contains(carte);
 	}
 
-	@Override
-	public boolean contains(CarteInterface carte) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public int getPoint() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getPoint() 
+	{
+		int point = 0;
+		Iterator<CarteInterface> iterator = this.iterator();
+		while (iterator.hasNext())
+		{
+			point = point + iterator.next().getValue();
+		}
+		return point;
 	}
 	
 

@@ -10,19 +10,19 @@ public interface EtatDuJeuInterface
 	public String getAtout();
 	
 	//renvoi l'anonce faite
-	public Annonce getAnnonce();
+	public AnnonceInterface getAnnonce();
 	
 	//renvoi true si une anonce a ete faite
 	public boolean annonceFaite();
 	
 	//renvoi la liste des cartes jouer
-	public CarteList getPlayedCard();
+	public CarteListInterface getPlayedCard();
 	
 	//renvoi la liste des carte sur la table
-	public CarteList getCardOnTable();
+	public CarteListInterface getCardOnTable();
 	
 	//Ajoute une nouvelle carte jouer
-	public void add(CarteInterface carte);
+	public void joue(CarteInterface carte);
 	
 	//non jouer et valide. Renvoi true si c'est le cas
 	public boolean valide(CarteInterface carte);
@@ -32,4 +32,10 @@ public interface EtatDuJeuInterface
 	
 	//passe au joueur suivant
 	public void joueurSuivant();
+	
+	//met fin au pli actuel et calcule les points
+	public void finpli();
+
+	//Termine la manche
+	public void mancheTerminer();
 }
