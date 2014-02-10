@@ -20,7 +20,7 @@ public final class ClassiFinal implements Serializable
 		H = h;
 	}
 	
-	public int result(double[] X)
+	public double result(double[] X)
 	{
 		
 		double result = 0;
@@ -28,6 +28,6 @@ public final class ClassiFinal implements Serializable
 		{
 			result=result+A[k]*H[k].result(X);
 		}
-		return (int) Math.signum(result);
+		return result;
 	}
 }

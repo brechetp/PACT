@@ -34,7 +34,6 @@ public final class AdaBoost
 				if (erreur<=erreurMin)
 				{
 					erreurMin=erreur;
-					classi.setErreur(erreur);
 					classiRetour=classi;
 				}
 			}
@@ -53,7 +52,7 @@ public final class AdaBoost
 		
 		for(int i=0;i<n;i++)
 		{
-			D[i]=1/n;
+			D[i]= (double)1/n;
 		}
 		
 		for(int t=0;t<T;t++)
@@ -61,11 +60,10 @@ public final class AdaBoost
 			ClassifSouche classi = AdaBoost.bestClassificateur(X, Y, D);
 			double erreur = AdaBoost.erreur(classi, X, Y, D);
 			H[t]=classi;
-			A[t]=(1/2)*Math.log((1-erreur)/erreur);
-		
+			A[t]=(0.5)*Math.log((1.0-erreur)/erreur);
 			for(int i=0;i<n;i++)
 			{
-				if(H[t].result(X[i])!=Y[i]) //erreur, des Nan apparaise dans les D[k]
+				if(H[t].result(X[i])!=Y[i])
 					D[i]=D[i]*Math.exp(A[t]);
 				else 
 					D[i]=D[i]*Math.exp(-A[t]);
@@ -80,7 +78,7 @@ public final class AdaBoost
 				D[i]=D[i]/denom;
 			}
 		}
-			
+		
 		return new ClassiFinal(A, H);
 	}
 }
