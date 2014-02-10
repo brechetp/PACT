@@ -1,9 +1,8 @@
 package leapmotion.main;
 import com.leapmotion.leap.*;
-
 import java.util.ArrayList;
 
-public class FramesGestes {
+public class FramesGestes{
 	
 	private static ArrayList<Frame> liste = new ArrayList<Frame>();
 	
@@ -50,12 +49,4 @@ public class FramesGestes {
 	public static int getSize(){
 		return liste.size();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }
