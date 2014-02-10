@@ -35,6 +35,21 @@ public class FramesGestes {
 		return mouvementDeTranslation;
 	}
 	
+	public static ArrayList<Vector> getHandPosition(){
+		
+		ArrayList<Vector> positionsDeLaMain = new ArrayList<Vector>();
+		
+		for (int k=0 ; k<liste.size() ; k++){
+			Hand hand = liste.get(k).hands().get(0);
+			positionsDeLaMain.add(k, hand.palmPosition());
+		}
+		
+		return positionsDeLaMain;
+	}
+	
+	public static int getSize(){
+		return liste.size();
+	}
 	
 	
 	
