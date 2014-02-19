@@ -30,4 +30,15 @@ public final class ClassiFinal implements Serializable
 		}
 		return result;
 	}
+	
+	public double valeurA()
+	{
+		double retour = 0;
+		for(double a : A)
+		{
+			retour=retour+a;
+		}
+		return retour;
+	}
+	
 }

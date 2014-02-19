@@ -53,7 +53,7 @@ public class mainada2 {
 			};
 		
 		int[] Y ={1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4};
-		int T=5000;
+		int T=20;
 		ClassiFinal[] classi = new ClassiFinal[4];
 		
 		//creation des classi
@@ -97,10 +97,10 @@ public class mainada2 {
 		for(int j=0;j<20;j++)
 		{
 			int indiceMax=0;
-			double resultMax =-100;
+			double resultMax =-1;
 			for(int k=1;k<5;k++)
 			{
-				double result = classi[k-1].result(test[j]);
+				double result = classi[k-1].result(test[j])/(classi[k-1].valeurA());
 				if (result>resultMax)
 				{
 					indiceMax=k;
