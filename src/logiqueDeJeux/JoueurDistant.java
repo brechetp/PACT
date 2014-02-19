@@ -37,4 +37,10 @@ public class JoueurDistant implements JoueurDistantInterface
 		
 	}
 
+	@Override
+	public boolean aHuitCarte() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

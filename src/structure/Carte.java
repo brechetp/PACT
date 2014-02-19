@@ -49,6 +49,14 @@ public class Carte implements CarteInterface
 	{
 		return etat.isAtout(this);
 	}
+
+	public int compare(CarteInterface carte) 
+	{
+		if (carte.isAtout()&&!this.isAtout())
+			return -1;
+		else
+			return (int) Math.signum(this.getValue()-carte.getValue());
+	}
 	
 
 

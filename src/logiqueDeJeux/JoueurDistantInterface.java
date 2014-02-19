@@ -19,5 +19,7 @@ public interface JoueurDistantInterface
 	//ajoute un carte au joeur distant
 	public void addCard(CarteInterface carte);
 	
+	//indique si la distribution est terminer
+	public boolean aHuitCarte();
 	
 }

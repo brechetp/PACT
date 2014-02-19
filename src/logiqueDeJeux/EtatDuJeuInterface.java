@@ -1,6 +1,5 @@
 package logiqueDeJeux;
 
-import machineEtat.CardEvent;
 import structure.*;
 
 
@@ -9,17 +8,9 @@ public interface EtatDuJeuInterface
 	//renvoi l'atout actuel
 	public String getAtout();
 	
-	//renvoi l'anonce faite
-	public AnnonceInterface getAnnonce();
 	
 	//renvoi true si une anonce a ete faite
 	public boolean annonceFaite();
-	
-	//renvoi la liste des cartes jouer
-	public CarteListInterface getPlayedCard();
-	
-	//renvoi la liste des carte sur la table
-	public CarteListInterface getCardOnTable();
 	
 	//Ajoute une nouvelle carte jouer
 	public void joue(CarteInterface carte);
@@ -38,4 +29,7 @@ public interface EtatDuJeuInterface
 
 	//Termine la manche
 	public void mancheTerminer();
+	
+	//Donne le numéro de l'equipe que a jouer la carte "carte"
+	public int numTeamCarte(CarteInterface carte);
 }

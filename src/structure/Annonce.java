@@ -6,13 +6,11 @@ public class Annonce implements AnnonceInterface
 	private int value;
 	private int team; 
 	
-	@Override
 	public int getValue() 
 	{
 		return value;
 	}
 
-	@Override
 	public String getAtout() 
 	{
 		return suit;

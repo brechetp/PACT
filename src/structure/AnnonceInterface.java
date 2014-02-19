@@ -9,4 +9,6 @@ public interface AnnonceInterface
 	//renvoi la couleur de l'atout
 	public String getAtout();
 	
+	public int getTeam();
+	
 }
