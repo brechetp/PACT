@@ -13,7 +13,13 @@ implements CarteListInterface
 	private static final long serialVersionUID = 1L;
 	private CarteInterface carteMaitresse; 
 	private CarteInterface firstCard;
-
+	
+	public CarteList()
+	{
+		this.carteMaitresse = null;
+		this.firstCard = null;
+	}
+	
 	public void ajoute(CarteInterface carte) 
 	{
 		if (this.isEmpty())

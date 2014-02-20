@@ -8,6 +8,13 @@ public class Team implements TeamInterface
 	private CarteListInterface CarteJoueur2;
 	private CarteListInterface CarteRemporter;
 	
+	public Team()
+	{
+		this.CarteJoueur1 = new CarteList();
+		this.CarteJoueur2 = new CarteList();
+		this.CarteRemporter = new CarteList();
+	}
+	
 	public void ajoute(CarteInterface carte, int i) 
 	{
 		if (i<3)
@@ -35,5 +42,15 @@ public class Team implements TeamInterface
 	public boolean jouerParTeam(CarteInterface carte) 
 	{
 		return CarteJoueur1.contain(carte)||CarteJoueur2.contain(carte);
+	}
+
+	@Override
+	public int jouerParJoueur(CarteInterface carte) 
+	{
+		if(CarteJoueur1.contain(carte))
+			return 1;
+		else if (CarteJoueur2.contain(carte))
+			return 2;
+		else return 0;
 	}
 }

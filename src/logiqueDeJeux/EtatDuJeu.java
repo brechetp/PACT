@@ -15,6 +15,20 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	private int pointsTeam2 = 0;
 	private int coefCoinche = 1;
 	
+	public EtatDuJeu ()
+	{
+		this.annonce = null;
+		this.playedCard = new CarteList();
+		this.cardOnTable = new CarteList();
+		this.TeamPair = new Team();
+		this.TeamImpair = new Team();
+	}
+	
+	public void setNumJoueur(int i)
+	{
+		this.numJoueur=i;
+	}
+	
 	public String getAtout() 
 	{
 		return annonce.getAtout();
@@ -38,7 +52,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		//		soit premiere carte joueur
 		//		soit de la meme couleur
 		//		soit l'allier est maitre
-		return (!playedCard.contain(carte))&&(carte.isAtout()||(cardOnTable.size()==0)||(cardOnTable.getFirstCardSuit()==carte.getSuit())||(numTeamCarte(cardOnTable.getPlusFort())==(this.numJoueur%2)));
+		return !playedCard.contain(carte);
 		
 	}
 
@@ -69,13 +83,31 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		 {
 			 TeamImpair.remporte(cardOnTable);
 		 }
+		 this.numJoueur = this.numRemportePli();
 		 this.cardOnTable = new CarteList();
 	}
+
+	private int numRemportePli() 
+	{
+		CarteInterface carte = cardOnTable.getPlusFort();
+		int numPair = this.TeamPair.jouerParJoueur(carte);
+		int numImpair = this.TeamImpair.jouerParJoueur(carte);
+		if (numImpair==1)
+			return 1;
+		else if (numImpair==2)
+			return 3;
+		else return 2*numPair; 
+	}
+
+
 
 	public void mancheTerminer() 
 	{
 		int teamPairPoint = TeamPair.getPoint();
 		int teamImpairPoint = TeamImpair.getPoint();
+		//pour test
+		System.out.println("Point carte team 1-3 = "+teamImpairPoint);
+		System.out.println("Point carte team 2-4 = "+teamPairPoint);
 		int teamG = annonce.getTeam();
 		if (teamG==0)
 		{
@@ -101,6 +133,9 @@ public class EtatDuJeu implements EtatDuJeuInterface
 				this.pointsTeam1 = pointsTeam1 + coefCoinche*(162 + annonce.getValue());
 			}
 		}
+		//pour les tests
+		System.out.println("Point team 1-3 = "+this.pointsTeam1);
+		System.out.println("Point team 2-4 = "+this.pointsTeam2);
 		//reinitialisation des variable de manche
 		this.playedCard = new CarteList();
 		this.annonce=null;
@@ -111,6 +146,8 @@ public class EtatDuJeu implements EtatDuJeuInterface
 
 	public boolean isAtout(Carte carte) 
 	{
+		if (annonce==null)
+			return false;
 		return (annonce.getAtout()==carte.getSuit());
 	}
 

@@ -5,18 +5,19 @@ import logiqueDeJeux.EtatDuJeu;
 public class Carte implements CarteInterface
 {
 	private String labelNum;
-	private Integer[] pos;
 	private String suit;
 	private EtatDuJeu etat;
-
+	
+	public Carte(String label, String suit, EtatDuJeu etat)
+	{
+		this.labelNum = label;
+		this.suit = suit;
+		this.etat = etat;
+	}
+	
 	public String getLabelNum() 
 	{
 		return labelNum;
-	}
-
-	public Integer[] getPos() 
-	{
-		return pos;
 	}
 
 	public int getValue() 

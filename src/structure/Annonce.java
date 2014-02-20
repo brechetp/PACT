@@ -42,7 +42,7 @@ public class Annonce implements AnnonceInterface
 	{
 		if (suit=="carreau")
 			suit="cœur";
-		else if (suit=="cœur")
+		else if (suit=="coeur")
 			suit="pique";
 		else if (suit=="pique")
 			suit="trefle";

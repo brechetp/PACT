@@ -13,12 +13,13 @@ public class StateMachine
 	private State state;
 	private EtatDuJeuInterface etat;
 	private JoueurDistantInterface joueurD;
-	private int valeurAnnonceMax;
+	private int valeurAnnonceMax = 80;
+	private int premierAJouer =1; 
 	
-	public StateMachine(JoueurDistantInterface joueurD) 
+	public StateMachine(JoueurDistantInterface joueurD, EtatDuJeu etat) 
 	{
 		this.state = State.Distribution;
-		this.etat = new EtatDuJeu();
+		this.etat = etat;
 		this.joueurD = joueurD;
 	}
 	 
@@ -30,7 +31,10 @@ public class StateMachine
 		case Distribution:
 			joueurD.addCard(carte.getCarte());
 			if (joueurD.aHuitCarte())
+			{
 				this.state = State.Annonce;
+				System.out.println("Distribution Terminer");
+			}
 			else
 				this.state = State.Distribution;
 			break;
@@ -320,11 +324,13 @@ public class StateMachine
 		{
 		case DebutTour4:
 			etat.finpli();
+			System.out.println("Premier tour terminer");
 			this.state = State.SecondTour;
 			break;
 			
 		case SecondTour4:
 			etat.finpli();
+			System.out.println("Second tour terminer");
 			this.state = State.ResteDesTours;
 			break;
 				
@@ -361,8 +367,10 @@ public class StateMachine
 		{
 		case ResteDesTours:
 			etat.mancheTerminer();
+			this.premierAJouer++;
+			etat.setNumJoueur(premierAJouer);
 			this.state = State.Distribution;
-			
+			System.out.println("Manche terminer");
 		default:
 			break;
 		}

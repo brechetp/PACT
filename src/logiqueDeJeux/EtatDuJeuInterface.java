@@ -56,4 +56,7 @@ public interface EtatDuJeuInterface
 
 	//Indique si le dernier pli a été jouer
 	public boolean dernierPli();
+
+	//setter pour le numero joueur
+	public void setNumJoueur(int premierAJouer);
 }

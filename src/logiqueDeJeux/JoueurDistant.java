@@ -7,6 +7,11 @@ public class JoueurDistant implements JoueurDistantInterface
 	
 	private CarteListInterface cardList;
 	
+	public JoueurDistant()
+	{
+		this.cardList = new CarteList();
+	}
+	
 	@Override
 	public void sendCard(CarteInterface cate) {
 		// TODO Auto-generated method stub

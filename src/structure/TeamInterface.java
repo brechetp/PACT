@@ -13,4 +13,7 @@ public interface TeamInterface
 	
 	//Indique si une carte est jouer par un des joueur de l'equipe
 	public boolean jouerParTeam(CarteInterface carte);
+
+	//Donne ne numero du joeur qui a joueur la carte et 0 si aucun ne la jouer
+	public int jouerParJoueur(CarteInterface carte);
 }
