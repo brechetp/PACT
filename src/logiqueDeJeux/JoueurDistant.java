@@ -5,7 +5,7 @@ import structure.*;
 public class JoueurDistant implements JoueurDistantInterface
 {
 	
-	
+	private CarteListInterface cardList;
 	
 	@Override
 	public void sendCard(CarteInterface cate) {
@@ -32,15 +32,17 @@ public class JoueurDistant implements JoueurDistantInterface
 	}
 
 	@Override
-	public void addCard(CarteInterface carte) {
+	public void addCard(CarteInterface carte) 
+	{
 		// TODO Auto-generated method stub
+		cardList.ajoute(carte);
 		
 	}
 
 	@Override
-	public boolean aHuitCarte() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean aHuitCarte() 
+	{
+		return cardList.size()==8;
 	}
 
 }

@@ -32,4 +32,28 @@ public interface EtatDuJeuInterface
 	
 	//Donne le numéro de l'equipe que a jouer la carte "carte"
 	public int numTeamCarte(CarteInterface carte);
+
+	//Augmente la valeur de l'annonce
+	public void annonceValueUp();
+
+	//Passe a la couleur suivante
+	public void annonceNextSuit();
+	
+	//Initialise un annonce si il n'y en avais pas, sinon augmente la valeur une fois
+	public void initAnnonce();
+
+	//Valide l'annonce en cour faite pas le joueur en cour
+	public void valideAnnonce();
+
+	//Donne la valeur de l'annonce
+	public int valeurAnnonce();
+
+	//Baisse la valeur de l'annonce
+	public void annonceValueDown();
+
+	//Multiplie coefCoinche par 2
+	public void coinche();
+
+	//Indique si le dernier pli a été jouer
+	public boolean dernierPli();
 }
