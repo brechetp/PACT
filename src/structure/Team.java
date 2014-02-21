@@ -7,6 +7,7 @@ public class Team implements TeamInterface
 	private CarteListInterface CarteJoueur1;
 	private CarteListInterface CarteJoueur2;
 	private CarteListInterface CarteRemporter;
+	private int dixDeDer = 0;
 	
 	public Team()
 	{
@@ -26,7 +27,7 @@ public class Team implements TeamInterface
 
 	public int getPoint() 
 	{
-		return CarteRemporter.getPoint();
+		return CarteRemporter.getPoint()+dixDeDer;
 	}
 
 	public void remporte(CarteListInterface pli) 
@@ -52,5 +53,12 @@ public class Team implements TeamInterface
 		else if (CarteJoueur2.contain(carte))
 			return 2;
 		else return 0;
+	}
+
+	@Override
+	public void dernierPli() 
+	{
+		this.dixDeDer=10;
+		
 	}
 }

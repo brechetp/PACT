@@ -16,4 +16,7 @@ public interface TeamInterface
 
 	//Donne ne numero du joeur qui a joueur la carte et 0 si aucun ne la jouer
 	public int jouerParJoueur(CarteInterface carte);
+	
+	//indique que cet team a fait le dernier pli
+	public void dernierPli();
 }

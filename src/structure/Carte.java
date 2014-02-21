@@ -55,8 +55,9 @@ public class Carte implements CarteInterface
 	{
 		if (carte.isAtout()&&!this.isAtout())
 			return -1;
-		else
+		else if (carte.getSuit()==this.getSuit())
 			return (int) Math.signum(this.getValue()-carte.getValue());
+		else return 1;
 	}
 	
 

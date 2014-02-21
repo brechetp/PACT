@@ -41,7 +41,7 @@ public class Annonce implements AnnonceInterface
 	public void nextSuit() 
 	{
 		if (suit=="carreau")
-			suit="cœur";
+			suit="coeur";
 		else if (suit=="coeur")
 			suit="pique";
 		else if (suit=="pique")

@@ -221,6 +221,7 @@ public class StateMachine
 		 case AnnonceAFaire2:
 			 etat.valideAnnonce();
 			 this.valeurAnnonceMax=etat.valeurAnnonce();
+			 etat.joueurSuivant();
 			 this.state = State.AnnoncePasse1;
 			 break;
 		 

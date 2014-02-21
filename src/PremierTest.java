@@ -49,9 +49,9 @@ public class PremierTest {
 		
 		Carte DixCa = new Carte("10","carreau",etat);
 		CardEvent DixCaEvent = new CardEvent(DixCa);
-		Carte DixCo = new Carte("1O","coeur",etat);
+		Carte DixCo = new Carte("10","coeur",etat);
 		CardEvent DixCoEvent = new CardEvent(DixCo);
-		Carte DixPi = new Carte("1O","pique",etat);
+		Carte DixPi = new Carte("10","pique",etat);
 		CardEvent DixPiEvent = new CardEvent(DixPi);
 		Carte DixTr = new Carte("10","trefle",etat);
 		CardEvent DixTrEvent = new CardEvent(DixTr);

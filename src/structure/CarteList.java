@@ -26,11 +26,14 @@ implements CarteListInterface
 		{
 			firstCard=carte;
 			carteMaitresse=carte;
+			this.add(carte);
 		}
-		
-		this.add(carte);
-		if (carteMaitresse.compare(carte)<0)
+		else if (carteMaitresse.compare(carte)<0)
+		{
 			carteMaitresse=carte;
+			this.add(carte);
+		}
+		else this.add(carte);
 	}
 
 	public boolean contain(CarteInterface carte) 
