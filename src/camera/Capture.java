@@ -10,6 +10,8 @@ import static com.googlecode.javacv.cpp.opencv_highgui.*;
 
 public class Capture {
 	
+	
+	private static int nbr;
 	public final static void saveToText(String fileName, int WIDTH, int HEIGHT, GrayImage matrix){ // sauvegarde dans un fichier texte
 		
 		try{
@@ -37,26 +39,41 @@ public class Capture {
 	
 
 	
-	    private static void captureFrame() {
-	        // 0-default camera, 1 - next...so on
-	        final OpenCVFrameGrabber grabber = new OpenCVFrameGrabber(0);
-	        try {
+	  public static int captureFrame()
+	    {
+	        OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(0);
+	        try
+	        {
+	        	
 	            grabber.start();
-	            IplImage img = grabber.grab();
-	            int width  = img.width(); // largeur de l'image
-	            int height = img.height(); // hauteur de l'image
-	            if (img != null) {
-	                GrayImage grayImage = new GrayImage(width, height, img); // on convertir en gris
-	                grayImage.save("data/capture.jpg"); // on enregistre l'image grise
-	                saveToText("data/text.txt", width, height, grayImage);
+	            IplImage img=grabber.grab();
+	            if(img!=null)
+	            {
+	                cvSaveImage("data/capture"+nbr+".jpg", img);
 	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
+	            Thread.sleep(5000);
+	            nbr++;
+	            grabber.start();
+	            IplImage img2=grabber.grab();
+	            if(img!=null)
+	            {
+	                cvSaveImage("data/capture"+nbr+".jpg", img2);
+	            }
+	        
+	        
+	            return nbr;
+	            
+	        }
+	        catch(Exception ae)
+	        {
+	            ae.printStackTrace();
+	            return 0;
+
 	        }
 	    }
-	    public static void main(String[] args) {
-	        captureFrame();
-	    }
-
-
+	        
+	        
 }
+	   
+
+
