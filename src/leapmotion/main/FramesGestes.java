@@ -1,28 +1,42 @@
 package leapmotion.main;
 import com.leapmotion.leap.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FramesGestes{
+public class FramesGestes implements Serializable{
 	
-	private static ArrayList<Frame> liste = new ArrayList<Frame>();
+	private static final long serialVersionUID = 6614254148316806275L;
 	
-	public static void addToList(int i, Frame f){
+	private int b; // paramètre servant à différencier les différents mouvements
+	
+	public FramesGestes(int b){
+		this.b=b;
+	}
+	
+	private ArrayList<Frame> liste = new ArrayList<Frame>();
+	
+	public void addToList(int i, Frame f){
 		liste.add(i,f);
 	}
 	
-	public static int getFingersCount(){
-		return liste.get(20).fingers().count();
+	public void setToList(int i, Frame f){
+		liste.set(i, f);
 	}
 	
-	public static int getHandsCount(){
+	public int getFingersCount(int i){
+		return liste.get(i).fingers().count();
+	}
+	
+	public int getHandsCount(){
 		return liste.get(20).hands().count();
 	}
 
-	public static int getToolsCount(){
+	public int getToolsCount(){
 		return liste.get(20).tools().count();
 	}
 	
-	public static ArrayList<Vector> getHandTranslation(){
+	public ArrayList<Vector> getHandTranslation(){
 		
 		ArrayList<Vector> mouvementDeTranslation = new ArrayList<Vector>();
 		
@@ -34,7 +48,7 @@ public class FramesGestes{
 		return mouvementDeTranslation;
 	}
 	
-	public static ArrayList<Vector> getHandPosition(){
+	public ArrayList<Vector> getHandPosition(){
 		
 		ArrayList<Vector> positionsDeLaMain = new ArrayList<Vector>();
 		
@@ -46,7 +60,7 @@ public class FramesGestes{
 		return positionsDeLaMain;
 	}
 	
-	public static int getSize(){
+	public int getSize(){
 		return liste.size();
 	}
 }

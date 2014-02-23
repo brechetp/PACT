@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KListener implements KeyListener {
 	
-	static char c='r';
+	private static char c='/';
 
 	@Override
 	public void keyPressed(KeyEvent event) {

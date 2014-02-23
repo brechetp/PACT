@@ -1,17 +1,21 @@
 package leapmotion.main;
 
 import java.io.*;
-import java.util.ArrayList;
 
 import com.leapmotion.leap.*;
 
 public class MyListener extends Listener{
 	
-	static KListener k1 = new KListener();
-	int i = 0;
-	int y = 0;
-	int b = 0;
-	ArrayList<GesteIndex> liste = new ArrayList<GesteIndex>();
+	private static KListener k1 = new KListener();  //KeyListener pour contrôle par clavier
+	
+	private int i = 0; // incrémentation pour sauvegarder toutes les frames d'un mouvement
+	private int y = 0; // paramètre de vérification de conditions
+	private int b = 0; // incrémentation pour sauvegarder tous les mouvements
+	
+	private LoopWait lw = new LoopWait(); // création d'un LoopWait pour réduire le lag des boucles infinies
+	
+	private FramesGestes framesGestes = new FramesGestes(b); // enregistrement des frames d'un mouvement
+	private ListeDeMouvements liste = new ListeDeMouvements(); // enregistrement de tous les mouvements
 	
 	public void onInit(Controller controller) {
         System.out.println("Initialisation Leap Motion");
@@ -19,61 +23,65 @@ public class MyListener extends Listener{
 	
     public void onFrame(Controller controller) {
     	
-    	
-    	if (k1.getC()=='r'){
+    	// INITIALISATION DU PROGRAMME DE CAPTURE DE MOUVEMENTS
+    	if (k1.getC()=='/'){
+    		
     		i=0;
     		y=0;
+    		
     		System.out.println("Initialisé. Appuyer sur A pour commencer une acquisition.");
     		System.out.println("-----------------------------------------------------------------------------------------------------");
-    		while (k1.getC()=='r'){
-    			try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+    		
+    		while (k1.getC()=='/'){
+    			lw.w();
     		}
+    		
     	}
     	
+    	// ACQUISITION D'UN MOUVEMENT
     	if (k1.getC()=='a'){
-    		// Informations sur la frame la plus récente
+    		
             Frame frame = controller.frame();
+            
     		if(y==0){
     			System.out.println("Début de la séquence d'acquisition. Placer la main au dessus de la Leap pour commencer l'acquisition.");
     			y=1;
     		}
+    		
             if (controller.frame(1).hands().count()>0){
             	if (y==1){
             		System.out.println("Main détectée. Début de l'acquisition du mouvement. Appuyer sur Z pour arrêter.");
             		y=2;
             	}
-            	FramesGestes.addToList(i, frame);
-            	i++;
+            	framesGestes.addToList(i, frame);
+                i++;
             }
-            	
+         
         }
     	
+    	// ARRÊT DE L'ACQUISITION ET SAUVEGARDE DU MOUVEMENT
     	if (k1.getC()=='z'){
+    		
     		System.out.println("Arrêt de l'acquisition.");
     		System.out.println("-----------------------------------------------------------------------------------------------------");
     		System.out.println("Réinitialisé. Appuyer sur A pour commencer une nouvelle acquisition.");
-    		FramesGestes framesGestes = new FramesGestes();
-    		GesteIndex gesteIndex = new GesteIndex(framesGestes, b);
-    		liste.add(b, gesteIndex);
+    		
+    		liste.add(b, framesGestes); 
+    		
     		b++;
     		i=0;
     		y=0;
+    		framesGestes = new FramesGestes(b);
+    		
     		while (k1.getC()=='z'){
-    			try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+    			lw.w();
     		}
     	}
     	
+    	// SAUVEGARDE DE LA LISTE DE TOUS LES MOUVEMENTS DANS UN FICHIER
+    	// QUELQUES PROBLEMES AVEC CETTE METHODE, EXCEPTION : NotSerializableException
     	if (k1.getC()=='s'){
+    		
     		try{
     			FileOutputStream fileOut = new FileOutputStream("C:/Users/Benjamin-Zigaroula-/Desktop/FramesGestes.ser");
     			ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -86,20 +94,25 @@ public class MyListener extends Listener{
     		catch(IOException i){
     	          i.printStackTrace();
     	    }
+    		
+    		while (k1.getC()=='s'){
+    			lw.w();
+    		}
+    		
     	}
     	
+    	// AFFICHAGE DE PARAMETRES DANS LA CONSOLE POUR VERIFICATION
     	if (k1.getC()=='p'){
+    		
     		for (int k = 0 ; k<liste.size() ; k++){
-    			liste.get(k).printInfo();
+    			System.out.print("Geste n°" + k + " : ");
+    			System.out.println(liste.get(k).getHandPosition());
     		}
+    		
     		while (k1.getC()=='p'){
-    			try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+    			lw.w();
     		}
+    		
     	}
 		
    	}

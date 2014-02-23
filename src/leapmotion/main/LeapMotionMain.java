@@ -9,10 +9,20 @@ public class LeapMotionMain {
 
 	public static void main(String[] args) {
 		
+		// Création d'une fenêtre pour un usage plus convivial
 		KListener kk = new KListener();
 		JFrame fenetre = new JFrame();
 		fenetre.addKeyListener(kk);
 		fenetre.setVisible(true);
+		fenetre.setSize(1000, 500);
+		fenetre.setLocation(250, 250);
+		fenetre.setTitle("Leap Motion Control Panel");
+		fenetre.setResizable(false);
+		
+		
+		
+		
+		
 		 // Create a sample listener and controller
         MyListener listener = new MyListener();
         Controller controller = new Controller();
