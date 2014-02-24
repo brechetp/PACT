@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.leapmotion.leap.Frame;
-import com.leapmotion.leap.HandList;
 
 public class ListeParam implements Serializable{
 	
@@ -30,13 +29,7 @@ public class ListeParam implements Serializable{
 	
 	public void addToList(Frame f, Frame f2){
 		
-		
-		HandList hand = f.hands();
-		if (hand == null)
-			System.out.println("booooo snif");
-		int nb = hand.count();
-		System.out.println("... "+nb);
-		liste.set(0, (double)nb);
+		liste.set(0, (double)f.hands().count());
 		liste.set(7, (double)f.fingers().count());
 		
 		if (f.hands().count()==1){

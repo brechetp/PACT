@@ -1,5 +1,4 @@
 package leapmotion.main;
-import com.leapmotion.leap.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;

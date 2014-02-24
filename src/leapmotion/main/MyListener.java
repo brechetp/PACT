@@ -86,7 +86,7 @@ public class MyListener extends Listener{
     	if (k1.getC()=='s'){
     		
     		try{
-    			FileOutputStream fileOut = new FileOutputStream("C:/Users/Benjamin-Zigaroula-/Desktop/FramesGestes.ser");
+    			FileOutputStream fileOut = new FileOutputStream("C:/Users/Benjamin-Zigaroula-/Desktop/GestesLeap/Geste1.ser");
     			ObjectOutputStream out = new ObjectOutputStream(fileOut);
     			out.writeObject(liste);
     			out.flush();
@@ -107,14 +107,26 @@ public class MyListener extends Listener{
     	// AFFICHAGE DE PARAMETRES DANS LA CONSOLE POUR VERIFICATION
     	if (k1.getC()=='p'){
     		
-    		for (int k = 0 ; k<liste.size() ; k++){
-    			System.out.print("Geste n°" + k + " : ");
-    			for (int g = 0 ; g<liste.get(k).getSize() ; g++){
-        			System.out.print(liste.get(k).get(g).get(2) + ", "); // Affichage de posX de la main 0
-    			}
-    			System.out.println(" ");
-
+    		try{
+        		File fichier = new File("C:/Users/Benjamin-Zigaroula-/Desktop/FramesGestes.ser");
+        		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;
+        		ListeDeMouvements hyk = (ListeDeMouvements)ois.readObject();
+        		for (int k = 0 ; k<hyk.size() ; k++){
+        			System.out.print("Geste n°" + k + " : ");
+        			for (int g = 0 ; g<hyk.get(k).getSize() ; g++){
+            			System.out.print(hyk.get(k).get(g).get(2) + ", "); // Affichage de posX de la main 0
+        			}
+        			System.out.println(" ");
+        			}
+        		ois.close();
     		}
+    		catch(Exception i)
+    		{
+    			i.printStackTrace();
+    		}
+
+    		
+
     		
     		while (k1.getC()=='p'){
     			lw.w();
