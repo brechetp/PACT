@@ -9,20 +9,20 @@ public class Pixel {
 	private Pixel northneighbor ; 
 	private Pixel westneighbor;
 	
+	
 	public Pixel (int x, int y, BinaryImage binaryImage) {
 		this.binaryImage = binaryImage;
 		this.x = x;
 		this.y = y;
 		this.tag = this.binaryImage.getFrameValue(x, y);
-		if (y>0 && binaryImage.getFrameValue(x, y-1)==1){
-			northneighbor = new Pixel(x,y-1, binaryImage);
-		} else {northneighbor = null ;
-				}
-		if (x>0 && binaryImage.getFrameValue(x, y-1)==1){
-			westneighbor = new Pixel(x,y-1, binaryImage);
-		} else {westneighbor = null ;
-				}
 		
+		  if (y>0){
+			northneighbor = this.binaryImage.taggedBinaryImage[x][y-1];
+		  } 
+		  if (x>0){
+			westneighbor = this.binaryImage.taggedBinaryImage[x-1][y];
+		  } 
+		  
 	}
 
 	
