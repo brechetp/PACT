@@ -41,4 +41,12 @@ public final class ClassiFinal implements Serializable
 		return retour;
 	}
 	
+	public void normaliser()
+	{
+		double total = this.valeurA();
+		for (int k=0;k<A.length;k++)
+		{
+			A[k]= A[k]/total;
+		}
+	}
 }
