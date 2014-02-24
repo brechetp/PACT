@@ -21,8 +21,6 @@ public class LeapMotionMain {
 		
 		
 		
-		
-		
 		 // Create a sample listener and controller
         MyListener listener = new MyListener();
         Controller controller = new Controller();

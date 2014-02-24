@@ -53,7 +53,10 @@ public class MyListener extends Listener{
             		System.out.println("Main détectée. Début de l'acquisition du mouvement. Appuyer sur Z pour arrêter.");
             		y=2;
             	}
-            	framesGestes.addToList(i, frame);
+            	
+            	ListeParam param = new ListeParam(i);
+            	param.addToList(frame, controller.frame(1));
+            	framesGestes.addToList(i, param);
                 i++;
             }
          
@@ -106,7 +109,11 @@ public class MyListener extends Listener{
     		
     		for (int k = 0 ; k<liste.size() ; k++){
     			System.out.print("Geste n°" + k + " : ");
-    			System.out.println(liste.get(k).getHandPosition());
+    			for (int g = 0 ; g<liste.get(k).getSize() ; g++){
+        			System.out.print(liste.get(k).get(g).get(2) + ", "); // Affichage de posX de la main 0
+    			}
+    			System.out.println(" ");
+
     		}
     		
     		while (k1.getC()=='p'){

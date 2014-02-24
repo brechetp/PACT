@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 public class ListeDeMouvements implements Serializable {
 
-	private static final long serialVersionUID = -2002221427236856303L;
-	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5725171662469738694L;
 	private ArrayList<FramesGestes> listeDeGestes = new ArrayList<FramesGestes>();
 	
 	public void add(int i, FramesGestes framesGestes){
