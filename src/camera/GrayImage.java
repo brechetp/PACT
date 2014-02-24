@@ -24,8 +24,7 @@ public class GrayImage extends Image{
 	public GrayImage(IplImage rgbImage){
 		
 		super(rgbImage);
-		int width = getWidth() ;
-		int height = getHeight();
+		
 		grayImage = cvCreateImage(cvSize(width, height), 8, 3);
 		
 		grayByteBuffer = grayImage.getByteBuffer();
@@ -50,7 +49,28 @@ public class GrayImage extends Image{
 				 matrix[i/width][i%width] =  grayValue;
 		}
 	}
-			
+	
+	public GrayImage (int[][] matrix) {
+		
+		super(cvCreateImage(cvSize(matrix[0].length, matrix.length), 8, 3));
+		this.matrix = matrix ;
+		grayImage = cvCreateImage(cvSize(width, height), 8, 3);
+		grayByteBuffer = grayImage.getByteBuffer();
+		
+		for (int i =0; i<width; i++){
+			for (int j=0; j<height; j++){
+				for(int k = 0; k<3; k++){
+					
+					grayByteBuffer.put(3*i + grayImage.widthStep()*j+k, (byte) matrix[j][i]);
+				}
+				
+			}
+		}
+		
+		
+		
+	}
+	
 		
 	public void setGrayByte(int index, byte value){
 		grayByteBuffer.put(index, value);
@@ -93,6 +113,32 @@ public class GrayImage extends Image{
 		}
 		BinaryImage bin = new BinaryImage(diff);
 		return bin ;
+		
+		
+	}
+	
+	public GrayImage conv(int[][] conv){
+		
+		
+		int[][] res = new int[height][width];
+		for (int i = 1 ; i < width-1 ; i++){
+			for (int j = 1; j < height-1; j++){
+				
+				float pixelValue = 0 ;
+				float tot = 0;
+				for (int k = 0; k <3; k++){
+					for(int p=0; p<3; p++){
+						
+						pixelValue = pixelValue + conv[p][k]*this.matrix[j+(p-1)][i+(k-1)];
+						tot = tot + conv[p][k];
+					}
+				}
+				res[j][i] = Math.round(pixelValue/tot);
+			}
+		}
+		GrayImage result = new GrayImage(res);
+		return result;
+		
 		
 		
 	}

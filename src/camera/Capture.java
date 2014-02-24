@@ -44,7 +44,7 @@ public class Capture {
 	        OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(0);
 	        try
 	        {
-	        	
+	        	Thread.sleep(2000);
 	            grabber.start();
 	            IplImage img=grabber.grab();
 	            if(img!=null)

@@ -8,8 +8,8 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 public class Image {
 	
-	private int width;
-	private int height;
+	protected int width;
+	protected int height;
 	private IplImage rgbImage;
 	private ByteBuffer byteBuffer;
 	

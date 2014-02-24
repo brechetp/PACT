@@ -40,6 +40,9 @@ public class Main {
 		        cvSaveImage("data/bin.jpg", bin.getImage());
 		        cvSaveImage("data/gray0.jpg", grayImage1.getGrayImage());
 		        cvSaveImage("data/gray1.jpg", grayImage2.getGrayImage());
+		        int[][] mat = {{1,2,1},{2,4,1},{1,2,1}};
+		        GrayImage test = grayImage1.conv(mat);
+		        cvSaveImage("data/gray2.jpg", test.getGrayImage());
 		        rgb_frame.showImage(bin.getImage());
 		       
 	
