@@ -20,9 +20,13 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-		
-		      	int nbr = Capture.captureFrame();
-		      	IplImage image1 = cvLoadImage("data/capture0.jpg");
+				
+		      	for(int i = 7 ; i<=10; i++){
+		      		Capture.captureFrame("data/capture"+i+".jpg");
+		      		Thread.sleep(5000);
+		      		
+		      	}
+		      	/*IplImage image1 = cvLoadImage("data/capture0.jpg");
 		      	IplImage image2 = cvLoadImage("data/capture1.jpg");
 		        GrayImage grayImage1 = new GrayImage(image1);
 		        GrayImage grayImage2 = new GrayImage(image2);
@@ -36,15 +40,17 @@ public class Main {
 		        rgb_frame.setVisible(false);
 		        
 		        rgb_frame.dispose();
-		        BinaryImage bin = grayImage1.difference(grayImage2);
-		        cvSaveImage("data/bin.jpg", bin.getImage());
+		        GrayImage bin = grayImage1.grayDifference(grayImage2);
+		        BinaryImage bin2 = grayImage2.test();
+		        cvSaveImage("data/bin4.jpg", bin.getGrayImage());
 		        cvSaveImage("data/gray0.jpg", grayImage1.getGrayImage());
 		        cvSaveImage("data/gray1.jpg", grayImage2.getGrayImage());
 		        int[][] mat = {{1,2,1},{2,4,1},{1,2,1}};
 		        GrayImage test = grayImage1.conv(mat);
 		        cvSaveImage("data/gray2.jpg", test.getGrayImage());
-		        rgb_frame.showImage(bin.getImage());
-		       
+		        //rgb_frame.showImage(bin.getBinaryImage());
+		        bin.saveToText("data/image.txt");
+		        cvSaveImage("data/test.jpg", bin2.getBinaryImage()); */
 	
 				
 				
