@@ -41,10 +41,8 @@ public class BinaryImage extends GrayImage {
 	public BinaryImage(GrayImage grayImage){
 		
 		super(grayImage.getRgbImage());
-		width = grayImage.getWidth();
-		height = grayImage.getHeight();
 		binaryMatrix = new int[height][width];
-		binaryImage = grayImage.getGrayImage();
+		binaryImage = cvCreateImage(cvSize(width, height), 8, 3);
 		binaryByteBuffer = binaryImage.getByteBuffer();
 		for(int i=0; i<width; i++){
 			for(int j=0; j<height; j++){

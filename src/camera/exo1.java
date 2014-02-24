@@ -34,7 +34,7 @@ public class exo1 {
 
         /*creation de l'objet d'acquisition de trames video à partir du fichier indiqué comme paramêtre du programme*/
         OpenCVFrameGrabber grabber = null;
-        grabber = new OpenCVFrameGrabber(0);
+        grabber = new OpenCVFrameGrabber(1);
 
         grabber.start();
 

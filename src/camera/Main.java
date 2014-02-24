@@ -21,36 +21,44 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		
 				
-		      	for(int i = 7 ; i<=10; i++){
+		   for(int i = 0 ; i<=1; i++){
 		      		Capture.captureFrame("data/capture"+i+".jpg");
 		      		Thread.sleep(5000);
 		      		
 		      	}
-		      	/*IplImage image1 = cvLoadImage("data/capture0.jpg");
-		      	IplImage image2 = cvLoadImage("data/capture1.jpg");
-		        GrayImage grayImage1 = new GrayImage(image1);
-		        GrayImage grayImage2 = new GrayImage(image2);
+		      	IplImage img1 = cvLoadImage("data/capture0.jpg");
+		      	IplImage img2 = cvLoadImage("data/capture1.jpg");
+		
+		      	Image image1 = new Image(img1);
+		      	Image image2 = new Image(img2);
+		        
+		      	GrayImage grayImage1 = new GrayImage(img1);
+		      	GrayImage grayImage2 = new GrayImage(img2);
 		       
-		        JFrame mainframe = new JFrame();
+		       /* JFrame mainframe = new JFrame();
 		        mainframe.setLayout(new GridLayout(1, 1));
 		        mainframe.setVisible(true);
 		        
 		        CanvasFrame rgb_frame = new CanvasFrame("AVI Playback Demo");        
 		        mainframe.getContentPane().add(rgb_frame.getCanvas() );
-		        rgb_frame.setVisible(false);
+		        rgb_frame.setVisible(false);*/
 		        
-		        rgb_frame.dispose();
-		        GrayImage bin = grayImage1.grayDifference(grayImage2);
-		        BinaryImage bin2 = grayImage2.test();
-		        cvSaveImage("data/bin4.jpg", bin.getGrayImage());
-		        cvSaveImage("data/gray0.jpg", grayImage1.getGrayImage());
-		        cvSaveImage("data/gray1.jpg", grayImage2.getGrayImage());
-		        int[][] mat = {{1,2,1},{2,4,1},{1,2,1}};
-		        GrayImage test = grayImage1.conv(mat);
-		        cvSaveImage("data/gray2.jpg", test.getGrayImage());
-		        //rgb_frame.showImage(bin.getBinaryImage());
-		        bin.saveToText("data/image.txt");
-		        cvSaveImage("data/test.jpg", bin2.getBinaryImage()); */
+		       // rgb_frame.dispose();
+		        BinaryImage binrgbvoisins = image1.difference(image2);
+		        BinaryImage bingrayvoisins = grayImage1.binaryDifference(grayImage2);
+		        BinaryImage binrgb = image1.difference2(image2);
+		        BinaryImage bingray = grayImage1.binaryDifference2(grayImage2);
+		        
+		        
+		    
+		        cvSaveImage("data/binrgbvoisins.jpg", binrgbvoisins.getBinaryImage());
+		        cvSaveImage("data/bingrayvoisins.jpg", bingrayvoisins.getBinaryImage());
+		        cvSaveImage("data/binrgb.jpg", binrgb.getBinaryImage());
+		        cvSaveImage("data/bingray.jpg", bingray.getBinaryImage());
+		     
+		    
+		
+		   
 	
 				
 				

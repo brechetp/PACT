@@ -91,42 +91,19 @@ public class GrayImage extends Image{
 		return grayMatrix;
 	}
 	
-public GrayImage grayDifference(GrayImage grayImage2){
-		
-		
-		int[][] matrix2 = grayImage2.getMatrix();
-		int width = getWidth();
-		int height = getHeight();
-		int[][] diff = new int[height][width];
-		if (getWidth() == grayImage2.getWidth() && getHeight() == grayImage2.getHeight()){
-			for (int i = 0 ; i< width; i++){
-				for(int j = 0; j < height; j++){
-					if (Math.pow((grayMatrix[j][i] - matrix2[j][i]), 2) > 200){
-						
-						diff[j][i] = matrix2[j][i];
-					} else {
-						diff[j][i] = 0 ;
-					}
-				}
-			}
-		}
-		GrayImage gray = new GrayImage(diff);
-		return gray ;
-		
-		
-	}
+
 	
-	public BinaryImage binaryDifference(GrayImage grayImage2){
+	public BinaryImage binaryDifference(GrayImage grayImage){
 		
 		
-		int[][] matrix2 = grayImage2.getMatrix();
+		int[][] matrix = grayImage.getMatrix();
 		int width = getWidth();
 		int height = getHeight();
 		int[][] diff = new int[height][width];
-		if (getWidth() == grayImage2.getWidth() && getHeight() == grayImage2.getHeight()){
+		if (getWidth() == grayImage.getWidth() && getHeight() == grayImage.getHeight()){
 			for (int i = 0 ; i< width; i++){
 				for(int j = 0; j < height; j++){
-					if (Math.pow((grayMatrix[j][i] - matrix2[j][i]), 2) > 200){
+					if (Math.abs((grayMatrix[j][i] - matrix[j][i])) > 10){
 						
 						diff[j][i] = 1;
 					} else {
@@ -209,6 +186,53 @@ public BinaryImage test(){
 			}
 		}
 	
+	BinaryImage bin = new BinaryImage(diff);
+	return bin ;
+	
+}
+
+
+public int voisin(int i, int j, int pixel){ // retourne le pixel voisin de (i,j)
+	
+	int res =0;
+	int distance = 0 , distanceMin = Integer.MAX_VALUE;
+	for(int n = Math.max(0, i-1); n <= Math.min(width-1, i+1); n++){
+		for(int p = Math.max(0, j-1); p <= Math.min(height-1,  j+1); p++){
+			
+			distance = 0;
+			
+				distance = Math.abs(grayMatrix[j][i] - pixel);
+			
+			if (distance < distanceMin){
+				distanceMin = distance;
+				res = grayMatrix[j][i];
+			}
+		}
+	}
+	
+	return res;
+}
+
+public BinaryImage binaryDifference2(GrayImage grayImage) {
+	
+	int[][] matrix2 = grayImage.getMatrix();
+	int width = getWidth();
+	int height = getHeight();
+	int[][] diff = new int[height][width];
+	int voisin = 0 ;
+	if (getWidth() == grayImage.getWidth() && getHeight() == grayImage.getHeight()){
+		for (int i = 0 ; i< width; i++){
+			for(int j = 0; j < height; j++){
+				voisin = voisin(i, j, grayMatrix[j][i]);
+				if (Math.abs((grayMatrix[j][i] - voisin)) > 20){
+					
+					diff[j][i] = 1;
+				} else {
+					diff[j][i] = 0 ;
+				}
+			}
+		}
+	}
 	BinaryImage bin = new BinaryImage(diff);
 	return bin ;
 	
