@@ -1,0 +1,28 @@
+Pre-requis:
+-Vecteur de poid D
+-Matrice d'apprentissage X de n exemples chaqun decrit par l attribut
+-Vecteur de classe Y
+-Une fonction qui cree un classificateur de type souche etant donnee un attribut et un seuil : ClassifSouche
+
+Sorties:
+-Seuil
+-IndiceAttribut
+-erreur
+
+indiceAttribut<-1
+erreurMin <- 1
+
+Pour j de 1 a l, Faire 		//Parcours des attributs
+	Pour i de 1 a n, Faire	//Parcours des exemples
+		erreur = CalculeErreur(ClassifSouche(j,X[i][j])) //Parcours des exemples pour calculer l'erreur du classificateur sur l'attrivut i et le seil M[i][j]
+	 	
+	 	-Si erreur<erreurMin alors
+	 		erreurMin <- erreur
+	 		seuil <- X[i][j]
+	 		indiceAttribut <- j
+	 	FinSi
+	FinFaire
+FinFaire
+
+Renvoie seuil, indiceAttribut et erreur. 
+
