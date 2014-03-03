@@ -32,11 +32,11 @@ public class ServeurReception implements Runnable
 				if (msg!=null)
 					msgrecu = true;
 			}
-			if (msg=="carte")
+			if (msg.equals("carte"))
 				this.newCarte();
-			else if (msg=="coinche")
+			else if (msg.equals("coinche"))
 				this.newCoinche();
-			else if (msg=="annonce")
+			else if (msg.equals("annonce"))
 				this.newAnnonce();
 		} 
 		catch (IOException e) 
@@ -52,9 +52,14 @@ public class ServeurReception implements Runnable
 		try 
 		{
 			String valeur =in.readLine();
+			if (valeur.equals("passer"))
+				belote.nouveauGeste(new MouvementEvent("passer"));
+			else
+			{
 			String couleur =in.readLine();
 			Annonce annonce = new Annonce(couleur, Integer.parseInt(valeur), -1);
 			belote.setAnnonce(annonce);
+			}
 		} 
 		catch (IOException e) 
 		{

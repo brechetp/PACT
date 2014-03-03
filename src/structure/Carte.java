@@ -22,19 +22,19 @@ public class Carte implements CarteInterface
 
 	public int getValue() 
 	{
-		if (labelNum=="10")
+		if (labelNum.equals("10"))
 			return 10;
-		else if (labelNum=="roi")
+		else if (labelNum.equals("roi"))
 			return 4;
-		else if (labelNum=="reine")
+		else if (labelNum.equals("reine"))
 			return 3;
-		else if (labelNum=="as")
+		else if (labelNum.equals("as"))
 			return 11;
-		else if (labelNum=="valet"&&isAtout())
+		else if (labelNum.equals("valet")&&isAtout())
 			return 20;
-		else if (labelNum=="valet")
+		else if (labelNum.equals("valet"))
 			return 2;
-		else if (labelNum=="9"&&isAtout())
+		else if (labelNum.equals("9")&&isAtout())
 			return 14;
 		else return 0;
 	}

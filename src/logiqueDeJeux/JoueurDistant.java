@@ -1,53 +1,54 @@
 package logiqueDeJeux;
 
+import serveur.Serveur;
 import structure.*;
 
 public class JoueurDistant implements JoueurDistantInterface
 {
 	
 	private CarteListInterface cardList;
+	private Serveur serveur;
 	
-	public JoueurDistant()
+	public JoueurDistant(BeloteCoinche belote)
 	{
-		this.cardList = new CarteList();
+		this.cardList=new CarteList();
+		this.serveur= new Serveur(belote);
 	}
 	
-	@Override
-	public void sendCard(CarteInterface cate) {
-		// TODO Auto-generated method stub
-		
+	public void sendCard(CarteInterface carte,int i) 
+	{
+		serveur.envoiCarte(carte, i);
 	}
 
-	@Override
-	public CarteInterface waitCard() {
-		// TODO Auto-generated method stub
-		return null;
+	public void waitCard() 
+	{
+		serveur.waitCarte();
 	}
 
-	@Override
-	public AnnonceInterface waitAnnonce() {
-		// TODO Auto-generated method stub
-		return null;
+	public void waitAnnonce() 
+	{
+		serveur.envoiTourAnnonce();
 	}
 
-	@Override
-	public void sendAnnonce(AnnonceInterface annonce) {
-		// TODO Auto-generated method stub
-		
+	public void sendAnnonce(AnnonceInterface annonce, int i) 
+	{
+		serveur.envoiAnnonce(annonce, i);
 	}
 
-	@Override
 	public void addCard(CarteInterface carte) 
 	{
-		// TODO Auto-generated method stub
 		cardList.ajoute(carte);
-		
+		serveur.envoiCarteDistribution(carte);
 	}
 
-	@Override
 	public boolean aHuitCarte() 
 	{
 		return cardList.size()==8;
+	}
+
+	public void partieTerminer() 
+	{
+		serveur.envoiPartieTerminer();
 	}
 
 }

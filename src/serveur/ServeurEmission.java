@@ -20,8 +20,12 @@ public class ServeurEmission implements Runnable
 		Scanner sc = new Scanner(msg);
 		while (sc.hasNext())
 		{
-			out.println(sc.next());
+			String envoi =sc.next();
+			System.out.println(envoi);
+			out.println(envoi);
+			out.flush();
 		}
+		sc.close();
 	}
 
 }

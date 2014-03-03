@@ -44,6 +44,7 @@ public class StateMachine
 		case DebutTour:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte()); //joue la carte et passe au joueur suivant
 				this.state = State.DebutTour1;
 			}
@@ -51,6 +52,7 @@ public class StateMachine
 		case DebutTour1:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte());	//joue la carte et passe au joueur suivant
 				this.state = State.DebutTour2;
 			}
@@ -58,6 +60,7 @@ public class StateMachine
 		case DebutTour2:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte());	//joue la carte et passe au joueur suivant
 				this.state = State.DebutTour3;
 			}
@@ -65,6 +68,7 @@ public class StateMachine
 		case DebutTour3:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte());	//joue la carte et passe au joueur suivant
 				this.state = State.DebutTour4;
 			}
@@ -72,6 +76,7 @@ public class StateMachine
 		case DebutTour4:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte());	//joue la carte et passe au joueur suivant
 				this.state = State.FinDebutTour;
 			}
@@ -81,6 +86,7 @@ public class StateMachine
 		case SecondTour:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte());	//joue la carte et passe au joueur suivant
 				this.state = State.SecondTour1;
 			}
@@ -88,6 +94,7 @@ public class StateMachine
 		case SecondTour1:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte());	//joue la carte et passe au joueur suivant
 				this.state = State.SecondTour2;
 			}
@@ -95,6 +102,7 @@ public class StateMachine
 		case SecondTour2:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte());	//joue la carte et passe au joueur suivant
 				this.state = State.SecondTour3;
 			}
@@ -102,6 +110,7 @@ public class StateMachine
 		case SecondTour3:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte());	//joue la carte et passe au joueur suivant
 				this.state = State.SecondTour4;
 			}
@@ -130,12 +139,12 @@ public class StateMachine
 		case ResteDesTours:
 			if (etat.valide(carte.getCarte()))
 			{
+				joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte()); //joue la carte et passe au joueur suivant
 				this.state = State.ResteDesTours;
 			}
 			break;
 			
-			 
 		default:
 			//Nothing
 			break;
@@ -384,6 +393,7 @@ public class StateMachine
 		{
 		case ResteDesTours:
 			//Action graphique
+			joueurD.partieTerminer();
 			break;
 		default:
 			//Nothing
@@ -398,10 +408,33 @@ public class StateMachine
 
 	public void setAnnonce(AnnonceInterface annonce) 
 	{
-		etat.setAnnonce(annonce);
-		etat.valeurAnnonce();
-		this.valeurAnnonceMax=etat.valeurAnnonce();
-		etat.joueurSuivant();
+		switch 	(this.state)
+		{
+		case Annonce:
+			etat.setAnnonce(annonce);
+			etat.valeurAnnonce();
+			this.valeurAnnonceMax=etat.valeurAnnonce();
+			etat.joueurSuivant();
+			this.state= State.AnnoncePasse1;
+		case AnnoncePasse1:
+			etat.setAnnonce(annonce);
+			etat.valeurAnnonce();
+			this.valeurAnnonceMax=etat.valeurAnnonce();
+			etat.joueurSuivant();
+			this.state= State.AnnoncePasse1;
+		case AnnoncePasse2:
+			etat.setAnnonce(annonce);
+			etat.valeurAnnonce();
+			this.valeurAnnonceMax=etat.valeurAnnonce();
+			etat.joueurSuivant();
+			this.state= State.AnnoncePasse1;
+		case AnnoncePasse3:
+			etat.setAnnonce(annonce);
+			etat.valeurAnnonce();
+			this.valeurAnnonceMax=etat.valeurAnnonce();
+			etat.joueurSuivant();
+			this.state= State.AnnoncePasse1;
+		}
 	}
 
 	public EtatDuJeuInterface getEtat() 
