@@ -85,7 +85,7 @@ public class MyListener extends Listener{
     	if (k1.getC()=='s'){
     		
     		try{
-    			FileOutputStream fileOut = new FileOutputStream("C:/Users/Benjamin-Zigaroula-/Desktop/GestesLeap/Geste1.ser");
+    			FileOutputStream fileOut = new FileOutputStream("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste4 (quitter)/Geste4 Michael (quitter).ser");
     			ObjectOutputStream out = new ObjectOutputStream(fileOut);
     			out.writeObject(liste);
     			out.flush();
@@ -107,7 +107,7 @@ public class MyListener extends Listener{
     	if (k1.getC()=='p'){
     		
     		try{
-        		File fichier = new File("C:/Users/Benjamin-Zigaroula-/Desktop/GestesLeap/Geste1.ser");
+        		File fichier = new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste4 (quitter)/Geste4 Michael (quitter).ser");
         		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;
         		ListeDeMouvements hyk = (ListeDeMouvements)ois.readObject();
         		for (int k = 0 ; k<hyk.size() ; k++){

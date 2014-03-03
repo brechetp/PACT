@@ -29,12 +29,19 @@ public final class AdaBoost
 		{
 			for(int i=0;i<hauteur;i++)
 			{
-				ClassifSouche classi = new ClassifSouche(X[i][j], j);
-				double erreur = AdaBoost.erreur(classi, X, Y, D);
-				if (erreur<=erreurMin)
+				ClassifSouche classiG = new ClassifSoucheGauche(X[i][j], j);
+				ClassifSouche classiD = new ClassifSoucheDroite(X[i][j], j);
+				double erreurG = AdaBoost.erreur(classiG, X, Y, D);
+				double erreurD = AdaBoost.erreur(classiD, X, Y, D);
+				if (erreurG<=erreurMin)
 				{
-					erreurMin=erreur;
-					classiRetour=classi;
+					erreurMin=erreurG;
+					classiRetour=classiG;
+				}
+				if (erreurD<=erreurMin)
+				{
+					erreurMin=erreurD;
+					classiRetour=classiD;
 				}
 			}
 		}

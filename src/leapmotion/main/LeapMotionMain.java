@@ -14,8 +14,8 @@ public class LeapMotionMain {
 		JFrame fenetre = new JFrame();
 		fenetre.addKeyListener(kk);
 		fenetre.setVisible(true);
-		fenetre.setSize(1000, 500);
-		fenetre.setLocation(250, 250);
+		fenetre.setSize(100, 50);
+		fenetre.setLocation(25, 25);
 		fenetre.setTitle("Leap Motion Control Panel");
 		fenetre.setResizable(false);
 		
