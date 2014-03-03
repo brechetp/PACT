@@ -25,7 +25,7 @@ public class IUGMain {
 				e.printStackTrace();
 			}
 			
-			vc.partieTerminée();
+			vc.partieTerminer();
 		}
 
 }

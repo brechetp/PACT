@@ -1,6 +1,7 @@
 package iug;
 
-public class ViewController {
+public class ViewController implements ViewControllerInterface
+{
 	
 	Fenetre fen = new Fenetre();
 	
@@ -129,13 +130,15 @@ public class ViewController {
 		fen.repaint();
 	}
 	
-	public void partieTerminée(){
+	public void partieTerminer(){
 		fen.getPan().setK(666);
 		fen.repaint();
 	}
 	
 	public void supprimerMessage(){
 		fen.getPan().setK(0);
+		fen.getPan().setJ(0);
+		fen.getPan().setI(0);
 		fen.repaint();
 	}
 	

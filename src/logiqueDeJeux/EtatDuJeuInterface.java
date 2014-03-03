@@ -1,5 +1,6 @@
 package logiqueDeJeux;
 
+import iug.ViewControllerInterface;
 import structure.*;
 
 
@@ -13,7 +14,7 @@ public interface EtatDuJeuInterface
 	public boolean annonceFaite();
 	
 	//Ajoute une nouvelle carte jouer
-	public void joue(CarteInterface carte);
+	public void joue(CarteInterface carte, ViewControllerInterface vci);
 	
 	//non jouer et valide. Renvoi true si c'est le cas
 	public boolean valide(CarteInterface carte);

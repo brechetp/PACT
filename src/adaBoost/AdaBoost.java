@@ -37,7 +37,6 @@ public final class AdaBoost
 					classiRetour=classi;
 				}
 			}
-			
 		}
 		
 		return classiRetour;

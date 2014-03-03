@@ -1,5 +1,6 @@
 package logiqueDeJeux;
 
+import iug.ViewControllerInterface;
 import structure.*;
 
 public class EtatDuJeu implements EtatDuJeuInterface
@@ -14,6 +15,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	private int pointsTeamPair = 0;
 	private int pointsTeamImpair = 0;
 	private int coefCoinche = 1;
+	private int valeurFinPartie = 2000;
 	
 	public EtatDuJeu ()
 	{
@@ -34,7 +36,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		return annonce.getAtout();
 	}
 
-	public void joue(CarteInterface carte) 
+	public void joue(CarteInterface carte,ViewControllerInterface vci) 
 	{
 		playedCard.ajoute(carte);
 		cardOnTable.ajoute(carte);
@@ -42,7 +44,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			TeamPair.ajoute(carte, numJoueur);
 		else
 			TeamImpair.ajoute(carte, numJoueur);
-		this.joueurSuivant();
+		this.joueurSuivant(vci);
 	}
 
 	public boolean valide(CarteInterface carte) 
@@ -66,10 +68,11 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		return annonce!=null&&annonce.getTeam()!=-1;
 	}
 
-	public void joueurSuivant() 
+	public void joueurSuivant(ViewControllerInterface vci) 
 	{
 		//Appel au joueur distant
 		this.numJoueur = (numJoueur%4) +1;
+		vci.joueurEnCours(numJoueur);
 	}
 	
 	public void finpli() 
@@ -149,6 +152,9 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		this.TeamPair=new Team();
 		this.TeamImpair = new Team();
 		this.coefCoinche = 1;
+		
+		if (this.pointsTeamPair>this.valeurFinPartie)
+			
 	}
 
 	public boolean isAtout(Carte carte) 
