@@ -22,11 +22,11 @@ public class Main {
 		
 				
 		   for(int i = 0 ; i<=1; i++){
-		      		Capture.captureFrame("data/capture"+i+".jpg");
-		      		Thread.sleep(5000);
+		      		Capture.captureFrame("data/capturebis"+i+".jpg");
+		      		
 		      		
 		      	}
-		      	IplImage img1 = cvLoadImage("data/capture0.jpg");
+		      	/*IplImage img1 = cvLoadImage("data/capture0.jpg");
 		      	IplImage img2 = cvLoadImage("data/capture1.jpg");
 		
 		      	Image image1 = new Image(img1);
@@ -41,7 +41,7 @@ public class Main {
 		        
 		        CanvasFrame rgb_frame = new CanvasFrame("AVI Playback Demo");        
 		        mainframe.getContentPane().add(rgb_frame.getCanvas() );
-		        rgb_frame.setVisible(false);*/
+		        rgb_frame.setVisible(false);
 		        
 		       // rgb_frame.dispose();
 		        BinaryImage binrgbvoisins = image1.difference(image2);
@@ -54,7 +54,7 @@ public class Main {
 		        cvSaveImage("data/binrgbvoisins.jpg", binrgbvoisins.getBinaryImage());
 		        cvSaveImage("data/bingrayvoisins.jpg", bingrayvoisins.getBinaryImage());
 		        cvSaveImage("data/binrgb.jpg", binrgb.getBinaryImage());
-		        cvSaveImage("data/bingray.jpg", bingray.getBinaryImage());
+		        cvSaveImage("data/bingray.jpg", bingray.getBinaryImage());*/
 		     
 		    
 		
