@@ -1,16 +1,27 @@
 package iug;
 
-import java.awt.*;
-import javax.swing.*;
-
 public class IUGMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
-		Fenetre window = new Fenetre();
-		//window.setUndecorated(true);
-		window.build();
+		int k = 0;
+		
+		Fenetre fen = new Fenetre();
+		try {
+			while(true){
+				Thread.sleep(500);
+				fen.getPan().repaint();
+				fen.getPan().setI(k);
+				k++;
+				if(k>32){
+					k=0;
+				}
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+
 	}
 
 }
