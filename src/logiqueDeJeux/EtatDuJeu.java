@@ -213,4 +213,10 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		return playedCard.size()==32;
 	}
 
+	@Override
+	public void setAnnonce(AnnonceInterface annonce) 
+	{
+		this.annonce=annonce;
+	}
+
 }

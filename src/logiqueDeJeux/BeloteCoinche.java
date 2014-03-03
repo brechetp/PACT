@@ -1,5 +1,6 @@
 package logiqueDeJeux;
 
+import structure.AnnonceInterface;
 import machineEtat.*;
 
 public class BeloteCoinche implements GlobalListener
@@ -37,4 +38,13 @@ public class BeloteCoinche implements GlobalListener
 		machine.eventFinPli();
 	}
 	
+	public void setAnnonce(AnnonceInterface annonce)
+	{
+		machine.setAnnonce(annonce);
+	}
+
+	public EtatDuJeuInterface getEtat() 
+	{
+		return machine.getEtat();
+	}
 }

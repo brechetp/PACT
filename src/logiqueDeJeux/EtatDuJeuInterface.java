@@ -59,4 +59,7 @@ public interface EtatDuJeuInterface
 
 	//setter pour le numero joueur
 	public void setNumJoueur(int premierAJouer);
+
+	//met la bonne valeur de l'annonce
+	public void setAnnonce(AnnonceInterface annonce);
 }

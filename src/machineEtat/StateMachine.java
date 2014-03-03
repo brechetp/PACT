@@ -1,5 +1,6 @@
 package machineEtat;
 
+import structure.AnnonceInterface;
 import logiqueDeJeux.*;
 
 public class StateMachine 
@@ -393,5 +394,19 @@ public class StateMachine
 	public void eventQuit() 
 	 {
 		 System.exit(0);
-	 } 
+	 }
+
+	public void setAnnonce(AnnonceInterface annonce) 
+	{
+		etat.setAnnonce(annonce);
+		etat.valeurAnnonce();
+		this.valeurAnnonceMax=etat.valeurAnnonce();
+		etat.joueurSuivant();
+	}
+
+	public EtatDuJeuInterface getEtat() 
+	{
+		// TODO Auto-generated method stub
+		return this.etat;
+	} 
 }
