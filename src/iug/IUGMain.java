@@ -6,22 +6,26 @@ public class IUGMain {
 		
 		int k = 0;
 		
-		Fenetre fen = new Fenetre();
-		try {
-			while(true){
-				Thread.sleep(500);
-				fen.getPan().repaint();
-				fen.getPan().setI(k);
-				k++;
-				if(k>32){
-					k=0;
-				}
+		ViewController vc = new ViewController();
+
+			vc.joueurEnCours(3);
+			vc.coinche(2);
+			vc.afficherCarte("astrefle");
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			vc.effacerCartes();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			vc.partieTerminée();
 		}
-
-
-	}
 
 }

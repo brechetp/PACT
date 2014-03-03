@@ -1,10 +1,14 @@
 package iug;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Panneau extends JPanel {
@@ -43,10 +47,13 @@ public class Panneau extends JPanel {
 	Carte carte32 = new Carte(32);
 	
 	int i = 0;
+	int k = 0;
+	int j = 0;
 	
 	public void paintComponent(Graphics g){
 		
 		try {
+			JLabel label = new JLabel("Le Joueur " + k + " a coinché !!!");
 			if (i>32){
 				i=0;
 			}
@@ -58,12 +65,126 @@ public class Panneau extends JPanel {
 		    else if(i==2){
 		    	  g.drawImage(carte2.getImage(), 460, 250, this);
 		    }
+		    else if(i==3){
+		    	  g.drawImage(carte3.getImage(), 460, 250, this);
+		    }
+		    else if(i==4){
+		    	  g.drawImage(carte4.getImage(), 460, 250, this);
+		    }
+		    else if(i==5){
+		    	  g.drawImage(carte5.getImage(), 460, 250, this);
+		    }
+		    else if(i==6){
+		    	  g.drawImage(carte6.getImage(), 460, 250, this);
+		    }
+		    else if(i==7){
+		    	  g.drawImage(carte7.getImage(), 460, 250, this);
+		    }
+		    else if(i==8){
+		    	  g.drawImage(carte8.getImage(), 460, 250, this);
+		    }
+		    else if(i==9){
+		    	  g.drawImage(carte9.getImage(), 460, 250, this);
+		    }
+		    else if(i==10){
+		    	  g.drawImage(carte10.getImage(), 460, 250, this);
+		    }
+		    else if(i==11){
+		    	  g.drawImage(carte11.getImage(), 460, 250, this);
+		    }
+		    else if(i==12){
+		    	  g.drawImage(carte12.getImage(), 460, 250, this);
+		    }
+		    else if(i==13){
+		    	  g.drawImage(carte13.getImage(), 460, 250, this);
+		    }
+		    else if(i==14){
+		    	  g.drawImage(carte14.getImage(), 460, 250, this);
+		    }
+		    else if(i==15){
+		    	  g.drawImage(carte15.getImage(), 460, 250, this);
+		    }
+		    else if(i==16){
+		    	  g.drawImage(carte16.getImage(), 460, 250, this);
+		    }
+		    else if(i==17){
+		    	  g.drawImage(carte17.getImage(), 460, 250, this);
+		    }
+		    else if(i==18){
+		    	  g.drawImage(carte18.getImage(), 460, 250, this);
+		    }
+		    else if(i==19){
+		    	  g.drawImage(carte19.getImage(), 460, 250, this);
+		    }
+		    else if(i==20){
+		    	  g.drawImage(carte20.getImage(), 460, 250, this);
+		    }
+		    else if(i==21){
+		    	  g.drawImage(carte21.getImage(), 460, 250, this);
+		    }
+		    else if(i==22){
+		    	  g.drawImage(carte22.getImage(), 460, 250, this);
+		    }
+		    else if(i==23){
+		    	  g.drawImage(carte23.getImage(), 460, 250, this);
+		    }
+		    else if(i==24){
+		    	  g.drawImage(carte24.getImage(), 460, 250, this);
+		    }
+		    else if(i==25){
+		    	  g.drawImage(carte25.getImage(), 460, 250, this);
+		    }
+		    else if(i==26){
+		    	  g.drawImage(carte26.getImage(), 460, 250, this);
+		    }
+		    else if(i==27){
+		    	  g.drawImage(carte27.getImage(), 460, 250, this);
+		    }
+		    else if(i==28){
+		    	  g.drawImage(carte28.getImage(), 460, 250, this);
+		    }
+		    else if(i==29){
+		    	  g.drawImage(carte29.getImage(), 460, 250, this);
+		    }
+		    else if(i==30){
+		    	  g.drawImage(carte30.getImage(), 460, 250, this);
+		    }
+		    else if(i==31){
+		    	  g.drawImage(carte31.getImage(), 460, 250, this);
+		    }
+		    else if(i==32){
+		    	  g.drawImage(carte32.getImage(), 460, 250, this);
+		    }
 		    else if(i==0){
+
+		    }
+		    
+		    if (k==0){
+		    	
+		    }
+		    else if (k>0 && k<5){
+		    	g.setColor(new Color(255, 0, 0));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+		    	g.drawString("Le joueur " + k + " a coinché !!!!!", 300, 400);
+		    }
+		    else if (k==666){
+		    	j=0;
+		    	i=0;
+		    	g.setColor(new Color(255, 0, 0));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 80));
+		    	g.drawString("PARTIE TERMINEE", 200, 400);
+		    }
+		    if (j!=0){
+		    	g.setColor(new Color(0,255,0));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+		    	g.drawString("C'est au joueur " + j + " de jouer !", 350 , 600);
+		    }
+		    if(j==0){
+		    	
 		    }
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
-		System.out.println(i);
 	}
 	
 	public void setI(int i){
@@ -72,6 +193,22 @@ public class Panneau extends JPanel {
 	
 	public int getI(){
 		return i;
+	}
+	
+	public void setK(int k){
+		this.k = k;
+	}
+	
+	public int getK(){
+		return k;
+	}
+	
+	public void setJ(int j){
+		this.j = j;
+	}
+	
+	public int getJ(){
+		return j;
 	}
 
 }
