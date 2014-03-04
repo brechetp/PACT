@@ -1,5 +1,8 @@
 package camera;
 
+import static com.googlecode.javacv.cpp.opencv_core.cvCreateImage;
+import patternmatching.Matrice;
+import static com.googlecode.javacv.cpp.opencv_core.cvSize;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
 import java.nio.ByteBuffer;
@@ -12,6 +15,7 @@ public class Image {
 	protected int height;
 	private IplImage rgbImage;
 	private ByteBuffer rgbByteBuffer;
+
 	
 	public Image(IplImage image){
 		
@@ -19,6 +23,27 @@ public class Image {
 		height = image.height();
 		rgbImage = image;
 		rgbByteBuffer = rgbImage.getByteBuffer();
+		
+	}
+	
+	public Image (int[] tab, int width, int height) {
+		
+		this.width = width;
+		this.height = height;
+		rgbImage = cvCreateImage(cvSize(width, height), 8, 3);
+		rgbByteBuffer = rgbImage.getByteBuffer();
+		
+		for (int i =0; i<width; i++){
+			for (int j=0; j<height; j++){
+				for(int k = 0; k<3; k++){
+					
+					rgbByteBuffer.put(3*i + rgbImage.widthStep()*j+k, (byte) tab[3*i + rgbImage.widthStep()*j+k]);
+				}
+				
+			}
+		}
+		
+		
 		
 	}
 	
@@ -115,28 +140,102 @@ public BinaryImage difference(Image image){
 		
 	}
 
-public BinaryImage difference2(Image image) {
-	int[][] diff = new int[height][width];
-	int[] pixel2 , pixel;
-	int distance = 0;
-	for (int i = 0 ; i< width; i++){
-		for(int j = 0; j < height; j++){
-			distance = 0;
-			pixel = getRgbByte(i,j);
-			pixel2 = image.getRgbByte(i, j);
-			for (int k = 0; k < 2; k ++){
-				distance = distance + Math.abs(pixel2[k] - pixel[k]);	
-			}	
+	public BinaryImage difference2(Image image) {
+		int[][] diff = new int[height][width];
+		int[] pixel2 , pixel;
+		int distance = 0;
+		for (int i = 0 ; i< width; i++){
+			for(int j = 0; j < height; j++){
+				distance = 0;
+				pixel = getRgbByte(i,j);
+				pixel2 = image.getRgbByte(i, j);
+				for (int k = 0; k < 2; k ++){
+					distance = distance + Math.abs(pixel2[k] - pixel[k]);	
+				}	
 			
-			if (distance > 40)
-				diff[j][i] = 1;
-			else
-				diff[j][i] = 0 ;
-				}
+				if (distance > 40)
+					diff[j][i] = 1;
+				else
+					diff[j][i] = 0 ;
 			}
-		
+		}
+		BinaryImage bin = new BinaryImage(diff);
+		return bin ;
+	}
 	
-	BinaryImage bin = new BinaryImage(diff);
-	return bin ;
-}
+	public Image resample(int[][][] coins, int width, int height){
+		
+		double [][] x = new double[8][8] ;
+		double [][] y = new double[8][1];
+		int[] tab = new int[width*height*3];
+		for (int i = 0; i < 8; i++){
+			for (int j = 0; j < 6; j++){
+				if (j%3 != 2)
+					x[i][j] = (i%2 + (1-j/3) % 2) * coins[0][i/2][j%3];
+				else 
+					x[i][j] = 1 ;
+			}
+			
+			for (int j = 6; j<8; j++){
+				x[i][j] = - coins[0][i/2][j%2]*coins[1][i/2][i%2];
+			}
+			y[i][0] = coins[1][i/2][i%2];
+				
+		}
+		 Matrice X = new Matrice(x);
+		 Matrice Y = new Matrice(y);
+		 Matrice Xinv = X.getMatriceInverse();
+		 Matrice A = Xinv.multiply(Y);
+		 
+		 for (int i = 0 ; i< width; i++){
+			 for (int j = 0; j < height; j++){
+				 double[][] h = new double[2][2];
+				 
+				 double [][] pointImage = new double[2][1];
+				 
+				 for (int n = 0; n <2; n++){
+					 for(int p = 0; p < 2; p++){
+						 
+						 h[n][p] = A.getValue(6+p, 0)*(j*n+i*(1-n))-A.getValue(n*3+p, 0);
+					 }
+					 pointImage[n][1] = A.getValue(n*3+2, 0)-(j*n+i*(1-n));
+					 
+				 }
+				 Matrice H = new Matrice(h);
+				 Matrice PointImage = new Matrice(pointImage);
+				 Matrice Point = H.getMatriceInverse().multiply(PointImage);
+				 double xValue = Point.getValue(0, 0), yValue = Point.getValue(1, 0);
+
+				 
+				 int[][] pixels = new int[4][3];
+				 
+				 for (int k = 0; k<4; k++){
+					 pixels[k] = getRgbByte((int)Math.ceil(xValue)+k/2, (int)Math.ceil(yValue)+k%2);
+				 }
+				 
+				 for(int k = 0; k<3; k++){
+					 tab[3*i + 3*width*j + k] = (int) Math.round((1-xValue%1)*(1-yValue%1)*pixels[k][0]+
+								 (xValue%1)*(1-yValue%1)*pixels[k][1]+
+								 (1-xValue%1)*(yValue%1)*pixels[k][2]+
+								 (xValue%1)*(yValue%1)*pixels[k][3]) ;
+					 }
+					 
+				 }
+				 
+				 
+				 
+				 
+			 }
+		 
+
+		 Image res = new Image(tab, width, height);
+		 return res;
+		 
+		 
+		 
+		 
+		
+
+		
+	}
 }
