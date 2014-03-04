@@ -7,9 +7,9 @@ public class PremierTest {
 
 	public static void main(String[] args) 
 	{
-		JoueurDistant joueurD = new JoueurDistant();
+		
 		EtatDuJeu etat = new EtatDuJeu();
-		BeloteCoinche belote = new BeloteCoinche(joueurD, etat);
+		BeloteCoinche belote = new BeloteCoinche(etat);
 		
 /******************************* Mouvement ***********************************************/
 		MouvementEvent passer = new MouvementEvent("passer");
@@ -101,79 +101,117 @@ public class PremierTest {
 		belote.nouvelleCarte(AsCoEvent);
 		belote.nouvelleCarte(ValCoEvent);
 		belote.nouvelleCarte(DixCoEvent);
-		
-		belote.nouveauGeste(passer); //joueur 1 passe
-		
-		belote.nouveauGeste(passer); //joueur 2 passe
-		
-		belote.nouveauGeste(accepter);
-		belote.nouveauGeste(accepter);
-		belote.nouveauGeste(passer);
-		belote.nouveauGeste(passer);
-		belote.nouveauGeste(accepter); //joueur 3 prend a 80 pique
-		
-		belote.nouveauGeste(passer); //joueur 4 passe
-		
-		belote.nouveauGeste(accepter);
-		belote.nouveauGeste(passer);
-		belote.nouveauGeste(accepter);
-		belote.nouveauGeste(passer);
-		belote.nouveauGeste(passer);
-		belote.nouveauGeste(accepter); // joueur 1 prend a 100 carreau
-		
-		belote.nouveauGeste(passer); //Joueur 2 passer
-		
-		belote.nouveauGeste(passer); //Joueur 3 passer
-		
-		belote.nouveauGeste(passer); //Joueur 4 passe
-		
-		belote.nouvelleCarte(ValCaEvent);
-		belote.nouvelleCarte(HuiCaEvent);
-		belote.nouvelleCarte(RoiCaEvent);
-		belote.nouvelleCarte(SepCaEvent);
-		belote.finPli();
-		
-		belote.nouvelleCarte(NeuCaEvent);
-		belote.nouvelleCarte(RenCaEvent);
-		belote.nouvelleCarte(DixCaEvent);
-		belote.nouvelleCarte(AsCaEvent);
-		belote.finPli();
-		
-		belote.nouvelleCarte(AsTrEvent);
-		belote.nouvelleCarte(ValTrEvent);
-		belote.nouvelleCarte(DixTrEvent);
-		belote.nouvelleCarte(SepTrEvent);
-		belote.finPli();
-		
-		belote.nouvelleCarte(AsCoEvent);
-		belote.nouvelleCarte(SepCoEvent);
-		belote.nouvelleCarte(RenCoEvent);
-		belote.nouvelleCarte(RoiCoEvent);
-		belote.finPli();
-		
-		belote.nouvelleCarte(DixCoEvent);
-		belote.nouvelleCarte(NeuCoEvent);
-		belote.nouvelleCarte(RoiPiEvent);
-		belote.nouvelleCarte(SepPiEvent);
-		belote.finPli();
-		
-		belote.nouvelleCarte(ValCoEvent);
-		belote.nouvelleCarte(HuiCoEvent);
-		belote.nouvelleCarte(ValPiEvent);
-		belote.nouvelleCarte(HuiTrEvent);
-		belote.finPli();
-		
-		belote.nouvelleCarte(RenPiEvent);
-		belote.nouvelleCarte(HuiPiEvent);
-		belote.nouvelleCarte(NeuTrEvent);
-		belote.nouvelleCarte(AsPiEvent);
-		belote.finPli();
-		
-		belote.nouvelleCarte(RenTrEvent);;
-		belote.nouvelleCarte(NeuPiEvent);
-		belote.nouvelleCarte(DixPiEvent);
-		belote.nouvelleCarte(RoiTrEvent);
-		belote.finPli();
+		try {
+			Thread.sleep(1000);
+			belote.nouveauGeste(passer); //joueur 1 passe
+			Thread.sleep(1000);
+			belote.nouveauGeste(passer); //joueur 2 passe
+			Thread.sleep(1000);
+			belote.nouveauGeste(accepter);
+			belote.nouveauGeste(accepter);
+			belote.nouveauGeste(passer);
+			belote.nouveauGeste(passer);
+			belote.nouveauGeste(accepter); //joueur 3 prend a 80 pique
+			Thread.sleep(1000);
+			belote.nouveauGeste(passer); //joueur 4 passe
+			Thread.sleep(1000);
+			belote.nouveauGeste(accepter);
+			belote.nouveauGeste(passer);
+			belote.nouveauGeste(accepter);
+			belote.nouveauGeste(passer);
+			belote.nouveauGeste(passer);
+			belote.nouveauGeste(accepter); // joueur 1 prend a 100 carreau
+			Thread.sleep(1000);
+			belote.nouveauGeste(passer); //Joueur 2 passer
+			Thread.sleep(1000);
+			belote.nouveauGeste(passer); //Joueur 3 passer
+			Thread.sleep(1000);
+			belote.nouveauGeste(passer); //Joueur 4 passe
+			Thread.sleep(1000);
+			
+			belote.nouvelleCarte(ValCaEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(HuiCaEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(RoiCaEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(SepCaEvent);
+			Thread.sleep(1000);
+			belote.finPli();
+			
+			belote.nouvelleCarte(NeuCaEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(RenCaEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(DixCaEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(AsCaEvent);
+			Thread.sleep(1000);
+			belote.finPli();
+			
+			belote.nouvelleCarte(AsTrEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(ValTrEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(DixTrEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(SepTrEvent);
+			Thread.sleep(1000);
+			belote.finPli();
+			
+			belote.nouvelleCarte(AsCoEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(SepCoEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(RenCoEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(RoiCoEvent);
+			Thread.sleep(1000);
+			belote.finPli();
+			
+			belote.nouvelleCarte(DixCoEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(NeuCoEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(RoiPiEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(SepPiEvent);
+			Thread.sleep(1000);
+			belote.finPli();
+			
+			belote.nouvelleCarte(ValCoEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(HuiCoEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(ValPiEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(HuiTrEvent);
+			Thread.sleep(1000);
+			belote.finPli();
+			
+			belote.nouvelleCarte(RenPiEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(HuiPiEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(NeuTrEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(AsPiEvent);
+			Thread.sleep(1000);
+			belote.finPli();
+			
+			belote.nouvelleCarte(RenTrEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(NeuPiEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(DixPiEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(RoiTrEvent);
+			Thread.sleep(1000);
+			belote.finPli();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

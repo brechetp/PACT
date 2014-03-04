@@ -23,7 +23,7 @@ public interface EtatDuJeuInterface
 	public int getNumJoueur();
 	
 	//passe au joueur suivant
-	public void joueurSuivant();
+	public void joueurSuivant(ViewControllerInterface vci);
 	
 	//met fin au pli actuel et calcule les points
 	public void finpli();

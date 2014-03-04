@@ -1,5 +1,6 @@
 package machineEtat;
 
+import iug.ViewController;
 import iug.ViewControllerInterface;
 import structure.AnnonceInterface;
 import logiqueDeJeux.*;
@@ -25,6 +26,7 @@ public class StateMachine
 		this.state = State.Distribution;
 		this.etat = etat;
 		this.joueurD = joueurD;
+		this.vci = new ViewController();
 	}
 	 
 	public void eventCarte(CardEvent carte) 
@@ -189,27 +191,27 @@ public class StateMachine
 		switch(this.state) 
 		{
 		case Annonce:
-			etat.joueurSuivant();
+			etat.joueurSuivant(vci);
 			this.state = State.AnnoncePasse1;
 			break;
 		case AnnoncePasse1:
-			etat.joueurSuivant();
+			etat.joueurSuivant(vci);
 			this.state = State.AnnoncePasse2;
 			break;
 		case AnnoncePasse2:
-			etat.joueurSuivant();
+			etat.joueurSuivant(vci);
 			this.state = State.AnnoncePasse3;
 			break;
 		case AnnoncePasse3:
 			if (etat.annonceFaite())
 			{
-				etat.joueurSuivant();
+				etat.joueurSuivant(vci);
 				this.state = State.DebutTour;
 			}
 			else /*annonce pas faite*/
 			{
-				etat.joueurSuivant();
-				etat.joueurSuivant();
+				etat.joueurSuivant(vci);
+				etat.joueurSuivant(vci);
 				this.state = State.Distribution;
 			}
 			break;
@@ -264,7 +266,7 @@ public class StateMachine
 		 case AnnonceAFaire2:
 			 etat.valideAnnonce();
 			 this.valeurAnnonceMax=etat.valeurAnnonce();
-			 etat.joueurSuivant();
+			 etat.joueurSuivant(vci);
 			 this.state = State.AnnoncePasse1;
 			 break;
 		 
@@ -452,32 +454,31 @@ public class StateMachine
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
-			etat.joueurSuivant();
+			etat.joueurSuivant(vci);
 			this.state= State.AnnoncePasse1;
 		case AnnoncePasse1:
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
-			etat.joueurSuivant();
+			etat.joueurSuivant(vci);
 			this.state= State.AnnoncePasse1;
 		case AnnoncePasse2:
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
-			etat.joueurSuivant();
+			etat.joueurSuivant(vci);
 			this.state= State.AnnoncePasse1;
 		case AnnoncePasse3:
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
-			etat.joueurSuivant();
+			etat.joueurSuivant(vci);
 			this.state= State.AnnoncePasse1;
 		}
 	}
 
 	public EtatDuJeuInterface getEtat() 
 	{
-		// TODO Auto-generated method stub
 		return this.etat;
 	} 
 }

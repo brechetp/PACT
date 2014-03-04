@@ -153,7 +153,8 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		this.TeamImpair = new Team();
 		this.coefCoinche = 1;
 		
-		if (this.pointsTeamPair>this.valeurFinPartie)
+		//if (this.pointsTeamPair>this.valeurFinPartie)
+			
 			
 	}
 
@@ -224,5 +225,4 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	{
 		this.annonce=annonce;
 	}
-
 }

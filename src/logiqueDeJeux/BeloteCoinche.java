@@ -8,9 +8,10 @@ public class BeloteCoinche implements GlobalListener
 	private StateMachine machine;
 	
 	
-	public BeloteCoinche(JoueurDistantInterface joueurD, EtatDuJeu etat)
+	public BeloteCoinche(EtatDuJeu etat)
 	{
-		this.machine = new StateMachine(joueurD, etat);
+		
+		this.machine = new StateMachine(new JoueurDistant(this), etat);
 	}
 	
 	public void nouvelleCarte(CardEvent carte) 

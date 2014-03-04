@@ -12,33 +12,33 @@ public class JoueurDistant implements JoueurDistantInterface
 	public JoueurDistant(BeloteCoinche belote)
 	{
 		this.cardList=new CarteList();
-		this.serveur= new Serveur(belote);
+		//this.serveur= new Serveur(belote);
 	}
 	
 	public void sendCard(CarteInterface carte,int i) 
 	{
-		serveur.envoiCarte(carte, i);
+		//serveur.envoiCarte(carte, i);
 	}
 
 	public void waitCard() 
 	{
-		serveur.waitCarte();
+		//serveur.waitCarte();
 	}
 
 	public void waitAnnonce() 
 	{
-		serveur.envoiTourAnnonce();
+		//serveur.envoiTourAnnonce();
 	}
 
 	public void sendAnnonce(AnnonceInterface annonce, int i) 
 	{
-		serveur.envoiAnnonce(annonce, i);
+		//serveur.envoiAnnonce(annonce, i);
 	}
 
 	public void addCard(CarteInterface carte) 
 	{
 		cardList.ajoute(carte);
-		serveur.envoiCarteDistribution(carte);
+		//serveur.envoiCarteDistribution(carte);
 	}
 
 	public boolean aHuitCarte() 
@@ -48,7 +48,7 @@ public class JoueurDistant implements JoueurDistantInterface
 
 	public void partieTerminer() 
 	{
-		serveur.envoiPartieTerminer();
+		//serveur.envoiPartieTerminer();
 	}
 
 }
