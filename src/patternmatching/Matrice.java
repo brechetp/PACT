@@ -98,8 +98,9 @@ public class Matrice
 	{
 		Matrice a = null;
 		double value = 0;
-	
-		if (this.getRows() < 3 && this.getColumns() < 3)
+		if (this.getRows() == 1 && this.getColumns() == 1)
+			return this.getValue(0, 0);
+		if (this.getRows() == 2 && this.getColumns() == 2)
 			return (this.getValue(0,0)*this.getValue(1,1) - this.getValue(1,0)*this.getValue(0,1));
 		
 		
@@ -348,11 +349,11 @@ public class Matrice
 	// multiplication
 	public Matrice multiply(final Matrice matrice)
 	{
-		Matrice a = new Matrice(this.getRows(), this.getColumns());
+		Matrice a = new Matrice(this.getRows(), matrice.getColumns());
 		int k,i,j,m;
 		double value = 0;
 				
-		for (k=0; k<this.getColumns(); k++)
+		for (k=0; k<matrice.getColumns(); k++)
 		{
 						
 			for (i=0; i<this.getRows(); i++)

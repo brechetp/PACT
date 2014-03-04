@@ -37,7 +37,7 @@ public class Image {
 			for (int j=0; j<height; j++){
 				for(int k = 0; k<3; k++){
 					
-					rgbByteBuffer.put(3*i + rgbImage.widthStep()*j+k, (byte) tab[3*i + rgbImage.widthStep()*j+k]);
+					rgbByteBuffer.put(3*i + rgbImage.widthStep()*j+k, (byte) tab[3*i + 3*width*j+k]);
 				}
 				
 			}
@@ -60,7 +60,7 @@ public class Image {
 	public int[] getRgbByte(int i, int j){
 		
 		int[] res = new int[3];
-		for(int k = 0; k <2; k++){
+		for(int k = 0; k <3; k++){
 			res[k] = (rgbByteBuffer.get(3*i + rgbImage.widthStep()*j+k) + 255) % 255;
 		}
 		return res;
@@ -165,15 +165,15 @@ public BinaryImage difference(Image image){
 	
 	public Image resample(int[][][] coins, int width, int height){
 		
-		double [][] x = new double[8][8] ;
-		double [][] y = new double[8][1];
-		int[] tab = new int[width*height*3];
+		double[][] x = new double[8][8] ; // matrice ˆ inverser
+		double[][] y = new double[8][1]; // point image
+		int[] tab = new int[width*height*3]; // tableau de l'image produite
 		for (int i = 0; i < 8; i++){
 			for (int j = 0; j < 6; j++){
-				if (j%3 != 2)
-					x[i][j] = (i%2 + (1-j/3) % 2) * coins[0][i/2][j%3];
+				if ((j%3) < 2)
+					x[i][j] = ((i%2 + (1-j/3)) % 2) * coins[0][i/2][j%3];
 				else 
-					x[i][j] = 1 ;
+					x[i][j] = ((i%2 + (1-j/3)) % 2) * 1 ;
 			}
 			
 			for (int j = 6; j<8; j++){
@@ -183,6 +183,7 @@ public BinaryImage difference(Image image){
 				
 		}
 		 Matrice X = new Matrice(x);
+		 System.out.println(X.isInversible());
 		 Matrice Y = new Matrice(y);
 		 Matrice Xinv = X.getMatriceInverse();
 		 Matrice A = Xinv.multiply(Y);
@@ -198,12 +199,14 @@ public BinaryImage difference(Image image){
 						 
 						 h[n][p] = A.getValue(6+p, 0)*(j*n+i*(1-n))-A.getValue(n*3+p, 0);
 					 }
-					 pointImage[n][1] = A.getValue(n*3+2, 0)-(j*n+i*(1-n));
+					 pointImage[n][0] = A.getValue(n*3+2, 0)-(j*n+i*(1-n));
 					 
 				 }
 				 Matrice H = new Matrice(h);
+				
 				 Matrice PointImage = new Matrice(pointImage);
-				 Matrice Point = H.getMatriceInverse().multiply(PointImage);
+				 Matrice Hinv = (H.getMatriceInverse());
+				 Matrice Point = Hinv.multiply(PointImage);
 				 double xValue = Point.getValue(0, 0), yValue = Point.getValue(1, 0);
 
 				 
@@ -214,10 +217,10 @@ public BinaryImage difference(Image image){
 				 }
 				 
 				 for(int k = 0; k<3; k++){
-					 tab[3*i + 3*width*j + k] = (int) Math.round((1-xValue%1)*(1-yValue%1)*pixels[k][0]+
-								 (xValue%1)*(1-yValue%1)*pixels[k][1]+
-								 (1-xValue%1)*(yValue%1)*pixels[k][2]+
-								 (xValue%1)*(yValue%1)*pixels[k][3]) ;
+					 tab[3*i + 3*width*j + k] = (int) Math.round((1-xValue%1)*(1-yValue%1)*pixels[0][k]+
+								 (xValue%1)*(1-yValue%1)*pixels[1][k]+
+								 (1-xValue%1)*(yValue%1)*pixels[2][k]+
+								 (xValue%1)*(yValue%1)*pixels[3][k]) ;
 					 }
 					 
 				 }

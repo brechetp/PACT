@@ -31,8 +31,9 @@ public class Main {
 		      	IplImage img2 = cvLoadImage("data/capture1.jpg");
 		
 		      	Image image1 = new Image(img1);
-		      	
-		      	Image image2 = image1.resample(new int[][][]{{{747, 600},{889, 697},{887, 253}},{{0,0},{273,0},{0,383},{273,383}}}, 273, 383);
+		      	int[][][] mat = new int[][][]{{{747, 600},{998, 694},{888, 260}, {1128, 346}},{{0,0},{273,0},{0,383},{273,383}}};
+		      	System.out.println(mat[1][3][4%3]);
+		      	Image image2 = image1.resample(mat, 273, 383);
 		        
 		      
 		       /* JFrame mainframe = new JFrame();
