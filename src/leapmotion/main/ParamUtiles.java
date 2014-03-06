@@ -1,13 +1,15 @@
 package leapmotion.main;
 
+import adaBoost.Classification;
+
 import com.leapmotion.leap.Frame;
 
 public class ParamUtiles {
 	
-	private double tab[] = new double[15];
+	private double tab[] = new double[Classification.NOMBRE_DE_FEATURES];
 	
 	public ParamUtiles(){
-		for (int i = 0 ; i <15 ; i++){
+		for (int i = 0 ; i <Classification.NOMBRE_DE_FEATURES ; i++){
 			tab[i]=(double)0;
 		}
 	}
@@ -41,7 +43,7 @@ public class ParamUtiles {
 		tab[13] = (double)f.hands().get(1).translation(f2).getZ();
 		
 		//Rotation de la première main
-		tab[14] = (double)Math.sqrt(f.hands().get(0).palmNormal().getX()*f.hands().get(0).palmNormal().getX()+f.hands().get(0).palmNormal().getY()*f.hands().get(0).palmNormal().getY()+f.hands().get(0).palmNormal().getZ()*f.hands().get(0).palmNormal().getZ());
+		//tab[14] = (double)Math.sqrt(f.hands().get(0).palmNormal().getX()*f.hands().get(0).palmNormal().getX()+f.hands().get(0).palmNormal().getY()*f.hands().get(0).palmNormal().getY()+f.hands().get(0).palmNormal().getZ()*f.hands().get(0).palmNormal().getZ());
 	}
 	
 	public double get(int i){

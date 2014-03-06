@@ -1,5 +1,9 @@
 package adaBoost;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 
@@ -9,27 +13,45 @@ public class mainada2 {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void main(double[][] X, double[][] X_test) 
+	public ClassiFinal[] main(double[][] X, double[][] X_test) 
 	{
 		int nbGeste = 5;
 		int[] Y = { 
-				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-				1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-				2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-				3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-				4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+				1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+				2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+				3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+				4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
 					} ;
 		
 		int[] Y_test = {
-					0,0,0,0,0,0,0,0,0,0,
-					1,1,1,1,1,1,1,1,1,1,1,1,
-					2,2,2,2,2,2,2,2,2,
-					3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-					4,4,4,4,4,4,4,4,4,4,4,4
+					0,0,0,0,0,0,0,0,0,
+					1,1,1,1,1,1,1,1,1,1,
+					2,2,2,2,2,2,2,2,2,2,2,2,
+					3,3,3,3,3,3,3,3,3,3,3,3,
+					4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
 						} ;
 		
 		int T=200;
 		ClassiFinal[] classi = new ClassiFinal[nbGeste];
+		ClassiFinauxListe tab = new ClassiFinauxListe(classi);
+		
+		try {
+			FileOutputStream fileOut = new FileOutputStream("./adaboost/Classificateurs Finaux.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(tab);;
+			out.flush();
+			out.close();
+			fileOut.close();
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 		
 		//creation des classi
 		for (int i=0;i<nbGeste;i++)
@@ -45,7 +67,7 @@ public class mainada2 {
 			classi[i].normaliser();
 		}
 		
-		int[] Ysortie = new int[62];
+		int[] Ysortie = new int[68];
 		for(int j=0;j<Y_test.length;j++)
 		{
 			int indiceMax=-1;
@@ -59,9 +81,9 @@ public class mainada2 {
 					resultMax=result;
 				}
 			}
-			if (resultMax<0)
-				Ysortie[j]=42;
-			else
+			//if (resultMax<0)
+				//Ysortie[j]=42;
+		//	else
 				Ysortie[j]=indiceMax;
 			
 		}
@@ -71,5 +93,7 @@ public class mainada2 {
 			System.out.print("Ytest ="+Y_test[j]+"   ");
 			System.out.println("Ysortie ="+Ysortie[j]);
 		}
+		
+		return classi;
 	}
 }

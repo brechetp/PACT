@@ -93,7 +93,7 @@ public class mainAda {
 				{0.215524,	 -0.144019,	 -0.597535,	 -0.330419,	 -0.360836,	 -0.365310,	 0.018148,	 -0.827206,	 0.795102,	 -0.024208,	 0.573626,	 -0.446019,	 -0.107613,	 0.250741,	 -0.681943,	 -0.238475,	 -0.329814,	 -0.421232,	 0.060680,	 -0.591069}
 			};
 		int[] Ytest = {1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4};
-		int[] Ysortie = new int[20];
+		/*int[] Ysortie = new int[20];
 		for(int j=0;j<20;j++)
 		{
 			int indiceMax=0;
@@ -111,11 +111,31 @@ public class mainAda {
 				System.out.println("bordel !!!");
 			Ysortie[j]=indiceMax;
 			
+		}*/
+		
+		int[] Ysortie = new int[40];
+		for(int j=0;j<40;j++)
+		{
+			int indiceMax=0;
+			double resultMax =-1;
+			for(int k=1;k<5;k++)
+			{
+				double result = classi[k-1].result(X[j])/(classi[k-1].valeurA());
+				if (result>resultMax)
+				{
+					indiceMax=k;
+					resultMax=result;
+				}
+			}
+			if (indiceMax==0)
+				System.out.println("bordel !!!");
+			Ysortie[j]=indiceMax;
+			
 		}
 		
-		for(int j=0;j<20;j++)
+		for(int j=0;j<40;j++)
 		{
-			System.out.print("Ytest ="+Ytest[j]+"   ");
+			System.out.print("Ytest ="+Y[j]+"   ");
 			System.out.println("Ysortie ="+Ysortie[j]);
 		}
 		

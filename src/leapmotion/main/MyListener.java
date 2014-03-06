@@ -44,8 +44,8 @@ public class MyListener extends Listener{
 
     		ParamUtiles param = new ParamUtiles();
     		param.addToList(frame, controller.frame(1));
-    		double tab[] = new double[15];
-    		for (int k = 0 ; k < 15 ; k++){
+    		double tab[] = new double[Classification.NOMBRE_DE_FEATURES];
+    		for (int k = 0 ; k < Classification.NOMBRE_DE_FEATURES ; k++){
     			tab[k] = param.get(k);
     		}
     		

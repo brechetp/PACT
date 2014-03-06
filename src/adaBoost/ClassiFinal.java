@@ -5,11 +5,11 @@ import java.io.Serializable;
 
 public final class ClassiFinal implements Serializable
 {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8869425576675025163L;
-	
+	private static final long serialVersionUID = -971724694737317174L;
 	private double[] A;
 	private ClassifSouche[] H;
 	

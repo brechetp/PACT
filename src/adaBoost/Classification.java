@@ -10,7 +10,7 @@ import machineEtat.MouvementEvent;
 public class Classification 
 {
 	private int compteur = 0;
-	private final int NOMBRE_DE_FEATURES = 15;
+	public static final int NOMBRE_DE_FEATURES = 14;
 	private double[] moyenneVecteur = new double[NOMBRE_DE_FEATURES];
 	private double[] nextMoyenneVecteur = new double[NOMBRE_DE_FEATURES];
 	private ClassiFinal[] classi;
@@ -44,7 +44,7 @@ public class Classification
 	
 	public void determineClasse (double[] mvment)
 	{
-		/*ArrayList<Integer> classesRetour= new ArrayList<Integer>();
+		ArrayList<Integer> classesRetour= new ArrayList<Integer>();
 		for(int k=0;k<classi.length;k++)
 		{
 			double result = classi[k].result(mvment);
@@ -54,8 +54,7 @@ public class Classification
 			}
 		}
 		if (classesRetour.size()==1)
-			this.envoiMouvement(classesRetour.get(0));*/
-		this.envoiMouvement(0);
+			this.envoiMouvement(classesRetour.get(0));
 	}
 	
 	public void ajoute(double[] frame)

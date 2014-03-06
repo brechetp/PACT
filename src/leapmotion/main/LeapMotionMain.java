@@ -1,10 +1,17 @@
 package leapmotion.main;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import javax.swing.JFrame;
 
 import logiqueDeJeux.BeloteCoinche;
 import logiqueDeJeux.EtatDuJeu;
+import adaBoost.BaseApprentissage;
+import adaBoost.ClassiFinal;
+import adaBoost.ClassiFinauxListe;
 import adaBoost.Classification;
 
 import com.leapmotion.leap.Controller;
@@ -24,31 +31,38 @@ public class LeapMotionMain {
 		fenetre.setResizable(false);
 		
 		
+		/*try {
+			File fichier = new File("./adaboost/Classificateurs Finaux.ser");
+			ObjectInputStream ois;
+			ois = new ObjectInputStream(new FileInputStream(fichier));
+			ClassiFinauxListe classilol = (ClassiFinauxListe)ois.readObject();
+			EtatDuJeu etat = new EtatDuJeu();
+			BeloteCoinche belote = new BeloteCoinche(etat);
+			Classification classi = new Classification(classilol.get());
+			classi.addListener(belote);
+	        MyListener listener = new MyListener(classi);
+	        Controller controller = new Controller();
+	        controller.addListener(listener);
+	        try {
+	            System.in.read();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        controller.removeListener(listener);
+	        ois.close();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
 		
-		 // Create a sample listener and controller
+		ClassiFinal[] classilol =BaseApprentissage.main(null);
 		EtatDuJeu etat = new EtatDuJeu();
 		BeloteCoinche belote = new BeloteCoinche(etat);
-		Classification classi = new Classification(null);
+		Classification classi = new Classification(classilol);
 		classi.addListener(belote);
-        MyListener listener = new MyListener(classi); // Erreur logique parce que il n'y a pas de classification ici et le constructeur a ete modifie depuis
+        MyListener listener = new MyListener(classi);
         Controller controller = new Controller();
-        
-        // Have the sample listener receive events from the controller
         controller.addListener(listener);
-
-        // Keep this process running until Enter is pressed
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Remove the sample listener when done
-        controller.removeListener(listener);
-
-
-		
-
 
 	}
 
