@@ -3,8 +3,8 @@ package patternmatching;
 public class BinaryImage2 {
 
 	private int[][] frame; // image binaire 0=background 1=objet
-	private int[] connectionTable = new int[100];
-	public Pixel[][] taggedBinaryImage = null; // image initiale o� les 1 sont
+	private int[] connectionTable = new int[10000];
+	public int[][] taggedBinaryImage; // image initiale o� les 1 sont
 												// remplac�s par des pixels
 												// �tiquet�s
 	private int size1 = 1920;
@@ -13,21 +13,21 @@ public class BinaryImage2 {
 
 	public BinaryImage2 (int [][] matrice){
 		this.frame = matrice ;
-		this.maxNbTags = 100;
+		this.maxNbTags = 10000;
+		this.taggedBinaryImage = new int[size2][size1];
+		for (int i = 0; i < size2; i++) {
+			for (int j = 0; j < size1; j++) {
+				taggedBinaryImage[i][j] = 0;
+				
+			}
+		}
 		
 	}
+	
 	
 	// algorithme de double passage
 	public int[][] conncetedComponents() {
 
-		taggedBinaryImage = new Pixel[size2][size1];
-		// construction des Pixel
-		for (int i = 0; i < size2; i++) {
-			for (int j = 0; j < size1; j++) {
-				taggedBinaryImage[i][j] = new Pixel(i, j, this);
-				
-			}
-		}
 
 		int k = 1;
 
@@ -43,27 +43,27 @@ public class BinaryImage2 {
 				{
 					if (frame[i-1][j] == 0 && frame[i][j-1] == 0) 
 					{
-						taggedBinaryImage[i][j].setTag(k);
+						taggedBinaryImage[i][j]=k;
 						k++;
 					} 
 					else 
 					{
-						if (taggedBinaryImage[i][j].getNorthNeighbor().getTag() == taggedBinaryImage[i][j].getWestNeighbor().getTag() && frame[i-1][j]==1) 
+						if (taggedBinaryImage[i-1][j] == taggedBinaryImage[i][j-1] && frame[i-1][j]==1) 
 						{
-							taggedBinaryImage[i][j].setTag(taggedBinaryImage[i][j].getNorthNeighbor().getTag());
+							taggedBinaryImage[i][j] = taggedBinaryImage[i-11][j];
 						} 
 						else 
 						{
 
-							int e1 = Math.min(taggedBinaryImage[i][j].getNorthNeighbor().getTag(), taggedBinaryImage[i][j].getWestNeighbor().getTag());
+							int e1 = Math.min(taggedBinaryImage[i-1][j], taggedBinaryImage[i][j-1]);
 							if (e1 == 0) 
 							{
-								e1 = Math.max(taggedBinaryImage[i][j].getNorthNeighbor().getTag(), taggedBinaryImage[i][j].getWestNeighbor().getTag());
+								e1 = Math.max(taggedBinaryImage[i-1][j], taggedBinaryImage[i][j-1]);
 							}
-							taggedBinaryImage[i][j].setTag(connectionTable[e1]);
+							taggedBinaryImage[i][j] = connectionTable[e1];
 							
 							// mise � jour de la table de la table de correspondance
-							int a = taggedBinaryImage[i][j].getNorthNeighbor().getTag();
+							int a = taggedBinaryImage[i-1][j];
 							if (connectionTable[a] != connectionTable[e1]) 
 							{
 								while (connectionTable[a] != a) 
@@ -74,7 +74,7 @@ public class BinaryImage2 {
 								}
 							}
 							
-							a = taggedBinaryImage[i][j].getWestNeighbor().getTag();
+							a = taggedBinaryImage[i][j-1];
 							if (connectionTable[a] != connectionTable[e1]) 
 							{
 								while (connectionTable[a] != a) 
@@ -102,27 +102,18 @@ public class BinaryImage2 {
 		// second balayage
 		for (int i1 = 1; i1 < size2; i1++) {
 			for (int j = 1; j < size1; j++) {
-				if (taggedBinaryImage[i1][j].getTag() != 0) {
-					taggedBinaryImage[i1][j].
-					setTag(connectionTable[taggedBinaryImage[i1][j]
-							.getTag()]);
+				if (taggedBinaryImage[i1][j] != 0) {
+					taggedBinaryImage[i1][j] = connectionTable[taggedBinaryImage[i1][j]];
 				}
 			}
 		}
 		
-		// passage de pixel � image binaire
-		for (int i = 0; i < size2; i++) {
-			for (int j = 0; j < size1; j++) {
-				frame[i][j] = taggedBinaryImage[i][j].getTag() ;
-			}
-		}
-
-		return frame; 
+		return taggedBinaryImage; 
 		
 	}
 
 	public int [][] largestComponent(){
-		conncetedComponents();
+		int [][] tab = conncetedComponents();
 		int[][] largest = new int[size2][size1];
 		int[] compteur = new int[maxNbTags];
 		for (int i=0; i<maxNbTags; i++){
@@ -131,8 +122,8 @@ public class BinaryImage2 {
 		
 		for (int i = 0; i < size2; i++) {
 			for (int j = 0; j < size1; j++) {
-				if (frame[i][j] !=0) {
-					compteur[frame[i][j]] +=1 ;
+				if (tab[i][j] !=0) {
+					compteur[tab[i][j]] +=1 ;
 				}
 			}
 		}
@@ -159,11 +150,4 @@ public class BinaryImage2 {
 		return largest;
 	}
 	
-
-	public int getFrameValue(int x, int y) {
-		
-		return frame[x][y];
-	}
-	
-
 }
