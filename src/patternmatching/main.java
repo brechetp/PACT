@@ -14,6 +14,7 @@ public class main {
 		
 		matrice[5][5]=1;
 		BinaryImage bi = new BinaryImage(matrice); 
+		
 		//int rep = bi.conncetedComponents();
 		
 		int [][] rep = bi.largestComponent();

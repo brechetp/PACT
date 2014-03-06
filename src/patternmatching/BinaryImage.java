@@ -161,9 +161,9 @@ public class BinaryImage {
 	
 
 	public int getFrameValue(int x, int y) {
+		
 		return frame[x][y];
 	}
-	
 	
 
 }
