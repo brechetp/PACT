@@ -111,7 +111,7 @@ public class Image {
 		return res;
 	}
 	
-public BinaryImage difference(Image image){
+	public BinaryImage difference(Image image){
 		
 		
 		int[][] diff = new int[height][width];
@@ -163,7 +163,11 @@ public BinaryImage difference(Image image){
 		return bin ;
 	}
 	
-	public Image resample(int[][][] coins, int width, int height){
+	public Image resample(int[][] coin, int width, int height){ // reechantillonnage on donne les coins et les dimensions de la nouvelle image
+		
+		int [][][] coins = new int[2][4][2];
+		coins[0] = coin;
+		coins[1] = new int[][]{{0,0}, {width, 0}, {0, height}, {width, height}};
 		
 		double[][] x = new double[8][8] ; // matrice ˆ inverser
 		double[][] y = new double[8][1]; // point image

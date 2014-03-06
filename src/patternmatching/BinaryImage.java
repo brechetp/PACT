@@ -9,6 +9,11 @@ public class BinaryImage {
 												// étiquetés
 	private int size;
 	private int maxNbTags;
+	
+	public int[][] getFrame(){
+		
+		return frame;
+	}
 
 	public BinaryImage (int [][] matrice){
 		this.size = matrice.length;
@@ -129,6 +134,15 @@ public class BinaryImage {
 	
 	public int getSize(){
 		return size;
+	}
+	
+	public int[][] getLargestComponent(){
+		
+		
+		
+		return frame;
+		
+		
 	}
 
 }
