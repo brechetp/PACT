@@ -1,3 +1,5 @@
+package patternmatching;
+
 /** Définition de la classe Matrice (Matrix) dans lequel nous trouvons beaucoup
   * de méthodes, d'opérations sur les matrices
   * 
@@ -12,7 +14,7 @@
 
 public class Matrice
 {
-	private long[][] coeff = null;
+	private double[][] coeff = null;
 	private int diametre = 0;
 	private int distance = 0;
 	
@@ -34,7 +36,7 @@ public class Matrice
 		this(0,0);
 	}
 
-	public Matrice(long[][] mat)
+	public Matrice(double[][] mat)
 	{
 		this.coeff = mat;
 	}
@@ -42,8 +44,8 @@ public class Matrice
 	//----------------------------------------------//
 	//					  		 SETTER					   	//
 	//----------------------------------------------//	
-	// définit une matrice de type long[][]
-	public void setMatrice(long[][] mat)
+	// définit une matrice de type double[][]
+	public void setMatrice(double[][] mat)
 	{
 		this.coeff = mat;
 	}
@@ -51,7 +53,7 @@ public class Matrice
 	// définit une valeur à la position i et j
 	// i - ligne
 	// j - col
-	public void setValue(int i, int j, long value)
+	public void setValue(int i, int j, double value)
 	{
 		this.coeff[i][j] = value;
 	}
@@ -60,15 +62,15 @@ public class Matrice
 	// on définit la taille de la mtrice
 	public void setLength(int i, int j)
 	{
-		this.coeff = new long[i][j];
+		this.coeff = new double[i][j];
 	}
 	
 	
 	//----------------------------------------------//
 	//					  		 GETTER					   	//
 	//----------------------------------------------//	
-	// retourne la matrice sous forme du type long[][]
-	public long[][] getMatrice()
+	// retourne la matrice sous forme du type double[][]
+	public double[][] getMatrice()
 	{
 		return this.coeff;
 	}
@@ -86,18 +88,19 @@ public class Matrice
 	}
 	
 	// retourne la valeur à la position i et j
-	public long getValue(int i, int j)
+	public double getValue(int i, int j)
 	{
 		return this.coeff[i][j];
 	}
 	
 	// retourne le déterminant d'une matrice
-	public long getDeterminant()
+	public double getDeterminant()
 	{
 		Matrice a = null;
-		long value = 0;
-	
-		if (this.getRows() < 3 && this.getColumns() < 3)
+		double value = 0;
+		if (this.getRows() == 1 && this.getColumns() == 1)
+			return this.getValue(0, 0);
+		if (this.getRows() == 2 && this.getColumns() == 2)
 			return (this.getValue(0,0)*this.getValue(1,1) - this.getValue(1,0)*this.getValue(0,1));
 		
 		
@@ -115,7 +118,7 @@ public class Matrice
 	{
 		Matrice a = new Matrice(this.getRows(), this.getColumns());
 		Matrice tmp = null;
-		long det = this.getDeterminant();
+		double det = this.getDeterminant();
 		
 		for (int i=0; i<this.getRows(); i++)
 			for (int j=0; j<this.getColumns(); j++)
@@ -177,9 +180,9 @@ public class Matrice
 	  *	sB - sommet B
 	  *	nb - Nombre de arrete (ou nombre de caractere du combinaison)
 	  * @return
-	  * 	long - nombre de combinaison possible entre 2 sommets
+	  * 	double - nombre de combinaison possible entre 2 sommets
 	  */
-	public long getGrapheCombiCount(int sA, int sB, int nb)
+	public double getGrapheCombiCount(int sA, int sB, int nb)
 	{
 		if (sB > this.getRows() || sA > this.getColumns())
 			return -1;
@@ -205,7 +208,7 @@ public class Matrice
 	public Matrice getMatriceTranspose()
 	{
 		Matrice a = new Matrice(this.getColumns(), this.getRows());
-		long tmp = 0;
+		double tmp = 0;
 		
 		for (int i=0; i<a.getRows(); i++)
 			for (int j=0; j<a.getColumns(); j++)
@@ -219,9 +222,9 @@ public class Matrice
 	}
 	
 	// retourne la valeur de la trice de la matrice
-	public long getTraceMatrice()
+	public double getTraceMatrice()
 	{
-		long value = 0;
+		double value = 0;
 		
 		for (int i=0; i<this.getRows(); i++)
 			value += this.getValue(i,i);
@@ -234,9 +237,9 @@ public class Matrice
 	  * entre deux sommets sA et sB, tel que sA <= sB
 	  * si sA > sB, méthode renvoi -1 pour erreur
 	  */
-	public long getDistanceGraphe(int sA, int sB)
+	public double getDistanceGraphe(int sA, int sB)
 	{
-		long value = 0;
+		double value = 0;
 		
 		if (sA > sB) 
 			return -1;
@@ -346,11 +349,11 @@ public class Matrice
 	// multiplication
 	public Matrice multiply(final Matrice matrice)
 	{
-		Matrice a = new Matrice(this.getRows(), this.getColumns());
+		Matrice a = new Matrice(this.getRows(), matrice.getColumns());
 		int k,i,j,m;
-		long value = 0;
+		double value = 0;
 				
-		for (k=0; k<this.getColumns(); k++)
+		for (k=0; k<matrice.getColumns(); k++)
 		{
 						
 			for (i=0; i<this.getRows(); i++)
@@ -404,7 +407,7 @@ public class Matrice
 	}
 	
 	// multiplication d'une matrice par une constante k
-	public Matrice multiplyByK(long k)
+	public Matrice multiplyByK(double k)
 	{
 		Matrice a = this;
 		
@@ -417,7 +420,7 @@ public class Matrice
 	
 	
 	// division d'une matrice par une constante k
-	public Matrice divByK(long k)
+	public Matrice divByK(double k)
 	{
 		Matrice a = this;
 		
@@ -514,7 +517,7 @@ public class Matrice
 	{
 			// matrice d'adjacence d'un graphe
 			Matrice a = new Matrice();
-			a.setMatrice(new long[][] { {0,1,1,0,0,0,0,0,0,0,0}, // 1
+			a.setMatrice(new double[][] { {0,1,1,0,0,0,0,0,0,0,0}, // 1
 												 {1,0,1,1,1,0,0,0,0,0,0}, // 2
 												 {1,1,0,0,1,0,0,0,0,0,0}, // 3
 												 {0,1,0,0,0,1,0,0,0,0,0}, // 4
@@ -530,7 +533,7 @@ public class Matrice
 		//System.out.println("Matrice A : \n"+a);				
 		//System.out.println("Distance : \n"+a.matricePow(4));
 		
-		Matrice x = new Matrice(new long[][] { {0,1,0,0}, {1,0,0,0}, {0,0,1,1},{0,0,0,1}});
+		Matrice x = new Matrice(new double[][] { {0,1,0,0}, {1,0,0,0}, {0,0,1,1},{0,0,0,1}});
 		System.out.println("Det : \n" + x.getDeterminant());
 		System.out.println("Matrice inverse : \n" + x.getMatriceInverse());
 

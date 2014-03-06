@@ -1,8 +1,13 @@
 package camera;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.ByteBuffer;
+
+
 
 import com.googlecode.javacv.OpenCVFrameGrabber;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
@@ -152,11 +157,15 @@ public class GrayImage extends Image{
 		PrintWriter pw = new PrintWriter(fos);
 		int i; // parcours en largeur
 		int j; // parcours en hauteur
+		String accu;
 		for(j=0; j<height; j++){ 
 			
 			for(i=0;i<width;i++){
+				accu = ""+get(i,j)+"";
+				while (accu.length() != 3)
+						accu = "0"+accu;
 				
-				pw.print(get(i,j)+" "); // on Žcrit l'etiquette
+				pw.print(accu); // on Žcrit l'etiquette
 
 			}
 			pw.print("\n");	// a la fin d'une ligne, on va a la ligne
@@ -168,7 +177,56 @@ public class GrayImage extends Image{
 	  e.printStackTrace();
   }
 	}
-public BinaryImage test(){
+	public static int[][] matrixFromTextFile(String fileName){
+		int[][] matrix = new int[1080][1920] ;
+		try{
+			FileReader fis = new FileReader(fileName);
+			BufferedReader bis = new BufferedReader (fis);
+			String currentLine; // ligne courrante lue
+			int j = 0; // j comptera les lignes du fichier 
+			String accu;
+			
+			while((currentLine = bis.readLine()) != null && j<1080){
+				// tant que le fichier n'est pas fini
+				
+				if(currentLine.length() == 3*1920){ // lorsque la largeur est la bonne
+					
+					for(int i=0; i<1920; i++){ // i compte la colonne
+						
+						accu = currentLine.substring(3*i, 3*(i+1));
+						matrix[j][i] = Integer.parseInt(accu);
+						
+						// on remplit la matrice
+					}
+					j++; // a la fin d'une ligne on incremente le nombre de lignes lues
+				}
+				else{ // quand la largeur n'est pas la bonne
+					bis.close();
+					throw new Exception();
+				}
+			}
+			if (j != 1080 || (currentLine = bis.readLine()) != null){ 
+				// si on s'arrete avant la fin du fichier ou si le fichier est trop grand
+				bis.close();
+				throw new Exception();
+			}
+			else // tout s'est bien passe, on ferme bis
+				bis.close(); 
+			return matrix;
+				
+		}
+		catch(IOException e){ // probleme d'ouverture de fichier
+			
+			e.printStackTrace();
+		}
+		catch(Exception e){ // probleme general
+			
+			e.printStackTrace();
+		}
+		return matrix;
+	}
+	
+	public BinaryImage test(){
 	
 	
 	int width = getWidth();

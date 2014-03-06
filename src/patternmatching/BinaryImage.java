@@ -4,9 +4,9 @@ public class BinaryImage {
 
 	private int[][] frame; // image binaire 0=background 1=objet
 	private int[] connectionTable = new int[10000];
-	public Pixel[][] taggedBinaryImage = null; // image initiale o les 1 sont
-												// remplacs par des pixels
-												// tiquets
+	public Pixel[][] taggedBinaryImage = null; // image initiale oï¿½ les 1 sont
+												// remplacï¿½s par des pixels
+												// ï¿½tiquetï¿½s
 	private int size1 = 1920;
 	private int size2 = 1080;
 	private int maxNbTags;
@@ -62,7 +62,7 @@ public class BinaryImage {
 							}
 							taggedBinaryImage[i][j].setTag(connectionTable[e1]);
 							
-							// mise ˆ jour de la table de la table de correspondance
+							// mise ï¿½ jour de la table de la table de correspondance
 							int a = taggedBinaryImage[i][j].getNorthNeighbor().getTag();
 							if (connectionTable[a] != connectionTable[e1]) 
 							{
@@ -110,7 +110,7 @@ public class BinaryImage {
 			}
 		}
 		
-		// passage de pixel ˆ image binaire
+		// passage de pixel ï¿½ image binaire
 		for (int i = 0; i < size2; i++) {
 			for (int j = 0; j < size1; j++) {
 				frame[i][j] = taggedBinaryImage[i][j].getTag() ;
