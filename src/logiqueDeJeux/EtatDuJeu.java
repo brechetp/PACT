@@ -75,7 +75,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		vci.joueurEnCours(numJoueur);
 	}
 	
-	public void finpli() 
+	public void finpli(ViewControllerInterface vci) 
 	{
 		 int numTeam = this.numTeamCarte(cardOnTable.getPlusFort());
 		 if (numTeam==0)
@@ -87,6 +87,9 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			 TeamImpair.remporte(cardOnTable);
 		 }
 		 this.numJoueur = this.numRemportePli();
+		 System.out.println(numJoueur);
+		 vci.effacerCartes();
+		 vci.joueurEnCours(numJoueur);
 		 this.cardOnTable = new CarteList();
 	}
 

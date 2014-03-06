@@ -26,7 +26,7 @@ public interface EtatDuJeuInterface
 	public void joueurSuivant(ViewControllerInterface vci);
 	
 	//met fin au pli actuel et calcule les points
-	public void finpli();
+	public void finpli(ViewControllerInterface vci);
 
 	//Termine la manche
 	public void mancheTerminer();

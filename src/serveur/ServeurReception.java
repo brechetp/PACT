@@ -24,20 +24,18 @@ public class ServeurReception implements Runnable
 	{
 		try 
 		{
-			String msg=null;
-			boolean msgrecu = false;
-			while(!msgrecu)
+			while (true) 
 			{
+				String msg = null;;
 				msg = in.readLine();
-				if (msg!=null)
-					msgrecu = true;
+				System.out.println(msg);
+				if (msg.equals("carte"))
+					this.newCarte();
+				else if (msg.equals("coinche"))
+					this.newCoinche();
+				else if (msg.equals("annonce"))
+					this.newAnnonce();
 			}
-			if (msg.equals("carte"))
-				this.newCarte();
-			else if (msg.equals("coinche"))
-				this.newCoinche();
-			else if (msg.equals("annonce"))
-				this.newAnnonce();
 		} 
 		catch (IOException e) 
 		{
@@ -56,9 +54,10 @@ public class ServeurReception implements Runnable
 				belote.nouveauGeste(new MouvementEvent("passer"));
 			else
 			{
-			String couleur =in.readLine();
-			Annonce annonce = new Annonce(couleur, Integer.parseInt(valeur), -1);
-			belote.setAnnonce(annonce);
+				System.out.println("recuption annonce");
+				String couleur =in.readLine();
+				Annonce annonce = new Annonce(couleur, Integer.parseInt(valeur), -1);
+				belote.setAnnonce(annonce);
 			}
 		} 
 		catch (IOException e) 
@@ -80,6 +79,7 @@ public class ServeurReception implements Runnable
 			String valeur =in.readLine();
 			String couleur =in.readLine();
 			Carte carte = new Carte(valeur, couleur, (EtatDuJeu)belote.getEtat());
+			System.out.println("carte recu");
 			belote.nouvelleCarte(new CardEvent(carte));
 		} 
 		catch (IOException e) 

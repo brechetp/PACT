@@ -372,22 +372,19 @@ public class StateMachine
 		switch(this.state)
 		{
 		case DebutTour4:
-			vci.effacerCartes();
-			etat.finpli();
+			etat.finpli(vci);
 			System.out.println("Premier tour terminer");
 			this.state = State.SecondTour;
 			break;
 			
 		case SecondTour4:
-			vci.effacerCartes();
-			etat.finpli();
+			etat.finpli(vci);
 			System.out.println("Second tour terminer");
 			this.state = State.ResteDesTours;
 			break;
 				
 		case ResteDesTours:
-			vci.effacerCartes();
-			etat.finpli();
+			etat.finpli(vci);
 			if (etat.dernierPli())
 				this.eventMancheTerminer();
 			else

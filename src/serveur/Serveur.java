@@ -68,7 +68,7 @@ public class Serveur
 		}
 	}
 	
-	public void envoiCoinche(CarteInterface carte, int i)
+	public void envoiCoinche(int i)
 	{
 		try 
 		{
@@ -131,7 +131,7 @@ public class Serveur
 			PrintWriter out =new PrintWriter(socket.getOutputStream());
 			if (annonce==null)
 			{
-				Thread t2 = new Thread(new ServeurEmission(out,"passe"));
+				Thread t2 = new Thread(new ServeurEmission(out,"passe "+i));
 				t2.start();
 			}
 			else 
@@ -146,4 +146,17 @@ public class Serveur
 		}
 	}
 	
+	public void envoiFinDeTour()
+	{
+		try 
+		{
+			PrintWriter out =new PrintWriter(socket.getOutputStream());
+			Thread t2 = new Thread(new ServeurEmission(out,"fin_de_tour"));
+			t2.start();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
 }

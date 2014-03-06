@@ -10,8 +10,8 @@ public class testServeur
 
 	public static void main(String[] args) 
 	{
-		EtatDuJeu etat = null;
-		BeloteCoinche belote = null;
+		EtatDuJeu etat = new EtatDuJeu();
+		BeloteCoinche belote = new BeloteCoinche(etat);
 		Serveur serveur = new Serveur(belote);
 		serveur.start();
 		System.out.println("Boo2 !!");
@@ -89,21 +89,25 @@ public class testServeur
 
 		try {
 			serveur.envoiCarteDistribution(AsTr);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			serveur.envoiCarteDistribution(AsPi);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			serveur.envoiCarteDistribution(AsCo);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			serveur.envoiCarteDistribution(AsCa);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			serveur.envoiCarteDistribution(SepTr);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			serveur.envoiCarteDistribution(SepCo);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			serveur.envoiCarteDistribution(SepPi);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			serveur.envoiCarteDistribution(SepCa);
+			Thread.sleep(100);
 			System.out.println("Envoi terminer");
+			Thread.sleep(100);
+			serveur.envoiTourAnnonce();
+			serveur.waitCarte();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
