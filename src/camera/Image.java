@@ -16,8 +16,13 @@ public class Image {
 	private IplImage rgbImage;
 	private ByteBuffer rgbByteBuffer;
 
+	/*
+	 * 
+	 * Constructeurs
+	 * 
+	 */
 	
-	public Image(IplImage image){
+	public Image(IplImage image){ 
 		
 		width = image.width();
 		height = image.height();
@@ -26,7 +31,7 @@ public class Image {
 		
 	}
 	
-	public Image (int[] tab, int width, int height) {
+	public Image (int[] tab, int width, int height) { // construit a parir d'un tableau de bytes
 		
 		this.width = width;
 		this.height = height;
@@ -47,6 +52,10 @@ public class Image {
 		
 	}
 	
+	/*
+	 * Setters et getters
+	 */
+	
 	public void setRgbByte(int index, byte byt){
 		
 		rgbByteBuffer.put(index, byt);
@@ -57,11 +66,22 @@ public class Image {
 		return rgbByteBuffer;
 		
 	}
-	public int[] getRgbByte(int i, int j){
+	
+	public int[] getRgbByte(int i, int j){ // retourne le vecteur pour le pixel (i,j)
 		
 		int[] res = new int[3];
 		for(int k = 0; k <3; k++){
 			res[k] = (rgbByteBuffer.get(3*i + rgbImage.widthStep()*j+k) + 255) % 255;
+		}
+		return res;
+		
+	}
+	
+	public int[] getRgbByte(int pixelIndex){ // idem pour le pixel ˆ l'index pixelIndex
+		
+		int[] res = new int[3];
+		for(int k = 0; k <3; k++){
+			res[k] = (rgbByteBuffer.get(pixelIndex+k) + 255) % 255;
 		}
 		return res;
 		
@@ -90,7 +110,7 @@ public class Image {
 		 }
 	}
 	
-	public int[] voisin(int i, int j, int[] pixel){ // retourne le pixel voisin de (i,j)
+	public int[] neighbour(int i, int j, int[] pixel){ // retourne le pixel voisin de (i,j)
 		
 		int[] res = new int[3];
 		int distance = 0 , distanceMin = Integer.MAX_VALUE;
@@ -111,7 +131,7 @@ public class Image {
 		return res;
 	}
 	
-	public BinaryImage difference(Image image){
+	public BinaryImage differenceNeighbour(Image image){
 		
 		
 		int[][] diff = new int[height][width];
@@ -121,7 +141,7 @@ public class Image {
 			for(int j = 0; j < height; j++){
 				distance = 0;
 				pixel = getRgbByte(i,j);
-				voisin = image.voisin(i, j, pixel);
+				voisin = image.neighbour(i, j, pixel);
 				for (int k = 0; k < 2; k ++){
 					distance = distance + Math.abs(voisin[k] - pixel[k]);	
 				}	

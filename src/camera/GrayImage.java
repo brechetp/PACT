@@ -9,52 +9,37 @@ import java.nio.ByteBuffer;
 
 
 
-import com.googlecode.javacv.OpenCVFrameGrabber;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 import static com.googlecode.javacv.cpp.opencv_core.cvCreateImage;
 import static com.googlecode.javacv.cpp.opencv_core.cvSize;
-import static com.googlecode.javacv.cpp.opencv_highgui.*;
-
-import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 public class GrayImage extends Image{
 	
-	private int[][] grayMatrix;
-	private IplImage grayImage;
-	private ByteBuffer grayByteBuffer;
+	private int[][] grayMatrix; // matrice de niveaux de gris
+	private IplImage grayImage; // image en niveaux de gris
+	private ByteBuffer grayByteBuffer; // tableau de bytes de l'image
 
-
-	
-
-	public GrayImage(IplImage grayImage2){
+	public GrayImage(IplImage rgbImage){
 		
-		super(grayImage2);
-		
-		grayImage = cvCreateImage(cvSize(width, height), 8, 3);
-		
-		grayByteBuffer = grayImage.getByteBuffer();
-		
+		super(rgbImage);
+		this.grayImage = cvCreateImage(cvSize(width, height), 8, 3);
+		grayByteBuffer = this.grayImage.getByteBuffer();
 		grayMatrix = new int[height][width];
-		
-	
-		ByteBuffer rgbData = getRgbByteBuffer();
 		
 		for(int i =0; i<width*height; i++){
 				
 				int pixelIndex = 3*i;
-				int blueValue = rgbData.get(pixelIndex), greenValue = rgbData.get(pixelIndex + 1),
-						redValue = rgbData.get(pixelIndex + 2);
+				int [] values= getRgbByte(pixelIndex); // on recupere les valeurs RGB du pixel
 				
-				 
-				 int grayValue = (int) (0.2125*((redValue + 255) % 255) + 0.7154*((greenValue + 255) % 255) + 0.0721*((blueValue + 255) % 255));
-				 setGrayByte(pixelIndex, (byte) grayValue);
+				int grayValue = (int) (0.2125*(values[2]) + 0.7154*(values[1]) + 0.0721*(values[0]));
+				 setGrayByte(pixelIndex, (byte) grayValue); // on modifie la valeur de gris
 				
 				 grayMatrix[i/width][i%width] =  grayValue;
 		}
 	}
 	
-	public GrayImage (int[][] grayMatrix) {
+	public GrayImage (int[][] grayMatrix) { // initialise une image a partir d'une matrice
 		
 		super(cvCreateImage(cvSize(grayMatrix[0].length, grayMatrix.length), 8, 3));
 		this.grayMatrix = grayMatrix ;
@@ -74,9 +59,11 @@ public class GrayImage extends Image{
 		
 		
 	}
-	
+	/*
+	 *  Settes et getters
+	 */
 		
-	public void setGrayByte(int index, byte value){
+	public void setGrayByte(int index, byte value){ // sauvegarde la valeur d'un byte en gris
 		grayByteBuffer.put(index, value);
 		grayByteBuffer.put(index+1, value);
 		grayByteBuffer.put(index+2, value);
@@ -97,6 +84,11 @@ public class GrayImage extends Image{
 	}
 	
 
+	/*
+	 * 
+	 * Difference entre deux images pour donner une image binaire
+	 * 
+	 */
 	
 	public BinaryImage binaryDifference(GrayImage grayImage){
 		
@@ -123,7 +115,7 @@ public class GrayImage extends Image{
 		
 	}
 	
-	public GrayImage conv(int[][] conv){
+	public GrayImage conv(int[][] conv){ // convolution d'une matrice avec un noyau
 		
 		
 		int[][] res = new int[height][width];
@@ -177,7 +169,8 @@ public class GrayImage extends Image{
 	  e.printStackTrace();
   }
 	}
-	public static int[][] matrixFromTextFile(String fileName){
+	
+	public static int[][] matrixFromTextFile(String fileName){ // retourne une matrice d'entiers a partir d'un fichier texte
 		int[][] matrix = new int[1080][1920] ;
 		try{
 			FileReader fis = new FileReader(fileName);
@@ -226,31 +219,30 @@ public class GrayImage extends Image{
 		return matrix;
 	}
 	
-	public BinaryImage test(){
+	public BinaryImage whiteThresholding(){ // on ne garde que les regions blanches
 	
 	
 	int width = getWidth();
 	int height = getHeight();
-	int[][] diff = new int[height][width];
+	int[][] res = new int[height][width];
 	
 		for (int i = 0 ; i< width; i++){
 			for(int j = 0; j < height; j++){
 				if (grayMatrix[j][i] > 235){
-					
-					diff[j][i] = 1;
+					res[j][i] = 1;
 				} else {
-					diff[j][i] = 0 ;
+					res[j][i] = 0 ;
 				}
 			}
 		}
 	
-	BinaryImage bin = new BinaryImage(diff);
+	BinaryImage bin = new BinaryImage(res);
 	return bin ;
 	
-}
+	}
 
-
-public int voisin(int i, int j, int pixel){ // retourne le pixel voisin de (i,j)
+	
+	public int neighbour(int i, int j, int pixel){ // retourne le pixel voisin de pixel
 	
 	int res =0;
 	int distance = 0 , distanceMin = Integer.MAX_VALUE;
@@ -269,32 +261,30 @@ public int voisin(int i, int j, int pixel){ // retourne le pixel voisin de (i,j)
 	}
 	
 	return res;
-}
+	}
 
-public BinaryImage binaryDifference2(GrayImage grayImage) {
+	public BinaryImage binaryDifferenceNeighbour(GrayImage grayImage) {
 	
-	int[][] matrix2 = grayImage.getMatrix();
-	int width = getWidth();
-	int height = getHeight();
-	int[][] diff = new int[height][width];
-	int voisin = 0 ;
-	if (getWidth() == grayImage.getWidth() && getHeight() == grayImage.getHeight()){
-		for (int i = 0 ; i< width; i++){
-			for(int j = 0; j < height; j++){
-				voisin = voisin(i, j, grayMatrix[j][i]);
-				if (Math.abs((grayMatrix[j][i] - voisin)) > 20){
-					
-					diff[j][i] = 1;
-				} else {
-					diff[j][i] = 0 ;
+		int width = getWidth();
+		int height = getHeight();
+		int[][] diff = new int[height][width];
+		int voisin = 0 ;
+		if (getWidth() == grayImage.getWidth() && getHeight() == grayImage.getHeight()){
+			for (int i = 0 ; i< width; i++){
+				for(int j = 0; j < height; j++){
+					voisin = neighbour(i, j, grayMatrix[j][i]);
+					if (Math.abs((grayMatrix[j][i] - voisin)) > 20){
+						diff[j][i] = 1;
+					} else {
+						diff[j][i] = 0 ;
+					}
 				}
 			}
 		}
-	}
-	BinaryImage bin = new BinaryImage(diff);
-	return bin ;
+		BinaryImage bin = new BinaryImage(diff);
+		return bin ;
 	
-}
+	}
 }
 
 

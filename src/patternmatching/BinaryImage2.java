@@ -1,24 +1,24 @@
 package patternmatching;
 
-public class BinaryImage {
+public class BinaryImage2 {
 
 	private int[][] frame; // image binaire 0=background 1=objet
-	private int[] connectionTable = new int[10000];
+	private int[] connectionTable = new int[999999];
 	public Pixel[][] taggedBinaryImage = null; // image initiale o� les 1 sont
 												// remplac�s par des pixels
 												// �tiquet�s
-	private int size1 = 1920;
-	private int size2 = 1080;
+	private int size1 = 166;
+	private int size2 = 169;
 	private int maxNbTags;
 
-	public BinaryImage (int [][] matrice){
+	public BinaryImage2 (int [][] matrice){
 		this.frame = matrice ;
-		this.maxNbTags = 10000;
+		this.maxNbTags = 999999;
 		
 	}
 	
 	// algorithme de double passage
-	public int conncetedComponents() {
+	public int[][] conncetedComponents() {
 
 		taggedBinaryImage = new Pixel[size2][size1];
 		// construction des Pixel
@@ -117,12 +117,12 @@ public class BinaryImage {
 			}
 		}
 
-		return 0; 
+		return frame; 
 		
 	}
 
 	public int [][] largestComponent(){
-		int l = conncetedComponents();
+		conncetedComponents();
 		int[][] largest = new int[size2][size1];
 		int[] compteur = new int[maxNbTags];
 		for (int i=0; i<maxNbTags; i++){

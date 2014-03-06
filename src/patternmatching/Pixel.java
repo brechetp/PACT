@@ -5,12 +5,12 @@ public class Pixel {
 	private final int x;
 	private final int y;
 	private int tag;
-	private final BinaryImage binaryImage;
+	private final BinaryImage2 binaryImage;
 	private Pixel northneighbor ; 
 	private Pixel westneighbor;
 	
 	
-	public Pixel (int x, int y, BinaryImage binaryImage) {
+	public Pixel (int x, int y, BinaryImage2 binaryImage) {
 		this.binaryImage = binaryImage;
 		this.x = x;
 		this.y = y;
