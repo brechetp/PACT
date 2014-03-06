@@ -1,6 +1,7 @@
 package camera;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
+
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -9,6 +10,7 @@ import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 
 import static com.googlecode.javacv.cpp.opencv_core.*;
+import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
 public class BinaryImage extends GrayImage {
 	
@@ -127,10 +129,20 @@ public class BinaryImage extends GrayImage {
 		return binaryImage;
 	}
 	
+	
+	
 	public int[][] getBinaryMatrix(){
 		
 		return binaryMatrix;
 	}
+	
+	@Override
+	public void save(String fileName){
+		 if (binaryImage != null) {
+           cvSaveImage(fileName, binaryImage);
+		 }
+	}
+	
 	
 	@Override
 	public final void saveToText(String fileName){ // sauvegarde dans un fichier texte
@@ -165,7 +177,6 @@ public class BinaryImage extends GrayImage {
 			BufferedReader bis = new BufferedReader (fis);
 			String currentLine; // ligne courrante lue
 			int j = 0; // j comptera les lignes du fichier 
-			String accu;
 			while((currentLine = bis.readLine()) != null && j<1080){
 				// tant que le fichier n'est pas fini
 				
@@ -195,26 +206,36 @@ public class BinaryImage extends GrayImage {
 	
 	public int[][] getCorners(){ // renvoie les coins d'une carte binaire
 		
-		int[][] res = new int[][]{{0,0},{width,0},{0,0},{0,height}};
+		int[][] res = new int[][]{{0,height},{0,0},{width,0},{0,0}};
+		
 		
 		for(int i = 0 ; i<width; i++){
 			for (int j = 0; j< height; j++){
 				
 				if (binaryMatrix[j][i] == 1)
 				{
-					if (i < res[1][0])
-						res[1] = new int[]{i,j};
-					if (j < res[3][1])
-						res[3] = new int[]{i,j};
-					if (i > res[2][0])
+					if (i < res[2][0]) // xMin
 						res[2] = new int[]{i,j};
-					if (j > res[0][1])
+					if (j < res[0][1]) // yMin
 						res[0] = new int[]{i,j};
+					if (i > res[1][0]) // xMax
+						res[1] = new int[]{i,j};
+					if (j > res[3][1]) // yMax
+						res[3] = new int[]{i,j};
 					
 				}
 			}
 		}
-		
+		// si ymin^2 - xmin^2 < ymin^2 - xmax^2 
+		if((Math.pow(res[3][1], 2)-Math.pow(res[1][0], 2)) < (Math.pow(res[3][1], 2)-Math.pow(res[2][0], 2))){
+			int[] yMin = res[0], xMax = res[1], xMin = res[2], yMax = res[3];
+			res[0] = xMin;
+			res[1] = yMin;
+			res[2] = yMax;
+			res[3] = xMax;
+			
+			
+		}
 		
 		
 		return res;
