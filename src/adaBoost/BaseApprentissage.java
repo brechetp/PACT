@@ -2,7 +2,9 @@ package adaBoost;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import leapmotion.main.ListeDeMouvements;
@@ -16,30 +18,30 @@ public class BaseApprentissage {
 		double[][] base_test = new double[62][9];		
 		ArrayList<File> tableau_fichiers = new ArrayList<File>() ;
 		
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste0 (passer)/Geste0 Edouard M (passer).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste0 (passer)/Geste0 Michael (passer).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste0 (passer)/Geste0 Pierre (passer).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste0 (passer)/Geste0 Tim (passer).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste1 (retour)/Geste1 Benjamin (retour).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste1 (retour)/Geste1 Edouard M (retour).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste1 (retour)/Geste1 Michael (retour).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste1 (retour)/Geste1 Pierre (retour).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste1 (retour)/Geste1 Tim (retour).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste2 (coinche)/Geste2 Benjamin (coinche).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste2 (coinche)/Geste2 Edouard E (coinche).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste2 (coinche)/Geste2 Michael (coinche).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste2 (coinche)/Geste2 Pierre (coinche).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste2 (coinche)/Geste2 Tim (coinche).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste3 (accepter)/Geste3 Benjamin (accepter).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste3 (accepter)/Geste3 Edouard E (accepter).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste3 (accepter)/Geste3 Edouard M (accepter).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste3 (accepter)/Geste3 Pierre (accepter).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste3 (accepter)/Geste3 Tim (accepter).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste4 (quitter)/Geste4 Benjamin (quitter).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste4 (quitter)/Geste4 Edouard E (quitter).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste4 (quitter)/Geste4 Edouard M (quitter).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste4 (quitter)/Geste4 Michael (quitter).ser"));
-		tableau_fichiers.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste4 (quitter)/Geste4 Tim (quitter).ser"));
+		tableau_fichiers.add(new File(".Gestes/Geste0 (passer)/Geste0 Edouard M (passer).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste0 (passer)/Geste0 Michael (passer).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste0 (passer)/Geste0 Pierre (passer).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste0 (passer)/Geste0 Tim (passer).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste1 (retour)/Geste1 Benjamin (retour).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste1 (retour)/Geste1 Edouard M (retour).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste1 (retour)/Geste1 Michael (retour).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste1 (retour)/Geste1 Pierre (retour).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste1 (retour)/Geste1 Tim (retour).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste2 (coinche)/Geste2 Benjamin (coinche).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste2 (coinche)/Geste2 Edouard E (coinche).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste2 (coinche)/Geste2 Michael (coinche).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste2 (coinche)/Geste2 Pierre (coinche).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste2 (coinche)/Geste2 Tim (coinche).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste3 (accepter)/Geste3 Benjamin (accepter).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste3 (accepter)/Geste3 Edouard E (accepter).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste3 (accepter)/Geste3 Edouard M (accepter).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste3 (accepter)/Geste3 Pierre (accepter).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste3 (accepter)/Geste3 Tim (accepter).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Benjamin (quitter).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Edouard E (quitter).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Edouard M (quitter).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Michael (quitter).ser"));
+		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Tim (quitter).ser"));
 
 		int compteur = 0 ;
 		
@@ -100,11 +102,11 @@ public class BaseApprentissage {
 			
 			ArrayList<File> tableau_fichiers_test = new ArrayList<File>() ;
 			
-			tableau_fichiers_test.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste0 (passer)/Geste0 Benjamin (passer).ser"));
-			tableau_fichiers_test.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste1 (retour)/Geste1 Edouard E (retour).ser"));
-			tableau_fichiers_test.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste2 (coinche)/Geste2 Edouard M (coinche).ser"));
-			tableau_fichiers_test.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste3 (accepter)/Geste3 Michael (accepter).ser"));
-			tableau_fichiers_test.add(new File("C:/Users/Timothée Boulet/Desktop/Cours Télécom/PROJ (Projets)/PROJ101 (PACT)/Indexation/Gestes/Geste4 (quitter)/Geste4 Pierre (quitter).ser"));
+			tableau_fichiers_test.add(new File("./Gestes/Geste0 (passer)/Geste0 Benjamin (passer).ser"));
+			tableau_fichiers_test.add(new File("./Gestes/Geste1 (retour)/Geste1 Edouard E (retour).ser"));
+			tableau_fichiers_test.add(new File("./Gestes/Geste2 (coinche)/Geste2 Edouard M (coinche).ser"));
+			tableau_fichiers_test.add(new File("./Gestes/Geste3 (accepter)/Geste3 Michael (accepter).ser"));
+			tableau_fichiers_test.add(new File("./Gestes/Geste4 (quitter)/Geste4 Pierre (quitter).ser"));
 			
 			int compteur_test = 0 ;
 			
@@ -163,6 +165,8 @@ public class BaseApprentissage {
 		{
 			e.printStackTrace();
 		}
+		
+		
 		mainada2 test = new mainada2();
 		test.main(base,base_test);
 	}

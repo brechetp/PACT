@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import structure.AnnonceInterface;
 import structure.CarteInterface;
 import logiqueDeJeux.BeloteCoinche;
@@ -29,7 +28,8 @@ public class Serveur
 	    	System.out.println("avant boo");
 	    	this.socket = socketserver.accept();
 	    	System.out.println("Boo !!");
-	    	BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+	    	BufferedReader
+	    	in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	    	Thread t1 = new Thread(new ServeurReception(in, belote));
 	    	t1.start();
 	    } 

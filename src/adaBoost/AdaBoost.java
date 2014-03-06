@@ -1,5 +1,10 @@
 package adaBoost;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 
 public final class AdaBoost 
 {
@@ -84,7 +89,26 @@ public final class AdaBoost
 				D[i]=D[i]/denom;
 			}
 		}
+		ClassiFinal classiFinal = new ClassiFinal(A, H);
+		classiFinal.normaliser();
 		
-		return new ClassiFinal(A, H);
+		try {
+			FileOutputStream fileOut = new FileOutputStream("./adaboost/Classificateurs Finaux.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(classiFinal);;
+			out.flush();
+			out.close();
+			fileOut.close();
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return classiFinal;
 	}
 }

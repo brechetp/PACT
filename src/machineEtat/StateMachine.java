@@ -39,6 +39,7 @@ public class StateMachine
 			if (joueurD.aHuitCarte())
 			{
 				this.state = State.Annonce;
+				vci.joueurEnCours(premierAJouer);
 				System.out.println("Distribution Terminer");
 			}
 			else
@@ -270,8 +271,8 @@ public class StateMachine
 			 this.state = State.AnnoncePasse1;
 			 break;
 		 
-		 /************************ Second Tour/Montre Carte **********************/
-		 case SecondTour1:
+/************************ Second Tour/Montre Carte **********************/
+	/*	 case SecondTour1:
 			 this.state = State.MontreCarte1;
 			 break;
 		 case SecondTour2:
@@ -282,7 +283,7 @@ public class StateMachine
 			 break;
 		 case SecondTour4:
 			 this.state = State.MontreCarte4;
-			 break;
+			 break;		*/
 			 
 			 
 		 case MontreCarte1:
@@ -456,24 +457,35 @@ public class StateMachine
 			this.valeurAnnonceMax=etat.valeurAnnonce();
 			etat.joueurSuivant(vci);
 			this.state= State.AnnoncePasse1;
+			break;
+			
 		case AnnoncePasse1:
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
 			etat.joueurSuivant(vci);
 			this.state= State.AnnoncePasse1;
+			break;
+			
 		case AnnoncePasse2:
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
 			etat.joueurSuivant(vci);
 			this.state= State.AnnoncePasse1;
+			break;
+			
 		case AnnoncePasse3:
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
 			etat.joueurSuivant(vci);
 			this.state= State.AnnoncePasse1;
+			break;
+			
+			
+		default:
+			break;
 		}
 	}
 

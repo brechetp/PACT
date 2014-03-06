@@ -89,19 +89,19 @@ public class testServeur
 
 		try {
 			serveur.envoiCarteDistribution(AsTr);
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			serveur.envoiCarteDistribution(AsPi);
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			serveur.envoiCarteDistribution(AsCo);
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			serveur.envoiCarteDistribution(AsCa);
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			serveur.envoiCarteDistribution(SepTr);
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			serveur.envoiCarteDistribution(SepCo);
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			serveur.envoiCarteDistribution(SepPi);
-			Thread.sleep(100);
+			Thread.sleep(1000);
 			serveur.envoiCarteDistribution(SepCa);
 			System.out.println("Envoi terminer");
 		} catch (InterruptedException e) {

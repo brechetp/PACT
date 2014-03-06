@@ -2,6 +2,10 @@ package adaBoost;
 
 public class ClassifSoucheGauche extends ClassifSouche
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double seuil;
 	private int indice;
 	

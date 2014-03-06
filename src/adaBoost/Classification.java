@@ -1,14 +1,18 @@
 package adaBoost;
 
+import java.util.ArrayList;
+
 import javax.swing.event.EventListenerList;
+
 import logiqueDeJeux.GlobalListener;
 import machineEtat.MouvementEvent;
 
 public class Classification 
 {
 	private int compteur = 0;
-	private double[] moyenneVecteur = new double[100];
-	private double[] nextMoyenneVecteur = new double[100];
+	private final int NOMBRE_DE_FEATURES = 9;
+	private double[] moyenneVecteur = new double[NOMBRE_DE_FEATURES];
+	private double[] nextMoyenneVecteur = new double[NOMBRE_DE_FEATURES];
 	private ClassiFinal[] classi;
 	private final EventListenerList listeners = new EventListenerList();
 	
@@ -39,20 +43,17 @@ public class Classification
 	
 	public void determineClasse (double[] mvment)
 	{
-		int indiceMax=0;
-		double resultMax =-1;
-		
+		ArrayList<Integer> classesRetour= new ArrayList<Integer>();
 		for(int k=0;k<classi.length;k++)
 		{
 			double result = classi[k].result(mvment);
-			if (result>resultMax)
+			if (result>0)
 			{
-				indiceMax=k;
-				resultMax=result;
+				classesRetour.add(new Integer(k));
 			}
 		}
-		
-		this.envoiMouvement(indiceMax);
+		if (classesRetour.size()==1)
+			this.envoiMouvement(classesRetour.get(0));
 	}
 	
 	public void ajoute(double[] frame)
