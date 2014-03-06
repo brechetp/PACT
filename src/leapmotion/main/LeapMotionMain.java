@@ -22,7 +22,7 @@ public class LeapMotionMain {
 		
 		
 		 // Create a sample listener and controller
-        MyListener listener = new MyListener();
+        MyListener listener = new MyListener(); // Erreur logique parce que il n'y a pas de classification ici et le constructeur a ete modifie depuis
         Controller controller = new Controller();
         
         // Have the sample listener receive events from the controller

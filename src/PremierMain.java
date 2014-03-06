@@ -4,9 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import com.leapmotion.leap.Controller;
+
 import adaBoost.ClassiFinal;
 import adaBoost.Classification;
 import leapmotion.main.ListeDeMouvements;
+import leapmotion.main.MyListener;
 import logiqueDeJeux.BeloteCoinche;
 import logiqueDeJeux.EtatDuJeu;
 
@@ -39,7 +42,12 @@ public class PremierMain {
 		BeloteCoinche belote = new BeloteCoinche(etat);
 		Classification classi = new Classification(classiFinal);
 		classi.addListener(belote);
+		
 		//Start Leap
+		MyListener listener = new MyListener(classi);
+        Controller controller = new Controller();
+        controller.addListener(listener);
+        
 		//lien leap classi
 		//start detection image
 		//lien detection image

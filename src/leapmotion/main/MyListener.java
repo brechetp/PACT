@@ -2,26 +2,62 @@ package leapmotion.main;
 
 import java.io.*;
 
+import adaBoost.Classification;
+
 import com.leapmotion.leap.*;
 
 public class MyListener extends Listener{
 	
-	private static KListener k1 = new KListener();  //KeyListener pour contrôle par clavier
 	
-	private int i = 0; // incrémentation pour sauvegarder toutes les frames d'un mouvement
-	private int y = 0; // paramètre de vérification de conditions
-	private int b = 0; // incrémentation pour sauvegarder tous les mouvements
+	private static KListener k1 = new KListener();  //KeyListener pour controle par clavier
 	
-	private LoopWait lw = new LoopWait(); // création d'un LoopWait pour réduire le lag des boucles infinies
+	private int i = 0; // incrementation pour sauvegarder toutes les frames d'un mouvement
+	private int y = 0; // parametre de vérification de conditions
+	private int b = 0; // incrementation pour sauvegarder tous les mouvements
+	
+	private LoopWait lw = new LoopWait(); // creation d'un LoopWait pour reduire le lag des boucles infinies
 	
 	private FramesGestes framesGestes = new FramesGestes(b); // enregistrement des frames d'un mouvement
 	private ListeDeMouvements liste = new ListeDeMouvements(); // enregistrement de tous les mouvements
 	
+	private Classification classi; // pour envoi vers la classification
+	
+	// Modification du constructeur pour avoir acces a la classification. Sert pour la fonction principale, a enlever pour la fonction d'enregistrement.
+	public MyListener(Classification classi){
+		this.classi=classi;
+	}
+	
+	// Initialisation
 	public void onInit(Controller controller) {
         System.out.println("Initialisation Leap Motion");
     }
 	
+	// Boucle principale
     public void onFrame(Controller controller) {
+    	
+    	/*************************************************************************************************************************/
+    	/**                             FONCTION PRINCIPALE : ENVOI VERS LA CLASSIFICATION EN CONTINU                           **/
+    	/*************************************************************************************************************************/
+    	
+    	k1.setC('^');
+    	if (k1.getC()=='^'){
+    		
+    		Frame frame = controller.frame();
+    		ParamUtiles param = new ParamUtiles();
+    		param.addToList(frame, controller.frame(1));
+    		double tab[] = new double[15];
+    		for (int k = 0 ; k < 15 ; k++){
+    			tab[k] = param.get(k);
+    		}
+    		classi.onFrame(tab);
+    		
+    	}
+    	
+    	
+    	/*************************************************************************************************************************/
+    	/**                                    CAPTURE ET ENREGISTREMENT POUR LA CLASSIFICATION                                 **/
+    	/*************************************************************************************************************************/
+    	
     	
     	// INITIALISATION DU PROGRAMME DE CAPTURE DE MOUVEMENTS
     	if (k1.getC()=='/'){
@@ -103,7 +139,7 @@ public class MyListener extends Listener{
     		
     	}
     	
-    	// AFFICHAGE DE PARAMETRES DANS LA CONSOLE POUR VERIFICATION
+    	// AFFICHAGE DE PARAMETRES DANS LA CONSOLE POUR VERIFICATION, RENVOIE LA LISTE ACTUELLE SI PAS DE SAUVEGARDE FAITE
     	if (k1.getC()=='p'){
     		
     		try{

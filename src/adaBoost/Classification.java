@@ -10,7 +10,7 @@ import machineEtat.MouvementEvent;
 public class Classification 
 {
 	private int compteur = 0;
-	private final int NOMBRE_DE_FEATURES = 9;
+	private final int NOMBRE_DE_FEATURES = 15;
 	private double[] moyenneVecteur = new double[NOMBRE_DE_FEATURES];
 	private double[] nextMoyenneVecteur = new double[NOMBRE_DE_FEATURES];
 	private ClassiFinal[] classi;
