@@ -20,5 +20,4 @@ public interface ViewControllerInterface
 	//suprime les message afficher
 	public void supprimerMessage();
 	
-	//
 }
