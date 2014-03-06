@@ -141,7 +141,7 @@ public class Image {
 			for(int j = 0; j < height; j++){
 				distance = 0;
 				pixel = getRgbByte(i,j);
-				voisin = image.voisin(i, j, pixel);
+				voisin = image.neighbour(i, j, pixel);
 				for (int k = 0; k < 2; k ++){
 					distance = distance + Math.abs(voisin[k] - pixel[k]);	
 				}	
