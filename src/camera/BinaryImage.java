@@ -1,18 +1,6 @@
 package camera;
 
-import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
-
-import java.awt.GridLayout;
-
-import javax.swing.JFrame;
-
-import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
-import com.googlecode.javacv.cpp.opencv_highgui.*;
-import com.googlecode.javacv.cpp.opencv_core.CvMat;
-
-import static com.googlecode.javacv.cpp.opencv_highgui.*;
-
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -20,27 +8,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 
-import com.googlecode.javacpp.Loader;
-import com.googlecode.javacv.*;
-import com.googlecode.javacv.cpp.*;
-
 import static com.googlecode.javacv.cpp.opencv_core.*;
-import static com.googlecode.javacv.cpp.opencv_imgproc.*;
-import static com.googlecode.javacv.cpp.opencv_calib3d.*;
-import static com.googlecode.javacv.cpp.opencv_objdetect.*;
-import static com.googlecode.javacv.cpp.opencv_highgui.*;
-
-import java.nio.ShortBuffer;
-import java.awt.*;
-import java.awt.image.*;
 
 public class BinaryImage extends GrayImage {
 	
 	private int[][] binaryMatrix ;
 	private IplImage binaryImage;
 	private ByteBuffer binaryByteBuffer;
+	
+/*
+ * 
+ * Constructeurs
+ */
 
-public BinaryImage(Image image){
+	public BinaryImage(Image image){ // a partir d'une image
 		
 		super(image.getRgbImage());
 		binaryMatrix = new int[height][width];
@@ -75,7 +56,7 @@ public BinaryImage(Image image){
 		}
 	}
 
-		public BinaryImage(GrayImage grayImage){
+		public BinaryImage(GrayImage grayImage){ // a partir d'une grayImage
 		
 		super(grayImage.getRgbImage());
 		binaryMatrix = new int[height][width];
@@ -105,7 +86,7 @@ public BinaryImage(Image image){
 	}
 
 
-	public BinaryImage(int[][] binaryMatrix) {
+	public BinaryImage(int[][] binaryMatrix) { // a partir d'une matrice binaire
 		
 		super(binaryMatrix);
 		this.binaryMatrix = binaryMatrix ;
@@ -136,7 +117,10 @@ public BinaryImage(Image image){
 	}
 	
 
-
+	/*
+	 * Setters et getters
+	 * 
+	 */
 
 	public IplImage getBinaryImage(){
 		
@@ -173,7 +157,7 @@ public BinaryImage(Image image){
       }
 	}
 	
-public static int[][] matrixFromTextFile(String fileName){
+	public static int[][] matrixFromTextFile(String fileName){
 		
 	int[][] matrix = new int[1080][1920];
 		try{
@@ -209,7 +193,7 @@ public static int[][] matrixFromTextFile(String fileName){
 		return matrix;
 	}
 	
-	public int[][] getCorners(){
+	public int[][] getCorners(){ // renvoie les coins d'une carte binaire
 		
 		int[][] res = new int[][]{{0,0},{width,0},{0,0},{0,height}};
 		
