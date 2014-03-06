@@ -201,11 +201,11 @@ public int voisin(int i, int j, int pixel){ // retourne le pixel voisin de (i,j)
 			
 			distance = 0;
 			
-				distance = Math.abs(grayMatrix[j][i] - pixel);
+				distance = Math.abs(grayMatrix[p][n] - pixel);
 			
 			if (distance < distanceMin){
 				distanceMin = distance;
-				res = grayMatrix[j][i];
+				res = grayMatrix[p][n];
 			}
 		}
 	}
