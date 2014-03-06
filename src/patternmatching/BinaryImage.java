@@ -7,11 +7,11 @@ public class BinaryImage {
 	public Pixel[][] taggedBinaryImage = null; // image initiale où les 1 sont
 												// remplacés par des pixels
 												// étiquetés
-	private int size;
+	private int size1 = 1920;
+	private int size2 = 1080;
 	private int maxNbTags;
 
 	public BinaryImage (int [][] matrice){
-		this.size = matrice.length;
 		this.frame = matrice ;
 		this.maxNbTags = 10000;
 		
@@ -20,10 +20,10 @@ public class BinaryImage {
 	// algorithme de double passage
 	public int conncetedComponents() {
 
-		taggedBinaryImage = new Pixel[size][size];
+		taggedBinaryImage = new Pixel[size2][size1];
 		// construction des Pixel
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
+		for (int i = 0; i < size2; i++) {
+			for (int j = 0; j < size1; j++) {
 				taggedBinaryImage[i][j] = new Pixel(i, j, this);
 				
 			}
@@ -37,8 +37,8 @@ public class BinaryImage {
 		}
 
 		// Premier passage
-		for (int i = 1; i < size; i++) {
-			for (int j = 1; j < size; j++) {
+		for (int i = 1; i < size2; i++) {
+			for (int j = 1; j < size1; j++) {
 				if (frame[i][j] == 1)
 				{
 					if (frame[i-1][j] == 0 && frame[i][j-1] == 0) 
@@ -100,8 +100,8 @@ public class BinaryImage {
 		}
 
 		// second balayage
-		for (int i1 = 1; i1 < size; i1++) {
-			for (int j = 1; j < size; j++) {
+		for (int i1 = 1; i1 < size2; i1++) {
+			for (int j = 1; j < size1; j++) {
 				if (taggedBinaryImage[i1][j].getTag() != 0) {
 					taggedBinaryImage[i1][j].
 					setTag(connectionTable[taggedBinaryImage[i1][j]
@@ -111,8 +111,8 @@ public class BinaryImage {
 		}
 		
 		// passage de pixel à image binaire
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
+		for (int i = 0; i < size2; i++) {
+			for (int j = 0; j < size1; j++) {
 				frame[i][j] = taggedBinaryImage[i][j].getTag() ;
 			}
 		}
@@ -121,14 +121,49 @@ public class BinaryImage {
 		
 	}
 
+	public int [][] largestComponent(){
+		int l = conncetedComponents();
+		int[][] largest = new int[size2][size1];
+		int[] compteur = new int[maxNbTags];
+		for (int i=0; i<maxNbTags; i++){
+			compteur[i]=0;
+		}
+		
+		for (int i = 0; i < size2; i++) {
+			for (int j = 0; j < size1; j++) {
+				if (frame[i][j] !=0) {
+					compteur[frame[i][j]] +=1 ;
+				}
+			}
+		}
+		
+		int max = 0 ; 
+		int imax = 0;
+		for (int i=0; i<maxNbTags; i++){
+			if (compteur[i] >= max){
+				max = compteur[i];
+				imax = i;
+			}
+		}
+		
+		for (int i = 0; i < size2; i++) {
+			for (int j = 0; j < size1; j++) {
+				if (frame[i][j] != imax) {
+					largest[i][j] =0 ;
+				} else {
+					largest[i][j]=1;
+				}
+			}
+		}	
+		
+		return largest;
+	}
 	
 
 	public int getFrameValue(int x, int y) {
 		return frame[x][y];
 	}
 	
-	public int getSize(){
-		return size;
-	}
+	
 
 }
