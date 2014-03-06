@@ -93,7 +93,10 @@ public class Image {
 		return rgbImage;
 	}
 
-	
+	public void setRgbImage(IplImage rgbImage) {
+		
+		this.rgbImage = rgbImage;
+	}
 	public int getWidth(){
 		
 		return width;
@@ -131,7 +134,7 @@ public class Image {
 		return res;
 	}
 	
-	public BinaryImage differenceNeighbour(Image image){
+	public BinaryImage differenceNeighbour(Image image, int threshold){
 		
 		
 		int[][] diff = new int[height][width];

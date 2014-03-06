@@ -9,10 +9,12 @@ import java.nio.ByteBuffer;
 
 
 
+
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 import static com.googlecode.javacv.cpp.opencv_core.cvCreateImage;
 import static com.googlecode.javacv.cpp.opencv_core.cvSize;
+import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
 public class GrayImage extends Image{
 	
@@ -139,6 +141,13 @@ public class GrayImage extends Image{
 		
 		
 		
+	}
+	
+	@Override
+	public void save(String fileName){
+		 if (grayImage != null) {
+           cvSaveImage(fileName, grayImage);
+		 }
 	}
 
 

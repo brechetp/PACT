@@ -3,17 +3,17 @@ package patternmatching;
 public class BinaryImage2 {
 
 	private int[][] frame; // image binaire 0=background 1=objet
-	private int[] connectionTable = new int[999999];
+	private int[] connectionTable = new int[100];
 	public Pixel[][] taggedBinaryImage = null; // image initiale o� les 1 sont
 												// remplac�s par des pixels
 												// �tiquet�s
-	private int size1 = 166;
-	private int size2 = 169;
+	private int size1 = 1920;
+	private int size2 = 1080;
 	private int maxNbTags;
 
 	public BinaryImage2 (int [][] matrice){
 		this.frame = matrice ;
-		this.maxNbTags = 999999;
+		this.maxNbTags = 100;
 		
 	}
 	
