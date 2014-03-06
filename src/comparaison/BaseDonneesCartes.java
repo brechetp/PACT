@@ -6,34 +6,55 @@ public class BaseDonneesCartes {
 	private int[][][] tab;
 	private double[] averageTab;
 	private double[] sigmaTab;
-	private int size1=1080;
-	private int size2=1920;
+	private int size1=635;
+	private int size2=889;
 	
-	public BaseDonneesCartes (int[][] grayMatrix){
+	public BaseDonneesCartes (int[][] tab0, int[][] tab1, int[][] tab2, int[][] tab3, int[][] tab4){
 		
 		tab = new int[5][1920][1080];
 		averageTab = new double[5];
 		sigmaTab = new double[5];
 		
-		for (int i=0; i<5; i++){
-			for (int k =0; k<size2; k++)
-			{
-				for (int j=0; j<size1; j++)
-			    {
-				tab[i][k][j]=0;
-			    }
-			}
+		for (int k =0; k<size2; k++)
+		{
+			for (int j=0; j<size1; j++)
+		    {
+			tab[0][k][j]=tab0[k][j];
+		    }
 		}
 		
 		for (int k =0; k<size2; k++)
 		{
 			for (int j=0; j<size1; j++)
 		    {
-			tab[3][k][j]=0;
+			tab[1][k][j]=tab1[k][j];
 		    }
 		}
 		
-		tab[3][22][22]=1;
+		for (int k =0; k<size2; k++)
+		{
+			for (int j=0; j<size1; j++)
+		    {
+			tab[2][k][j]=tab2[k][j];
+		    }
+		}
+		
+		for (int k =0; k<size2; k++)
+		{
+			for (int j=0; j<size1; j++)
+		    {
+			tab[3][k][j]=tab3[k][j];
+		    }
+		}
+		
+		for (int k =0; k<size2; k++)
+		{
+			for (int j=0; j<size1; j++)
+		    {
+			tab[4][k][j]=tab4[k][j];
+		    }
+		}
+		
 	
 		/*for (int k=0 ; k<5 ; k++ ){
 			double average = 0;

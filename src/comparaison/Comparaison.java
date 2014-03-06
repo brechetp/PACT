@@ -10,8 +10,8 @@ public class Comparaison {
 	private double sigma;
 	
 	public Comparaison (int[][] grayMatrix){
-		this.size1 = 1080;
-		this.size2 = 1920;
+		this.size1 = 635;
+		this.size2 = 889;
 		this.doubleTab = new int[size2][size1];
 		this.doubleTab = grayMatrix;
 	}
