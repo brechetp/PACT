@@ -92,23 +92,6 @@ public final class AdaBoost
 		ClassiFinal classiFinal = new ClassiFinal(A, H);
 		classiFinal.normaliser();
 		
-		try {
-			FileOutputStream fileOut = new FileOutputStream("./adaboost/Classificateurs Finaux.ser");
-			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			out.writeObject(classiFinal);;
-			out.flush();
-			out.close();
-			fileOut.close();
-		} 
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		
 		return classiFinal;
 	}
 }

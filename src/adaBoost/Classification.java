@@ -25,25 +25,26 @@ public class Classification
 	public void onFrame(double[] frame)
 	{
 		compteur++;
+		System.out.println(compteur);
 		this.ajoute(frame);
 		
-		if (compteur>=60)
+		if (compteur>=30)
 		{
 			this.ajouteNext(frame);
 		}
 		
-		if (compteur == 120)
+		if (compteur == 60)
 		{
 			determineClasse(this.moyenneVecteur);
 			this.moyenneVecteur = this.nextMoyenneVecteur;
-			this.nextMoyenneVecteur = new double[100];
-			compteur = 60;
+			this.nextMoyenneVecteur = new double[NOMBRE_DE_FEATURES];
+			compteur = 30;
 		}
 	}
 	
 	public void determineClasse (double[] mvment)
 	{
-		ArrayList<Integer> classesRetour= new ArrayList<Integer>();
+		/*ArrayList<Integer> classesRetour= new ArrayList<Integer>();
 		for(int k=0;k<classi.length;k++)
 		{
 			double result = classi[k].result(mvment);
@@ -53,7 +54,8 @@ public class Classification
 			}
 		}
 		if (classesRetour.size()==1)
-			this.envoiMouvement(classesRetour.get(0));
+			this.envoiMouvement(classesRetour.get(0));*/
+		this.envoiMouvement(0);
 	}
 	
 	public void ajoute(double[] frame)

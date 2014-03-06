@@ -20,7 +20,7 @@ public class PremierMain {
 	{
 		
 		ClassiFinal[] classiFinal = null;
-		try {
+		/*try {
 			ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(new File("./adaboost/Classificateurs Finaux.ser"))) ;
 			classiFinal = (ClassiFinal[])ois.readObject();
 		} 
@@ -35,7 +35,7 @@ public class PremierMain {
 		catch (IOException e) 
 		{
 			e.printStackTrace();
-		}
+		}*/
 		
 		
 		EtatDuJeu etat = new EtatDuJeu();

@@ -21,7 +21,6 @@ public class MyListener extends Listener{
 	private ListeDeMouvements liste = new ListeDeMouvements(); // enregistrement de tous les mouvements
 	
 	private Classification classi; // pour envoi vers la classification
-	
 	// Modification du constructeur pour avoir acces a la classification. Sert pour la fonction principale, a enlever pour la fonction d'enregistrement.
 	public MyListener(Classification classi){
 		this.classi=classi;
@@ -39,26 +38,27 @@ public class MyListener extends Listener{
     	/**                             FONCTION PRINCIPALE : ENVOI VERS LA CLASSIFICATION EN CONTINU                           **/
     	/*************************************************************************************************************************/
     	
-    	k1.setC('^');
-    	if (k1.getC()=='^'){
-    		
-    		Frame frame = controller.frame();
+    	
+		Frame frame = controller.frame();
+    	if (frame.hands().count()>0){
+
     		ParamUtiles param = new ParamUtiles();
     		param.addToList(frame, controller.frame(1));
     		double tab[] = new double[15];
     		for (int k = 0 ; k < 15 ; k++){
     			tab[k] = param.get(k);
     		}
-    		classi.onFrame(tab);
     		
+    		classi.onFrame(tab);
     	}
+
     	
     	
     	/*************************************************************************************************************************/
     	/**                                    CAPTURE ET ENREGISTREMENT POUR LA CLASSIFICATION                                 **/
     	/*************************************************************************************************************************/
     	
-    	
+  	/*
     	// INITIALISATION DU PROGRAMME DE CAPTURE DE MOUVEMENTS
     	if (k1.getC()=='/'){
     		
@@ -174,7 +174,7 @@ public class MyListener extends Listener{
     		}
     		
     	}
-		
+		*/
    	}
         
 }

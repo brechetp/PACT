@@ -3,6 +3,10 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import logiqueDeJeux.BeloteCoinche;
+import logiqueDeJeux.EtatDuJeu;
+import adaBoost.Classification;
+
 import com.leapmotion.leap.Controller;
 
 public class LeapMotionMain {
@@ -22,7 +26,11 @@ public class LeapMotionMain {
 		
 		
 		 // Create a sample listener and controller
-        MyListener listener = new MyListener(); // Erreur logique parce que il n'y a pas de classification ici et le constructeur a ete modifie depuis
+		EtatDuJeu etat = new EtatDuJeu();
+		BeloteCoinche belote = new BeloteCoinche(etat);
+		Classification classi = new Classification(null);
+		classi.addListener(belote);
+        MyListener listener = new MyListener(classi); // Erreur logique parce que il n'y a pas de classification ici et le constructeur a ete modifie depuis
         Controller controller = new Controller();
         
         // Have the sample listener receive events from the controller

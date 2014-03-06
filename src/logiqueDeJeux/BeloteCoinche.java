@@ -21,6 +21,7 @@ public class BeloteCoinche implements GlobalListener
 
 	public void nouveauGeste(MouvementEvent mouvement) 
 	{
+		System.out.println("Message Recu !!");
 		if (mouvement.getLabel()=="passer")
 			machine.eventGestePasser();
 		else if (mouvement.getLabel()=="retour")
