@@ -1,11 +1,14 @@
 package camera;
 
 import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
+import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+
+import patternmatching.BinaryImage2;
 
 import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
@@ -22,14 +25,23 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		
 				
-		  /* for(int i = 0 ; i<=1; i++){
-		      		Capture.captureFrame("data/capture"+i+".jpg");
-		      		if (i!=1)
-		      			Thread.sleep(5000);
+		   for(int i = 10 ; i<=19; i++){
+		      		Capture.captureFrame("data/capture/capt"+i+".jpg");
+		      		Thread.sleep(5000);
+		      		i++;
+		      		Capture.captureFrame("data/capture/capt"+i+".jpg");
+		      		IplImage img1 = cvLoadImage("data/capture/capt"+(i-1)+".jpg");
+			      	IplImage img2 = cvLoadImage("data/capture/capt"+i+".jpg");
+			      	Image image1 = new Image(img1), image2 = new Image (img2);
+			      	BinaryImage bin = image1.difference(image2);
+			      	
+			      	cvSaveImage("data/binary/bin"+i/2+".jpg", bin.getBinaryImage());
+			      	
+			      	
 		      		
 		      	}
-		      	 */
-		      	IplImage img1 = cvLoadImage("data/capture0.jpg");
+		      	 
+		      	/* IplImage img1 = cvLoadImage("data/capture0.jpg");
 		      	IplImage img2 = cvLoadImage("data/capture1.jpg");
 		
 		      	Image image1 = new Image(img1);
@@ -61,7 +73,7 @@ public class Main {
 		        mainframe.getContentPane().add(rgb_frame.getCanvas() );
 		        rgb_frame.setVisible(false);
 		        
-		       // rgb_frame.dispose(); 
+		        rgb_frame.dispose(); 
 		        BinaryImage binrgbvoisins = image1.difference(image2);
 		        BinaryImage bingrayvoisins = grayImage1.binaryDifference(grayImage2);
 		        BinaryImage binrgb = image1.difference2(image2);
@@ -73,8 +85,33 @@ public class Main {
 		        cvSaveImage("data/binary/bingrayvoisins"+Compt+".jpg", bingrayvoisins.getBinaryImage());
 		        cvSaveImage("data/binary/binrgb"+Compt+".jpg", binrgb.getBinaryImage());
 		        cvSaveImage("data/binary/bingray"+Compt+".jpg", bingray.getBinaryImage());
-		        cvSaveImage("data/binary/bingray"+Compt+".jpg", bingray.getBinaryImage());*/
-		      //	cvSaveImage("data/binary/test.jpg", image3.getRgbImage());
+		        cvSaveImage("data/binary/bingray"+Compt+".jpg", bingray.getBinaryImage());
+		      	cvSaveImage("data/binary/test.jpg", image3.getRgbImage()); 
+		
+
+		IplImage img1 = cvLoadImage("data/binbis.jpg");
+		BinaryImage bin = new BinaryImage (new Image(img1));
+		int [][] matrice = bin.getBinaryMatrix();
+	
+		BinaryImage2 bi = new BinaryImage2(matrice); 
+		
+		int[][] rep = bi.conncetedComponents();
+		
+		for (int i = 0; i < 166; i++){
+			
+			for (int j = 0; j < 169; j++){
+				
+				System.out.print(rep[j][i]);
+			}
+			System.out.println();
+		}
+		
+		int [][] rep = bi.largestComponent();
+		
+		BinaryImage bin2 = new BinaryImage (rep);
+		
+		cvSaveImage("data/bin2.jpg", bin2.getBinaryImage()); */
+		
 		      	
 		      	
 		      
