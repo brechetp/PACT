@@ -32,9 +32,9 @@ public class Annonce implements AnnonceInterface
 	{
 		if (value==250)
 			value=500;
-		else if (value==160)
+		else if (value==150)
 			value=250;
-		else if (value<160)
+		else if (value<150)
 			value=value+10;
 	}
 
