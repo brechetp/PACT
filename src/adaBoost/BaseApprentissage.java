@@ -14,8 +14,8 @@ public class BaseApprentissage {
 	public static ClassiFinal[] main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		double[][] base = new double[349][15] ;	
-		double[][] base_test = new double[68][15];	
+		double[][] base = new double[262][14] ;	
+		double[][] base_test = new double[43][14];	
 		ArrayList<File> tableau_fichiers = new ArrayList<File>() ;
 		
 		tableau_fichiers.add(new File("./Gestes/Geste0 (passer)/Geste0 Benjamin (passer).ser"));
@@ -41,18 +41,18 @@ public class BaseApprentissage {
 		tableau_fichiers.add(new File("./Gestes/Geste3 (accepter)/Geste3 Michael (accepter).ser"));
 		tableau_fichiers.add(new File("./Gestes/Geste3 (accepter)/Geste3 Pierre (accepter).ser"));
 		tableau_fichiers.add(new File("./Gestes/Geste3 (accepter)/Geste3 Tim (accepter).ser"));
-		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Benjamin (quitter).ser"));
-		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Edouard E (quitter).ser"));
-		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Edouard M (quitter).ser"));
-		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Michael (quitter).ser"));
-		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Pierre (quitter).ser"));
-		tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Tim (quitter).ser"));
+		//tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Benjamin (quitter).ser"));
+		//tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Edouard E (quitter).ser"));
+		//tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Edouard M (quitter).ser"));
+		//tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Michael (quitter).ser"));
+		//tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Pierre (quitter).ser"));
+		//tableau_fichiers.add(new File("./Gestes/Geste4 (quitter)/Geste4 Tim (quitter).ser"));
 
 		int compteur = 0 ;
 		
 		try
 		{
-			for (int k = 0 ; k < 24 ; k++)
+			for (int k = 0 ; k < 23 ; k++)
 			{
 				ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(tableau_fichiers.get(k))) ;
 				ListeDeMouvements hyk = (ListeDeMouvements)ois.readObject();
@@ -142,11 +142,11 @@ public class BaseApprentissage {
 			tableau_fichiers_test.add(new File("./Gestes/Geste1 (retour)/Geste1 Benjamin (retour).ser"));
 			tableau_fichiers_test.add(new File("./Gestes/Geste2 (coinche)/Geste2 Edouard E (coinche).ser"));
 			tableau_fichiers_test.add(new File("./Gestes/Geste3 (accepter)/Geste3 Edouard M (accepter).ser"));
-			tableau_fichiers_test.add(new File("./Gestes/Geste4 (quitter)/Geste4 Michael (quitter).ser"));
+			//tableau_fichiers_test.add(new File("./Gestes/Geste4 (quitter)/Geste4 Michael (quitter).ser"));
 			
 			int compteur_test = 0 ;
 			
-			for (int k = 0 ; k < 5 ; k++)
+			for (int k = 0 ; k < 4 ; k++)
 			{
 				ObjectInputStream ois_test =  new ObjectInputStream(new FileInputStream(tableau_fichiers_test.get(k))) ;
 				ListeDeMouvements hyk_test = (ListeDeMouvements)ois_test.readObject();
