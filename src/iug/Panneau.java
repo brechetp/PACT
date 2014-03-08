@@ -176,12 +176,12 @@ public class Panneau extends JPanel {
 		    	g.drawString("PARTIE TERMINEE", 200, 400);
 		    }
 		    if (j!=0 && h==0){
-		    	g.setColor(new Color(0,255,0));
+		    	g.setColor(new Color(255,255,0));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("C'est au joueur " + j + " de jouer !", 350 , 600);
 		    }
 		    if (j!=0 && h==1){
-		    	g.setColor(new Color(0,255,0));
+		    	g.setColor(new Color(255,255,0));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("C'est au joueur " + j + " d'annoncer !", 350 , 600);
 		    }
