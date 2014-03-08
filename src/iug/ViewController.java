@@ -167,6 +167,12 @@ public class ViewController implements ViewControllerInterface
 	
 	public void afficheAnnonce(String valeur, String couleur){
 		fen.getPan().setStrings(valeur, couleur);
+		fen.getPan().setY(1);
+		fen.repaint();
+	}
+	
+	public void actualiseAnnonce(String valeur, String couleur){
+		fen.getPan().setStrings(valeur, couleur);
 		fen.repaint();
 	}
 	
@@ -178,6 +184,7 @@ public class ViewController implements ViewControllerInterface
 		if(fen.getPan().getY()==2){
 			fen.getPan().setY(2);
 		}
+		fen.repaint();
 	}
 	
 	public void effaceAnnonce(){

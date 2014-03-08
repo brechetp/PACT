@@ -29,5 +29,11 @@ public interface ViewControllerInterface
 	public void contreCoinche();
 
 	public void afficheAnnonce(String val, String couleur);
+	
+	public void valideValeurAnnonce();
+	
+	public void actualiseAnnonce(String valeur, String couleur);
+	
+	
 
 }
