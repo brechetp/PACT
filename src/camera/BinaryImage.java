@@ -18,6 +18,12 @@ public class BinaryImage extends GrayImage {
 	private IplImage binaryImage;
 	private ByteBuffer binaryByteBuffer;
 	
+	private int maxNbTags=10000;
+	private int[] connectionTable = new int[maxNbTags];
+	public int[][] taggedBinaryImage; // image initiale o� les 1 sont
+												// remplac�s par des pixels
+												// �tiquet�s
+	
 /*
  * 
  * Constructeurs
@@ -29,6 +35,7 @@ public class BinaryImage extends GrayImage {
 		binaryMatrix = new int[height][width];
 		binaryImage = cvCreateImage(cvSize(width, height), 8, 3);
 		binaryByteBuffer = binaryImage.getByteBuffer();
+		taggedBinaryImage = new int[height][width];
 		int[] rgbByte;
 		int value = 0 ;
 		
@@ -37,6 +44,8 @@ public class BinaryImage extends GrayImage {
 				
 				rgbByte = getRgbByte(i,j);
 				value = rgbByte[0] + rgbByte[1] + rgbByte[2] / 3 ;
+				
+				taggedBinaryImage[j][i] = 0 ;
 				
 				if (value>127){
 					
@@ -62,11 +71,13 @@ public class BinaryImage extends GrayImage {
 		
 		super(grayImage.getRgbImage());
 		binaryMatrix = new int[height][width];
+		taggedBinaryImage = new int[height][width];
 		binaryImage = cvCreateImage(cvSize(width, height), 8, 3);
 		binaryByteBuffer = binaryImage.getByteBuffer();
 		for(int i=0; i<width; i++){
 			for(int j=0; j<height; j++){
 				
+				taggedBinaryImage[j][i] = 0 ;
 				if (grayImage.get(i, j)>127){
 					
 					binaryMatrix[j][i] = 1;
@@ -92,6 +103,7 @@ public class BinaryImage extends GrayImage {
 		
 		super(binaryMatrix);
 		this.binaryMatrix = binaryMatrix ;
+		taggedBinaryImage = new int[height][width];
 		height = binaryMatrix.length;
 		width = binaryMatrix[0].length;
 		binaryImage = cvCreateImage(cvSize(width, height), 8, 3);
@@ -111,6 +123,7 @@ public class BinaryImage extends GrayImage {
 					}
 					
 				}
+				taggedBinaryImage[j][i] = 0;
 			}
 		}
 		
@@ -241,12 +254,140 @@ public class BinaryImage extends GrayImage {
 		return res;
 	}
 
-
-
-
 	
+	// algorithme de double passage
+	public int[][] conncetedComponents() {
+
+
+		int k = 1;
+
+		// initialisation de la table de correspondance
+		for (int i = 1; i < maxNbTags; i++) {
+			connectionTable[i] = i;
+		}
+
+		// Premier passage
+		for (int i = 1; i < height; i++) {
+			for (int j = 1; j < width; j++) {
+				if (binaryMatrix[i][j] == 1)
+				{
+					if (binaryMatrix[i-1][j] == 0 && binaryMatrix[i][j-1] == 0) 
+					{
+						taggedBinaryImage[i][j]=k;
+						k++;
+					} 
+					else 
+					{
+						if (taggedBinaryImage[i-1][j] == taggedBinaryImage[i][j-1] && binaryMatrix[i-1][j]==1) 
+						{
+							taggedBinaryImage[i][j] = taggedBinaryImage[i-1][j];
+						} 
+						else 
+						{
+
+							int e1 = Math.min(taggedBinaryImage[i-1][j], taggedBinaryImage[i][j-1]);
+							int e2 = Math.max(taggedBinaryImage[i-1][j], taggedBinaryImage[i][j-1]);
+							if (e1 == 0) 
+							{
+								taggedBinaryImage[i][j] = connectionTable[e2];
+							}
+							else
+							{
+								taggedBinaryImage[i][j] = connectionTable[e1];
+								connectionTable[e2]=connectionTable[e1];
+							}
+							
+							// mise � jour de la table de la table de correspondance
+							/**int a = taggedBinaryImage[i-1][j];
+							if (connectionTable[a] != connectionTable[e1]) 
+							{
+								while (connectionTable[a] != a) 
+								{
+									int l = connectionTable[a];
+									connectionTable[a] = connectionTable[e1];
+									a = l;
+								}
+							}
+							
+							a = taggedBinaryImage[i][j-1];
+							if (connectionTable[a] != connectionTable[e1]) 
+							{
+								while (connectionTable[a] != a) 
+								{
+									int l = connectionTable[a];
+								connectionTable[a] = connectionTable[e1];
+								a = l;
+								}
+							}*/
+						}
+					}
+				}
+			}
+		}
+
+		// actualisation de T
+		for (int m = 1; m < k; m++) 
+		{
+				connectionTable[m] = connectionTable[connectionTable[m]];
+		}
+
+		// second balayage
+		for (int i1 = 1; i1 < height; i1++) {
+			for (int j = 1; j < width; j++) {
+				if (taggedBinaryImage[i1][j] != 0) {
+					taggedBinaryImage[i1][j] = connectionTable[taggedBinaryImage[i1][j]];
+				}
+			}
+		}
+		
+		return taggedBinaryImage; 
+		
+	}
+
+	public int [][] largestComponent(){
+		int [][] tab = conncetedComponents();
+		int[][] largest = new int[height][width];
+		int[] compteur = new int[maxNbTags];
+		for (int i=0; i<maxNbTags; i++){
+			compteur[i]=0;
+		}
+		
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (tab[i][j] !=0) {
+					compteur[tab[i][j]] +=1 ;
+				}
+			}
+		}
+		
+		int max = 0 ; 
+		int imax = 0;
+		for (int i=0; i<maxNbTags; i++){
+			if (compteur[i] >= max){
+				max = compteur[i];
+				imax = i;
+			}
+		}
+		
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (tab[i][j] != imax) {
+					largest[i][j] =0 ;
+				} else {
+					largest[i][j]=1;
+				}
+			}
+		}	
+		
+		return largest;
+	}
 	
-
-
 }
+
+
+	
+	
+
+
+
 

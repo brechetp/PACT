@@ -8,7 +8,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 
-import patternmatching.BinaryImage2;
+
 
 import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
@@ -152,12 +152,11 @@ public class Main {
 		
 		IplImage img = cvLoadImage("data/database/binary/bin0.jpg");
 		BinaryImage bin = new BinaryImage (new Image(img));
-		int [][] matrice = bin.getBinaryMatrix();    	
+
 		      
-		BinaryImage2 bi = new BinaryImage2(matrice); 
 		
 		    
-		int [][] rep = bi.largestComponent();
+		int [][] rep = bin.largestComponent();
 		
 		BinaryImage bin2 = new BinaryImage (rep);
 		

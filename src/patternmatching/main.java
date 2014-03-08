@@ -14,7 +14,7 @@ public class main {
 		BinaryImage bin = new BinaryImage (new Image(img1));
 		int [][] matrice = bin.getBinaryMatrix();
 	
-		BinaryImage2 bi = new BinaryImage2(matrice); 
+		BinaryImage bi = new BinaryImage(matrice); 
 		
 		//int rep = bi.conncetedComponents();
 		
