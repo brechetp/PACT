@@ -139,6 +139,7 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setK(0);
 		fen.getPan().setJ(0);
 		fen.getPan().setI(0);
+		fen.getPan().setY(0);
 		fen.repaint();
 	}
 	
@@ -148,6 +149,19 @@ public class ViewController implements ViewControllerInterface
 	
 	public void modeJeu(){
 		fen.getPan().setH(0);
+	}
+	
+	public void contreCoinche(){
+		fen.getPan().setK(5);
+	}
+	
+	public void afficheAnnonce(String valeur, String couleur){
+		fen.getPan().setStrings(valeur, couleur);
+		fen.getPan().setY(1);
+	}
+	
+	public void effaceAnnonce(){
+		fen.getPan().setY(0);
 	}
 
 }

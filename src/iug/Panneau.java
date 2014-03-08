@@ -50,6 +50,9 @@ public class Panneau extends JPanel {
 	int k = 0;
 	int j = 0;
 	int h = 0;
+	int y = 0;
+	String s1;
+	String s2;
 	
 	public void paintComponent(Graphics g){
 		
@@ -168,12 +171,19 @@ public class Panneau extends JPanel {
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		    	g.drawString("Le joueur " + k + " a coinché !!!!!", 300, 400);
 		    }
+		    else if (k==5){
+		    	g.setColor(new Color(255, 0, 0));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+		    	g.drawString("CONTRE-COINCHE !!!", 320, 400);
+		    }
 		    else if (k==666){
 		    	j=0;
 		    	i=0;
+		    	y=0;
+		    	h=0;
 		    	g.setColor(new Color(255, 0, 0));
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 80));
-		    	g.drawString("PARTIE TERMINEE", 200, 400);
+		    	g.drawString("PARTIE TERMINEE", 180, 400);
 		    }
 		    if (j!=0 && h==0){
 		    	g.setColor(new Color(255,255,0));
@@ -185,7 +195,15 @@ public class Panneau extends JPanel {
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("C'est au joueur " + j + " d'annoncer !", 350 , 600);
 		    }
-		    if(j==0){
+		    if (j==0){
+		    	
+		    }
+		    if (y!=0){
+		    	g.setColor(new Color(255,255,0));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+		    	g.drawString("Annonce en cours : " + s1 + " - " + s2, 300 , 650);
+		    }
+		    if (y==0){
 		    	
 		    }
 		} catch (IOException e) {
@@ -223,6 +241,19 @@ public class Panneau extends JPanel {
 	
 	public int getH(){
 		return h;
+	}
+	
+	public void setY(int y){
+		this.y=y;
+	}
+	
+	public int getY(){
+		return y;
+	}
+	
+	public void setStrings(String s1, String s2){
+		this.s1=s1;
+		this.s2=s2;
 	}
 
 }

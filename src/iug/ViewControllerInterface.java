@@ -23,4 +23,6 @@ public interface ViewControllerInterface
 	public void modeAnnonce();
 	
 	public void modeJeu();
+	
+	public void effaceAnnonce();
 }

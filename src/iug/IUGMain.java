@@ -9,7 +9,8 @@ public class IUGMain {
 		ViewController vc = new ViewController();
 
 			vc.joueurEnCours(3);
-			vc.coinche(2);
+			vc.contreCoinche();
+			vc.afficheAnnonce("100", "carreau");
 			vc.afficherCarte("astrefle");
 			try {
 				Thread.sleep(5000);
