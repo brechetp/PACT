@@ -220,12 +220,12 @@ public class StateMachine
 			break;
 			
 		case AnnonceAFaire:
-			etat.annonceValueUp();
+			etat.annonceValueUp(vci);
 			this.state = State.AnnonceAFaire;
 			break;
 			
 		case AnnonceAFaire2:
-			etat.annonceNextSuit();
+			etat.annonceNextSuit(vci);
 			this.state = State.AnnonceAFaire2;
 			break;
 			
@@ -263,17 +263,7 @@ public class StateMachine
 		 
 		 case AnnonceAFaire:
 			 //Affiche l'annonce
-			 int valeur = etat.valeurAnnonce();
-			 String val;
-			 if (valeur==250)
-				 val="capot";
-			 else if (valeur==500)
-				 val="générale";
-			 else
-				 val =""+valeur;
-			 String couleur = etat.getAtout();
-			 vci.afficheAnnonce(val,couleur);
-			 //Terminer affiche annonce
+			 vci.valideValeurAnnonce();
 			 this.state = State.AnnonceAFaire2;
 			 break;
 		 

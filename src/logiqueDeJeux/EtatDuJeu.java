@@ -175,15 +175,37 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		else return 1;
 	}
 
-	public void annonceValueUp() 
+	public void annonceValueUp(ViewControllerInterface vci) 
 	{
 		this.annonce.valueUp();
+		//Actualise l'annonce
+		int valeur = this.valeurAnnonce();
+		String val;
+		if (valeur==250)
+			val="capot";
+		else if (valeur==500)
+			val="générale";
+		else
+			val =""+valeur;
+		String couleur = this.getAtout();
+		vci.actualiseAnnonce(val,couleur);
 		
 	}
 
-	public void annonceNextSuit() 
+	public void annonceNextSuit(ViewControllerInterface vci) 
 	{
 		this.annonce.nextSuit();
+		//Met a jour la couleur
+		int valeur = this.valeurAnnonce();
+		String val;
+		if (valeur==250)
+			val="capot";
+		else if (valeur==500)
+			val="générale";
+		else
+			val =""+valeur;
+		String couleur = this.getAtout();
+		vci.afficheAnnonce(val,couleur);
 		
 	}
 

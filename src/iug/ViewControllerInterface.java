@@ -20,20 +20,25 @@ public interface ViewControllerInterface
 	//suprime les message afficher
 	public void supprimerMessage();
 	
+	//Passe en mode annonce sur l'interface
 	public void modeAnnonce();
 	
+	//Passe en mode jeu sur l'interface
 	public void modeJeu();
 	
+	//Efface l'affichage de l'annonce
 	public void effaceAnnonce();
 
+	//Affiche une contrecoinche
 	public void contreCoinche();
 
+	//Affiche l'annonce avec la valeur et couleur
 	public void afficheAnnonce(String val, String couleur);
 	
-	public void valideValeurAnnonce();
-	
+	//Actualise l'annonce aprés modification
 	public void actualiseAnnonce(String valeur, String couleur);
 	
-	
+	//Aprés validation des valeur
+	public void valideValeurAnnonce();
 
 }

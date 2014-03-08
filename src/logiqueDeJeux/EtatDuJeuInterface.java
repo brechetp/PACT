@@ -35,10 +35,10 @@ public interface EtatDuJeuInterface
 	public int numTeamCarte(CarteInterface carte);
 
 	//Augmente la valeur de l'annonce
-	public void annonceValueUp();
+	public void annonceValueUp(ViewControllerInterface vci);
 
 	//Passe a la couleur suivante
-	public void annonceNextSuit();
+	public void annonceNextSuit(ViewControllerInterface vci);
 	
 	//Initialise un annonce si il n'y en avais pas, sinon augmente la valeur une fois
 	public void initAnnonce(ViewControllerInterface vci);
