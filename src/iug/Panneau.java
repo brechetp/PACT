@@ -201,7 +201,21 @@ public class Panneau extends JPanel {
 		    if (y!=0){
 		    	g.setColor(new Color(255,255,0));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-		    	g.drawString("Annonce en cours : " + s1 + " - " + s2, 300 , 650);
+		    	g.drawString("Annonce en cours : ", 300 , 650);
+		    	if(y==1){
+		    		g.setColor(new Color(255,0,0));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+			    	g.drawString(s1, 540 , 650);
+			    	g.setColor(new Color(255,255,0));
+			    	g.drawString(" - " + s2, 580 , 650);
+		    	}
+		    	if(y==2){
+		    		g.setColor(new Color(255,255,0));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+			    	g.drawString(s1 + " - ", 540 , 650);
+			    	g.setColor(new Color(255,0,0));
+			    	g.drawString(s2, 600 , 650);
+		    	}
 		    }
 		    if (y==0){
 		    	

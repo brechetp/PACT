@@ -13,6 +13,13 @@ public class IUGMain {
 			vc.afficheAnnonce("100", "carreau");
 			vc.afficherCarte("astrefle");
 			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			vc.afficheAnnonce("100", "carreau");
+			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
