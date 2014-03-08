@@ -262,7 +262,18 @@ public class StateMachine
 			 break;
 		 
 		 case AnnonceAFaire:
-			 //Action graphique
+			 //Affiche l'annonce
+			 int valeur = etat.valeurAnnonce();
+			 String val;
+			 if (valeur==250)
+				 val="capot";
+			 else if (valeur==500)
+				 val="générale";
+			 else
+				 val =""+valeur;
+			 String couleur = etat.getAtout();
+			 vci.afficheAnnonce(val,couleur);
+			 //Terminer affiche annonce
 			 this.state = State.AnnonceAFaire2;
 			 break;
 		 
