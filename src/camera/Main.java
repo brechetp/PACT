@@ -137,7 +137,7 @@ public class Main {
 		cvSaveImage("data/binbis2.jpg", bin2.getBinaryImage()); */
 		
 		//Capture(0, 10, "data/database/capture/capt");
-		BinaryImage[] tab = Difference(0, 10, 2, 30,"data/database/capture/capt","data/database/binary/bin" );
+		/*BinaryImage[] tab = Difference(0, 2, 2, 30,"data/database/capture/capt","data/database/binary/bin" );
 		int[][] coins0 = tab[0].getCorners();
 		
 		
@@ -148,12 +148,20 @@ public class Main {
 		int[][] coins1 = tab[1].getCorners();
 		Image img1 = new Image(tab[1].getRgbImage());
 		Image resample1 = img1.resample(coins1, 635, 889);
-		cvSaveImage("data/database/resample/resample1.jpg", resample1.getRgbImage());  	
-		      	
-		      
-		     
-		    
+		cvSaveImage("data/database/resample/resample1.jpg", resample1.getRgbImage());  	*/
 		
+		IplImage img = cvLoadImage("data/database/binary/bin0.jpg");
+		BinaryImage bin = new BinaryImage (new Image(img));
+		int [][] matrice = bin.getBinaryMatrix();    	
+		      
+		BinaryImage2 bi = new BinaryImage2(matrice); 
+		
+		    
+int [][] rep = bi.largestComponent();
+		
+		BinaryImage bin2 = new BinaryImage (rep);
+		
+		cvSaveImage("data/test/bintest.jpg", bin2.getBinaryImage());
 		   
 	
 				
