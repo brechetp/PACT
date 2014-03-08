@@ -185,7 +185,7 @@ public class Main {
 		
 	}
 	
-	public static BinaryImage[] Difference(int debut, int compt, int pas, int threshold, String source, String destination){
+	public static BinaryImage[] Difference(int debut, int compt, int pas, int threshold, int nbr, String source, String destination){
 		
 		BinaryImage[] res = new BinaryImage[compt/pas];
 		for(int i = debut; i < compt-1; i+=pas){ // pas = 1 ou 2
@@ -194,7 +194,7 @@ public class Main {
 			IplImage img1 = cvLoadImage(source+(i+1)+".jpg");
 			Image image0 = new Image(img0);
 	      	Image image1 = new Image(img1);
-	      	BinaryImage bin = image0.differenceNeighbour(image1, threshold);
+	      	BinaryImage bin = image0.differenceNeighbour(image1, threshold, nbr);
 	      	bin.setRgbImage(img1);
 	      	res[i/pas] = bin ;
 	      	bin.save(destination+(i/pas)+".jpg");

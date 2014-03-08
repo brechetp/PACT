@@ -113,12 +113,12 @@ public class Image {
 		 }
 	}
 	
-	public int[] neighbour(int i, int j, int[] pixel){ // retourne le pixel voisin de (i,j)
+	public int[] neighbour(int i, int j, int[] pixel, int nbr){ // retourne le pixel voisin de (i,j)
 		
 		int[] res = new int[3];
 		int distance = 0 , distanceMin = Integer.MAX_VALUE;
-		for(int n = Math.max(0, i-2); n <= Math.min(width-1, i+2); n++){
-			for(int p = Math.max(0, j-2); p <= Math.min(height-1,  j+2); p++){
+		for(int n = Math.max(0, i-nbr); n <= Math.min(width-1, i+nbr); n++){
+			for(int p = Math.max(0, j-nbr); p <= Math.min(height-1,  j+nbr); p++){
 				int[] rgbByte = getRgbByte(n, p);
 				distance = 0;
 				for (int k = 0; k < 2; k ++){
@@ -134,7 +134,7 @@ public class Image {
 		return res;
 	}
 	
-	public BinaryImage differenceNeighbour(Image image, int threshold){
+	public BinaryImage differenceNeighbour(Image image, int threshold, int nbr){
 		
 		
 		int[][] diff = new int[height][width];
@@ -144,12 +144,12 @@ public class Image {
 			for(int j = 0; j < height; j++){
 				distance = 0;
 				pixel = getRgbByte(i,j);
-				voisin = image.neighbour(i, j, pixel);
+				voisin = image.neighbour(i, j, pixel, nbr);
 				for (int k = 0; k < 2; k ++){
 					distance = distance + Math.abs(voisin[k] - pixel[k]);	
 				}	
 				
-				if (distance > 40)
+				if (distance > threshold)
 					diff[j][i] = 1;
 				else
 					diff[j][i] = 0 ;
