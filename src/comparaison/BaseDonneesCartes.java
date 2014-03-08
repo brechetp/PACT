@@ -1,100 +1,67 @@
 package comparaison;
 
+import camera.Image;
+
 
 public class BaseDonneesCartes {
 	
-	private int[][][] tab;
-	private double[] averageTab;
-	private double[] sigmaTab;
-	private int size1=635;
-	private int size2=889;
+	private Image[] tab;
+	private double[][] averageTab;
+	private double[][] sigmaTab;
+	private int width;
+	private int height;
 	
-	public BaseDonneesCartes (int[][] tab0, int[][] tab1, int[][] tab2, int[][] tab3, int[][] tab4){
+	public BaseDonneesCartes (int debut, int fin, String source){
 		
-		tab = new int[5][1920][1080];
-		averageTab = new double[5];
-		sigmaTab = new double[5];
+		int size = fin-debut+1;
+		double[] average, variance;
+		averageTab = new double[size][3];
+		sigmaTab = new double[size][3];
 		
-		for (int k =0; k<size2; k++)
-		{
-			for (int j=0; j<size1; j++)
-		    {
-			tab[0][k][j]=tab0[k][j];
-		    }
-		}
+		tab = new Image[size];
 		
-		for (int k =0; k<size2; k++)
-		{
-			for (int j=0; j<size1; j++)
-		    {
-			tab[1][k][j]=tab1[k][j];
-		    }
-		}
-		
-		for (int k =0; k<size2; k++)
-		{
-			for (int j=0; j<size1; j++)
-		    {
-			tab[2][k][j]=tab2[k][j];
-		    }
-		}
-		
-		for (int k =0; k<size2; k++)
-		{
-			for (int j=0; j<size1; j++)
-		    {
-			tab[3][k][j]=tab3[k][j];
-		    }
-		}
-		
-		for (int k =0; k<size2; k++)
-		{
-			for (int j=0; j<size1; j++)
-		    {
-			tab[4][k][j]=tab4[k][j];
-		    }
-		}
-		
-	
-		/*for (int k=0 ; k<5 ; k++ ){
-			double average = 0;
-			for (int i =0; i<size2; i++)
+		for(int k = 0; k<size; k++){
+			
+			tab[k] = new Image(source+(k+1)+".jpg");
+			average = new double[3];
+			variance = new double[3];
+			width = tab[k].getWidth();
+			height = tab[k].getHeight();
+			for (int i =0; i<width; i++)
 			{
-				for (int j=0; j<size1; j++)
+				for (int j=0; j<height; j++)
 				{
-					average += tab[k][i][j];
+					for (int p =0; p<3; p++){
+						average[p] += tab[k].getRgbByte(i, j)[p];
+						variance[p] += Math.pow(tab[k].getRgbByte(i, j)[p]-average[p],2);
+					}
+					
 				}
 			}	
-			averageTab[k] = average/(size2*size1);
-		 
-			double variance = 0;
-			for (int i =0; i<size2; i++)
-			{
-				for (int j=0; j<size1; j++)
-				{
-					variance += Math.pow(tab[k][i][j]-average,2);
-				}
-			}
-			sigmaTab[k] = Math.sqrt(variance/(size2*size1));
 			
-		}*/
+			for(int p =0; p<3; p++){
+				averageTab[k][p] = average[p]/(width*height);
+				sigmaTab[k][p] = Math.sqrt(variance[p]/(width*height));
+			}
+		}
+		 
+			
 		
 		
 	}
 
-	public double getValue(int i, int k, int j){
-	return tab[i][k][j];
+	public int[] getValue(int k, int i, int j){
+	return tab[i].getRgbByte(i, j);
 	}
  
-	public double getAverage(int i){
-		//return averageTab[i];
-		return 0;
+	public double[] getAverage(int i){
+		return averageTab[i];
 	}
 	
    
-	public double getSigma(int i){
-		//return sigmaTab[i];
-		return 1;
+	public double[] getSigma(int i){
+		return sigmaTab[i];
+		
 	}
 	
 }
