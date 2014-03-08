@@ -157,7 +157,7 @@ public class Main {
 		BinaryImage2 bi = new BinaryImage2(matrice); 
 		
 		    
-int [][] rep = bi.largestComponent();
+		int [][] rep = bi.largestComponent();
 		
 		BinaryImage bin2 = new BinaryImage (rep);
 		
