@@ -354,6 +354,7 @@ public class StateMachine
 		 case AnnoncePasse1:
 			 etat.coinche();
 			 vci.coinche(etat.getNumJoueur());
+			 vci.modeJeu();
 			 this.state = State.DebutTour;
 			 break;
 		 
