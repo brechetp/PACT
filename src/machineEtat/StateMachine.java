@@ -242,22 +242,22 @@ public class StateMachine
 		 
 /*************************** Annonce ***********************/
 		 case Annonce:
-			 etat.initAnnonce();
+			 etat.initAnnonce(vci);
 			 this.state = State.AnnonceAFaire;
 			 break;
 		 
 		 case AnnoncePasse1:
-			 etat.initAnnonce();
+			 etat.initAnnonce(vci);
 			 this.state = State.AnnonceAFaire;
 			 break;
 		 
 		 case AnnoncePasse2:
-			 etat.initAnnonce();
+			 etat.initAnnonce(vci);
 			 this.state = State.AnnonceAFaire;
 			 break;
 		 
 		 case AnnoncePasse3:
-			 etat.initAnnonce();
+			 etat.initAnnonce(vci);
 			 this.state = State.AnnonceAFaire;
 			 break;
 		 
@@ -267,7 +267,7 @@ public class StateMachine
 			 break;
 		 
 		 case AnnonceAFaire2:
-			 etat.valideAnnonce();
+			 etat.valideAnnonce(vci);
 			 this.valeurAnnonceMax=etat.valeurAnnonce();
 			 etat.joueurSuivant(vci);
 			 this.state = State.AnnoncePasse1;
@@ -354,6 +354,7 @@ public class StateMachine
 		 case AnnoncePasse1:
 			 etat.coinche();
 			 vci.coinche(etat.getNumJoueur());
+			 etat.setNumJoueur(premierAJouer);
 			 vci.modeJeu();
 			 this.state = State.DebutTour;
 			 break;
@@ -361,6 +362,7 @@ public class StateMachine
 		 case DebutTour:
 			 etat.coinche();
 			 vci.coinche(etat.getNumJoueur());
+			 vci.contreCoinche();
 			 this.state = State.DebutTour;
 			 break;
 		 

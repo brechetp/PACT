@@ -41,10 +41,10 @@ public interface EtatDuJeuInterface
 	public void annonceNextSuit();
 	
 	//Initialise un annonce si il n'y en avais pas, sinon augmente la valeur une fois
-	public void initAnnonce();
+	public void initAnnonce(ViewControllerInterface vci);
 
 	//Valide l'annonce en cour faite pas le joueur en cour
-	public void valideAnnonce();
+	public void valideAnnonce(ViewControllerInterface vci);
 
 	//Donne la valeur de l'annonce
 	public int valeurAnnonce();

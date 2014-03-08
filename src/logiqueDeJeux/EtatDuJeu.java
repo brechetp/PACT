@@ -187,17 +187,31 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		
 	}
 
-	public void initAnnonce() 
+	public void initAnnonce(ViewControllerInterface vci) 
 	{
 		if (this.annonce==null)
 			annonce=new Annonce("carreau",80, -1);
 		else
 			annonce.valueUp();
+		//Affiche l'annonce
+		int valeur = this.valeurAnnonce();
+		String val;
+		if (valeur==250)
+			val="capot";
+		else if (valeur==500)
+			val="générale";
+		else
+			val =""+valeur;
+		String couleur = this.getAtout();
+		vci.afficheAnnonce(val,couleur);
+		//Terminer affiche annonce
 	}
 
-	public void valideAnnonce() 
+	public void valideAnnonce(ViewControllerInterface vci) 
 	{
 		annonce.setTeam(numJoueur%2);
+		vci.effaceAnnonce();
+		
 	}
 
 	public int valeurAnnonce() 

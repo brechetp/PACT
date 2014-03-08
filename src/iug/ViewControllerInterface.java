@@ -25,4 +25,9 @@ public interface ViewControllerInterface
 	public void modeJeu();
 	
 	public void effaceAnnonce();
+
+	public void contreCoinche();
+
+	public void afficheAnnonce(String val, String couleur);
+
 }
