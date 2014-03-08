@@ -156,20 +156,28 @@ public class ViewController implements ViewControllerInterface
 	public void contreCoinche(){
 		fen.getPan().setK(5);
 		fen.repaint();
+		try{
+			Thread.sleep(2000);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		fen.getPan().setK(0);
+		fen.repaint();
 	}
 	
 	public void afficheAnnonce(String valeur, String couleur){
-		if (fen.getPan().getY()!=1){
-			fen.getPan().setStrings(valeur, couleur);
-			fen.getPan().setY(1);
-			fen.repaint();
-		}
-		else if(fen.getPan().getY()!=2){
-			fen.getPan().setStrings(valeur, couleur);
+		fen.getPan().setStrings(valeur, couleur);
+		fen.repaint();
+	}
+	
+	public void valideValeurAnnonce(){
+		if(fen.getPan().getY()==1){
 			fen.getPan().setY(2);
-			fen.repaint();
 		}
 		
+		if(fen.getPan().getY()==2){
+			fen.getPan().setY(2);
+		}
 	}
 	
 	public void effaceAnnonce(){

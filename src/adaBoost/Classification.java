@@ -92,12 +92,12 @@ public class Classification
 		
 		case 0:
 			//envoiMouvement(new MouvementEvent("passer"));
-			System.out.println("Passer");
+			//System.out.println("Passer");
 			break;
 		case 1:
 			//envoiMouvement(new MouvementEvent("retour"));
 			envoiMouvement(new MouvementEvent("passer"));
-			System.out.println("Retour");
+			System.out.println("Passer");
 			break;
 		case 2:
 			envoiMouvement(new MouvementEvent("coinche"));
@@ -125,7 +125,7 @@ public class Classification
 
 	public void lancerClassi() 
 	{
-		if (compteur>10)
+		if (compteur>30)
 		{
 			determineClasse(this.moyenneVecteur);
 			this.moyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES];
