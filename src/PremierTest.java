@@ -101,7 +101,7 @@ public class PremierTest {
 		belote.nouvelleCarte(AsCoEvent);
 		belote.nouvelleCarte(ValCoEvent);
 		belote.nouvelleCarte(DixCoEvent);
-		try {
+		/**try {
 			Thread.sleep(1000);
 			belote.nouveauGeste(passer); //joueur 1 passe
 			Thread.sleep(1000);
@@ -212,7 +212,7 @@ public class PremierTest {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}     
+		}     */
 	}         
               
 }             

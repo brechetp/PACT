@@ -122,13 +122,15 @@ public class Classification
 
 	public void lancerClassi() 
 	{
-		if (compteur>0)
+		if (compteur>10)
 		{
 			determineClasse(this.moyenneVecteur);
 			this.moyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES];
 			this.nextMoyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES];
 			compteur = 0;
 		}
+		else if (compteur>0)
+			compteur = 0;
 		
 	}
 }
