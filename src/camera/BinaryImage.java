@@ -11,6 +11,9 @@ import java.nio.ByteBuffer;
 
 import static com.googlecode.javacv.cpp.opencv_core.*;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
+import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
+
+
 
 public class BinaryImage extends GrayImage {
 	
@@ -131,11 +134,17 @@ public class BinaryImage extends GrayImage {
 		
 	}
 	
+	public BinaryImage(String string) {
+		this(new Image(cvLoadImage(string)));
+	}
+	
 
 	/*
 	 * Setters et getters
 	 * 
 	 */
+
+	
 
 	public IplImage getBinaryImage(){
 		
@@ -204,6 +213,7 @@ public class BinaryImage extends GrayImage {
 					j++; // a la fin d'une ligne on incremente le nombre de lignes lues
 				}
 			}
+			bis.close();
 				
 		}
 		catch(IOException e){ // probleme d'ouverture de fichier
@@ -344,7 +354,7 @@ public class BinaryImage extends GrayImage {
 		
 	}
 
-	public int [][] largestComponent(){
+	public BinaryImage largestComponent(){
 		int [][] tab = conncetedComponents();
 		int[][] largest = new int[height][width];
 		int[] compteur = new int[maxNbTags];
@@ -379,7 +389,7 @@ public class BinaryImage extends GrayImage {
 			}
 		}	
 		
-		return largest;
+		return new BinaryImage (largest);
 	}
 	
 }

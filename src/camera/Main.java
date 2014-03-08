@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 
 
+
 import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.*;
@@ -150,17 +151,10 @@ public class Main {
 		Image resample1 = img1.resample(coins1, 635, 889);
 		cvSaveImage("data/database/resample/resample1.jpg", resample1.getRgbImage());  	*/
 		
-		IplImage img = cvLoadImage("data/database/binary/bin0.jpg");
-		BinaryImage bin = new BinaryImage (new Image(img));
-
-		      
 		
-		    
-		int [][] rep = bin.largestComponent();
-		
-		BinaryImage bin2 = new BinaryImage (rep);
-		
-		cvSaveImage("data/test/bintest.jpg", bin2.getBinaryImage());
+	
+		difference(0, 43, 1, 20, 0, "data/capture/carte", "data/binary/carte");
+		resample(0, 43, "data/binary/carte", "data/capture/carte", "data/database/carte");
 		   
 	
 				
@@ -168,45 +162,41 @@ public class Main {
 		        
 		    }
 	
-	public static void Capture(int debut, int compt, String fileName){ //enregistre compt images
+	public static void difference(int debut, int fin, int pas, int threshold, int nbr, String source, String destination){
 		
-		for(int i = debut; i<compt; i++){
-  		Capture.captureFrame(fileName+i+".jpg");
-  	
-  		
-  		if (i!= compt-1)
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				
-				e.printStackTrace();
-			}
-  		}
-		
-	}
-	
-	public static BinaryImage[] Difference(int debut, int compt, int pas, int threshold, int nbr, String source, String destination){
-		
-		BinaryImage[] res = new BinaryImage[compt/pas];
-		for(int i = debut; i < compt-1; i+=pas){ // pas = 1 ou 2
+		for(int i = debut; i <= fin; i+=pas){ // pas = 1 ou 2
 			
-			IplImage img0 = cvLoadImage(source+i+".jpg");
-			IplImage img1 = cvLoadImage(source+(i+1)+".jpg");
+			IplImage img0 = cvLoadImage("data/capture/fond0.jpg");
+			IplImage img1 = cvLoadImage(source+i+".jpg");
 			Image image0 = new Image(img0);
 	      	Image image1 = new Image(img1);
-	      	BinaryImage bin = image0.differenceNeighbour(image1, threshold, nbr);
+	      	BinaryImage bin = image1.differenceNeighbour(image0, threshold, nbr);
 	      	bin.setRgbImage(img1);
-	      	res[i/pas] = bin ;
 	      	bin.save(destination+(i/pas)+".jpg");
 	      	
 	      	
 		}
 		
-		return res ;
+	
+		
+	}
+	
+	public static void resample(int debut, int fin, String binSource, String rgbSource, String destination){
+		
+		int[][] coins ;
+
+		for(int i = debut; i <= fin; i++){
+			
+			BinaryImage bin = new BinaryImage(binSource+i+".jpg");
+			BinaryImage card = bin.largestComponent();
+			Image img = new Image(rgbSource+i+".jpg");
+			coins = card.getCorners();
+			Image resample = img.resample(coins, 635, 889);
+	      	cvSaveImage(destination+i+".jpg", resample.getRgbImage());
+	      	
+		}
 		
 	}
 
-
-	
 
 }

@@ -9,6 +9,9 @@ import java.nio.ByteBuffer;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
+import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
+
+
 public class Image {
 	
 	protected int width;
@@ -50,6 +53,11 @@ public class Image {
 		
 		
 		
+	}
+	
+	public Image(String fileName){
+		
+		this(cvLoadImage(fileName));
 	}
 	
 	/*
