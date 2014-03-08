@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 
+import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
+import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
+
 
 
 
@@ -14,7 +17,7 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 import static com.googlecode.javacv.cpp.opencv_core.cvCreateImage;
 import static com.googlecode.javacv.cpp.opencv_core.cvSize;
-import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
+
 
 public class GrayImage extends Image{
 	
@@ -60,6 +63,11 @@ public class GrayImage extends Image{
 		
 		
 		
+	}
+	
+	public GrayImage (String fileName){
+		
+		this(cvLoadImage(fileName));
 	}
 	/*
 	 *  Settes et getters
