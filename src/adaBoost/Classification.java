@@ -90,18 +90,23 @@ public class Classification
 		{
 		case 0:
 			envoiMouvement(new MouvementEvent("passer"));
+			System.out.println("Passer");
 			break;
 		case 1:
 			envoiMouvement(new MouvementEvent("retour"));
+			System.out.println("Retour");
 			break;
 		case 2:
 			envoiMouvement(new MouvementEvent("coinche"));
+			System.out.println("Coinche");
 			break;
 		case 3:
 			envoiMouvement(new MouvementEvent("accepter"));
+			System.out.println("Accepter");
 			break;
 		case 4:
 			envoiMouvement(new MouvementEvent("quitter"));
+			System.out.println("Quitter");
 			break;
 		}
 	}
@@ -112,5 +117,18 @@ public class Classification
             {
                 listener.nouveauGeste(mvmt);
             }
+	}
+
+
+	public void lancerClassi() 
+	{
+		if (compteur>0)
+		{
+			determineClasse(this.moyenneVecteur);
+			this.moyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES];
+			this.nextMoyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES];
+			compteur = 0;
+		}
+		
 	}
 }

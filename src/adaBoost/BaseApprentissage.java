@@ -255,6 +255,7 @@ public class BaseApprentissage {
 		catch (Exception e) 
 		{
 			e.printStackTrace();
+			System.out.println("boo");
 		}
 		
 		

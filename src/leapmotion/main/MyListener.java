@@ -38,20 +38,26 @@ public class MyListener extends Listener{
     	/**                             FONCTION PRINCIPALE : ENVOI VERS LA CLASSIFICATION EN CONTINU                           **/
     	/*************************************************************************************************************************/
     	
-    	
-		Frame frame = controller.frame();
-    	if (frame.hands().count()>0)
-    	{
-    		System.out.println("boo !!");
-    		ParamUtiles param = new ParamUtiles();
-    		param.addToList(frame, controller.frame(1));
-    		double tab[] = new double[Classification.NOMBRE_DE_FEATURES];
-    		for (int k = 0 ; k < Classification.NOMBRE_DE_FEATURES ; k++){
-    			tab[k] = param.get(k);
-    		}
-    		
-    		classi.onFrame(tab);
+    	try{
+    		Frame frame = controller.frame();
+        	if (frame.hands().count()>0)
+        	{
+        		ParamUtiles param = new ParamUtiles();
+        		param.addToList(frame, controller.frame(1));
+        		double tab[] = new double[Classification.NOMBRE_DE_FEATURES];
+        		for (int k = 0 ; k < Classification.NOMBRE_DE_FEATURES ; k++){
+        			tab[k] = param.get(k);
+        		}
+        		
+        		classi.onFrame(tab);
+        	}
+        	else{
+        		classi.lancerClassi();
+        	}
+    	}catch(Exception e){
+    		e.printStackTrace();
     	}
+		
 
     	
     	

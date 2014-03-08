@@ -49,6 +49,7 @@ public class Panneau extends JPanel {
 	int i = 0;
 	int k = 0;
 	int j = 0;
+	int h = 0;
 	
 	public void paintComponent(Graphics g){
 		
@@ -174,10 +175,15 @@ public class Panneau extends JPanel {
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 80));
 		    	g.drawString("PARTIE TERMINEE", 200, 400);
 		    }
-		    if (j!=0){
+		    if (j!=0 && h==0){
 		    	g.setColor(new Color(0,255,0));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("C'est au joueur " + j + " de jouer !", 350 , 600);
+		    }
+		    if (j!=0 && h==1){
+		    	g.setColor(new Color(0,255,0));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+		    	g.drawString("C'est au joueur " + j + " d'annoncer !", 350 , 600);
 		    }
 		    if(j==0){
 		    	
@@ -209,6 +215,14 @@ public class Panneau extends JPanel {
 	
 	public int getJ(){
 		return j;
+	}
+	
+	public void setH(int h){
+		this.h = h;
+	}
+	
+	public int getH(){
+		return h;
 	}
 
 }

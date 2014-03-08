@@ -55,7 +55,7 @@ public class LeapMotionMain {
 			e1.printStackTrace();
 		}*/
 		
-		ClassiFinal[] classilol =BaseApprentissage.main(null);
+		ClassiFinal[] classilol = BaseApprentissage.main(null);
 		EtatDuJeu etat = new EtatDuJeu();
 		BeloteCoinche belote = new BeloteCoinche(etat);
 		Classification classi = new Classification(classilol);
@@ -63,6 +63,12 @@ public class LeapMotionMain {
         MyListener listener = new MyListener(classi);
         Controller controller = new Controller();
         controller.addListener(listener);
+        
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 	}
 

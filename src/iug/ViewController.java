@@ -142,9 +142,12 @@ public class ViewController implements ViewControllerInterface
 		fen.repaint();
 	}
 	
-	// Coinche pour le joueur X
-	// Numéro du joueur en cours
-	// Partie terminée pour le numéro de l'équipe gagnante + nombre de points équipe paire et impaire
-	// 
+	public void modeAnnonce(){
+		fen.getPan().setH(1);
+	}
+	
+	public void modeJeu(){
+		fen.getPan().setH(0);
+	}
 
 }
