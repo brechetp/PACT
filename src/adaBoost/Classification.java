@@ -88,12 +88,15 @@ public class Classification
 	{
 		switch(i)
 		{
+		// Pour le prototype alléger on change retour en passer.
+		
 		case 0:
-			envoiMouvement(new MouvementEvent("passer"));
+			//envoiMouvement(new MouvementEvent("passer"));
 			System.out.println("Passer");
 			break;
 		case 1:
-			envoiMouvement(new MouvementEvent("retour"));
+			//envoiMouvement(new MouvementEvent("retour"));
+			envoiMouvement(new MouvementEvent("passer"));
 			System.out.println("Retour");
 			break;
 		case 2:
@@ -105,7 +108,7 @@ public class Classification
 			System.out.println("Accepter");
 			break;
 		case 4:
-			envoiMouvement(new MouvementEvent("quitter"));
+			//envoiMouvement(new MouvementEvent("quitter"));
 			System.out.println("Quitter");
 			break;
 		}
