@@ -58,6 +58,46 @@ public class Capture {
 			
 		}
 		
+		public static void database(int debut, int fin, int threshold, int nbr, String capture, String destination){
+			
+			int[][] coins ;
+
+			for(int i = debut; i <= fin; i++){ 
+				
+				 
+		  		
+		  		if (i!= 0)
+					try {
+						System.out.println("Vous pouvez poser la carte"+i);
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						
+						e.printStackTrace();
+					}
+				
+				Capture.captureFrame(capture+i+".jpg");
+		  		System.out.println("Photo "+(i+1)+" prise");
+		  	if (i!=0){
+		  	
+					Image image0 = new Image("data/capture/carte0.jpg");
+					Image image1 = new Image(capture+i+".jpg");
+					BinaryImage bin = image1.differenceNeighbour(image0, threshold, nbr);
+			      	BinaryImage card = bin.largestComponent();
+			      	coins = card.getCorners();
+					Image resample = image1.resample(coins, 635, 889);
+			      	cvSaveImage(destination+i+".jpg", resample.getRgbImage());
+
+		  	}
+		  	
+		  	
+		      	
+		      	
+			}
+			
+		
+			
+		}
+		
 		
 
 		

@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 
 
 
+
+
 import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.*;
@@ -153,33 +155,15 @@ public class Main {
 		
 		
 	
-		difference(0, 43, 1, 20, 0, "data/capture/carte", "data/binary/carte");
-		resample(0, 43, "data/binary/carte", "data/capture/carte", "data/database/carte");
-		   
+		Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
+		
 	
 				
 				
 		        
 		    }
 	
-	public static void difference(int debut, int fin, int pas, int threshold, int nbr, String source, String destination){
-		
-		for(int i = debut; i <= fin; i+=pas){ // pas = 1 ou 2
-			
-			IplImage img0 = cvLoadImage("data/capture/fond0.jpg");
-			IplImage img1 = cvLoadImage(source+i+".jpg");
-			Image image0 = new Image(img0);
-	      	Image image1 = new Image(img1);
-	      	BinaryImage bin = image1.differenceNeighbour(image0, threshold, nbr);
-	      	bin.setRgbImage(img1);
-	      	bin.save(destination+(i/pas)+".jpg");
-	      	
-	      	
-		}
-		
 	
-		
-	}
 	
 	public static void resample(int debut, int fin, String binSource, String rgbSource, String destination){
 		
