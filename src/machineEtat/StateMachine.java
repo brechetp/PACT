@@ -39,6 +39,7 @@ public class StateMachine
 			if (joueurD.aHuitCarte())
 			{
 				this.state = State.Annonce;
+				vci.modeAnnonce();
 				vci.joueurEnCours(premierAJouer);
 				System.out.println("Distribution Terminer");
 			}
@@ -206,6 +207,7 @@ public class StateMachine
 		case AnnoncePasse3:
 			if (etat.annonceFaite())
 			{
+				vci.modeJeu();
 				etat.joueurSuivant(vci);
 				this.state = State.DebutTour;
 			}

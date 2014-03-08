@@ -20,4 +20,7 @@ public interface ViewControllerInterface
 	//suprime les message afficher
 	public void supprimerMessage();
 	
+	public void modeAnnonce();
+	
+	public void modeJeu();
 }
