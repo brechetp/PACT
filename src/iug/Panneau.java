@@ -207,14 +207,14 @@ public class Panneau extends JPanel {
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 			    	g.drawString(s1, 540 , 650);
 			    	g.setColor(new Color(255,255,0));
-			    	g.drawString(s2, 640 , 650);
+			    	g.drawString(s2, 650 , 650);
 		    	}
 		    	if(y==2){
 		    		g.setColor(new Color(255,255,0));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 			    	g.drawString(s1, 540 , 650);
 			    	g.setColor(new Color(255,0,0));
-			    	g.drawString(s2, 660 , 650);
+			    	g.drawString(s2, 670 , 650);
 		    	}
 		    }
 		    if (y==0){

@@ -205,7 +205,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
-		vci.afficheAnnonce(val,couleur);
+		vci.actualiseAnnonce(val,couleur);
 		
 	}
 

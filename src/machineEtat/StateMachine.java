@@ -19,7 +19,7 @@ public class StateMachine
 	private int valeurAnnonceMax = 80;
 	private int premierAJouer =1;
 	private ViewControllerInterface vci;
-	private int numJoueurDistant=2;
+	private int numJoueurDistant=4;
 	
 	public StateMachine(JoueurDistantInterface joueurD, EtatDuJeu etat) 
 	{
@@ -356,13 +356,13 @@ public class StateMachine
 			 etat.coinche();
 			 vci.coinche(etat.getNumJoueur());
 			 etat.setNumJoueur(premierAJouer);
+			 vci.joueurEnCours(premierAJouer);
 			 vci.modeJeu();
 			 this.state = State.DebutTour;
 			 break;
 		 
 		 case DebutTour:
 			 etat.coinche();
-			 vci.coinche(etat.getNumJoueur());
 			 vci.contreCoinche();
 			 this.state = State.DebutTour;
 			 break;
