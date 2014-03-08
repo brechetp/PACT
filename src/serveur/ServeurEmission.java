@@ -21,7 +21,6 @@ public class ServeurEmission implements Runnable
 		while (sc.hasNext())
 		{
 			String envoi =sc.next();
-			System.out.println(envoi);
 			out.println(envoi);
 			out.flush();
 		}

@@ -40,8 +40,9 @@ public class MyListener extends Listener{
     	
     	
 		Frame frame = controller.frame();
-    	if (frame.hands().count()>0){
-
+    	if (frame.hands().count()>0)
+    	{
+    		System.out.println("boo !!");
     		ParamUtiles param = new ParamUtiles();
     		param.addToList(frame, controller.frame(1));
     		double tab[] = new double[Classification.NOMBRE_DE_FEATURES];
@@ -89,6 +90,7 @@ public class MyListener extends Listener{
             		System.out.println("Main détectée. Début de l'acquisition du mouvement. Appuyer sur Z pour arrêter.");
             		y=2;
             	}
+            	
             	
             	ListeParam param = new ListeParam(i);
             	param.addToList(frame, controller.frame(1));

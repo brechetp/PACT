@@ -32,7 +32,7 @@ public class mainada2 {
 					4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
 						} ;
 		
-		int T=200;
+		int T=50;
 		ClassiFinal[] classi = new ClassiFinal[nbGeste];
 		ClassiFinauxListe tab = new ClassiFinauxListe(classi);
 		

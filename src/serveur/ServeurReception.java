@@ -24,17 +24,22 @@ public class ServeurReception implements Runnable
 	{
 		try 
 		{
+			String msg = null;;
 			while (true) 
 			{
-				String msg = null;;
 				msg = in.readLine();
 				System.out.println(msg);
-				if (msg.equals("carte"))
-					this.newCarte();
-				else if (msg.equals("coinche"))
-					this.newCoinche();
-				else if (msg.equals("annonce"))
-					this.newAnnonce();
+				msg = in.readLine();
+				System.out.println(msg);
+				if (msg!=null) 
+				{
+					if (msg.equals("carte"))
+						this.newCarte();
+					else if (msg.equals("coinche"))
+						this.newCoinche();
+					else if (msg.equals("annonce"))
+						this.newAnnonce();
+				}
 			}
 		} 
 		catch (IOException e) 

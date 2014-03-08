@@ -65,7 +65,7 @@ public class BaseApprentissage {
 					int nb_frames = hyk.get(i).getSize() ;
 					//System.out.println(nb_frames + " frames dans l'exemple " + i + " du fichier " + k);
 					
-					double[] descripteurs = new double[14] ;
+					double[] descripteurs = new double[Classification.NOMBRE_DE_FEATURES] ;
     			
 					for (int j = 5 ; j < nb_frames ; j++) //On enlève les 5 premières frames pour l'entrée du geste dans la zone
 					{
@@ -124,7 +124,7 @@ public class BaseApprentissage {
 					}
 					
 					
-					for (int m = 0 ; m < 14 ; m++)
+					for (int m = 0 ; m < Classification.NOMBRE_DE_FEATURES ; m++)
 					{
 						descripteurs[m] = descripteurs[m] / nb_frames ;
 						base[compteur][m] = descripteurs[m] ;
@@ -158,7 +158,7 @@ public class BaseApprentissage {
 				{					
 					int nb_frames_test = hyk_test.get(i).getSize() ;
 						
-					double[] descripteurs_test = new double[14] ;
+					double[] descripteurs_test = new double[Classification.NOMBRE_DE_FEATURES] ;
 	    		
 					for (int j = 5 ; j < nb_frames_test ; j++) //On enlève les 5 premières frames pour l'entrée du geste dans la zone
 					{
@@ -241,7 +241,7 @@ public class BaseApprentissage {
 						}
 					}
 					
-					for (int m = 0 ; m < 14 ; m++)
+					for (int m = 0 ; m < Classification.NOMBRE_DE_FEATURES ; m++)
 					{
 						descripteurs_test[m] = descripteurs_test[m] / nb_frames_test ;
 						base_test[compteur_test][m] = descripteurs_test[m] ;
