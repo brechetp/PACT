@@ -29,8 +29,6 @@ public class ServeurReception implements Runnable
 			{
 				msg = in.readLine();
 				System.out.println(msg);
-				msg = in.readLine();
-				System.out.println(msg);
 				if (msg!=null) 
 				{
 					if (msg.equals("carte"))
@@ -55,7 +53,7 @@ public class ServeurReception implements Runnable
 		try 
 		{
 			String valeur =in.readLine();
-			if (valeur.equals("passer"))
+			if (valeur.equals("passe"))
 				belote.nouveauGeste(new MouvementEvent("passer"));
 			else
 			{
@@ -82,9 +80,11 @@ public class ServeurReception implements Runnable
 		try 
 		{
 			String valeur =in.readLine();
+			System.out.println(valeur);
 			String couleur =in.readLine();
+			System.out.println(couleur);
 			Carte carte = new Carte(valeur, couleur, (EtatDuJeu)belote.getEtat());
-			System.out.println("carte recu");
+			
 			belote.nouvelleCarte(new CardEvent(carte));
 		} 
 		catch (IOException e) 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import logiqueDeJeux.BeloteCoinche;
 import logiqueDeJeux.EtatDuJeu;
 import machineEtat.CardEvent;
+import structure.Annonce;
 import structure.Carte;
 
 public class testServeur 
@@ -105,15 +106,43 @@ public class testServeur
 			serveur.envoiCarteDistribution(SepPi);
 			Thread.sleep(100);
 			serveur.envoiCarteDistribution(SepCa);
-			Thread.sleep(10000);
+			Thread.sleep(1000);
 			System.out.println("Envoi terminer");
-			Thread.sleep(100);
+			serveur.envoiAnnonce(null, 1);
+			Thread.sleep(2000);
+			serveur.envoiAnnonce(null, 2);
+			Thread.sleep(2000);
+			serveur.envoiAnnonce(new Annonce("trefle", 100, 1), 3);
+			Thread.sleep(2000);
+			serveur.envoiTourAnnonce();
+			Thread.sleep(2000);
+			serveur.envoiCoinche(1);
+			Thread.sleep(1000);
+			serveur.envoiFinAnnonce();
+			System.out.println("fin des annonces");
+			Thread.sleep(2000);
 			serveur.envoiCarte(DixTr, 1);
 			Thread.sleep(100);
 			serveur.envoiCarte(DixPi, 2);
 			Thread.sleep(100);
 			serveur.envoiCarte(DixCa, 3);
+			System.out.println("Fin envoi carte");
 			Thread.sleep(100);
+			serveur.waitCarte();
+			Thread.sleep(10000);
+			serveur.envoiFinDeTour();
+			System.out.println("Fin de tour");
+			Thread.sleep(2000);
+			serveur.envoiCarte(HuiTr, 3);
+			Thread.sleep(2000);
+			serveur.waitCarte();
+			Thread.sleep(2000);
+			serveur.envoiCarte(HuiCa, 1);
+			Thread.sleep(2000);
+			serveur.envoiCarte(HuiCo, 2);
+			Thread.sleep(2000);
+			
+			
 			
 			System.in.read();
 		} catch (InterruptedException e) {

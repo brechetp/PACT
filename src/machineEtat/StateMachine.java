@@ -209,12 +209,14 @@ public class StateMachine
 			{
 				vci.modeJeu();
 				etat.joueurSuivant(vci);
+				joueurD.sendFinAnnonce();
 				this.state = State.DebutTour;
 			}
 			else /*annonce pas faite*/
 			{
 				etat.joueurSuivant(vci);
 				etat.joueurSuivant(vci);
+				this.premierAJouer = etat.getNumJoueur();
 				this.state = State.Distribution;
 			}
 			break;
@@ -358,6 +360,7 @@ public class StateMachine
 			 etat.setNumJoueur(premierAJouer);
 			 vci.joueurEnCours(premierAJouer);
 			 vci.modeJeu();
+			 joueurD.sendFinAnnonce();
 			 this.state = State.DebutTour;
 			 break;
 		 

@@ -51,4 +51,10 @@ public class JoueurDistant implements JoueurDistantInterface
 		//serveur.envoiPartieTerminer();
 	}
 
+	@Override
+	public void sendFinAnnonce() 
+	{
+		//serveur.envoiFinAnnonce();
+	}
+
 }

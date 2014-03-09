@@ -24,5 +24,8 @@ public interface JoueurDistantInterface
 	
 	//indique que la partie est terminer
 	public void partieTerminer();
+
+	//indique que le mode annonce est fini
+	public void sendFinAnnonce();
 	
 }
