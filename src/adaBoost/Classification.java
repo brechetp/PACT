@@ -36,9 +36,9 @@ public class Classification
 		if (compteur == 60)
 		{
 			determineClasse(this.moyenneVecteur);
-			this.moyenneVecteur = this.nextMoyenneVecteur;
-			this.nextMoyenneVecteur = new double[NOMBRE_DE_FEATURES];
-			compteur = 30;
+			this.moyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES]; //this.nextMoyenneVecteur;
+			//this.nextMoyenneVecteur = new double[NOMBRE_DE_FEATURES];
+			compteur = 0;
 		}
 	}
 	
