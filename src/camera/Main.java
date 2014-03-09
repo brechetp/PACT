@@ -166,14 +166,30 @@ public class Main {
 		  System.out.println(carte.findIn(database));*/
 		
 	
+		Capture.captureFrame("data/test/fond.jpg");
+		Thread.sleep(5000);
+		Capture.captureFrame("data/test/capture.jpg");
+		
+		Image im1 = new Image("data/test/fond.jpg");
+		Image im2 = new Image ("data/test/capture.jpg");
+		
+		BinaryImage bin = im2.difference(im1);
+		
+		BinaryImage bin2 = bin.largestComponent();
+		
+		int[][] coins = bin2.getCorners();
+		
+		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage());
 		
 		
-		 
+		Card[] tab = new Card[]{new Card("data/database/carte25.jpg"), new Card("data/database/carte34.jpg")};
+		
+		CardDatabase database2 = new CardDatabase(tab);
+	
 
-		//Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
-		CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
-		Card carte = new Card("data/database/carte4.jpg");
-		  System.out.println(carte.findIn(database));
+		
+		
+		  System.out.println(carte.findIn(database2));
 
 		/*for (int i =1; i<43; i++){
 			
@@ -183,10 +199,10 @@ public class Main {
 		}
 		Image im = new Image ("data/database/carte1.jpg");
 		
-		BinaryImage bin = new BinaryImage(im.threshold(Image.threshold).cut(50, 50, 535, 789));
+		BinaryImage bin = new BinaryImage(im.threshold(Image.threshold));
 		bin.save("data/testtest.jpg");*/
 		
-		  System.out.print((int) '1'-48);
+		
 				
 				
 		        

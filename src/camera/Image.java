@@ -147,7 +147,7 @@ public class Image {
 			for (int i=0; i<width; i++)
 			{
 				int[] rgbByte = getRgbByte(i,j);
-				if(! isWhite(rgbByte)){
+				if(true){
 					for(int k =0; k<3; k++){
 						average[k] += rgbByte[k];
 					}
@@ -171,7 +171,7 @@ public class Image {
 			for (int i=0; i<width; i++)
 			{
 				int[] rgbByte = getRgbByte(i,j);
-				if (! isWhite(rgbByte)){
+				if (true){
 					for(int k =0; k<3; k++){
 						sigma[k] += Math.pow(rgbByte[k]-average[k],2);
 					}
@@ -425,9 +425,6 @@ public class Image {
 
 	}
 
-	
-	
-	
 }
 
 

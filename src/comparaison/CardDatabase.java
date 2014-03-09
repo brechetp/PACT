@@ -32,6 +32,29 @@ public class CardDatabase {
 		}
 	}
 		
+	public CardDatabase (Card[] tab){
+		
+		size = tab.length;
+		averageTab = new double[size][3];
+		sigmaTab = new double[size][3];
+		this.tab = new Card[size];
+		for(int k = 0; k<size; k++){
+			
+			try {
+				this.tab[k] = tab[k];
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			averageTab[k] = tab[k].getAverage();
+			sigmaTab[k] = tab[k].getSigma();
+		}
+		
+		
+	}
+	
+	
+
 
 	public Card getCard(int k){
 		

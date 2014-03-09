@@ -1,6 +1,7 @@
 package camera;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
+
 import comparaison.CardDatabase;
 
 
@@ -100,7 +101,7 @@ public class Card extends Image{
 		  // comparaison avec chaque carte de la base de donnée	
 			for (int i=0 ; i < size ; i++)
 			{
-				matchTable[i] = compare(database.getCard(i), 2);
+				matchTable[i] = compare(database.getCard(i), 3);
 			}
 			
 		  // détermination du meilleur match	
@@ -150,7 +151,6 @@ public class Card extends Image{
 			return rep;
 			
 		}
-
 		public double[] neighbourPixel(int i, int j, double[] pixel, int nbr){ // retourne le pixel voisin de pixel 
 			
 			double distance = 0 , distanceMin = Integer.MAX_VALUE;
@@ -179,6 +179,20 @@ public class Card extends Image{
 			//prendre garde à rajouter kmin et jmin pour grdes images
 			return res ;
 		}
+		public double normalize(double[] value, double[] average, double[] sigma, int k){
+			
+			return (value[k]-average[k])/sigma[k];
+		}
+		public double normalize(int[] value, double[] average, double[] sigma, int k){
+			
+			return (value[k]-average[k])/sigma[k];
+		}
+		
+		
+		
+		
+
+		
 		
 		
 		public boolean isThereYellow(){
@@ -202,15 +216,7 @@ public class Card extends Image{
 			
 			
 		}
-		public double normalize(double[] value, double[] average, double[] sigma, int k){
-			
-			return (value[k]-average[k])/sigma[k];
-		}
-		public double normalize(int[] value, double[] average, double[] sigma, int k){
-			
-			return (value[k]-average[k])/sigma[k];
-		}
-		
+
 	
 		
 		public String getType(){
