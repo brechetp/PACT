@@ -1,14 +1,40 @@
 package camera;
 
+import com.googlecode.javacv.cpp.opencv_core.IplImage;
+
 import comparaison.CardDatabase;
 
 public class Card extends Image{
 	
+	
 
+	private static final double[] yellow = new double[]{150,200,200};
+	private static final double[] averageYellow = new double[]{163.4125, 247.32, 248.835};
+	private static final double[] sigmaYellow = new double[]{8.154896918416563, 3.0153938382904544, 2.786175694388279};
 	// double [] matchTable = new double [5];
-	private double[] average;
-	private double[] sigma;
-	private String name;
+
+
+	private Image corner;
+
+	
+	
+
+	
+	public Card(IplImage image) throws Exception{
+		
+		super(image);
+		average = new double[3]; // moyenne sur RGB
+		sigma = new double[3]; // ecart type sur RGB
+		if (width != 635 || height != 889){
+			throw new Exception("Ce n'est pas une carte");
+		}
+		corner = this.cut(100, 250);
+
+		
+		computeAverage();
+		computeSigma();
+		
+	}
 	
 	public Card(String fileName) throws Exception{
 		
@@ -19,48 +45,16 @@ public class Card extends Image{
 		if (width != 635 || height != 889){
 			throw new Exception("Ce n'est pas une carte");
 		}
-		int compt = 0;
-		
-		for (int i =0; i<width; i++) // calcul de la moyenne
-		{
-			for (int j=0; j<height; j++)
-			{
-				int[] rgbByte = getRgbByte(i,j);
-				if ((rgbByte[0]+rgbByte[1]+rgbByte[2])/3 < 240){ // pour les pixels non blancs
-					for (int p =0; p<3; p++){
-						average[p] += rgbByte[p];
-					}
-					compt++;
-				}
-				
-			}
-		}
-		
-		for(int p =0; p<3; p++){
-			average[p] = average[p]/(compt);
-		}
-		
-		for (int i =0; i<width; i++) // calcul de l'ecart type
-		{
-			for (int j=0; j<height; j++)
-			{
-				int[] rgbByte = getRgbByte(i,j);
-				if ((rgbByte[0]+rgbByte[1]+rgbByte[2])/3 < 240){
-					for (int p =0; p<3; p++){
-						sigma[p] += Math.pow(getRgbByte(i,j)[p]-average[p], 2);
-					}				
-				}
-				
-			}
-		}	
-		
-		for(int p =0; p<3; p++){
+		corner = this.cut(100,  250);
 
-			sigma[p] = Math.sqrt(sigma[p]/(compt));
-		}
+		
+		computeAverage();
+		computeSigma();
 		
 	}
 	
+
+
 /*
  * 
  * Setters and getters
@@ -82,6 +76,18 @@ public class Card extends Image{
 		return name;
 	}
 	
+	public int getCompt(){
+		
+		return compt;
+	}
+	
+	
+	
+
+
+	
+	
+	
 	public String findIn(CardDatabase database){
 		
 		  int size = database.getSize();
@@ -102,7 +108,7 @@ public class Card extends Image{
 		    {
 		    	double val = 0;
 		    	for(int compt = 0; compt <3; compt++){
-		    		val += Math.pow(max[compt]-matchTable[i][compt], 2);
+		    		val += Math.pow(matchTable[i][compt], 2);
 		    	}
 				if (maxDistance<val) 
 				{
@@ -125,9 +131,11 @@ public class Card extends Image{
 				{
 					rgbByte = getRgbByte(i,j);
 					pixel = new double[3];
-					for(int k =0; k<3; k++){
-						pixel[k] = (rgbByte[k]-average[k])/sigma[k];
-						rep[k] = rep[k] + pixel[k]*card.neighbour(i,j,pixel,nbr)[k] ;
+					if ((rgbByte[0]+rgbByte[1]+rgbByte[2])/3 < 230){
+						for(int k =0; k<3; k++){
+							pixel[k] = (rgbByte[k]-average[k])/sigma[k];
+							rep[k] = rep[k] + pixel[k]*card.neighbourPixel(i,j,pixel,average, sigma, nbr)[k] ;
+						}
 					}
 				}
 			}	
@@ -136,7 +144,7 @@ public class Card extends Image{
 			
 		}
 
-		public double[] neighbour(int i, int j, double[] pixel, int nbr){ // retourne le pixel voisin de pixel 
+		public double[] neighbourPixel(int i, int j, double[] pixel, double[] average, double[] sigma, int nbr){ // retourne le pixel voisin de pixel 
 			
 			double distance = 0 , distanceMin = Integer.MAX_VALUE;
 			double[] res = new double[3];
@@ -147,14 +155,14 @@ public class Card extends Image{
 					distance = 0 ;
 					for(int compt = 0; compt<3; compt++){
 						
-						distance += Math.abs((rgbByte[compt]-average[compt])/sigma[compt] - pixel[compt]);
+						distance += Math.abs(normalize(rgbByte, this.average, this.sigma, compt) -normalize(pixel, average, sigma, compt));
 						
 					}
 					
 						if (distance < distanceMin){
 							for(int compt = 0; compt<3; compt++){
 								
-								res[compt] = Math.abs((rgbByte[compt]-average[compt])/sigma[compt] - pixel[compt]);
+								res[compt] = Math.abs(normalize(rgbByte, this.average, this.sigma, compt) -normalize(pixel, average, sigma, compt));
 								
 							}
 							distanceMin = distance;
@@ -164,11 +172,62 @@ public class Card extends Image{
 			//prendre garde ˆ rajouter kmin et jmin pour grdes images
 			return res ;
 		}
+		
+		
+		public boolean isThereYellow(){
 			
+			float compt = 0;
+			int k = 0;
+			while( compt/(height*width) < 0.1 && k<height*width){
+				
+				int[] rgbByte = getRgbByte(k);
+				/*double distance = 0;
+				for(int p=0; p<3; p++){
+					distance += Math.pow(rgbByte[p]-yellow[p], 2);
+				}
+				if (distance < threshold)
+					res = true;*/
+				if (rgbByte[0] < 180 && rgbByte[1] > 240 && rgbByte[2] > 240)
+					compt++;
+				k++;
+			}
+			return compt/((float) height*width) >= 0.1;
+			
+			
+		}
+		public double normalize(double[] value, double[] average, double[] sigma, int k){
+			
+			return (value[k]-average[k])/sigma[k];
+		}
+		public double normalize(int[] value, double[] average, double[] sigma, int k){
+			
+			return (value[k]-average[k])/sigma[k];
+		}
 		
+		public String getColor(){
+			
+			double[] average = corner.getAverage();
+			if (average[2] > 200)
+				 return "1";
+			else
+				return "0";
+			
+			 
+			
+		}
 		
-		
-		
+		public String getType(String string){
+			
+			if (compt < 80000) // c'est un As
+				return string+"0";
+			if (compt >= 80000 && compt < 200000) // c'est un 7, un 8 ou un 9
+				return string+"1";
+			else
+				return string+"2";
+			
+		}
+			
+
 	
 
 }

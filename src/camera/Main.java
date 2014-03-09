@@ -158,10 +158,20 @@ public class Main {
 		
 	
 		//Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
-		 CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
+		 /*CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
 		 @SuppressWarnings("unused")
 		Card carte = new Card("data/database/carte4.jpg");
-		  System.out.println(carte.findIn(database));
+		  System.out.println(carte.findIn(database));*/
+		
+		for (int i =1; i<43; i++){
+			
+			Card carte = new Card("data/database/carte"+i+".jpg");
+			System.out.println(i+" : "+carte.getType(carte.getColor()));
+			
+			
+		}
+		
+		
 		 
 				
 				
