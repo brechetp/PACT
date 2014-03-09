@@ -11,7 +11,7 @@ public class IUGMain {
 			vc.joueurEnCours(3);
 			vc.contreCoinche();
 			vc.afficheAnnonce("100", "carreau");
-			vc.afficherCarte("astrefle");
+			vc.afficherCarte("7trefle");
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -20,7 +20,27 @@ public class IUGMain {
 			}
 			vc.afficheAnnonce("100", "carreau");
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			vc.valideValeurAnnonce();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			vc.actualiseAnnonce("100", "coeur");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

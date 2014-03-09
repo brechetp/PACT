@@ -108,7 +108,6 @@ public class ViewController implements ViewControllerInterface
 		if (s.equals("ascarreau")){
 			k = 32;
 		}
-		
 		fen.getPan().setI(k);
 		fen.repaint();
 	}

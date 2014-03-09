@@ -16,7 +16,7 @@ public class Fenetre extends JFrame{
 	    this.setSize(1024, 768);
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-	    this.setExtendedState(Frame.MAXIMIZED_BOTH);
+	    //this.setExtendedState(Frame.MAXIMIZED_BOTH);
 	    //this.setResizable(false);
 	    this.setUndecorated(true);
 	    this.setVisible(true);
