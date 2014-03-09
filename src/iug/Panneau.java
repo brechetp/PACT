@@ -167,12 +167,12 @@ public class Panneau extends JPanel {
 		    	
 		    }
 		    else if (k>0 && k<5){
-		    	g.setColor(new Color(255, 0, 0));
+		    	g.setColor(new Color(204, 0, 51));
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		    	g.drawString("Le joueur " + k + " a coinché !!!!!", 300, 400);
 		    }
 		    else if (k==5){
-		    	g.setColor(new Color(255, 0, 0));
+		    	g.setColor(new Color(204, 0, 51));
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		    	g.drawString("CONTRE-COINCHE !!!", 320, 400);
 		    }
@@ -186,12 +186,12 @@ public class Panneau extends JPanel {
 		    	g.drawString("PARTIE TERMINEE", 180, 400);
 		    }
 		    if (j!=0 && h==0){
-		    	g.setColor(new Color(255,255,0));
+		    	g.setColor(new Color(0,51,153));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("C'est au joueur " + j + " de jouer !", 350 , 600);
 		    }
 		    if (j!=0 && h==1){
-		    	g.setColor(new Color(255,255,0));
+		    	g.setColor(new Color(0,153,153));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("C'est au joueur " + j + " d'annoncer !", 350 , 600);
 		    }
@@ -199,18 +199,18 @@ public class Panneau extends JPanel {
 		    	
 		    }
 		    if (y!=0){
-		    	g.setColor(new Color(255,255,0));
+		    	g.setColor(new Color(255,153,51));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("Annonce en cours : ", 300 , 650);
 		    	if(y==1){
 		    		g.setColor(new Color(255,0,0));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 			    	g.drawString(s1, 540 , 650);
-			    	g.setColor(new Color(255,255,0));
+			    	g.setColor(new Color(255,153,51));
 			    	g.drawString(s2, 650 , 650);
 		    	}
 		    	if(y==2){
-		    		g.setColor(new Color(255,255,0));
+		    		g.setColor(new Color(255,153,51));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 			    	g.drawString(s1, 540 , 650);
 			    	g.setColor(new Color(255,0,0));
