@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Panneau extends JPanel {
@@ -57,12 +56,11 @@ public class Panneau extends JPanel {
 	public void paintComponent(Graphics g){
 		
 		try {
-			JLabel label = new JLabel("Le Joueur " + k + " a coinché !!!");
 			if (i>32){
 				i=0;
 			}
 		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN.png"));
-		    g.drawImage(img, 0, 0, this);
+		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    if(i==1){
 		    	  g.drawImage(carte1.getImage(), 460, 250, this);
 		    }
