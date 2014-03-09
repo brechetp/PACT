@@ -159,14 +159,14 @@ public class Main {
 		
 		
 
-		//Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
+		Capture.database(32, 32, 20, 1, "data/capture/carte", "data/database/database2/carte");
 		 /*CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
 		 @SuppressWarnings("unused")
 		Card carte = new Card("data/database/carte4.jpg");
 		  System.out.println(carte.findIn(database));*/
 		
 	
-		Capture.captureFrame("data/test/fond.jpg");
+		/*Capture.captureFrame("data/test/fond.jpg");
 		Thread.sleep(5000);
 		Capture.captureFrame("data/test/capture.jpg");
 		
