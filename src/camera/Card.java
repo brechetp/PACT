@@ -1,6 +1,7 @@
 package camera;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
+import comparaison.CardDatabase;
 
 
 public class Card extends Image{
@@ -225,7 +226,7 @@ public class Card extends Image{
 			int nbr = getComponentsNumber (6000);
 			if (nbr ==1)
 				string = string+"0";
-			if (nbr >= 7 && nbr <= 10)
+			else if (nbr >= 7 && nbr <= 10)
 				string = string+(nbr-6);
 			else 
 				string = string+"5";

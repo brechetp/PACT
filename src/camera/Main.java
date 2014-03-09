@@ -20,10 +20,9 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.*;
 import com.googlecode.javacv.cpp.opencv_core.CvMat;
 
-<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
+
 import comparaison.CardDatabase;
-=======
->>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
+
 import comparaison.Comparaison;
 import static com.googlecode.javacv.cpp.opencv_highgui.*;
 
@@ -159,34 +158,25 @@ public class Main {
 		cvSaveImage("data/database/resample/resample1.jpg", resample1.getRgbImage());  	*/
 		
 		
-	
-<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
+
 		//Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
 		 /*CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
 		 @SuppressWarnings("unused")
 		Card carte = new Card("data/database/carte4.jpg");
 		  System.out.println(carte.findIn(database));*/
 		
-		for (int i =1; i<43; i++){
-			
-			Card carte = new Card("data/database/carte"+i+".jpg");
-			System.out.println(i+" : "+carte.getType(carte.getColor()));
-			
-			
-		}
+	
 		
 		
 		 
-=======
+
 		// Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
 		
 
 		for (int i =1; i<43; i++){
 			
 			Card carte = new Card("data/database/carte"+i+".jpg");
-			System.out.println(i+" : "+carte.getComponentsNumber(6000)+" "+ carte.getCompt());
-			BinaryImage bin = new BinaryImage(carte.threshold(Image.threshold).cut(50, 50, 535, 789));
-			bin.save("data/test"+i+".jpg");
+			System.out.println(i+" : "+carte.getType(carte.getColor()));
 			
 		}
 		Image im = new Image ("data/database/carte1.jpg");
@@ -195,7 +185,6 @@ public class Main {
 		bin.save("data/testtest.jpg");
 		
 
->>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 				
 				
 		        
