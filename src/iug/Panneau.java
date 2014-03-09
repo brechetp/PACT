@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Panneau extends JPanel {
@@ -57,12 +56,11 @@ public class Panneau extends JPanel {
 	public void paintComponent(Graphics g){
 		
 		try {
-			JLabel label = new JLabel("Le Joueur " + k + " a coinché !!!");
 			if (i>32){
 				i=0;
 			}
-		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN.png"));
-		    g.drawImage(img, 0, 0, this);
+		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN2.png"));
+		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    if(i==1){
 		    	  g.drawImage(carte1.getImage(), 460, 250, this);
 		    }
@@ -167,12 +165,12 @@ public class Panneau extends JPanel {
 		    	
 		    }
 		    else if (k>0 && k<5){
-		    	g.setColor(new Color(255, 0, 0));
+		    	g.setColor(new Color(204, 0, 51));
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		    	g.drawString("Le joueur " + k + " a coinché !!!!!", 300, 400);
 		    }
 		    else if (k==5){
-		    	g.setColor(new Color(255, 0, 0));
+		    	g.setColor(new Color(204, 0, 51));
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		    	g.drawString("CONTRE-COINCHE !!!", 320, 400);
 		    }
@@ -186,12 +184,12 @@ public class Panneau extends JPanel {
 		    	g.drawString("PARTIE TERMINEE", 180, 400);
 		    }
 		    if (j!=0 && h==0){
-		    	g.setColor(new Color(255,255,0));
+		    	g.setColor(new Color(0,51,153));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("C'est au joueur " + j + " de jouer !", 350 , 600);
 		    }
 		    if (j!=0 && h==1){
-		    	g.setColor(new Color(255,255,0));
+		    	g.setColor(new Color(0,153,153));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("C'est au joueur " + j + " d'annoncer !", 350 , 600);
 		    }
@@ -199,18 +197,18 @@ public class Panneau extends JPanel {
 		    	
 		    }
 		    if (y!=0){
-		    	g.setColor(new Color(255,255,0));
+		    	g.setColor(new Color(255,153,51));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 		    	g.drawString("Annonce en cours : ", 300 , 650);
 		    	if(y==1){
 		    		g.setColor(new Color(255,0,0));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 			    	g.drawString(s1, 540 , 650);
-			    	g.setColor(new Color(255,255,0));
+			    	g.setColor(new Color(255,153,51));
 			    	g.drawString(s2, 650 , 650);
 		    	}
 		    	if(y==2){
-		    		g.setColor(new Color(255,255,0));
+		    		g.setColor(new Color(255,153,51));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 			    	g.drawString(s1, 540 , 650);
 			    	g.setColor(new Color(255,0,0));

@@ -230,7 +230,6 @@ public class PremierTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-	}         
-              
+	}               
 }             
               
