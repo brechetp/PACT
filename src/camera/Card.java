@@ -21,36 +21,41 @@ public class Card extends Image{
 		}
 		int compt = 0;
 		
-		for (int i =0; i<width; i++)
+		for (int i =0; i<width; i++) // calcul de la moyenne
 		{
 			for (int j=0; j<height; j++)
 			{
 				int[] rgbByte = getRgbByte(i,j);
-				if ((rgbByte[0]+rgbByte[1]+rgbByte[2])/3 < 240){
+				if ((rgbByte[0]+rgbByte[1]+rgbByte[2])/3 < 240){ // pour les pixels non blancs
 					for (int p =0; p<3; p++){
-						average[p] += getRgbByte(i, j)[p];
+						average[p] += rgbByte[p];
 					}
 					compt++;
 				}
 				
 			}
-		}	
+		}
 		
-		for (int i =0; i<width; i++)
+		for(int p =0; p<3; p++){
+			average[p] = average[p]/(compt);
+		}
+		
+		for (int i =0; i<width; i++) // calcul de l'ecart type
 		{
 			for (int j=0; j<height; j++)
 			{
 				int[] rgbByte = getRgbByte(i,j);
 				if ((rgbByte[0]+rgbByte[1]+rgbByte[2])/3 < 240){
 					for (int p =0; p<3; p++){
-						average[p] += getRgbByte(i, j)[p];
-					}				}
+						sigma[p] += Math.pow(getRgbByte(i,j)[p]-average[p], 2);
+					}				
+				}
 				
 			}
 		}	
 		
 		for(int p =0; p<3; p++){
-			average[p] = average[p]/(compt);
+
 			sigma[p] = Math.sqrt(sigma[p]/(compt));
 		}
 		

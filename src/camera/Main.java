@@ -161,7 +161,7 @@ public class Main {
 		 CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
 		 @SuppressWarnings("unused")
 		Card carte = new Card("data/database/carte4.jpg");
-		  // System.out.println(carte.findIn(database));
+		  System.out.println(carte.findIn(database));
 		 
 				
 				
