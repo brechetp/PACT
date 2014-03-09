@@ -23,14 +23,14 @@ public class LeapMotionMain {
 	public static void main(String[] args) throws InterruptedException {
 		
 		// Création d'une fenêtre pour un usage plus convivial
-		KListener kk = new KListener();
+		/*KListener kk = new KListener();
 		JFrame fenetre = new JFrame();
 		fenetre.addKeyListener(kk);
 		fenetre.setVisible(true);
 		fenetre.setSize(100, 50);
 		fenetre.setLocation(25, 25);
 		fenetre.setTitle("Leap Motion Control Panel");
-		fenetre.setResizable(false);
+		fenetre.setResizable(false);*/
 		
 		
 		/*try {

@@ -56,7 +56,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci); //joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant); //joue la carte et passe au joueur suivant
 				this.state = State.DebutTour1;
 			}
 			break;
@@ -67,7 +67,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci);	//joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
 				this.state = State.DebutTour2;
 			}
 			break;
@@ -78,7 +78,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci);	//joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
 				this.state = State.DebutTour3;
 			}
 			break;
@@ -89,7 +89,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci);	//joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
 				this.state = State.DebutTour4;
 			}
 			break;
@@ -100,7 +100,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci);	//joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
 				this.state = State.FinDebutTour;
 			}
 			break;
@@ -113,7 +113,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci);	//joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
 				this.state = State.SecondTour1;
 			}
 			break;
@@ -124,7 +124,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci);	//joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
 				this.state = State.SecondTour2;
 			}
 			break;
@@ -135,7 +135,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci);	//joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
 				this.state = State.SecondTour3;
 			}
 			break;
@@ -146,7 +146,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci);	//joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
 				this.state = State.SecondTour4;
 			}
 			break;
@@ -178,7 +178,7 @@ public class StateMachine
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
 				else
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci); //joue la carte et passe au joueur suivant
+				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant); //joue la carte et passe au joueur suivant
 				this.state = State.ResteDesTours;
 			}
 			break;
@@ -194,29 +194,45 @@ public class StateMachine
 		switch(this.state) 
 		{
 		case Annonce:
+			if (numJoueurDistant != etat.getNumJoueur())
+			{
+				joueurD.sendAnnonce(null, etat.getNumJoueur());
+			}
 			etat.joueurSuivant(vci,joueurD,"annonce",numJoueurDistant);
 			this.state = State.AnnoncePasse1;
 			break;
 		case AnnoncePasse1:
-			etat.joueurSuivant(vci);
+			if (numJoueurDistant != etat.getNumJoueur())
+			{
+				joueurD.sendAnnonce(null, etat.getNumJoueur());
+			}
+			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
 			this.state = State.AnnoncePasse2;
 			break;
 		case AnnoncePasse2:
-			etat.joueurSuivant(vci);
+			if (numJoueurDistant != etat.getNumJoueur())
+			{
+				joueurD.sendAnnonce(null, etat.getNumJoueur());
+			}
+			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
 			this.state = State.AnnoncePasse3;
 			break;
 		case AnnoncePasse3:
 			if (etat.annonceFaite())
 			{
+				if (numJoueurDistant != etat.getNumJoueur())
+				{
+					joueurD.sendAnnonce(null, etat.getNumJoueur());
+				}
 				vci.modeJeu();
-				etat.joueurSuivant(vci);
+				etat.joueurSuivant(vci,joueurD, "jeu", numJoueurDistant);
 				joueurD.sendFinAnnonce();
 				this.state = State.DebutTour;
 			}
 			else /*annonce pas faite*/
 			{
-				etat.joueurSuivant(vci);
-				etat.joueurSuivant(vci);
+				etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
+				etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
 				this.premierAJouer = etat.getNumJoueur();
 				this.state = State.Distribution;
 			}
@@ -272,8 +288,9 @@ public class StateMachine
 		 
 		 case AnnonceAFaire2:
 			 etat.valideAnnonce(vci);
+			 joueurD.sendAnnonce(etat.getAnnonce(), etat.getNumJoueur());
 			 this.valeurAnnonceMax=etat.valeurAnnonce();
-			 etat.joueurSuivant(vci);
+			 etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
 			 this.state = State.AnnoncePasse1;
 			 break;
 		 
@@ -462,7 +479,7 @@ public class StateMachine
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
-			etat.joueurSuivant(vci);
+			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
 			this.state= State.AnnoncePasse1;
 			break;
 			
@@ -470,7 +487,7 @@ public class StateMachine
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
-			etat.joueurSuivant(vci);
+			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
 			this.state= State.AnnoncePasse1;
 			break;
 			
@@ -478,7 +495,7 @@ public class StateMachine
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
-			etat.joueurSuivant(vci);
+			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
 			this.state= State.AnnoncePasse1;
 			break;
 			
@@ -486,7 +503,7 @@ public class StateMachine
 			etat.setAnnonce(annonce);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
-			etat.joueurSuivant(vci);
+			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
 			this.state= State.AnnoncePasse1;
 			break;
 			

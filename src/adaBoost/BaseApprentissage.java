@@ -136,7 +136,7 @@ public class BaseApprentissage {
 			}
 			
 			
-			ArrayList<File> tableau_fichiers_test = new ArrayList<File>() ;
+			/**ArrayList<File> tableau_fichiers_test = new ArrayList<File>() ;
 			
 			tableau_fichiers_test.add(new File("./Gestes/Geste0 (passer)/Geste0 Tim (passer).ser"));
 			tableau_fichiers_test.add(new File("./Gestes/Geste1 (retour)/Geste1 Benjamin (retour).ser"));
@@ -201,9 +201,9 @@ public class BaseApprentissage {
 							//						+ descripteurs_test[4]
 							//								* descripteurs_test[4]); //rotation
 						}
-						if (descripteurs_test[0]>1) {
+						if (descripteurs_test[0]>1) { **/
 							/* Informations de la 2eme main */
-							double X_normale2_test = hyk_test.get(i).get(j)
+						/**	double X_normale2_test = hyk_test.get(i).get(j)
 									.get(41);
 							double Y_normale2_test = hyk_test.get(i).get(j)
 									.get(42);
@@ -250,14 +250,13 @@ public class BaseApprentissage {
 					compteur_test++ ;
 	    		}
 				ois_test.close() ;
-			}
+			}**/
     	}
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 			System.out.println("boo");
 		}
-		
 		
 		mainada2 test = new mainada2();
 		return test.main(base,base_test);

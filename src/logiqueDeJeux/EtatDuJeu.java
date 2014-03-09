@@ -37,7 +37,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		return annonce.getAtout();
 	}
 
-	public void joue(CarteInterface carte,ViewControllerInterface vci) 
+	public void joue(CarteInterface carte,ViewControllerInterface vci,JoueurDistantInterface joueurD, int numJoueurDistant) 
 	{
 		playedCard.ajoute(carte);
 		cardOnTable.ajoute(carte);
@@ -45,7 +45,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			TeamPair.ajoute(carte, numJoueur);
 		else
 			TeamImpair.ajoute(carte, numJoueur);
-		this.joueurSuivant(vci);
+		this.joueurSuivant(vci, joueurD, "jeu", numJoueurDistant);
 	}
 
 	public boolean valide(CarteInterface carte) 
@@ -69,19 +69,6 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		return annonce!=null&&annonce.getTeam()!=-1;
 	}
 
-	public void joueurSuivant(ViewControllerInterface vci,JoueurDistant joueurD,String string,int numJoueurD) 
-	{
-		this.numJoueur = (numJoueur%4) +1;
-		vci.joueurEnCours(numJoueur);
-		if (numJoueur == numJoueurD)
-		{
-			if (string.equals(annonce))
-				joueurD.waitAnnonce();
-			else
-				joueurD.waitCard();
-		}
-	}
-	
 	public void finpli(ViewControllerInterface vci) 
 	{
 		 int numTeam = this.numTeamCarte(cardOnTable.getPlusFort());
@@ -113,6 +100,19 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	}
 
 
+
+	public void joueurSuivant(ViewControllerInterface vci,JoueurDistantInterface joueurD,String string,int numJoueurD) 
+	{
+		this.numJoueur = (numJoueur%4) +1;
+		vci.joueurEnCours(numJoueur);
+		if (numJoueur == numJoueurD)
+		{
+			if (string.equals(annonce))
+				joueurD.waitAnnonce();
+			else
+				joueurD.waitCard();
+		}
+	}
 
 	public void mancheTerminer() 
 	{
@@ -270,5 +270,10 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	public void setAnnonce(AnnonceInterface annonce) 
 	{
 		this.annonce=annonce;
+	}
+	
+	public AnnonceInterface getAnnonce ()
+	{
+		return annonce;
 	}
 }

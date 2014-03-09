@@ -36,7 +36,7 @@ public class mainada2 {
 		ClassiFinal[] classi = new ClassiFinal[nbGeste];
 		ClassiFinauxListe tab = new ClassiFinauxListe(classi);
 		
-		try {
+		/**try {
 			FileOutputStream fileOut = new FileOutputStream("./adaboost/Classificateurs Finaux.ser");
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(tab);;
@@ -51,7 +51,7 @@ public class mainada2 {
 		catch (IOException e) 
 		{
 			e.printStackTrace();
-		}
+		}**/
 		
 		//creation des classi
 		for (int i=0;i<nbGeste;i++)
@@ -67,7 +67,7 @@ public class mainada2 {
 			classi[i].normaliser();
 		}
 		
-		int[] Ysortie = new int[43];
+		/*int[] Ysortie = new int[43];
 		for(int j=0;j<Y_test.length;j++)
 		{
 			int indiceMax=-1;
@@ -92,7 +92,7 @@ public class mainada2 {
 		{
 			System.out.print("Ytest ="+Y_test[j]+"   ");
 			System.out.println("Ysortie ="+Ysortie[j]);
-		}
+		}*/
 		
 		return classi;
 	}

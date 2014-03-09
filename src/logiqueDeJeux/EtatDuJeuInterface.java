@@ -14,7 +14,7 @@ public interface EtatDuJeuInterface
 	public boolean annonceFaite();
 	
 	//Ajoute une nouvelle carte jouer
-	public void joue(CarteInterface carte, ViewControllerInterface vci);
+	public void joue(CarteInterface carte, ViewControllerInterface vci, JoueurDistantInterface joueurD, int i);
 	
 	//non jouer et valide. Renvoi true si c'est le cas
 	public boolean valide(CarteInterface carte);
@@ -63,4 +63,7 @@ public interface EtatDuJeuInterface
 
 	//met la bonne valeur de l'annonce
 	public void setAnnonce(AnnonceInterface annonce);
+
+
+	public AnnonceInterface getAnnonce();
 }
