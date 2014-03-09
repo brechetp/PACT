@@ -42,6 +42,7 @@ public class StateMachine
 				vci.modeAnnonce();
 				vci.joueurEnCours(premierAJouer);
 				System.out.println("Distribution Terminer");
+				//test si joueur distant doit annoncer en premier
 			}
 			else
 				this.state = State.Distribution;
@@ -193,7 +194,7 @@ public class StateMachine
 		switch(this.state) 
 		{
 		case Annonce:
-			etat.joueurSuivant(vci);
+			etat.joueurSuivant(vci,joueurD,"annonce",numJoueurDistant);
 			this.state = State.AnnoncePasse1;
 			break;
 		case AnnoncePasse1:

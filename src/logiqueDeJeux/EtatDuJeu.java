@@ -1,5 +1,6 @@
 package logiqueDeJeux;
 
+import machineEtat.StateMachine;
 import iug.ViewControllerInterface;
 import structure.*;
 
@@ -68,11 +69,17 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		return annonce!=null&&annonce.getTeam()!=-1;
 	}
 
-	public void joueurSuivant(ViewControllerInterface vci) 
+	public void joueurSuivant(ViewControllerInterface vci,JoueurDistant joueurD,String string,int numJoueurD) 
 	{
-		//Appel au joueur distant
 		this.numJoueur = (numJoueur%4) +1;
 		vci.joueurEnCours(numJoueur);
+		if (numJoueur == numJoueurD)
+		{
+			if (string.equals(annonce))
+				joueurD.waitAnnonce();
+			else
+				joueurD.waitCard();
+		}
 	}
 	
 	public void finpli(ViewControllerInterface vci) 

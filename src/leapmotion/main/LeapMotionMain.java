@@ -20,7 +20,7 @@ import com.leapmotion.leap.Controller;
 
 public class LeapMotionMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		// Création d'une fenêtre pour un usage plus convivial
 		KListener kk = new KListener();
@@ -140,13 +140,21 @@ public class LeapMotionMain {
 		
 //Distribution
 		belote.nouvelleCarte(ValCaEvent);
+		Thread.sleep(100);
 		belote.nouvelleCarte(NeuCaEvent);
+		Thread.sleep(100);
 		belote.nouvelleCarte(RenPiEvent);
+		Thread.sleep(100);
 		belote.nouvelleCarte(NeuPiEvent);
+		Thread.sleep(100);
 		belote.nouvelleCarte(AsTrEvent);
+		Thread.sleep(100);
 		belote.nouvelleCarte(AsCoEvent);
+		Thread.sleep(100);
 		belote.nouvelleCarte(ValCoEvent);
+		Thread.sleep(100);
 		belote.nouvelleCarte(DixCoEvent);
+		Thread.sleep(100);
         
         try {
             System.in.read();
