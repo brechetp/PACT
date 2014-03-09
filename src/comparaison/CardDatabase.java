@@ -32,7 +32,7 @@ public class CardDatabase {
 		}
 	}
 		
-	public CardDatabase (Card[] tab){
+	public CardDatabase (Image[] tab){
 		
 		size = tab.length;
 		averageTab = new double[size][3];
@@ -41,7 +41,9 @@ public class CardDatabase {
 		for(int k = 0; k<size; k++){
 			
 			try {
-				this.tab[k] = tab[k];
+				this.tab[k] = new Card(tab[k].getRgbImage());
+				this.tab[k].computeAverage();
+				this.tab[k].computeSigma();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -56,7 +58,7 @@ public class CardDatabase {
 	
 
 
-	public Card getCard(int k){
+	public Image getCard(int k){
 		
 		return tab[k];
 	}

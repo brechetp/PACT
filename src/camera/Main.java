@@ -182,14 +182,14 @@ public class Main {
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage());
 		
 		
-		Card[] tab = new Card[]{new Card("data/database/carte25.jpg"), new Card("data/database/carte34.jpg")};
+		Image[] tab = new Image[]{new Card("data/database/carte25.jpg").getCorner(), new Card("data/database/carte34.jpg").getCorner()};
 		
-		CardDatabase database2 = new CardDatabase(tab);
+		CardDatabase database3 = new CardDatabase(tab);
 	
 
 		
 		
-		  System.out.println(carte.findIn(database2));
+		  System.out.println(carte.findIn(database3));
 
 		/*for (int i =1; i<43; i++){
 			

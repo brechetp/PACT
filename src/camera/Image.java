@@ -28,6 +28,7 @@ public class Image {
 	protected double[] average = null;
 	protected double[] sigma = null;
 
+	protected Image corner;
 	
 	
 	protected String name;
@@ -197,6 +198,11 @@ public class Image {
 		if (sigma == null)
 			computeSigma();
 		return sigma;
+	}
+	
+	public Image getCorner(){
+		
+		return corner;
 	}
 	
 
@@ -424,6 +430,79 @@ public class Image {
 		return res;
 
 	}
+	
+	/*
+	 * 
+	 * 
+	 * 
+	 */
+	
+	public double[] compare(Image card, int nbr){ // (2*nbr+1)^2 est le nombre de voisins 
+		
+		double[] rep =new double[3];
+		double[] pixel = new double[3];
+		int[] rgbByte;
+		
+
+		for (int j =0; j<height; j++)
+		{
+			for (int i=0; i<width; i++)
+			{
+				rgbByte = getRgbByte(i,j);
+				pixel = new double[3];
+				for(int k =0; k<3; k++){
+					pixel[k] = normalize(rgbByte, average, sigma, k);
+				}
+				double[] neighbour = card.neighbourPixel(i, j, pixel, nbr);
+				for(int k =0; k<3; k++){
+					rep[k] = rep[k] + pixel[k]*neighbour[k];
+				} 
+				
+			}
+			
+		}	
+		//System.out.println(rep);
+		return rep;
+		
+	}
+	public double[] neighbourPixel(int i, int j, double[] pixel, int nbr){ // retourne le pixel voisin de pixel 
+		
+		double distance = 0 , distanceMin = Integer.MAX_VALUE;
+		double res[] = new double[3];
+		for(int p = Math.max(0, j-nbr); p <= Math.min(height-1, j+nbr); p++){
+			for(int n = Math.max(0, i-nbr); n <= Math.min(width-1,  i+nbr); n++){
+				
+				int[] rgbByte = getRgbByte(n,p); // Byte de la carte dans la db
+				distance = 0 ;
+				for(int compt = 0; compt<3; compt++){
+					
+					distance += Math.abs(normalize(rgbByte, average, sigma, compt) -pixel[compt]);
+					
+				}
+				
+					if (distance < distanceMin){
+						for(int compt = 0; compt<3; compt++){
+							
+							res[compt] = Math.abs(normalize(rgbByte, average, sigma, compt));
+							
+						}
+						distanceMin = distance;
+					}
+				}
+			}
+		//prendre garde ˆ rajouter kmin et jmin pour grdes images
+		return res ;
+	}
+	public double normalize(double[] value, double[] average, double[] sigma, int k){
+		
+		return (value[k]-average[k])/sigma[k];
+	}
+	public double normalize(int[] value, double[] average, double[] sigma, int k){
+		
+		return (value[k]-average[k])/sigma[k];
+	}
+	
+	
 
 }
 

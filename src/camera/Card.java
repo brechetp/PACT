@@ -15,7 +15,7 @@ public class Card extends Image{
 	// double [] matchTable = new double [5];
 
 
-	private Image corner;
+
 
 	
 	
@@ -26,9 +26,7 @@ public class Card extends Image{
 		super(image);
 		average = new double[3]; // moyenne sur RGB
 		sigma = new double[3]; // ecart type sur RGB
-		if (width != 635 || height != 889){
-			throw new Exception("Ce n'est pas une carte");
-		}
+	
 
 		corner = this.cut(0,0,100, 250);
 
@@ -45,9 +43,7 @@ public class Card extends Image{
 		name = fileName;
 		average = new double[3]; // moyenne sur RGB
 		sigma = new double[3]; // ecart type sur RGB
-		if (width != 635 || height != 889){
-			throw new Exception("Ce n'est pas une carte");
-		}
+		
 
 		corner = this.cut(0,0, 100,  250);
 
@@ -85,7 +81,10 @@ public class Card extends Image{
 		
 		return compt;
 	}
-	
+	public Image getCorner(){
+		
+		return corner;
+	}
 	
 	
 
@@ -101,7 +100,7 @@ public class Card extends Image{
 		  // comparaison avec chaque carte de la base de donnée	
 			for (int i=0 ; i < size ; i++)
 			{
-				matchTable[i] = compare(database.getCard(i), 3);
+				matchTable[i] = corner.compare(database.getCard(i).getCorner(), 3);
 			}
 			
 		  // détermination du meilleur match	
@@ -121,71 +120,6 @@ public class Card extends Image{
 				}
 			}
 			return database.getCard(imax).getName();
-		}
-		
-		public double[] compare(Card card, int nbr){ // (2*nbr+1)^2 est le nombre de voisins 
-			
-			double[] rep =new double[3];
-			double[] pixel = new double[3];
-			int[] rgbByte;
-			
-	
-			for (int j =0; j<height; j++)
-			{
-				for (int i=0; i<width; i++)
-				{
-					rgbByte = getRgbByte(i,j);
-					pixel = new double[3];
-					for(int k =0; k<3; k++){
-						pixel[k] = normalize(rgbByte, average, sigma, k);
-					}
-					double[] neighbour = card.neighbourPixel(i, j, pixel, nbr);
-					for(int k =0; k<3; k++){
-						rep[k] = rep[k] + pixel[k]*neighbour[k];
-					} 
-					
-				}
-				
-			}	
-			//System.out.println(rep);
-			return rep;
-			
-		}
-		public double[] neighbourPixel(int i, int j, double[] pixel, int nbr){ // retourne le pixel voisin de pixel 
-			
-			double distance = 0 , distanceMin = Integer.MAX_VALUE;
-			double res[] = new double[3];
-			for(int p = Math.max(0, j-nbr); p <= Math.min(height-1, j+nbr); p++){
-				for(int n = Math.max(0, i-nbr); n <= Math.min(width-1,  i+nbr); n++){
-					
-					int[] rgbByte = getRgbByte(n,p); // Byte de la carte dans la db
-					distance = 0 ;
-					for(int compt = 0; compt<3; compt++){
-						
-						distance += Math.abs(normalize(rgbByte, average, sigma, compt) -pixel[compt]);
-						
-					}
-					
-						if (distance < distanceMin){
-							for(int compt = 0; compt<3; compt++){
-								
-								res[compt] = Math.abs(normalize(rgbByte, average, sigma, compt));
-								
-							}
-							distanceMin = distance;
-						}
-					}
-				}
-			//prendre garde à rajouter kmin et jmin pour grdes images
-			return res ;
-		}
-		public double normalize(double[] value, double[] average, double[] sigma, int k){
-			
-			return (value[k]-average[k])/sigma[k];
-		}
-		public double normalize(int[] value, double[] average, double[] sigma, int k){
-			
-			return (value[k]-average[k])/sigma[k];
 		}
 		
 		
