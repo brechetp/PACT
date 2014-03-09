@@ -108,18 +108,27 @@ public class PremierTest {
 			belote.nouveauGeste(passer); //joueur 2 passe
 			Thread.sleep(1000);
 			belote.nouveauGeste(accepter);
+			Thread.sleep(1000);
 			belote.nouveauGeste(accepter);
+			Thread.sleep(1000);
 			belote.nouveauGeste(passer);
+			Thread.sleep(1000);
 			belote.nouveauGeste(passer);
+			Thread.sleep(1000);
 			belote.nouveauGeste(accepter); //joueur 3 prend a 80 pique
 			Thread.sleep(1000);
 			belote.nouveauGeste(passer); //joueur 4 passe
 			Thread.sleep(1000);
 			belote.nouveauGeste(accepter);
+			Thread.sleep(1000);
 			belote.nouveauGeste(passer);
+			Thread.sleep(1000);
 			belote.nouveauGeste(accepter);
+			Thread.sleep(1000);
 			belote.nouveauGeste(passer);
+			Thread.sleep(1000);
 			belote.nouveauGeste(passer);
+			Thread.sleep(1000);
 			belote.nouveauGeste(accepter); // joueur 1 prend a 100 carreau
 			Thread.sleep(1000);
 			belote.nouveauGeste(passer); //Joueur 2 passer
