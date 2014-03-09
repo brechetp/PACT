@@ -104,19 +104,19 @@ public class Card extends Image{
 			}
 			
 		  // détermination du meilleur match	
-		    double[] max = new double[3];
+		    
 		    double maxDistance = 0;
 		    int imax = 0;
 		    
 		    for (int i=0 ; i < size ; i++)
 		    {
-		    	double val = 0;
+		    	double norme = 0;
 		    	for(int compt = 0; compt <3; compt++){
-		    		val += Math.pow(matchTable[i][compt], 2);
+		    		norme += Math.pow(matchTable[i][compt], 2);
 		    	}
-				if (maxDistance<val) 
+				if (maxDistance<norme) 
 				{
-					imax = i; max = matchTable[i]; maxDistance = val;
+					imax = i; maxDistance = norme;
 				}
 			}
 			return database.getCard(imax).getName();
@@ -135,23 +135,26 @@ public class Card extends Image{
 				{
 					rgbByte = getRgbByte(i,j);
 					pixel = new double[3];
-					if ((rgbByte[0]+rgbByte[1]+rgbByte[2])/3 < 230){
-						for(int k =0; k<3; k++){
-							pixel[k] = (rgbByte[k]-average[k])/sigma[k];
-							rep[k] = rep[k] + pixel[k]*card.neighbourPixel(i,j,pixel,average, sigma, nbr)[k] ;
-						}
+					for(int k =0; k<3; k++){
+						pixel[k] = normalize(rgbByte, average, sigma, k);
 					}
+					double[] neighbour = card.neighbourPixel(i, j, pixel, nbr);
+					for(int k =0; k<3; k++){
+						rep[k] = rep[k] + pixel[k]*neighbour[k];
+					} 
+					
 				}
+				
 			}	
 			//System.out.println(rep);
 			return rep;
 			
 		}
 
-		public double[] neighbourPixel(int i, int j, double[] pixel, double[] average, double[] sigma, int nbr){ // retourne le pixel voisin de pixel 
+		public double[] neighbourPixel(int i, int j, double[] pixel, int nbr){ // retourne le pixel voisin de pixel 
 			
 			double distance = 0 , distanceMin = Integer.MAX_VALUE;
-			double[] res = new double[3];
+			double res[] = new double[3];
 			for(int p = Math.max(0, j-nbr); p <= Math.min(height-1, j+nbr); p++){
 				for(int n = Math.max(0, i-nbr); n <= Math.min(width-1,  i+nbr); n++){
 					
@@ -159,14 +162,14 @@ public class Card extends Image{
 					distance = 0 ;
 					for(int compt = 0; compt<3; compt++){
 						
-						distance += Math.abs(normalize(rgbByte, this.average, this.sigma, compt) -normalize(pixel, average, sigma, compt));
+						distance += Math.abs(normalize(rgbByte, average, sigma, compt) -pixel[compt]);
 						
 					}
 					
 						if (distance < distanceMin){
 							for(int compt = 0; compt<3; compt++){
 								
-								res[compt] = Math.abs(normalize(rgbByte, this.average, this.sigma, compt) -normalize(pixel, average, sigma, compt));
+								res[compt] = Math.abs(normalize(rgbByte, average, sigma, compt));
 								
 							}
 							distanceMin = distance;
@@ -208,28 +211,23 @@ public class Card extends Image{
 			return (value[k]-average[k])/sigma[k];
 		}
 		
-		public String getColor(){
-			
-			double[] average = corner.getAverage();
-			if (average[2] > 200)
-				 return "1";
-			else
-				return "0";
-			
-			 
-			
-		}
+	
 		
-		public String getType(String string){
+		public String getType(){
 			
-
+			String string;
+			double[] average = corner.getAverage();
+			if (average[2] > 200) // carte rouge
+				string = "1";
+			else
+				string = "0"; // carte noire
 			int nbr = getComponentsNumber (6000);
-			if (nbr ==1)
+			if (nbr ==1) // as
 				string = string+"0";
-			else if (nbr >= 7 && nbr <= 10)
+			else if (nbr >= 7 && nbr <= 10) // 7, 8, 9, 10
 				string = string+(nbr-6);
 			else 
-				string = string+"5";
+				string = string+"5"; // V, D, R
 			return string;
 				
 			
@@ -245,6 +243,21 @@ public class Card extends Image{
 
 			
 		}
+		
+		public String find(CardDatabase[][] tab){
+			
+			String res;
+			String string = getType();
+			
+			res = findIn(tab[(int)string.charAt(0)-48][(int)string.charAt(1)-48]);
+			
+			return res;
+			
+			
+			
+		}
+		
+		
 			
 
 	

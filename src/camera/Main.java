@@ -170,10 +170,12 @@ public class Main {
 		
 		 
 
-		// Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
-		
+		//Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
+		CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
+		Card carte = new Card("data/database/carte4.jpg");
+		  System.out.println(carte.findIn(database));
 
-		for (int i =1; i<43; i++){
+		/*for (int i =1; i<43; i++){
 			
 			Card carte = new Card("data/database/carte"+i+".jpg");
 			System.out.println(i+" : "+carte.getType(carte.getColor()));
@@ -182,9 +184,9 @@ public class Main {
 		Image im = new Image ("data/database/carte1.jpg");
 		
 		BinaryImage bin = new BinaryImage(im.threshold(Image.threshold).cut(50, 50, 535, 789));
-		bin.save("data/testtest.jpg");
+		bin.save("data/testtest.jpg");*/
 		
-
+		  System.out.print((int) '1'-48);
 				
 				
 		        
