@@ -13,7 +13,7 @@ public class JoueurDistant implements JoueurDistantInterface
 	{
 		this.cardList=new CarteList();
 		this.serveur= new Serveur(belote);
-		//serveur.start();
+		serveur.start();
 	}
 	
 	public void sendCard(CarteInterface carte,int i) 

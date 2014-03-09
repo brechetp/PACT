@@ -189,7 +189,7 @@ public class StateMachine
 		}
 	}
 		 
-	public void eventGestePasser() 
+	public void eventGestePasser()
 	{
 		switch(this.state) 
 		{
@@ -222,6 +222,12 @@ public class StateMachine
 			{
 				if (numJoueurDistant != etat.getNumJoueur())
 				{
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					joueurD.sendAnnonce(null, etat.getNumJoueur());
 				}
 				vci.modeJeu();

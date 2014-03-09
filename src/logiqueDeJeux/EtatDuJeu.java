@@ -103,6 +103,12 @@ public class EtatDuJeu implements EtatDuJeuInterface
 
 	public void joueurSuivant(ViewControllerInterface vci,JoueurDistantInterface joueurD,String string,int numJoueurD) 
 	{
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		this.numJoueur = (numJoueur%4) +1;
 		vci.joueurEnCours(numJoueur);
 		if (numJoueur == numJoueurD)
