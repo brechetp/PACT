@@ -14,18 +14,23 @@ public class Card extends Image{
 		
 		super(fileName);
 		name = fileName;
-		average = new double[3];
-		sigma = new double[3];
+		average = new double[3]; // moyenne sur RGB
+		sigma = new double[3]; // ecart type sur RGB
 		if (width != 635 || height != 889){
 			throw new Exception("Ce n'est pas une carte");
 		}
+		int compt = 0;
 		
 		for (int i =0; i<width; i++)
 		{
 			for (int j=0; j<height; j++)
 			{
-				for (int p =0; p<3; p++){
-					average[p] += getRgbByte(i, j)[p];
+				int[] rgbByte = getRgbByte(i,j);
+				if ((rgbByte[0]+rgbByte[1]+rgbByte[2])/3 < 240){
+					for (int p =0; p<3; p++){
+						average[p] += getRgbByte(i, j)[p];
+					}
+					compt++;
 				}
 				
 			}
@@ -35,15 +40,18 @@ public class Card extends Image{
 		{
 			for (int j=0; j<height; j++)
 			{
-				for (int p =0; p<3; p++){
-					sigma[p] += Math.pow(getRgbByte(i, j)[p]-average[p],2);					}
+				int[] rgbByte = getRgbByte(i,j);
+				if ((rgbByte[0]+rgbByte[1]+rgbByte[2])/3 < 240){
+					for (int p =0; p<3; p++){
+						average[p] += getRgbByte(i, j)[p];
+					}				}
 				
 			}
 		}	
 		
 		for(int p =0; p<3; p++){
-			average[p] = average[p]/(width*height);
-			sigma[p] = Math.sqrt(sigma[p]/(width*height));
+			average[p] = average[p]/(compt);
+			sigma[p] = Math.sqrt(sigma[p]/(compt));
 		}
 		
 	}
