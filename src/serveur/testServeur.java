@@ -1,5 +1,7 @@
 package serveur;
 
+import java.io.IOException;
+
 import logiqueDeJeux.BeloteCoinche;
 import logiqueDeJeux.EtatDuJeu;
 import machineEtat.CardEvent;
@@ -8,7 +10,7 @@ import structure.Carte;
 public class testServeur 
 {
 
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException 
 	{
 		EtatDuJeu etat = new EtatDuJeu();
 		BeloteCoinche belote = new BeloteCoinche(etat);
@@ -103,11 +105,17 @@ public class testServeur
 			serveur.envoiCarteDistribution(SepPi);
 			Thread.sleep(100);
 			serveur.envoiCarteDistribution(SepCa);
-			Thread.sleep(100);
+			Thread.sleep(10000);
 			System.out.println("Envoi terminer");
 			Thread.sleep(100);
-			serveur.envoiTourAnnonce();
-			serveur.waitCarte();
+			serveur.envoiCarte(DixTr, 1);
+			Thread.sleep(100);
+			serveur.envoiCarte(DixPi, 2);
+			Thread.sleep(100);
+			serveur.envoiCarte(DixCa, 3);
+			Thread.sleep(100);
+			
+			System.in.read();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

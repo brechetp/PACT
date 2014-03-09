@@ -101,7 +101,7 @@ public class PremierTest {
 		belote.nouvelleCarte(AsCoEvent);
 		belote.nouvelleCarte(ValCoEvent);
 		belote.nouvelleCarte(DixCoEvent);
-		/**try {
+		try {
 			Thread.sleep(1000);
 			belote.nouveauGeste(passer); //joueur 1 passe
 			Thread.sleep(1000);
@@ -136,6 +136,7 @@ public class PremierTest {
 			belote.nouvelleCarte(RoiCaEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(SepCaEvent);
+			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
 			
@@ -146,6 +147,7 @@ public class PremierTest {
 			belote.nouvelleCarte(DixCaEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(AsCaEvent);
+			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
 			
@@ -156,6 +158,7 @@ public class PremierTest {
 			belote.nouvelleCarte(DixTrEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(SepTrEvent);
+			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
 			
@@ -166,6 +169,7 @@ public class PremierTest {
 			belote.nouvelleCarte(RenCoEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(RoiCoEvent);
+			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
 			
@@ -176,6 +180,7 @@ public class PremierTest {
 			belote.nouvelleCarte(RoiPiEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(SepPiEvent);
+			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
 			
@@ -186,6 +191,7 @@ public class PremierTest {
 			belote.nouvelleCarte(ValPiEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(HuiTrEvent);
+			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
 			
@@ -196,6 +202,7 @@ public class PremierTest {
 			belote.nouvelleCarte(NeuTrEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(AsPiEvent);
+			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
 			
@@ -206,13 +213,14 @@ public class PremierTest {
 			belote.nouvelleCarte(DixPiEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(RoiTrEvent);
+			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
 			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}     */
+		}  
 	}         
               
 }             
