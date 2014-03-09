@@ -26,6 +26,7 @@ public class BinaryImage extends GrayImage {
 	public int[][] taggedBinaryImage; // image initiale o� les 1 sont
 												// remplac�s par des pixels
 												// �tiquet�s
+	private int nbTags = 0;
 	
 /*
  * 
@@ -349,7 +350,7 @@ public class BinaryImage extends GrayImage {
 				}
 			}
 		}
-		
+		nbTags = k;
 		return taggedBinaryImage; 
 		
 	}
@@ -357,22 +358,22 @@ public class BinaryImage extends GrayImage {
 	public BinaryImage largestComponent(){
 		int [][] tab = conncetedComponents();
 		int[][] largest = new int[height][width];
-		int[] compteur = new int[maxNbTags];
-		for (int i=0; i<maxNbTags; i++){
+		int[] compteur = new int[nbTags];
+		for (int i=0; i<nbTags; i++){
 			compteur[i]=0;
 		}
 		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (tab[i][j] !=0) {
-					compteur[tab[i][j]] +=1 ;
+					compteur[tab[i][j]]++ ;
 				}
 			}
 		}
 		
 		int max = 0 ; 
 		int imax = 0;
-		for (int i=0; i<maxNbTags; i++){
+		for (int i=0; i<nbTags; i++){
 			if (compteur[i] >= max){
 				max = compteur[i];
 				imax = i;
@@ -391,6 +392,36 @@ public class BinaryImage extends GrayImage {
 		
 		return new BinaryImage (largest);
 	}
+	
+	public int componentsNumber(int size){
+		
+		int [][] tab = conncetedComponents();
+	
+		int[] compteur = new int[nbTags];
+		for (int i=0; i<nbTags; i++){
+			compteur[i]=0;
+		}
+		
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (tab[i][j] !=0) {
+					compteur[tab[i][j]]++ ;
+				}
+			}
+		}
+		
+		int res =0;
+		for (int i=0; i<nbTags; i++){
+			if (compteur[i] >= size){
+				res++;
+			}
+		}
+		
+			
+		
+		return res;
+	}
+	
 	
 }
 

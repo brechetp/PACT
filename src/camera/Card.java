@@ -2,7 +2,6 @@ package camera;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
-import comparaison.CardDatabase;
 
 public class Card extends Image{
 	
@@ -28,7 +27,9 @@ public class Card extends Image{
 		if (width != 635 || height != 889){
 			throw new Exception("Ce n'est pas une carte");
 		}
-		corner = this.cut(100, 250);
+
+		corner = this.cut(0,0,100, 250);
+
 
 		
 		computeAverage();
@@ -45,7 +46,9 @@ public class Card extends Image{
 		if (width != 635 || height != 889){
 			throw new Exception("Ce n'est pas une carte");
 		}
-		corner = this.cut(100,  250);
+
+		corner = this.cut(0,0, 100,  250);
+
 
 		
 		computeAverage();
@@ -218,12 +221,27 @@ public class Card extends Image{
 		
 		public String getType(String string){
 			
-			if (compt < 80000) // c'est un As
-				return string+"0";
-			if (compt >= 80000 && compt < 200000) // c'est un 7, un 8 ou un 9
-				return string+"1";
-			else
-				return string+"2";
+
+			int nbr = getComponentsNumber (6000);
+			if (nbr ==1)
+				string = string+"0";
+			if (nbr >= 7 && nbr <= 10)
+				string = string+(nbr-6);
+			else 
+				string = string+"5";
+			return string;
+				
+			
+		}
+		
+		public int getComponentsNumber(int size){
+			
+			BinaryImage bin = new BinaryImage(this.threshold(threshold).cut(50, 50, 535, 789)); //on enleve les bords
+			int res = bin.componentsNumber(size);
+			
+			return res;
+			
+
 			
 		}
 			

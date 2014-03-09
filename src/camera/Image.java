@@ -14,10 +14,18 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 
 public class Image {
 	
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
 	private static final int threshold = 200;
 	
 	protected int compt =0; //compte le nombre de pixels non blancs
 	
+=======
+	public static final int threshold = 190;
+	
+	protected int compt =0; //compte le nombre de pixels non blancs
+	
+
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 	protected int width;
 	protected int height;
 	private IplImage rgbImage;
@@ -98,7 +106,7 @@ public class Image {
 		
 	}
 	
-	public int[] getRgbByte(int pixelIndex){ // idem pour le pixel ˆ l'index pixelIndex
+	public int[] getRgbByte(int pixelIndex){ // idem pour le pixel ï¿½ l'index pixelIndex
 		
 		int[] res = new int[3];
 		for(int k = 0; k <3; k++){
@@ -128,6 +136,7 @@ public class Image {
 		return height;
 	}
 	
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
 	public String getName(){
 		
 		return name;
@@ -156,10 +165,34 @@ public class Image {
 		
 		for(int p =0; p<3; p++){
 			average[p] = average[p]/(compt);
+=======
+	
+	public void computeAverage(){
+		
+		average = new double[3];
+		
+		for (int j =0; j<height; j++)
+		{
+			for (int i=0; i<width; i++)
+			{
+				int[] rgbByte = getRgbByte(i,j);
+				if(! isWhite(rgbByte)){
+					for(int k =0; k<3; k++){
+						average[k] += rgbByte[k];
+					}
+					compt++;
+				
+				}
+			}
+		}	
+		for(int k =0; k<3; k++){
+			average[k] += average[k]/((float) compt);
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 		}
 	}
 	
 	public void computeSigma(){
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
 		
 		
 		sigma = new double[3];
@@ -184,17 +217,47 @@ public class Image {
 	}
 
 	public double[] getAverage() {
+=======
+		if (average == null)
+			computeAverage();
+		
+		for (int j =0; j<height; j++)
+		{
+			for (int i=0; i<width; i++)
+			{
+				int[] rgbByte = getRgbByte(i,j);
+				if (! isWhite(rgbByte)){
+					for(int k =0; k<3; k++){
+						sigma[k] += Math.pow(rgbByte[k]-average[k],2);
+					}
+				}
+			}
+		}
+		for(int k =0; k<3; k++){
+			sigma[k] = Math.sqrt(sigma[k]/(compt));
+		} 
+	}
+	
+	public double[] getAverage(){
+		
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 		if (average == null)
 			computeAverage();
 		return average;
 	}
 	
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
 	public double[] getSigma() {
+=======
+	public double[] getSigma(){
+		
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 		if (sigma == null)
 			computeSigma();
 		return sigma;
 	}
 	
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
 	
 	
 	
@@ -205,6 +268,13 @@ public class Image {
 	 * 
 	 * 
 	 */
+=======
+	public boolean isWhite(int[] rgbByte){
+		
+		return (rgbByte[0] > threshold && rgbByte[1] > threshold && rgbByte[2] > threshold);
+	}
+	  
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 
 	public void save(String fileName){
 		 if (rgbImage != null) {
@@ -291,7 +361,7 @@ public class Image {
 		coins[0] = coin;
 		coins[1] = new int[][]{{0,0}, {width, 0}, {0, height}, {width, height}};
 		
-		double[][] x = new double[8][8] ; // matrice ˆ inverser
+		double[][] x = new double[8][8] ; // matrice ï¿½ inverser
 		double[][] y = new double[8][1]; // point image
 		int[] tab = new int[width*height*3]; // tableau de l'image produite
 		for (int i = 0; i < 8; i++){
@@ -359,6 +429,7 @@ public class Image {
 
 		 Image res = new Image(tab, width, height);
 		 return res;
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
 			
 	}
 	
@@ -372,6 +443,27 @@ public class Image {
 				int[] rgbByte = getRgbByte(i,j);
 				for(int p =0; p<3; p++){
 					tab[3*i + 3*width*j+p] = rgbByte[p];
+=======
+
+		 
+		 
+		 
+		 
+
+			
+	}
+	
+	public Image cut(int x, int y, int width, int height){
+		
+		int[] tab = new int[3*width*height];
+		
+		for(int i=x; i< x+width; i++){
+			for(int j=y; j<y+height; j++ ){
+				
+				int[] rgbByte = getRgbByte(i,j);
+				for(int p =0; p<3; p++){
+					tab[3*(i-x) + 3*width*(j-y)+p] = rgbByte[p];
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 				}
 				
 			}
@@ -380,22 +472,36 @@ public class Image {
 		return cut;
 	}
 	
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
 	public Image threshold(int threshold){
 		
 		int[] tab = new int[3*width*height];
 		
+=======
+	public Image threshold(int threshold){ // on seuille selon le blanc
+		
+		int[] tab = new int[3*width*height];
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 		for(int i=0; i< width; i++){
 			for(int j=0; j<height; j++ ){
 				
 				int[] rgbByte = getRgbByte(i,j);
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
 				if ((rgbByte[0] > threshold && rgbByte[1] > threshold && rgbByte[2]> threshold)){
+=======
+				if (isWhite(rgbByte)){
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 					
 					for(int p =0; p<3; p++){
 						tab[3*i + 3*width*j+p] = 0;
 					}
 				}else{
 					for(int p =0; p<3; p++){
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
 						tab[3*i + 3*width*j+p] = rgbByte[p];
+=======
+						tab[3*i + 3*width*j+p] = 255;
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 					}
 					
 					
@@ -404,9 +510,15 @@ public class Image {
 		}
 		Image res = new Image(tab, width, height);
 		return res;
+<<<<<<< 007e05c00d42d792d886287a0ea889972551a245
+=======
+
+>>>>>>> e26d0388004058b5d9246abff8c0378f0eb0f925
 	}
 
 	
 	
 	
 }
+
+
