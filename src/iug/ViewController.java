@@ -6,6 +6,7 @@ public class ViewController implements ViewControllerInterface
 	Fenetre fen = new Fenetre();
 	
 	public void effacerCartes(){
+		fen.getPan().setYCarte(0);
 		fen.getPan().setI(0);
 		fen.repaint();
 	}
@@ -108,8 +109,18 @@ public class ViewController implements ViewControllerInterface
 		if (s.equals("ascarreau")){
 			k = 32;
 		}
-		fen.getPan().setI(k);
-		fen.repaint();
+		for (int yCarte = -50 ; yCarte<250 ; yCarte = yCarte + 5){
+			fen.getPan().setYCarte(yCarte);
+			fen.getPan().setI(k);
+			fen.repaint();
+			try {
+				Thread.sleep(15);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 	
 	public void coinche(int k){

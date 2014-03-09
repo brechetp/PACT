@@ -63,100 +63,100 @@ public class Panneau extends JPanel {
 		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN2.png"));
 		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    if(i==1){	 
-		    	  g.drawImage(carte1.getImage(), 480, 150, this);
+		    	  g.drawImage(carte1.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==2){
-		    	  g.drawImage(carte2.getImage(), 480, 150, this);
+		    	  g.drawImage(carte2.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==3){
-		    	  g.drawImage(carte3.getImage(), 480, 150, this);
+		    	  g.drawImage(carte3.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==4){
-		    	  g.drawImage(carte4.getImage(), 480, 150, this);
+		    	  g.drawImage(carte4.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==5){
-		    	  g.drawImage(carte5.getImage(), 480, 150, this);
+		    	  g.drawImage(carte5.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==6){
-		    	  g.drawImage(carte6.getImage(), 480, 150, this);
+		    	  g.drawImage(carte6.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==7){
-		    	  g.drawImage(carte7.getImage(), 480, 150, this);
+		    	  g.drawImage(carte7.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==8){
-		    	  g.drawImage(carte8.getImage(), 480, 150, this);
+		    	  g.drawImage(carte8.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==9){
-		    	  g.drawImage(carte9.getImage(), 480, 150, this);
+		    	  g.drawImage(carte9.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==10){
-		    	  g.drawImage(carte10.getImage(), 480, 150, this);
+		    	  g.drawImage(carte10.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==11){
-		    	  g.drawImage(carte11.getImage(), 480, 150, this);
+		    	  g.drawImage(carte11.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==12){
-		    	  g.drawImage(carte12.getImage(), 480, 150, this);
+		    	  g.drawImage(carte12.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==13){
-		    	  g.drawImage(carte13.getImage(), 480, 150, this);
+		    	  g.drawImage(carte13.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==14){
-		    	  g.drawImage(carte14.getImage(), 480, 150, this);
+		    	  g.drawImage(carte14.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==15){
-		    	  g.drawImage(carte15.getImage(), 480, 150, this);
+		    	  g.drawImage(carte15.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==16){
-		    	  g.drawImage(carte16.getImage(), 480, 150, this);
+		    	  g.drawImage(carte16.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==17){
-		    	  g.drawImage(carte17.getImage(), 480, 150, this);
+		    	  g.drawImage(carte17.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==18){
-		    	  g.drawImage(carte18.getImage(), 480, 150, this);
+		    	  g.drawImage(carte18.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==19){
-		    	  g.drawImage(carte19.getImage(), 480, 150, this);
+		    	  g.drawImage(carte19.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==20){
-		    	  g.drawImage(carte20.getImage(), 480, 150, this);
+		    	  g.drawImage(carte20.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==21){
-		    	  g.drawImage(carte21.getImage(), 480, 150, this);
+		    	  g.drawImage(carte21.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==22){
-		    	  g.drawImage(carte22.getImage(), 480, 150, this);
+		    	  g.drawImage(carte22.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==23){
-		    	  g.drawImage(carte23.getImage(), 480, 150, this);
+		    	  g.drawImage(carte23.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==24){
-		    	  g.drawImage(carte24.getImage(), 480, 150, this);
+		    	  g.drawImage(carte24.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==25){
-		    	  g.drawImage(carte25.getImage(), 480, 150, this);
+		    	  g.drawImage(carte25.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==26){
-		    	  g.drawImage(carte26.getImage(), 480, 150, this);
+		    	  g.drawImage(carte26.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==27){
-		    	  g.drawImage(carte27.getImage(), 480, 150, this);
+		    	  g.drawImage(carte27.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==28){
-		    	  g.drawImage(carte28.getImage(), 480, 150, this);
+		    	  g.drawImage(carte28.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==29){
-		    	  g.drawImage(carte29.getImage(), 480, 150, this);
+		    	  g.drawImage(carte29.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==30){
-		    	  g.drawImage(carte30.getImage(), 480, 150, this);
+		    	  g.drawImage(carte30.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==31){
-		    	  g.drawImage(carte31.getImage(), 480, 150, this);
+		    	  g.drawImage(carte31.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==32){
-		    	  g.drawImage(carte32.getImage(), 480, 150, this);
+		    	  g.drawImage(carte32.getImage(), 480, yCarte, this);
 		    }
 		    else if(i==0){
 
