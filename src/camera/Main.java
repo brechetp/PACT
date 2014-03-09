@@ -13,12 +13,13 @@ import javax.swing.JFrame;
 
 
 
+
 import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.*;
 import com.googlecode.javacv.cpp.opencv_core.CvMat;
 
-import comparaison.BaseDonneesCartes;
+import comparaison.CardDatabase;
 import comparaison.Comparaison;
 import static com.googlecode.javacv.cpp.opencv_highgui.*;
 
@@ -156,7 +157,9 @@ public class Main {
 		
 	
 		//Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
-		 BaseDonneesCartes database = new BaseDonneesCartes(1, 42, "data/database/carte");
+		 CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
+		 Card carte = new Card("data/database/carte4.jpg");
+		 System.out.println(carte.findIn(database));
 		 
 				
 				
