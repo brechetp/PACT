@@ -18,6 +18,9 @@ public class Image {
 	protected int height;
 	private IplImage rgbImage;
 	private ByteBuffer rgbByteBuffer;
+	
+	
+	private double[] average, sigma;
 
 	/*
 	 * 
@@ -31,6 +34,8 @@ public class Image {
 		height = image.height();
 		rgbImage = image;
 		rgbByteBuffer = rgbImage.getByteBuffer();
+		average = new double[3];
+		sigma = new double[3];
 		
 	}
 	
@@ -114,6 +119,15 @@ public class Image {
 		
 		return height;
 	}
+	
+	
+	
+	/*
+	 * 
+	 * Sauvegarde
+	 * 
+	 * 
+	 */
 
 	public void save(String fileName){
 		 if (rgbImage != null) {
@@ -129,7 +143,7 @@ public class Image {
 			for(int p = Math.max(0, j-nbr); p <= Math.min(height-1,  j+nbr); p++){
 				int[] rgbByte = getRgbByte(n, p);
 				distance = 0;
-				for (int k = 0; k < 2; k ++){
+				for (int k = 0; k < 3; k ++){
 					distance = distance + Math.abs(rgbByte[k] - pixel[k]);
 				}
 				if (distance < distanceMin){
@@ -171,7 +185,7 @@ public class Image {
 		
 	}
 
-	public BinaryImage difference2(Image image) {
+	public BinaryImage difference(Image image) {
 		int[][] diff = new int[height][width];
 		int[] pixel2 , pixel;
 		int distance = 0;
@@ -268,12 +282,8 @@ public class Image {
 
 		 Image res = new Image(tab, width, height);
 		 return res;
-		 
-		 
-		 
-		 
-		
-
-		
+			
 	}
+	
+	
 }

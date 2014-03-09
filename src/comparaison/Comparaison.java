@@ -17,7 +17,7 @@ public class Comparaison {
 	}
 	
 	
-	public int getCardValue (BaseDonneesCartes baseDonneesCartes){
+	public int getCardValue (CardDatabase baseDonneesCartes){
 		
 	  // Calcul de average et sigma 
 		average = 0; double variance = 0;
