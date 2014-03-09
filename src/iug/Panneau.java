@@ -59,7 +59,7 @@ public class Panneau extends JPanel {
 			if (i>32){
 				i=0;
 			}
-		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN.png"));
+		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN2.png"));
 		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    if(i==1){
 		    	  g.drawImage(carte1.getImage(), 460, 250, this);
