@@ -114,10 +114,10 @@ public class testServeur
 			Thread.sleep(2000);
 			serveur.envoiAnnonce(new Annonce("trefle", 100, 1), 3);
 			Thread.sleep(1000);
-			//serveur.envoiTourAnnonce();
-			//Thread.sleep(10000);
-			//serveur.envoiCoinche(1);
-			Thread.sleep(1000);
+			serveur.envoiTourAnnonce();
+			Thread.sleep(10000);
+			serveur.envoiCoinche(1);
+			Thread.sleep(3000);
 			serveur.envoiFinAnnonce();
 			System.out.println("fin des annonces");
 			Thread.sleep(2000);
