@@ -59,10 +59,10 @@ public interface EtatDuJeuInterface
 	public boolean dernierPli();
 
 	//setter pour le numero joueur
-	public void setNumJoueur(int premierAJouer);
+	public void setNumJoueur(int premierAJouer, JoueurDistantInterface joueurD, int numJoueurDistant);
 
 	//met la bonne valeur de l'annonce
-	public void setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci);
+	public boolean setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci);
 
 
 	public AnnonceInterface getAnnonce();

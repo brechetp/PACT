@@ -27,8 +27,10 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		this.TeamImpair = new Team();
 	}
 	
-	public void setNumJoueur(int i)
+	public void setNumJoueur(int i,JoueurDistantInterface joueurD,int numJoueurDistant)
 	{
+		if (i==numJoueurDistant)
+			joueurD.waitCard();
 		this.numJoueur=i;
 	}
 	
@@ -273,19 +275,28 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	}
 
 	@Override
-	public void setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci) 
+	public boolean setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci) 
 	{
-		this.annonce=annonce;
-		int valeur = this.valeurAnnonce();
-		String val;
-		if (valeur==250)
-			val="capot";
-		else if (valeur==500)
-			val="générale";
+		if (annonce == null)
+		{
+			vci.annonceJoueurDistant("", "");
+			return false;
+		}
 		else
-			val =""+valeur;
-		String couleur = this.getAtout();
-		vci.annonceJoueurDistant(val, couleur);
+		{
+			this.annonce=annonce;
+			int valeur = this.valeurAnnonce();
+			String val;
+			if (valeur==250)
+				val="capot";
+			else if (valeur==500)
+				val="générale";
+			else
+				val =""+valeur;
+			String couleur = this.getAtout();
+			vci.annonceJoueurDistant(val, couleur);
+			return true;
+		}
 	}
 	
 	public AnnonceInterface getAnnonce ()

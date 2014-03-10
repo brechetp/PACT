@@ -44,7 +44,6 @@ public class BeloteCoinche implements GlobalListener
 	
 	public void setAnnonce(AnnonceInterface annonce)
 	{
-		System.out.println("Annonce envoyé a machine");
 		machine.setAnnonce(annonce);
 	}
 

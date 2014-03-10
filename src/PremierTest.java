@@ -117,7 +117,7 @@ public class PremierTest {
 			Thread.sleep(1000);
 			belote.nouveauGeste(accepter); //joueur 3 prend a 80 pique
 			Thread.sleep(1000);
-			belote.nouveauGeste(passer); //joueur 4 passe
+			belote.setAnnonce(null); //joueur 4 passe
 			Thread.sleep(1000);
 			belote.nouveauGeste(accepter);
 			Thread.sleep(1000);
@@ -135,7 +135,7 @@ public class PremierTest {
 			Thread.sleep(1000);
 			belote.nouveauGeste(passer); //Joueur 3 passer
 			Thread.sleep(1000);
-			belote.nouveauGeste(passer); //Joueur 4 passe
+			belote.setAnnonce(null); //Joueur 4 passe
 			Thread.sleep(1000);
 			
 			belote.nouvelleCarte(ValCaEvent);

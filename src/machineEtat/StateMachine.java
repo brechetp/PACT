@@ -231,7 +231,7 @@ public class StateMachine
 					joueurD.sendAnnonce(null, etat.getNumJoueur());
 				}
 				vci.modeJeu();
-				etat.joueurSuivant(vci,joueurD, "jeu", numJoueurDistant);
+				etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
 				joueurD.sendFinAnnonce();
 				this.state = State.DebutTour;
 			}
@@ -381,7 +381,7 @@ public class StateMachine
 		 case AnnoncePasse1:
 			 etat.coinche();
 			 vci.coinche(etat.getNumJoueur());
-			 etat.setNumJoueur(premierAJouer);
+			 etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
 			 vci.joueurEnCours(premierAJouer);
 			 vci.modeJeu();
 			 joueurD.sendFinAnnonce();
@@ -450,7 +450,7 @@ public class StateMachine
 		case ResteDesTours:
 			etat.mancheTerminer();
 			this.premierAJouer++;
-			etat.setNumJoueur(premierAJouer);
+			etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
 			this.state = State.Distribution;
 			System.out.println("Manche terminer");
 		default:
@@ -482,35 +482,56 @@ public class StateMachine
 		switch 	(this.state)
 		{
 		case Annonce:
-			etat.setAnnonce(annonce, vci);
-			etat.valeurAnnonce();
+			boolean retour = etat.setAnnonce(annonce, vci);
 			this.valeurAnnonceMax=etat.valeurAnnonce();
 			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
-			this.state= State.AnnoncePasse1;
+			this.state = State.AnnoncePasse1;	
 			break;
 			
 		case AnnoncePasse1:
-			etat.setAnnonce(annonce);
-			etat.valeurAnnonce();
+			retour = etat.setAnnonce(annonce, vci);
 			this.valeurAnnonceMax=etat.valeurAnnonce();
 			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
-			this.state= State.AnnoncePasse1;
+			if (retour) 
+			{
+				this.state = State.AnnoncePasse1;
+			}
+			else 
+			{
+				this.state = State.AnnoncePasse2;
+			}
 			break;
 			
 		case AnnoncePasse2:
-			etat.setAnnonce(annonce);
-			etat.valeurAnnonce();
+			retour = etat.setAnnonce(annonce, vci);
 			this.valeurAnnonceMax=etat.valeurAnnonce();
 			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
-			this.state= State.AnnoncePasse1;
+			if (retour) 
+			{
+				this.state = State.AnnoncePasse1;
+			}
+			else 
+			{
+				this.state = State.AnnoncePasse3;
+			}
 			break;
 			
 		case AnnoncePasse3:
-			etat.setAnnonce(annonce);
-			etat.valeurAnnonce();
+			retour = etat.setAnnonce(annonce, vci);
 			this.valeurAnnonceMax=etat.valeurAnnonce();
 			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
-			this.state= State.AnnoncePasse1;
+			if (retour) 
+			{
+				this.state = State.AnnoncePasse1;
+			}
+			else 
+			{
+				vci.modeJeu();
+				joueurD.sendFinAnnonce();
+				etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
+				this.state = State.DebutTour;
+				//a vérifier si annonce est faite
+			}
 			break;
 			
 			

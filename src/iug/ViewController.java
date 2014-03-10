@@ -203,16 +203,30 @@ public class ViewController implements ViewControllerInterface
 	}
 	
 	public void annonceJoueurDistant(String valeur, String couleur){
-		fen.getPan().setValeurCouleur(valeur, couleur);
-		fen.getPan().setK(6);
-		fen.repaint();
-		try{
-			Thread.sleep(2000);
-		}catch(Exception e){
-			e.printStackTrace();
+		if(valeur=="" && couleur==""){
+			fen.getPan().setK(7);
+			fen.repaint();
+			try{
+				Thread.sleep(2000);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			fen.getPan().setK(0);
+			fen.repaint();
 		}
-		fen.getPan().setK(0);
-		fen.repaint();
+		else{
+			fen.getPan().setValeurCouleur(valeur, couleur);
+			fen.getPan().setK(6);
+			fen.repaint();
+			try{
+				Thread.sleep(2000);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			fen.getPan().setK(0);
+			fen.repaint();
+		}
+		
 	}
 
 }

@@ -180,7 +180,12 @@ public class Panneau extends JPanel {
 		    else if (k==6){
 		    	g.setColor(new Color(204, 0, 51));
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-		    	g.drawString("Annonce joueur distant : " + valeur + " " + couleur, 320, 400);
+		    	g.drawString("Annonce joueur distant : " + valeur + " " + couleur, 200, 400);
+		    }
+		    else if (k==7){
+		    	g.setColor(new Color(204, 0, 51));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+		    	g.drawString("Le joueur distant a passé", 320, 400);
 		    }
 		    else if (k==666){
 		    	j=0;
