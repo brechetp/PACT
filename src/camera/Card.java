@@ -219,29 +219,29 @@ public class Card extends Image{
 
 	
 		
-		public String getType(){
+		public int getType(){
 			
-			String string;
-			double[] average = corner.getAverage();
-			if (average[2] > 200) // carte rouge
+			int res;
+			/*double[] average = corner.getThresholdedAverage();
+			if (average[2] > 200 ) // carte rouge
 				string = "1";
 			else
-				string = "0"; // carte noire
+				string = "0"; // carte noire*/
 			int nbr = getComponentsNumber (6000);
 			if (nbr ==1) // as
-				string = string+"0";
+				res = 0;
 			else if (nbr >= 7 && nbr <= 10) // 7, 8, 9, 10
-				string = string+(nbr-6);
+				res = (nbr-6);
 			else 
-				string = string+"5"; // V, D, R
-			return string;
+				res = 5; // V, D, R
+			return res;
 				
 			
 		}
 		
 		public int getComponentsNumber(int size){
 			
-			BinaryImage bin = new BinaryImage(this.threshold(threshold).cut(50, 50, 535, 789)); //on enleve les bords
+			BinaryImage bin = new BinaryImage(this.binaryThreshold().cut(50, 50, 535, 789)); //on enleve les bords
 			int res = bin.componentsNumber(size);
 			
 			return res;
@@ -253,13 +253,35 @@ public class Card extends Image{
 		public String find(CardDatabase[][] tab){
 			
 			String res;
-			String string = getType();
+			String string = null//getType();
 			
 			res = findIn(tab[(int)string.charAt(0)-48][(int)string.charAt(1)-48]);
 			
 			return res;
 			
 			
+			
+		}
+		public String find(CardDatabase[] tab){
+			
+			String res;
+			int nbr = getType();
+			
+			res = findIn(tab[nbr]);
+			
+			return res;
+			
+			
+			
+		}
+		
+			
+			
+			
+		
+
+		public Image getCorner() {
+			return corner;
 			
 		}
 		

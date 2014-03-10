@@ -49,7 +49,7 @@ public class Capture {
 	  		
 	  		if (i!= compt-1)
 				try {
-					Thread.sleep(5000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					
 					e.printStackTrace();
@@ -68,7 +68,7 @@ public class Capture {
 		  		
 		  		if (i!= 0)
 					try {
-						System.out.println("Vous pouvez poser la carte"+i);
+						System.out.println("Vous pouvez poser la carte "+i);
 						Thread.sleep(5000);
 					} catch (InterruptedException e) {
 						
@@ -83,6 +83,7 @@ public class Capture {
 					Image image1 = new Image(capture+i+".jpg");
 					BinaryImage bin = image1.differenceNeighbour(image0, threshold, nbr);
 			      	BinaryImage card = bin.largestComponent();
+			      	cvSaveImage("data/binary/database2/carte"+i+".jpg", bin.getBinaryImage());
 			      	coins = card.getCorners();
 					Image resample = image1.resample(coins, 635, 889);
 			      	cvSaveImage(destination+i+".jpg", resample.getRgbImage());

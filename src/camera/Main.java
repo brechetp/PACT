@@ -15,14 +15,13 @@ import javax.swing.JFrame;
 
 
 
+
 import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.*;
 import com.googlecode.javacv.cpp.opencv_core.CvMat;
 
-
 import comparaison.CardDatabase;
-
 import comparaison.Comparaison;
 import static com.googlecode.javacv.cpp.opencv_highgui.*;
 
@@ -159,16 +158,16 @@ public class Main {
 		
 		
 
-		//Capture.database(45, 45, 20, 1, "data/capture/carte", "data/database/carte");
+		// Capture.database(0, 32, 20, 1, "data/capture/carte", "data/database/database3/carte");
 		 /*CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
 		 @SuppressWarnings("unused")
 		Card carte = new Card("data/database/carte4.jpg");
 		  System.out.println(carte.findIn(database));*/
 		
 	
-		Capture.captureFrame("data/test/fond.jpg");
+		/*Capture.captureFrame("data/test/fond.jpg");
 		Thread.sleep(5000);
-		Capture.captureFrame("data/test/capture.jpg");
+		Capture.captureFrame("data/test/capture.jpg");*/
 		
 		Image im1 = new Image("data/test/fond.jpg");
 		Image im2 = new Image ("data/test/capture.jpg");
@@ -179,17 +178,12 @@ public class Main {
 		
 		int[][] coins = bin2.getCorners();
 		
-		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage());
+		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
 		
 		
-		Card[] tab = new Card[]{new Card("data/database/carte25.jpg"), new Card("data/database/carte34.jpg")};
-		
-		CardDatabase database2 = new CardDatabase(tab);
 	
-
 		
 		
-		  System.out.println(carte.findIn(database2));
 
 		/*for (int i =1; i<43; i++){
 			
@@ -201,12 +195,35 @@ public class Main {
 		
 		BinaryImage bin = new BinaryImage(im.threshold(Image.threshold));
 		bin.save("data/testtest.jpg");*/
+		CardDatabase[] tab = new CardDatabase[6];
 		
+	/*for(int i =0; i <2; i++){
+			for(int j =0; j< 5; j++){
+				tab[i][j] = new CardDatabase((i*16)+(2*j+1),(i*16)+(2*j+2), "data/database/database2/carte");
+			}
+			for(int j =5; j< 6; j++){
+				tab[i][j] = new CardDatabase((i*16)+(2*j+1),(i*16)+(2*j+6), "data/database/database2/carte");
+			}
+	
+		} */
 		
+			System.out.println("Base de donnee");
+				for(int j =0; j< 5; j++){
+					tab[j] = new CardDatabase((4*j+1),(4*j+4), "data/database/database2/carte");
+				}
+				for(int j =5; j< 6; j++){
+					tab[j] = new CardDatabase((4*j+1),(4*j+12), "data/database/database2/carte");
+				}
+	
+				System.out.println("Base de donnee fini");
+		
+			
+		System.out.println(carte.find(tab));
+	
 				
 				
 		        
-		    }
+	}
 	
 	
 	
