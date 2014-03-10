@@ -273,9 +273,19 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	}
 
 	@Override
-	public void setAnnonce(AnnonceInterface annonce) 
+	public void setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci) 
 	{
 		this.annonce=annonce;
+		int valeur = this.valeurAnnonce();
+		String val;
+		if (valeur==250)
+			val="capot";
+		else if (valeur==500)
+			val="générale";
+		else
+			val =""+valeur;
+		String couleur = this.getAtout();
+		vci.annonceJoueurDistant(val, couleur);
 	}
 	
 	public AnnonceInterface getAnnonce ()

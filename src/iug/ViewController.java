@@ -201,5 +201,18 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setY(0);
 		fen.repaint();
 	}
+	
+	public void annonceJoueurDistant(String valeur, String couleur){
+		fen.getPan().setValeurCouleur(valeur, couleur);
+		fen.getPan().setK(6);
+		fen.repaint();
+		try{
+			Thread.sleep(2000);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		fen.getPan().setK(0);
+		fen.repaint();
+	}
 
 }

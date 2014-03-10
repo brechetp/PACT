@@ -40,5 +40,7 @@ public interface ViewControllerInterface
 	
 	//Aprés validation des valeur
 	public void valideValeurAnnonce();
+	
+	public void annonceJoueurDistant(String valeur, String couleur);
 
 }

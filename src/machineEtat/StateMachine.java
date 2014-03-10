@@ -482,7 +482,7 @@ public class StateMachine
 		switch 	(this.state)
 		{
 		case Annonce:
-			etat.setAnnonce(annonce);
+			etat.setAnnonce(annonce, vci);
 			etat.valeurAnnonce();
 			this.valeurAnnonceMax=etat.valeurAnnonce();
 			etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);

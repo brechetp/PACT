@@ -53,6 +53,8 @@ public class Panneau extends JPanel {
 	int yCarte = 0;
 	String s1;
 	String s2;
+	String valeur;
+	String couleur;
 	
 	public void paintComponent(Graphics g){
 		
@@ -175,6 +177,11 @@ public class Panneau extends JPanel {
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		    	g.drawString("CONTRE-COINCHE !!!", 320, 400);
 		    }
+		    else if (k==6){
+		    	g.setColor(new Color(204, 0, 51));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+		    	g.drawString("Annonce joueur distant : " + valeur + " " + couleur, 320, 400);
+		    }
 		    else if (k==666){
 		    	j=0;
 		    	i=0;
@@ -271,6 +278,11 @@ public class Panneau extends JPanel {
 	
 	public void setYCarte(int yCarte){
 		this.yCarte=yCarte;
+	}
+	
+	public void setValeurCouleur(String valeur, String couleur){
+		this.valeur = valeur;
+		this.couleur = couleur;
 	}
 
 }
