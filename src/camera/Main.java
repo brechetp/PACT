@@ -158,7 +158,7 @@ public class Main {
 		
 		
 
-		// Capture.database(0, 32, 20, 1, "data/capture/carte", "data/database/database3/carte");
+		Capture.database(14, 64, 20, 1, "data/capture/carte", "data/database/database4/carte");
 		 /*CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
 		 @SuppressWarnings("unused")
 		Card carte = new Card("data/database/carte4.jpg");
@@ -169,7 +169,7 @@ public class Main {
 		Thread.sleep(5000);
 		Capture.captureFrame("data/test/capture.jpg");*/
 		
-		Image im1 = new Image("data/test/fond.jpg");
+		/*Image im1 = new Image("data/test/fond.jpg");
 		Image im2 = new Image ("data/test/capture.jpg");
 		
 		BinaryImage bin = im2.difference(im1);
@@ -194,8 +194,8 @@ public class Main {
 		Image im = new Image ("data/database/carte1.jpg");
 		
 		BinaryImage bin = new BinaryImage(im.threshold(Image.threshold));
-		bin.save("data/testtest.jpg");*/
-		CardDatabase[] tab = new CardDatabase[6];
+		bin.save("data/testtest.jpg");
+		CardDatabase[] tab = new CardDatabase[6]; */
 		
 	/*for(int i =0; i <2; i++){
 			for(int j =0; j< 5; j++){
@@ -207,7 +207,7 @@ public class Main {
 	
 		} */
 		
-			System.out.println("Base de donnee");
+			/*System.out.println("Base de donnee");
 				for(int j =0; j< 5; j++){
 					tab[j] = new CardDatabase((4*j+1),(4*j+4), "data/database/database2/carte");
 				}
@@ -218,7 +218,9 @@ public class Main {
 				System.out.println("Base de donnee fini");
 		
 			
-		System.out.println(carte.find(tab));
+		System.out.println( carte.getComponentsNumber(6000));
+		
+		System.out.println(carte.find(tab));*/
 	
 				
 				

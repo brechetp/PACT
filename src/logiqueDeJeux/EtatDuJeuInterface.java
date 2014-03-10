@@ -66,4 +66,7 @@ public interface EtatDuJeuInterface
 
 
 	public AnnonceInterface getAnnonce();
+
+
+	public boolean isAtout(Carte carte);
 }

@@ -19,16 +19,16 @@ public class CardDatabase {
 		
 		tab = new Card[size];
 		
-		for(int k = 0; k<size; k++){
+		for(int k = debut; k<fin+1; k++){
 			
 			try {
-				tab[k] = new Card(source+(k+1)+".jpg");
+				tab[k-debut] = new Card(source+(k)+".jpg");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-			averageTab[k] = tab[k].getAverage();
-			sigmaTab[k] = tab[k].getSigma();
+			averageTab[k-debut] = tab[k-debut].getAverage();
+			sigmaTab[k-debut] = tab[k-debut].getSigma();
 		}
 	}
 		

@@ -18,29 +18,29 @@ public class JoueurDistant implements JoueurDistantInterface
 	
 	public void sendCard(CarteInterface carte,int i) 
 	{
-		serveur.envoiCarte(carte, i);
+		//serveur.envoiCarte(carte, i);
 	}
 
 	public void waitCard() 
 	{
-		serveur.waitCarte();
+		//serveur.waitCarte();
 	}
 
 	public void waitAnnonce() 
 	{
-		serveur.envoiTourAnnonce();
+		//serveur.envoiTourAnnonce();
 	}
 
 	public void sendAnnonce(AnnonceInterface annonce, int i) 
 	{
-		serveur.envoiAnnonce(annonce, i);
+		//serveur.envoiAnnonce(annonce, i);
 	}
 
 	public void addCard(CarteInterface carte) 
 	{
-		System.out.println("carte envoyé");
+		System.out.println("carte envoyŽ");
 		cardList.ajoute(carte);
-		serveur.envoiCarteDistribution(carte);
+		//serveur.envoiCarteDistribution(carte);
 	}
 
 	public boolean aHuitCarte() 
@@ -50,7 +50,7 @@ public class JoueurDistant implements JoueurDistantInterface
 
 	public void partieTerminer() 
 	{
-		serveur.envoiPartieTerminer();
+		//serveur.envoiPartieTerminer();
 	}
 
 	@Override

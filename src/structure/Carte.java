@@ -1,18 +1,18 @@
 package structure;
 
-import logiqueDeJeux.EtatDuJeu;
+import logiqueDeJeux.EtatDuJeuInterface;
 
 public class Carte implements CarteInterface
 {
 	private String labelNum;
 	private String suit;
-	private EtatDuJeu etat;
+	private EtatDuJeuInterface etat;
 	
-	public Carte(String label, String suit, EtatDuJeu etat)
+	public Carte(String label, String suit, EtatDuJeuInterface etatDuJeuInterface)
 	{
 		this.labelNum = label;
 		this.suit = suit;
-		this.etat = etat;
+		this.etat = etatDuJeuInterface;
 	}
 	
 	public String getLabelNum() 

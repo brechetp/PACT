@@ -23,17 +23,21 @@ public class PremierMain {
 	public static void main(String[] args) throws InterruptedException 
 	{
 		
-
+		//Creation base de classi
 		ClassiFinal[] classilol = BaseApprentissage.main(null);
+		//Cration logique de jeu
 		EtatDuJeu etat = new EtatDuJeu();
 		BeloteCoinche belote = new BeloteCoinche(etat);
 		Classification classi = new Classification(classilol);
 		classi.addListener(belote);
+		//Start Leap
         MyListener listener = new MyListener(classi);
         Controller controller = new Controller();
         controller.addListener(listener);
+        //Start Camera
+        new Thread(new MainThreadImage(belote)).start();
         
-        Carte RoiCa = new Carte("roi","carreau",etat);
+        /**Carte RoiCa = new Carte("roi","carreau",etat);
 		CardEvent RoiCaEvent = new CardEvent(RoiCa);
 		Carte RoiCo = new Carte("roi","coeur",etat);
 		CardEvent RoiCoEvent = new CardEvent(RoiCo);
@@ -121,7 +125,7 @@ public class PremierMain {
 		belote.nouvelleCarte(ValCoEvent);
 		Thread.sleep(100);
 		belote.nouvelleCarte(DixCoEvent);
-		Thread.sleep(100);
+		Thread.sleep(100);**/
         
         try {
             System.in.read();

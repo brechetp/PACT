@@ -219,22 +219,22 @@ public class Card extends Image{
 
 	
 		
-		public int getType(){
+		public String getType(){
 			
-			int res;
-			/*double[] average = corner.getThresholdedAverage();
+			String string;
+			double[] average = corner.getThresholdedAverage();
 			if (average[2] > 200 ) // carte rouge
 				string = "1";
 			else
-				string = "0"; // carte noire*/
+				string = "0"; // carte noire
 			int nbr = getComponentsNumber (6000);
 			if (nbr ==1) // as
-				res = 0;
+				string = string+"0";
 			else if (nbr >= 7 && nbr <= 10) // 7, 8, 9, 10
-				res = (nbr-6);
+				string =string+ (nbr-6);
 			else 
-				res = 5; // V, D, R
-			return res;
+				string = string+5; // V, D, R
+			return string;
 				
 			
 		}
@@ -253,7 +253,7 @@ public class Card extends Image{
 		public String find(CardDatabase[][] tab){
 			
 			String res;
-			String string = null//getType();
+			String string = getType();
 			
 			res = findIn(tab[(int)string.charAt(0)-48][(int)string.charAt(1)-48]);
 			
@@ -262,7 +262,7 @@ public class Card extends Image{
 			
 			
 		}
-		public String find(CardDatabase[] tab){
+		/*public String find(CardDatabase[] tab){
 			
 			String res;
 			int nbr = getType();
@@ -273,7 +273,7 @@ public class Card extends Image{
 			
 			
 			
-		}
+		}*/
 		
 			
 			

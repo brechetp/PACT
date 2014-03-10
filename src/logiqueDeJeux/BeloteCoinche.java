@@ -16,6 +16,8 @@ public class BeloteCoinche implements GlobalListener
 	
 	public void nouvelleCarte(CardEvent carte) 
 	{
+		System.out.println(carte.getCarte().getLabelNum());
+		System.out.println(carte.getCarte().getSuit());
 		machine.eventCarte(carte);
 	}
 
