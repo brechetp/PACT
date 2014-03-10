@@ -15,7 +15,7 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class Image {
 	
 
-	public static final int threshold = 190;
+	public static final int threshold = 100;
 	
 	protected int compt =0; //compte le nombre de pixels non blancs
 	
@@ -141,7 +141,7 @@ public class Image {
 	public void computeAverage(){
 		
 		average = new double[3];
-		
+		compt = 0;
 		for (int j =0; j<height; j++)
 		{
 			for (int i=0; i<width; i++)
@@ -162,6 +162,29 @@ public class Image {
 		}
 	}
 	
+	public void computeThresholdedAverage(){
+		
+		average = new double[3];
+		compt = 0;
+		for (int j =0; j<height; j++)
+		{
+			for (int i=0; i<width; i++)
+			{
+				int[] rgbByte = getRgbByte(i,j);
+				if(! isWhite(rgbByte)){
+					for(int k =0; k<3; k++){
+						average[k] += rgbByte[k];
+					}
+					compt++;
+				
+				}
+			}
+		}	
+		for(int k =0; k<3; k++){
+			average[k] = average[k]/((float) compt);
+
+		}
+	}
 	public void computeSigma(){
 
 	
@@ -188,6 +211,14 @@ public class Image {
 
 		if (average == null)
 			computeAverage();
+		return average;
+	}
+	
+	public double[] getThresholdedAverage(){
+		
+
+		if (average == null)
+			computeThresholdedAverage();
 		return average;
 	}
 	
@@ -393,7 +424,7 @@ public class Image {
 	}
 	
 
-	public Image threshold(int threshold){ // on seuille selon le blanc
+	public Image binaryThreshold(){ // on seuille selon le blanc
 		
 		int[] tab = new int[3*width*height];
 
@@ -413,6 +444,37 @@ public class Image {
 					for(int p =0; p<3; p++){
 
 						tab[3*i + 3*width*j+p] = 255;
+
+					}
+					
+					
+			}
+		}
+		}
+		Image res = new Image(tab, width, height);
+		return res;
+
+	}
+	public Image threshold(){ // on seuille selon le blanc
+		
+		int[] tab = new int[3*width*height];
+
+		for(int i=0; i< width; i++){
+			for(int j=0; j<height; j++ ){
+				
+				int[] rgbByte = getRgbByte(i,j);
+
+			
+				if (isWhite(rgbByte)){
+
+					
+					for(int p =0; p<3; p++){
+						tab[3*i + 3*width*j+p] = 0;
+					}
+				}else{
+					for(int p =0; p<3; p++){
+
+						tab[3*i + 3*width*j+p] = rgbByte[p];
 
 					}
 					
