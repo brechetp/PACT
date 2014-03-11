@@ -16,7 +16,7 @@ public class Capture {
 	
 	  public static void captureFrame(String fileName)
 	    {
-	        OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(1);
+	        OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(0);
 	        try
 	        {
 	        	
@@ -66,24 +66,30 @@ public class Capture {
 				
 				 
 		  		
-		  		if (i!= 0)
-					try {
-						System.out.println("Vous pouvez poser la carte "+i);
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
+		  	
+					
 						
-						e.printStackTrace();
-					}
+					
 				
 				Capture.captureFrame(capture+i+".jpg");
 		  		System.out.println("Photo "+(i+1)+" prise");
+		  		System.out.println("Vous pouvez poser la carte "+(i+1));
+		  		if (i==0)
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		  	if (i!=0){
 		  	
 					Image image0 = new Image("data/capture/carte0.jpg");
 					Image image1 = new Image(capture+i+".jpg");
 					BinaryImage bin = image1.differenceNeighbour(image0, threshold, nbr);
+					
 			      	BinaryImage card = bin.largestComponent();
-			      	cvSaveImage("data/binary/database2/carte"+i+".jpg", bin.getBinaryImage());
+			      	cvSaveImage("data/binary/database4/carte"+i+".jpg", bin.getBinaryImage());
+			      	cvSaveImage("data/binary/database4bis/carte"+i+".jpg", card.getBinaryImage());
 			      	coins = card.getCorners();
 					Image resample = image1.resample(coins, 635, 889);
 			      	cvSaveImage(destination+i+".jpg", resample.getRgbImage());

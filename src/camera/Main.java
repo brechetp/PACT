@@ -158,19 +158,19 @@ public class Main {
 		
 		
 
-		Capture.database(14, 64, 20, 1, "data/capture/carte", "data/database/database4/carte");
+		//Capture.database(36, 64, 20, 1, "data/capture/carte", "data/database/database5/carte");
 		 /*CardDatabase database = new CardDatabase(1, 5, "data/database/carte");
 		 @SuppressWarnings("unused")
 		Card carte = new Card("data/database/carte4.jpg");
 		  System.out.println(carte.findIn(database));*/
 		
 	
-		/*Capture.captureFrame("data/test/fond.jpg");
+		/*Capture.captureFrame("data/capture/carte2.jpg");
 		Thread.sleep(5000);
-		Capture.captureFrame("data/test/capture.jpg");*/
+		Capture.captureFrame("data/capture/carte3.jpg");*/
 		
-		/*Image im1 = new Image("data/test/fond.jpg");
-		Image im2 = new Image ("data/test/capture.jpg");
+		Image im1 = new Image("data/capture/carte2.jpg");
+		Image im2 = new Image ("data/capture/carte3.jpg");
 		
 		BinaryImage bin = im2.difference(im1);
 		
@@ -179,16 +179,24 @@ public class Main {
 		int[][] coins = bin2.getCorners();
 		
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
+		carte.save("data/capture/cartetest.jpg");
+		bin.save("data/test/save1.jpg");
 		
+		new Database("data/database/database5/carte");
 		
+		System.out.println(carte.getType());
+		
+		System.out.println(carte.find(Database.database));
+		
+		//Database database = new Database("data/database/database5/carte");
 	
 		
 		
 
-		/*for (int i =1; i<43; i++){
+		/*for (int i =1; i<64; i++){
 			
-			Card carte = new Card("data/database/carte"+i+".jpg");
-			System.out.println(i+" : "+carte.getType(carte.getColor()));
+			Card cartebis = new Card("data/database/database5/carte"+i+".jpg");
+			System.out.println(i+" : "+cartebis.getType());
 			
 		}
 		Image im = new Image ("data/database/carte1.jpg");
@@ -215,12 +223,12 @@ public class Main {
 					tab[j] = new CardDatabase((4*j+1),(4*j+12), "data/database/database2/carte");
 				}
 	
-				System.out.println("Base de donnee fini");
+				System.out.println("Base de donnee fini");*/
 		
 			
-		System.out.println( carte.getComponentsNumber(6000));
+	
 		
-		System.out.println(carte.find(tab));*/
+		//System.out.println(carte.find(Database.database));
 	
 				
 				

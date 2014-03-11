@@ -66,7 +66,7 @@ public class Card extends Image{
  * 
  */
 	
-	public double[] getAverage(){
+	/*public double[] getAverage(){
 		
 		return average;
 	}
@@ -74,7 +74,7 @@ public class Card extends Image{
 	public double[] getSigma(){
 		
 		return sigma;
-	}
+	}*/
 	
 	public String getName(){
 		
@@ -98,13 +98,13 @@ public class Card extends Image{
 		  int size = database.getSize();
 		  double[][] matchTable = new double[size][3];
 		  
-		  // comparaison avec chaque carte de la base de donnŽe	
+		  // comparaison avec chaque carte de la base de donnï¿½e	
 			for (int i=0 ; i < size ; i++)
 			{
-				matchTable[i] = compare(database.getCard(i), 3);
+				matchTable[i] = compare(database.getCard(i), 0);
 			}
 			
-		  // dŽtermination du meilleur match	
+		  // dï¿½termination du meilleur match	
 		    
 		    double maxDistance = 0;
 		    int imax = 0;
@@ -176,7 +176,7 @@ public class Card extends Image{
 						}
 					}
 				}
-			//prendre garde ˆ rajouter kmin et jmin pour grdes images
+			//prendre garde ï¿½ rajouter kmin et jmin pour grdes images
 			return res ;
 		}
 		public double normalize(double[] value, double[] average, double[] sigma, int k){
@@ -223,12 +223,12 @@ public class Card extends Image{
 			
 			String string;
 			double[] average = corner.getThresholdedAverage();
-			if (average[2] > 200 ) // carte rouge
+			if (average[2] > 180 ) // carte rouge
 				string = "1";
 			else
 				string = "0"; // carte noire
 			int nbr = getComponentsNumber (6000);
-			if (nbr ==1) // as
+			if (nbr ==1 && compt < 100000) // as
 				string = string+"0";
 			else if (nbr >= 7 && nbr <= 10) // 7, 8, 9, 10
 				string =string+ (nbr-6);

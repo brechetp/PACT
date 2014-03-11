@@ -15,7 +15,7 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class Image {
 	
 
-	public static final int threshold = 100;
+	public static final int threshold = 220;
 	
 	protected int compt =0; //compte le nombre de pixels non blancs
 	
@@ -26,7 +26,10 @@ public class Image {
 	private ByteBuffer rgbByteBuffer;
 	
 	protected double[] average = null;
+	protected double[] thresholdedAverage = null;
 	protected double[] sigma = null;
+	
+
 
 	
 	
@@ -141,30 +144,29 @@ public class Image {
 	public void computeAverage(){
 		
 		average = new double[3];
-		compt = 0;
+	
 		for (int j =0; j<height; j++)
 		{
 			for (int i=0; i<width; i++)
 			{
 				int[] rgbByte = getRgbByte(i,j);
-				if(true){
-					for(int k =0; k<3; k++){
-						average[k] += rgbByte[k];
-					}
+				if (! isWhite(rgbByte))
 					compt++;
 				
+				for(int k =0; k<3; k++){
+					average[k] += rgbByte[k];
 				}
 			}
 		}	
 		for(int k =0; k<3; k++){
-			average[k] = average[k]/((float) compt);
+			average[k] = average[k]/((float) height*width);
 
 		}
 	}
 	
 	public void computeThresholdedAverage(){
 		
-		average = new double[3];
+		thresholdedAverage = new double[3];
 		compt = 0;
 		for (int j =0; j<height; j++)
 		{
@@ -173,7 +175,7 @@ public class Image {
 				int[] rgbByte = getRgbByte(i,j);
 				if(! isWhite(rgbByte)){
 					for(int k =0; k<3; k++){
-						average[k] += rgbByte[k];
+						thresholdedAverage[k] += rgbByte[k];
 					}
 					compt++;
 				
@@ -181,7 +183,7 @@ public class Image {
 			}
 		}	
 		for(int k =0; k<3; k++){
-			average[k] = average[k]/((float) compt);
+			thresholdedAverage[k] = thresholdedAverage[k]/( compt);
 
 		}
 	}
@@ -202,7 +204,7 @@ public class Image {
 			}
 		}
 		for(int k =0; k<3; k++){
-			sigma[k] = Math.sqrt(sigma[k]/(compt));
+			sigma[k] = Math.sqrt(sigma[k]/(height*width));
 		} 
 	}
 	
@@ -217,9 +219,9 @@ public class Image {
 	public double[] getThresholdedAverage(){
 		
 
-		if (average == null)
+		if (thresholdedAverage == null)
 			computeThresholdedAverage();
-		return average;
+		return thresholdedAverage;
 	}
 	
 
@@ -313,11 +315,11 @@ public class Image {
 				distance = 0;
 				pixel = getRgbByte(i,j);
 				pixel2 = image.getRgbByte(i, j);
-				for (int k = 0; k < 2; k ++){
+				for (int k = 0; k < 3; k ++){
 					distance = distance + Math.abs(pixel2[k] - pixel[k]);	
 				}	
 			
-				if (distance > 40)
+				if (distance > 60)
 					diff[j][i] = 1;
 				else
 					diff[j][i] = 0 ;
@@ -488,5 +490,4 @@ public class Image {
 	}
 
 }
-
 
