@@ -17,9 +17,9 @@ public interface EtatDuJeuInterface
 	public void joue(CarteInterface carte, ViewControllerInterface vci, JoueurDistantInterface joueurD, int i);
 	
 	//non jouer et valide. Renvoi true si c'est le cas
-	public boolean valide(CarteInterface carte);
+	public boolean valide(CarteInterface carte, JoueurDistantInterface joueurD, int numJoueurDistant);
 	
-	//donne le numéro du joueur actuel
+	//donne le numï¿½ro du joueur actuel
 	public int getNumJoueur();
 	
 	//passe au joueur suivant
@@ -31,7 +31,7 @@ public interface EtatDuJeuInterface
 	//Termine la manche
 	public void mancheTerminer();
 	
-	//Donne le numéro de l'equipe que a jouer la carte "carte"
+	//Donne le numï¿½ro de l'equipe que a jouer la carte "carte"
 	public int numTeamCarte(CarteInterface carte);
 
 	//Augmente la valeur de l'annonce
@@ -55,7 +55,7 @@ public interface EtatDuJeuInterface
 	//Multiplie coefCoinche par 2
 	public void coinche();
 
-	//Indique si le dernier pli a été jouer
+	//Indique si le dernier pli a ï¿½tï¿½ jouer
 	public boolean dernierPli();
 
 	//setter pour le numero joueur

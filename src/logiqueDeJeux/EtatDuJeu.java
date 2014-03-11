@@ -50,14 +50,11 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		this.joueurSuivant(vci, joueurD, "jeu", numJoueurDistant);
 	}
 
-	public boolean valide(CarteInterface carte) 
+	public boolean valide(CarteInterface carte,JoueurDistantInterface joueurD,int numJoueurDistant) 
 	{
-		//pas deja jouer et 
-		//		soit atout
-		//		soit premiere carte joueur
-		//		soit de la meme couleur
-		//		soit l'allier est maitre
-		return !playedCard.contain(carte);
+		//pas deja jouer et pas dans la main du joueur si il ne joue pas
+		//	not played && (si numjoueur != numjouer distant) alors 
+		return !playedCard.contain(carte)&&(numJoueurDistant==numJoueur||!joueurD.aLaCarte(carte));
 		
 	}
 
@@ -199,7 +196,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (valeur==250)
 			val="capot";
 		else if (valeur==500)
-			val="générale";
+			val="gï¿½nï¿½rale";
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
@@ -216,7 +213,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (valeur==250)
 			val="capot";
 		else if (valeur==500)
-			val="générale";
+			val="gï¿½nï¿½rale";
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
@@ -236,7 +233,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (valeur==250)
 			val="capot";
 		else if (valeur==500)
-			val="générale";
+			val="gï¿½nï¿½rale";
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
@@ -290,7 +287,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			if (valeur==250)
 				val="capot";
 			else if (valeur==500)
-				val="générale";
+				val="gï¿½nï¿½rale";
 			else
 				val =""+valeur;
 			String couleur = this.getAtout();

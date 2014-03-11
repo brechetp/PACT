@@ -4,7 +4,7 @@ import structure.*;
 
 public interface JoueurDistantInterface 
 {
-	//Envoi la carte joué au joueur distant et le numero du joueur i
+	//Envoi la carte jouï¿½ au joueur distant et le numero du joueur i
 	public void sendCard(CarteInterface carte,int i);
 	
 	//demande que le joueur distant joue une carte
@@ -27,5 +27,8 @@ public interface JoueurDistantInterface
 
 	//indique que le mode annonce est fini
 	public void sendFinAnnonce();
+
+	//envoi vrai si le joueur a la carte en sa possession
+	public boolean aLaCarte(CarteInterface carte);
 	
 }

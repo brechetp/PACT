@@ -5,17 +5,17 @@ import camera.Card;
 import camera.Database;
 
 
-public class ThreadComparaison implements Runnable
+public class Comparaison implements Runnable
 {
 	private Card carte;
 	private BeloteCoinche belote;
 	
-	public ThreadComparaison(Card carte, BeloteCoinche belote)
+	public Comparaison(Card carte, BeloteCoinche belote)
 	{
 		this.carte = carte;
 		this.belote = belote;
 	}
-	@Override
+	
 	public void run() 
 	{
 		envoyerCarteBelote(carte.find(Database.database));
@@ -25,23 +25,23 @@ public class ThreadComparaison implements Runnable
 	private void envoyerCarteBelote(String string)
 	{
 		System.out.println(string);
-		if (string.endsWith("1.jpg"))
+		if (string.endsWith("e1.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("as","pique", belote.getEtat())));
-		else if (string.endsWith("2.jpg"))
+		else if (string.endsWith("e2.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("as","pique", belote.getEtat())));
-		else if (string.endsWith("3.jpg"))
+		else if (string.endsWith("e3.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("as","trefle", belote.getEtat())));
-		else if (string.endsWith("4.jpg"))
+		else if (string.endsWith("e4.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("as","trefle", belote.getEtat())));
-		else if (string.endsWith("5.jpg"))
+		else if (string.endsWith("e5.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("7","pique", belote.getEtat())));
-		else if (string.endsWith("6.jpg"))
+		else if (string.endsWith("e6.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("7","pique", belote.getEtat())));
-		else if (string.endsWith("7.jpg"))
+		else if (string.endsWith("e7.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("7","trefle", belote.getEtat())));
-		else if (string.endsWith("8.jpg"))
+		else if (string.endsWith("e8.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("7","trefle", belote.getEtat())));
-		else if (string.endsWith("9.jpg"))
+		else if (string.endsWith("e9.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("8","pique", belote.getEtat())));
 		else if (string.endsWith("10.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("8","pique", belote.getEtat())));

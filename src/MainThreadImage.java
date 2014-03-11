@@ -48,7 +48,7 @@ public class MainThreadImage implements Runnable{
 				Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage());
 				carte.save("data/test/resample/resample"+compt+".jpg");
 				carte.binaryThreshold().cut(50, 50, 535, 789).save("data/test/binary/binary"+compt+".jpg");
-				new Thread(new ThreadComparaison(carte,belote)).start();
+				new Comparaison(carte,belote).run(); //retire la thread pour éviter les confusion
 				
 				
 			} catch (Exception e) {

@@ -37,7 +37,7 @@ public class PremierMain {
         //Start Camera
         new Thread(new MainThreadImage(belote)).start();
         
-        Carte RoiCa = new Carte("roi","carreau",etat);
+        /**Carte RoiCa = new Carte("roi","carreau",etat);
 		CardEvent RoiCaEvent = new CardEvent(RoiCa);
 		Carte RoiCo = new Carte("roi","coeur",etat);
 		CardEvent RoiCoEvent = new CardEvent(RoiCo);
@@ -132,6 +132,6 @@ public class PremierMain {
         } catch (IOException e) {
             e.printStackTrace();
         }
-	}
+	}**/
 
 }
