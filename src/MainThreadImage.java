@@ -27,15 +27,11 @@ public class MainThreadImage implements Runnable{
 		while (true)
 		{
 			compt++;
-			try {
-				Thread.sleep(10000);
-				System.out.println("Photo prise");
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			//mettre un test qu'il n'y a pas de main dans la zone ici: par exemple un bool a false quand la leap detecte et true sinon
 			Capture.captureFrame("data/test/capture"+compt+".jpg");
+			System.out.println("Photo prise");
+			
+			
 			Image im2 = new Image ("data/test/capture"+compt+".jpg");
 			
 			BinaryImage bin = im2.difference(fond);
