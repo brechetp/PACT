@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 import static com.googlecode.javacv.cpp.opencv_core.*;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
@@ -157,6 +158,12 @@ public class BinaryImage extends GrayImage {
 	public int[][] getBinaryMatrix(){
 		
 		return binaryMatrix;
+	}
+	
+	@Override
+	public int get(int i, int j){
+		
+		return binaryMatrix[j][i];
 	}
 	
 	@Override
@@ -423,6 +430,99 @@ public class BinaryImage extends GrayImage {
 	}
 	
 	
+	/*
+	 * 
+	 * Et logique entre deux images binaire
+	 * 
+	 * 
+	 */
+	
+	public BinaryImage and(BinaryImage image){
+		
+		int[][] res = new int[height][width];
+		
+		for(int j = 0; j<height; j++){
+			for(int i =0; i< width; i++){
+				
+				res[j][i] = this.get(i,j) * image.get(i, j);
+			}
+		}
+		
+		
+		return new BinaryImage(res);
+		
+		
+	}
+	
+	/*
+	 * Detection de contours
+	 * 
+	 */
+	
+	public EdgeImage getEdge(){
+		
+		int[][] res = new int[height][width];
+		ArrayList<int[]> list = new ArrayList<int[]>();
+		
+		
+		for (int i =1; i < width-1; i ++){
+			for(int j =1; j < height-1; j++){
+				
+				res[j][i] = binaryMatrix[j][i]*Math.min(1, (Math.abs(binaryMatrix[j][i]-binaryMatrix[j+1][i]) +Math.abs(binaryMatrix[j][i]-binaryMatrix[j+1][i])+Math.abs(binaryMatrix[j][i]-binaryMatrix[j-1][i])+Math.abs(binaryMatrix[j][i+1]-binaryMatrix[j][i-1]))) ;
+				if (res[j][i]==1)
+					list.add(new int[]{i,j});
+			}
+		}
+		
+		return new EdgeImage (res, list);
+		
+	}
+	
+	public int vote(double[][] points){
+		
+		int compt = 0;
+		
+		double x0 = points[0][0], y0 = points[0][1], x1 = points[1][0], y1 = points[1][1], x2 = points[2][0], y2 = points[2][1];
+		double alpha = x1-x0, beta = y1-y0, gamma = -beta, delta = alpha;
+		double squareNorm = Math.sqrt(Math.pow(alpha, 2) + Math.pow(beta, 2));
+		double norme = Math.sqrt(Math.pow(alpha, 2) + Math.pow(beta, 2));
+		
+		double[][] coins = coins(points);
+		
+		Line line1 = new Line(coins[0], coins[2]), line2 = new Line(coins[0], coins[1]), line3 = new Line(coins[1], coins[3]), line4 = new Line(coins[2], coins[3]);
+		
+		
+		
+		
+		return compt;
+	}
+	
+	private double[][] coins(double[][] points){
+		
+		double[][] coins = new double[4][2];
+		
+		double x0 = points[0][0], y0 = points[0][1], x1 = points[1][0], y1 = points[1][1], x2 = points[2][0], y2 = points[2][1];
+		double alpha = x1-x0, beta = y1-y0, gamma = -beta, delta = alpha;
+		double norm = Math.sqrt(Math.pow(alpha, 2) + Math.pow(beta, 2));
+		double squareNorm = Math.sqrt(Math.pow(alpha, 2) + Math.pow(beta, 2));
+		
+		coins[0][0] = x1 + (((x2-x1)*(alpha) + (y2-y1)*beta)/(squareNorm))*alpha;
+		coins[0][1] = y1 + (((x2-x1)*(alpha) + (y2-y1)*beta)/(squareNorm))*beta;
+		// coordonnes de H projete de 2 sur la droite 01
+		
+		coins[1][0] = coins[0][0] + Card.WIDTH*(gamma)/norm;
+		coins[1][1] = coins[0][1] + Card.WIDTH*(delta)/norm;
+		
+		coins[2][0] = coins[0][0] + Card.HEIGHT*(alpha)/norm;
+		coins[2][1] = coins[0][1] + Card.HEIGHT*(beta)/norm;
+		
+		coins[3][0] = coins[1][0] + Card.HEIGHT*(alpha)/norm;
+		coins[3][1] = coins[1][0] + Card.HEIGHT*(beta)/norm;
+		
+		
+		return coins;
+		
+	}
 }
 
 

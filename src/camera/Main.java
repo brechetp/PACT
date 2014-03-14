@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 
 
 
+
 import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.*;
@@ -165,28 +166,34 @@ public class Main {
 		  System.out.println(carte.findIn(database));*/
 		
 	
-		/*Capture.captureFrame("data/capture/carte2.jpg");
+		Capture.captureFrame("data/test/carte2.jpg");
 		Thread.sleep(5000);
-		Capture.captureFrame("data/capture/carte3.jpg");*/
+		Capture.captureFrame("data/test/carte3.jpg");
 		
-		Image im1 = new Image("data/capture/carte2.jpg");
-		Image im2 = new Image ("data/capture/carte3.jpg");
+		Image im1 = new Image("data/test/carte2.jpg");
+		Image im2 = new Image ("data/test/carte3.jpg");
 		
-		BinaryImage bin = im2.difference(im1);
+		BinaryImage bin1 = im2.differenceNeighbour(im1, 30, 3);
+		bin1.save("data/test/binary/bin1.jpg");
+		BinaryImage bin2 = im2.binaryThreshold(1);
+		bin2.save("data/test/binary/bin2.jpg");
+		BinaryImage bin = bin1.and(bin2);
 		
-		BinaryImage bin2 = bin.largestComponent();
+		bin.save("data/test/binary/bin.jpg");
 		
-		int[][] coins = bin2.getCorners();
+		BinaryImage bin3 = bin.largestComponent();
+		
+		int[][] coins = bin3.getCorners();
 		
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
-		carte.save("data/capture/cartetest.jpg");
-		bin.save("data/test/save1.jpg");
+		carte.save("data/test/cartetest.jpg");
+		bin3.edge().save("data/test/save2.jpg");
 		
-		new Database("data/database/database5/carte");
+		/*new Database("data/database/database5/carte");
 		
 		System.out.println(carte.getType());
 		
-		System.out.println(carte.find(Database.database));
+		System.out.println(carte.find(Database.database));*/
 		
 		//Database database = new Database("data/database/database5/carte");
 	

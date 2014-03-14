@@ -13,6 +13,9 @@ public class Card extends Image{
 	private static final double[] averageYellow = new double[]{163.4125, 247.32, 248.835};
 	private static final double[] sigmaYellow = new double[]{8.154896918416563, 3.0153938382904544, 2.786175694388279};
 	// double [] matchTable = new double [5];
+	static final double WIDTH = 0;
+	static final double HEIGHT =0 ;
+	
 
 
 	private Image corner;
@@ -241,7 +244,7 @@ public class Card extends Image{
 		
 		public int getComponentsNumber(int size){
 			
-			BinaryImage bin = new BinaryImage(this.binaryThreshold().cut(50, 50, 535, 789)); //on enleve les bords
+			BinaryImage bin = new BinaryImage(this.binaryThreshold(0).cut(50, 50, 535, 789)); //on enleve les bords
 			int res = bin.componentsNumber(size);
 			
 			return res;

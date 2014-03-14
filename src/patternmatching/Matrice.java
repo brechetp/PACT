@@ -538,4 +538,6 @@ public class Matrice
 		System.out.println("Matrice inverse : \n" + x.getMatriceInverse());
 
 	}
+	
+	
 }

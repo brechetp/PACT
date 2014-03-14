@@ -134,8 +134,8 @@ public class GrayImage extends Image{
 				
 				float pixelValue = 0 ;
 				float tot = 0;
-				for (int k = 0; k <3; k++){
-					for(int p=0; p<3; p++){
+				for (int k = 0; k <conv[0].length; k++){
+					for(int p=0; p<conv.length; p++){
 						
 						pixelValue = pixelValue + conv[p][k]*this.grayMatrix[j+(p-1)][i+(k-1)];
 						tot = tot + conv[p][k];

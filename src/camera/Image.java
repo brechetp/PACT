@@ -15,7 +15,7 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class Image {
 	
 
-	public static final int threshold = 220;
+	public static final int threshold = 200;
 	
 	protected int compt =0; //compte le nombre de pixels non blancs
 	
@@ -426,7 +426,8 @@ public class Image {
 	}
 	
 
-	public Image binaryThreshold(){ // on seuille selon le blanc
+	public BinaryImage binaryThreshold(int version){ // on seuille selon le blanc
+		// si version = 1, on garde les blancs , si version = 0 on garde les non blancs
 		
 		int[] tab = new int[3*width*height];
 
@@ -440,12 +441,12 @@ public class Image {
 
 					
 					for(int p =0; p<3; p++){
-						tab[3*i + 3*width*j+p] = 0;
+						tab[3*i + 3*width*j+p] = version*255;
 					}
 				}else{
 					for(int p =0; p<3; p++){
 
-						tab[3*i + 3*width*j+p] = 255;
+						tab[3*i + 3*width*j+p] = 255 - version*255;
 
 					}
 					
@@ -454,7 +455,7 @@ public class Image {
 		}
 		}
 		Image res = new Image(tab, width, height);
-		return res;
+		return new BinaryImage(res);
 
 	}
 	public Image threshold(){ // on seuille selon le blanc
@@ -487,6 +488,15 @@ public class Image {
 		Image res = new Image(tab, width, height);
 		return res;
 
+	}
+	
+	public BinaryImage detect(Image image, int threshold, int nbr){
+		
+		BinaryImage bin1 = this.differenceNeighbour(image, threshold, nbr);
+		BinaryImage bin2 = this.binaryThreshold(1);
+		
+		return bin2.and(bin1);
+		
 	}
 
 }
