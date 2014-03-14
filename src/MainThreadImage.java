@@ -26,7 +26,7 @@ public class MainThreadImage implements Runnable{
 		new Database("data/database/database5/carte");
 		while (true)
 		{
-			compt++;
+			compt= (compt +1) % 100;
 			try {
 				Thread.sleep(10000);
 				System.out.println("Photo prise");
