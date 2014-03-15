@@ -153,6 +153,8 @@ public class Comparaison implements Runnable
 			belote.nouvelleCarte(new CardEvent(new Carte("roi","carreau", belote.getEtat())));
 		else if (string.endsWith("64.jpg"))
 			belote.nouvelleCarte(new CardEvent(new Carte("roi","carreau", belote.getEtat())));
+		else if( string.equals("Pas de carte sur la table"))
+			belote.finPli();
 	}
 	
 }

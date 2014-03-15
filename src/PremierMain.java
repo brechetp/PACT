@@ -31,9 +31,9 @@ public class PremierMain {
 		Classification classi = new Classification(classilol);
 		classi.addListener(belote);
 		//Start Leap
-        MyListener listener = new MyListener(classi);
+      /*  MyListener listener = new MyListener(classi);
         Controller controller = new Controller();
-        controller.addListener(listener);
+        controller.addListener(listener);*/
         //Start Camera
         new Thread(new MainThreadImage(belote)).start();
         
@@ -131,7 +131,7 @@ public class PremierMain {
             System.in.read();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-	}**/
+        }**/
+	}
 
 }

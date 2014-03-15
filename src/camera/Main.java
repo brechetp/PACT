@@ -187,7 +187,7 @@ public class Main {
 		
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/test/cartetest.jpg");
-		bin3.edge().save("data/test/save2.jpg");
+	
 		
 		/*new Database("data/database/database5/carte");
 		

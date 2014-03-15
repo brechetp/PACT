@@ -231,7 +231,9 @@ public class Card extends Image{
 			else
 				string = "0"; // carte noire
 			int nbr = getComponentsNumber (6000);
-			if (nbr ==1 && compt < 100000) // as
+			if (nbr ==0)
+				string = null;
+			else if (nbr ==1 && compt < 100000) // as
 				string = string+"0";
 			else if (nbr >= 7 && nbr <= 10) // 7, 8, 9, 10
 				string =string+ (nbr-6);
@@ -258,9 +260,13 @@ public class Card extends Image{
 			String res;
 			String string = getType();
 			
-			res = findIn(tab[(int)string.charAt(0)-48][(int)string.charAt(1)-48]);
-			
-			return res;
+			if (string != null) {
+				res = findIn(tab[(int) string.charAt(0) - 48][(int) string
+						.charAt(1) - 48]);
+				return res;
+			} else {
+				return "Pas de carte sur la table";
+			}
 			
 			
 			

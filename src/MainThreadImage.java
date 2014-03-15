@@ -1,4 +1,6 @@
+
 import logiqueDeJeux.BeloteCoinche;
+import camera.BinaryComponent;
 import camera.BinaryImage;
 import camera.Capture;
 import camera.Card;
@@ -26,26 +28,35 @@ public class MainThreadImage implements Runnable{
 		new Database("data/database/database5/carte");
 		while (true)
 		{
-			compt++;
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			compt = compt + 1 % 10;
 			//mettre un test qu'il n'y a pas de main dans la zone ici: par exemple un bool a false quand la leap detecte et true sinon
 			Capture.captureFrame("data/test/capture"+compt+".jpg");
 			System.out.println("Photo prise");
 			
-			
 			Image im2 = new Image ("data/test/capture"+compt+".jpg");
 			
-			BinaryImage bin = im2.difference(fond);
+			BinaryImage bin = im2.detect(fond, 30, 1);
 			
-			BinaryImage bin2 = bin.largestComponent();
+			bin.save("data/test/binary/binary"+compt+".jpg");
 			
-			int[][] coins = bin2.getCorners();
+			Capture.captureFrame("data/test/fond"+compt+".jpg");
+			System.out.println("fond pris !");
+			fond= new Image ("data/test/fond"+compt+".jpg");
 			
-			try {
+			BinaryComponent bin2 = bin.largestComponent();
+			try{
+				
+				int[][] coins = bin2.getCorners();
 				Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage());
 				carte.save("data/test/resample/resample"+compt+".jpg");
-				carte.binaryThreshold().cut(50, 50, 535, 789).save("data/test/binary/binary"+compt+".jpg");
+				carte.binaryThreshold(0).cut(50, 50, 535, 789).save("data/test/binary/binary"+compt+".jpg");
 				new Comparaison(carte,belote).run(); //retire la thread pour éviter les confusion
-				
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

@@ -235,7 +235,7 @@ public class BinaryImage extends GrayImage {
 		return matrix;
 	}
 	
-	public int[][] getCorners(){ // renvoie les coins d'une carte binaire
+	public int[][] getCorners() throws Exception{ // renvoie les coins d'une carte binaire
 		
 		int[][] res = new int[][]{{0,height},{0,0},{width,0},{0,0}};
 		
@@ -362,7 +362,7 @@ public class BinaryImage extends GrayImage {
 		
 	}
 
-	public BinaryImage largestComponent(){
+	public BinaryComponent largestComponent(){
 		int [][] tab = conncetedComponents();
 		int[][] largest = new int[height][width];
 		int[] compteur = new int[nbTags];
@@ -397,7 +397,7 @@ public class BinaryImage extends GrayImage {
 			}
 		}	
 		
-		return new BinaryImage (largest);
+		return new BinaryComponent (largest, max);
 	}
 	
 	public int componentsNumber(int size){

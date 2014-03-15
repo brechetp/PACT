@@ -38,7 +38,7 @@ public class BeloteCoinche implements GlobalListener
 
 	public void finPli() 
 	{
-		// TODO Auto-generated method stub
+		System.out.println("fin de pli");
 		machine.eventFinPli();
 	}
 	
