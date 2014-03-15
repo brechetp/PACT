@@ -58,7 +58,7 @@ public class Capture {
 			
 		}
 		
-		public static void database(int debut, int fin, int threshold, int nbr, String capture, String destination){
+		public static void database(int debut, int fin, int threshold, int nbr, String capture, String destination) throws Exception{
 			
 			int[][] coins ;
 
@@ -85,7 +85,7 @@ public class Capture {
 		  	
 					Image image0 = new Image("data/capture/carte0.jpg");
 					Image image1 = new Image(capture+i+".jpg");
-					BinaryImage bin = image1.differenceNeighbour(image0, threshold, nbr);
+					BinaryImage bin = image1.differenceNeighbour(image0);
 					
 			      	BinaryImage card = bin.largestComponent();
 			      	cvSaveImage("data/binary/database4/carte"+i+".jpg", bin.getBinaryImage());

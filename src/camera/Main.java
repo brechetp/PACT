@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 
 
 
+
 import com.googlecode.javacv.CanvasFrame;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.*;
@@ -165,15 +166,18 @@ public class Main {
 		Card carte = new Card("data/database/carte4.jpg");
 		  System.out.println(carte.findIn(database));*/
 		
-	
-		Capture.captureFrame("data/test/carte2.jpg");
+	/*
+	 * Capture de deux cartes
+	 * 
+	 */
+		/*Capture.captureFrame("data/test/carte2.jpg");
 		Thread.sleep(5000);
-		Capture.captureFrame("data/test/carte3.jpg");
+		Capture.captureFrame("data/test/carte3.jpg");*/
 		
-		Image im1 = new Image("data/test/carte2.jpg");
-		Image im2 = new Image ("data/test/carte3.jpg");
+		Image im1 = new Image("data/test/capture8.jpg");
+		Image im2 = new Image ("data/test/capture7.jpg");
 		
-		BinaryImage bin1 = im2.differenceNeighbour(im1, 30, 3);
+		BinaryImage bin1 = im2.differenceNeighbour(im1);
 		bin1.save("data/test/binary/bin1.jpg");
 		BinaryImage bin2 = im2.binaryThreshold(1);
 		bin2.save("data/test/binary/bin2.jpg");
@@ -183,10 +187,13 @@ public class Main {
 		
 		BinaryImage bin3 = bin.largestComponent();
 		
-		int[][] coins = bin3.getCorners();
+		bin3.getEdge().save("data/test/contour.jpg");
+		
+		int[][] coins = bin3.ransac();
 		
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/test/cartetest.jpg");
+		
 	
 		
 		/*new Database("data/database/database5/carte");
@@ -236,6 +243,16 @@ public class Main {
 	
 		
 		//System.out.println(carte.find(Database.database));
+		
+		
+		/*
+		 * 
+		 * Tests sur les lignes et segments
+		 * 
+		 */
+		
+		Line line = new Line(new double[]{6,18}, new double[]{0,0});
+
 	
 				
 				
@@ -244,7 +261,7 @@ public class Main {
 	
 	
 	
-	public static void resample(int debut, int fin, String binSource, String rgbSource, String destination){
+	public static void resample(int debut, int fin, String binSource, String rgbSource, String destination) throws Exception{
 		
 		int[][] coins ;
 

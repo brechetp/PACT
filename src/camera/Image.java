@@ -15,7 +15,9 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class Image {
 	
 
-	public static final int threshold = 200;
+	public static final int WHITE_THRESHOLD = 200;
+	public static final int DISTANCE_THRESHOLD = 30;
+	private static final int NEIGHBOUR_NUMBER = 3; // pour l'algorithme de distance
 	
 	protected int compt =0; //compte le nombre de pixels non blancs
 	
@@ -246,7 +248,7 @@ public class Image {
 
 	public boolean isWhite(int[] rgbByte){
 		
-		return (rgbByte[0] > threshold && rgbByte[1] > threshold && rgbByte[2] > threshold);
+		return (rgbByte[0] > WHITE_THRESHOLD && rgbByte[1] > WHITE_THRESHOLD && rgbByte[2] > WHITE_THRESHOLD);
 	}
 	  
 
@@ -277,7 +279,7 @@ public class Image {
 		return res;
 	}
 	
-	public BinaryImage differenceNeighbour(Image image, int threshold, int nbr){
+	public BinaryImage differenceNeighbour(Image image){
 		
 		
 		int[][] diff = new int[height][width];
@@ -287,12 +289,12 @@ public class Image {
 			for(int j = 0; j < height; j++){
 				distance = 0;
 				pixel = getRgbByte(i,j);
-				voisin = image.neighbour(i, j, pixel, nbr);
+				voisin = image.neighbour(i, j, pixel, NEIGHBOUR_NUMBER);
 				for (int k = 0; k < 2; k ++){
 					distance = distance + Math.abs(voisin[k] - pixel[k]);	
 				}	
 				
-				if (distance > threshold)
+				if (distance > DISTANCE_THRESHOLD)
 					diff[j][i] = 1;
 				else
 					diff[j][i] = 0 ;
@@ -319,7 +321,7 @@ public class Image {
 					distance = distance + Math.abs(pixel2[k] - pixel[k]);	
 				}	
 			
-				if (distance > 60)
+				if (distance > WHITE_THRESHOLD)
 					diff[j][i] = 1;
 				else
 					diff[j][i] = 0 ;
@@ -458,7 +460,7 @@ public class Image {
 		return new BinaryImage(res);
 
 	}
-	public Image threshold(){ // on seuille selon le blanc
+	public Image whiteThreshold(){ // on seuille selon le blanc
 		
 		int[] tab = new int[3*width*height];
 
@@ -490,9 +492,9 @@ public class Image {
 
 	}
 	
-	public BinaryImage detect(Image image, int threshold, int nbr){
+	public BinaryImage detect(Image image){
 		
-		BinaryImage bin1 = this.differenceNeighbour(image, threshold, nbr);
+		BinaryImage bin1 = this.differenceNeighbour(image);
 		BinaryImage bin2 = this.binaryThreshold(1);
 		
 		return bin2.and(bin1);
