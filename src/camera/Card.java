@@ -9,12 +9,9 @@ public class Card extends Image{
 	
 	
 
-	private static final double[] yellow = new double[]{150,200,200};
-	private static final double[] averageYellow = new double[]{163.4125, 247.32, 248.835};
-	private static final double[] sigmaYellow = new double[]{8.154896918416563, 3.0153938382904544, 2.786175694388279};
 	// double [] matchTable = new double [5];
-	static final double WIDTH = 260;
-	static final double HEIGHT =367 ;
+	static double WIDTH = 285 ; // taille de la carte sur l'ecran
+	static double HEIGHT = 402;
 	
 
 
