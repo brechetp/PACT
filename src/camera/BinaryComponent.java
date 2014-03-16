@@ -73,7 +73,7 @@ public class BinaryComponent extends BinaryImage{
 			}
 		}
 		// si (ymin-y)^2 + (xmin - x)^2 < ymin ... + xmax...
-		if((Math.pow(res[2][1]-res[0][1], 2)+Math.pow(res[2][0]-res[0][0], 2)) < (Math.pow(res[0][1]-res[3][1], 2)+Math.pow(res[0][0]-res[3][1], 2))){
+		if((Math.pow(res[2][1]-res[0][1], 2)+Math.pow(res[2][0]-res[0][0], 2)) < (Math.pow(res[0][1]-res[1][1], 2)+Math.pow(res[0][0]-res[1][0  ], 2))){
 			int[] yMin = res[0], xMax = res[1], xMin = res[2], yMax = res[3];
 			res[0] = xMin;
 			res[1] = yMin;
@@ -82,6 +82,7 @@ public class BinaryComponent extends BinaryImage{
 
 
 		}
+
 
 
 		return res;

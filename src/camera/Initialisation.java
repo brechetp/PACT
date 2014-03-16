@@ -36,7 +36,7 @@ public class Initialisation {
 		
 		Card.WIDTH= (Math.sqrt(Math.pow(coins[0][0]-coins[1][0], 2)+ Math.pow(coins[0][1]-coins[1][1],  2))+Math.sqrt(Math.pow(coins[2][0]-coins[3][0], 2)+ Math.pow(coins[2][1]-coins[3][1],  2)))/2;
 		Card.HEIGHT= (Math.sqrt(Math.pow(coins[0][0]-coins[2][0], 2)+ Math.pow(coins[0][1]-coins[2][1],  2))+Math.sqrt(Math.pow(coins[1][0]-coins[3][0], 2)+ Math.pow(coins[1][1]-coins[3][1],  2)))/2;
-		System.out.println("Taille initialisée");
+		System.out.println("Taille initialisée à "+ Card.WIDTH+", "+Card.HEIGHT+".");
 		
 	
 	}

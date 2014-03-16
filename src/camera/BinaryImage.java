@@ -18,7 +18,7 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 
 public class BinaryImage extends GrayImage {
 	
-	private static final int COMPONENT_THRESHOLD = 6000;
+	private static final int COMPONENT_THRESHOLD = 3000;
 	protected int[][] binaryMatrix ;
 	private IplImage binaryImage;
 	private ByteBuffer binaryByteBuffer;

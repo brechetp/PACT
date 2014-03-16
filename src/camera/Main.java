@@ -170,15 +170,15 @@ public class Main {
 		 * Initialisation
 		 * 
 		 */
-		  Initialisation.setCardSize();
+		// Initialisation.setCardSize();
 		
 	/*
 	 * Capture de deux cartes
 	 * 
 	 */
-		/*Capture.captureFrame("data/test/fond.jpg");
+		Capture.captureFrame("data/test/fond.jpg");
 		Thread.sleep(5000);
-		Capture.captureFrame("data/test/carte.jpg");*/
+		Capture.captureFrame("data/test/carte.jpg");
 		
 		Image im1 = new Image("data/test/fond.jpg");
 		Image im2 = new Image ("data/test/carte.jpg");
@@ -199,6 +199,8 @@ public class Main {
 		
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/test/cartetest.jpg");
+		
+		System.out.println(carte.getType());
 		
 	
 		
@@ -251,15 +253,7 @@ public class Main {
 		//System.out.println(carte.find(Database.database));
 		
 		
-		/*
-		 * 
-		 * Tests sur les lignes et segments
-		 * 
-		 */
-		
-		Line line = new Line(new double[]{6,18}, new double[]{0,0});
 
-	
 				
 				
 		        
