@@ -170,15 +170,15 @@ public class Main {
 		 * Initialisation
 		 * 
 		 */
-		 // Initialisation.setCardSize();
+		  Initialisation.setCardSize();
 		
 	/*
 	 * Capture de deux cartes
 	 * 
 	 */
-		Capture.captureFrame("data/test/fond.jpg");
+		/*Capture.captureFrame("data/test/fond.jpg");
 		Thread.sleep(5000);
-		Capture.captureFrame("data/test/carte.jpg");
+		Capture.captureFrame("data/test/carte.jpg");*/
 		
 		Image im1 = new Image("data/test/fond.jpg");
 		Image im2 = new Image ("data/test/carte.jpg");

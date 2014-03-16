@@ -12,7 +12,7 @@ public class Capture {
 
 	public static void captureFrame(String fileName)
 	{
-		OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(0);
+		OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(1);
 		try
 		{
 
