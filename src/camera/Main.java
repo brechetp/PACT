@@ -166,16 +166,22 @@ public class Main {
 		Card carte = new Card("data/database/carte4.jpg");
 		  System.out.println(carte.findIn(database));*/
 		
+		/*
+		 * Initialisation
+		 * 
+		 */
+		Initialisation.setCardSize();
+		
 	/*
 	 * Capture de deux cartes
 	 * 
-	 */
-		/*Capture.captureFrame("data/test/carte2.jpg");
+	 */Thread.sleep(5000);
+		Capture.captureFrame("data/test/fond.jpg");
 		Thread.sleep(5000);
-		Capture.captureFrame("data/test/carte3.jpg");*/
+		Capture.captureFrame("data/test/carte.jpg");
 		
-		Image im1 = new Image("data/test/capture8.jpg");
-		Image im2 = new Image ("data/test/capture7.jpg");
+		Image im1 = new Image("data/test/fond.jpg");
+		Image im2 = new Image ("data/test/carte.jpg");
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
 		bin1.save("data/test/binary/bin1.jpg");
@@ -267,9 +273,9 @@ public class Main {
 		for(int i = debut; i <= fin; i++){
 			
 			BinaryImage bin = new BinaryImage(binSource+i+".jpg");
-			BinaryImage card = bin.largestComponent();
+			BinaryComponent card = bin.largestComponent();
 			Image img = new Image(rgbSource+i+".jpg");
-			coins = card.getCorners();
+			coins = card.getCornersRansac();
 			Image resample = img.resample(coins, 635, 889);
 	      	cvSaveImage(destination+i+".jpg", resample.getRgbImage());
 	      	
