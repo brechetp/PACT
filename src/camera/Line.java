@@ -22,11 +22,11 @@ public class Line {
 	public boolean isIn(int[] point, double threshold){ //  teste si le point est dans le semgment [AB]
 		
 		return 
-			(Math.abs(equation[0]*point[0] + equation[1]*point[1] + equation[2])/(Math.sqrt(Math.pow(equation[0], 2)+Math.pow(equation[1], 2))) < threshold
-					&& point[0] > Math.min(extremities[0][0], extremities[1][0])
-					&& point[0] < Math.max(extremities[0][0], extremities[1][0])
-					&& point[1] > Math.min(extremities[0][1], extremities[1][1])
-					&& point[1] < Math.max(extremities[0][1], extremities[1][1]));
+			(Math.abs(equation[0]*point[0] + equation[1]*point[1] + equation[2])/(Math.sqrt(Math.pow(equation[0], 2)+Math.pow(equation[1], 2))) <= threshold
+					&& point[0] >= Math.min(extremities[0][0], extremities[1][0])
+					&& point[0] <= Math.max(extremities[0][0], extremities[1][0])
+					&& point[1] >= Math.min(extremities[0][1], extremities[1][1])
+					&& point[1] <= Math.max(extremities[0][1], extremities[1][1]));
 		
 	}
 

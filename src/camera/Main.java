@@ -185,11 +185,10 @@ public class Main {
 		
 		bin.save("data/test/binary/bin.jpg");
 		
-		BinaryImage bin3 = bin.largestComponent();
+		BinaryComponent bin3 = bin.largestComponent();
+	
 		
-		bin3.getEdge().save("data/test/contour.jpg");
-		
-		int[][] coins = bin3.ransac();
+		int[][] coins = bin3.getCorners();
 		
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/test/cartetest.jpg");
