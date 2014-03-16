@@ -18,6 +18,7 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 
 public class BinaryImage extends GrayImage {
 	
+	private static final int COMPONENT_THRESHOLD = 4000;
 	protected int[][] binaryMatrix ;
 	private IplImage binaryImage;
 	private ByteBuffer binaryByteBuffer;
@@ -362,6 +363,41 @@ public class BinaryImage extends GrayImage {
 		}	
 		
 		return new BinaryComponent (largest, max);
+	}
+	
+	public BinaryComponent largeComponents(){ // renvoie les grandes composantes
+		
+		int [][] tab = conncetedComponents();
+		int[][] largest = new int[height][width];
+		int[] compteur = new int[nbTags];
+		int compt = 0; // compte le nombre de pixels gardes
+		
+		for (int i=0; i<nbTags; i++){
+			compteur[i]=0;
+		}
+		
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (tab[i][j] !=0) {
+					compteur[tab[i][j]]++ ;
+				}
+			}
+		}
+		
+		
+		
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (compteur[tab[i][j]] >= COMPONENT_THRESHOLD) {
+					largest[i][j] =1 ;
+					compt++;
+				} else {
+					largest[i][j]=0;
+				}
+			}
+		}	
+		
+		return new BinaryComponent (largest, compt);
 	}
 	
 	public int componentsNumber(int size){

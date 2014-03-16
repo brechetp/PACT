@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class EdgeImage extends BinaryImage {
 
-	private static final double lineThreshold = 0.2; // distance ˆ laquelle un point est dans une droite
-	private static final int NBR_RANSAC = 10000000;
+	private static final double lineThreshold = 2; // distance ˆ laquelle un point est dans une droite
+	private static final int NBR_RANSAC = 10000;
 	private ArrayList<int[]> pointsList = new ArrayList<int[]>();
 
 	public EdgeImage(int[][] matrix, ArrayList<int[]> pointsList){
@@ -21,7 +21,7 @@ public class EdgeImage extends BinaryImage {
 		int[][] res = new int[4][2];
 		int size = pointsList.size();
 		int i = 0;
-		while (max < 150 && i < NBR_RANSAC){
+		while (max < (Card.WIDTH + Card.HEIGHT) && i < NBR_RANSAC){
 			
 			i++;
 			int[][] points = new int[3][2];

@@ -170,12 +170,12 @@ public class Main {
 		 * Initialisation
 		 * 
 		 */
-		Initialisation.setCardSize();
+		 // Initialisation.setCardSize();
 		
 	/*
 	 * Capture de deux cartes
 	 * 
-	 */Thread.sleep(5000);
+	 */
 		Capture.captureFrame("data/test/fond.jpg");
 		Thread.sleep(5000);
 		Capture.captureFrame("data/test/carte.jpg");
@@ -189,12 +189,13 @@ public class Main {
 		bin2.save("data/test/binary/bin2.jpg");
 		BinaryImage bin = bin1.and(bin2);
 		
-		bin.save("data/test/binary/bin.jpg");
 		
-		BinaryComponent bin3 = bin.largestComponent();
-	
 		
-		int[][] coins = bin3.getCorners();
+		BinaryComponent bin3 = bin.largeComponents();
+		bin3.save("data/test/binary/bin.jpg");
+		bin3.getEdge().save("data/test/contour.jpg");
+		
+		int[][] coins = bin3.getCornersRansac();
 		
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/test/cartetest.jpg");
