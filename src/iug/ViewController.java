@@ -160,6 +160,15 @@ public class ViewController implements ViewControllerInterface
 	
 	public void modeJeu(){
 		fen.getPan().setH(0);
+		fen.getPan().setM(1);
+		fen.repaint();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		fen.getPan().setM(0);
 		fen.repaint();
 	}
 	

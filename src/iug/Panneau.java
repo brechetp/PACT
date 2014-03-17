@@ -51,6 +51,7 @@ public class Panneau extends JPanel {
 	int j = 0;
 	int h = 0;
 	int y = 0;
+	int m = 0;
 	int yCarte = 0;
 	String s1;
 	String s2;
@@ -170,27 +171,27 @@ public class Panneau extends JPanel {
 		    }
 		    else if (k>0 && k<5){
 		    	g.setColor(new Color(204, 0, 51));
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 				FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("Le joueur " + k + " a coinché !!!!!", (this.getWidth()/2)-(metrics.stringWidth("Le joueur " + k + " a coinché !!!!!")/2), 400);
+		    	g.drawString("Le joueur " + k + " a coinché !!!!!", (this.getWidth()/2)-(metrics.stringWidth("Le joueur " + k + " a coinché !!!!!")/2), (this.getHeight()/2));
 		    }
 		    else if (k==5){
 		    	g.setColor(new Color(204, 0, 51));
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 				FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("CONTRE-COINCHE !!!", (this.getWidth()/2)-(metrics.stringWidth("CONTRE-COINCHE !!!")/2), 400);
+		    	g.drawString("CONTRE-COINCHE !!!", (this.getWidth()/2)-(metrics.stringWidth("CONTRE-COINCHE !!!")/2), (this.getHeight()/2));
 		    }
 		    else if (k==6){
 		    	g.setColor(new Color(204, 0, 51));
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 				FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("Annonce joueur distant : " + valeur + " " + couleur, (this.getWidth()/2)-(metrics.stringWidth("Annonce joueur distant : " + valeur + " " + couleur)/2), 400);
+		    	g.drawString("Annonce joueur distant : " + valeur + " " + couleur, (this.getWidth()/2)-(metrics.stringWidth("Annonce joueur distant : " + valeur + " " + couleur)/2), (this.getHeight()/2));
 		    }
 		    else if (k==7){
 		    	g.setColor(new Color(204, 0, 51));
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 				FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("Le joueur distant a passé", (this.getWidth()/2)-(metrics.stringWidth("Le joueur distant a passé")/2), 400);
+		    	g.drawString("Le joueur distant a passé", (this.getWidth()/2)-(metrics.stringWidth("Le joueur distant a passé")/2), (this.getHeight()/2));
 		    }
 		    else if (k==666){
 		    	j=0;
@@ -200,47 +201,56 @@ public class Panneau extends JPanel {
 		    	g.setColor(new Color(255, 0, 0));
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 80));
 				FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("PARTIE TERMINEE", (this.getWidth()/2)-(metrics.stringWidth("PARTIE TERMINEE")/2), 400);
+		    	g.drawString("PARTIE TERMINEE", (this.getWidth()/2)-(metrics.stringWidth("PARTIE TERMINEE")/2), (this.getHeight()/2));
 		    }
 		    if (j!=0 && h==0){
 		    	g.setColor(new Color(0,51,153));
-		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 		    	FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("C'est au joueur " + j + " de jouer !", (this.getWidth()/2)-(metrics.stringWidth("C'est au joueur " + j + " de jouer !")/2) , 600);
+		    	g.drawString("C'est au joueur " + j + " de jouer !", (this.getWidth()/2)-(metrics.stringWidth("C'est au joueur " + j + " de jouer !")/2) , (int) ((this.getHeight()*0.7)));
 		    }
 		    if (j!=0 && h==1){
 		    	g.setColor(new Color(0,153,153));
-		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 		    	FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("C'est au joueur " + j + " d'annoncer !", (this.getWidth()/2)-(metrics.stringWidth("C'est au joueur " + j + " d'annoncer !")/2) , 600);
+		    	g.drawString("C'est au joueur " + j + " d'annoncer !", (this.getWidth()/2)-(metrics.stringWidth("C'est au joueur " + j + " d'annoncer !")/2) , (int) ((this.getHeight())*0.7));
 		    }
 		    if (j==0){
 		    	
 		    }
 		    if (y!=0){
 		    	g.setColor(new Color(255,153,51));
-		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 		    	FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("Annonce en cours : ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2) , 650);
+		    	g.drawString("Annonce en cours : ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2) , (int) ((this.getHeight()*0.8)));
 		    	if(y==1){
 		    		g.setColor(new Color(255,0,0));
-			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-			    	g.drawString(s1, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2) , 650);
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+			    	g.drawString(s1, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : ") , (int) ((this.getHeight()*0.8)));
 			    	g.setColor(new Color(255,153,51));
-			    	g.drawString(" - ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2), 650);
-			    	g.drawString(s2, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2) , 650);
+			    	g.drawString(" - ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1), (int) ((this.getHeight()*0.8)));
+			    	g.drawString(s2, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1 + " - ") , (int) ((this.getHeight()*0.8)));
 		    	}
 		    	if(y==2){
 		    		g.setColor(new Color(255,153,51));
-			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-			    	g.drawString(s1, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2) , 650);
-			    	g.drawString(" - ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2), 650);
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+			    	g.drawString(s1, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : ") , (int) ((this.getHeight()*0.8)));
+			    	g.drawString(" - ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1), (int) ((this.getHeight()*0.8)));
 			    	g.setColor(new Color(255,0,0));
-			    	g.drawString(s2, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2) , 650);
+			    	g.drawString(s2, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1 + " - ") , (int) ((this.getHeight()*0.8)));
 		    	}
 		    }
 		    if (y==0){
 		    	
+		    }
+		    if (m==0){
+		    	
+		    }
+		    if (m==1){
+		    	g.setColor(new Color(51,0,153));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+		    	FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("Le jeu commence !", (this.getWidth()/2)-(metrics.stringWidth("Le jeu commence !")/2), this.getHeight()/2);
 		    }
 		} catch (IOException e) {
 		    e.printStackTrace();
@@ -299,6 +309,10 @@ public class Panneau extends JPanel {
 	public void setValeurCouleur(String valeur, String couleur){
 		this.valeur = valeur;
 		this.couleur = couleur;
+	}
+	
+	public void setM(int m){
+		this.m = m ;
 	}
 
 }

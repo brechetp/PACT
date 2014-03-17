@@ -52,7 +52,13 @@ public class IUGMain {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			vc.modeJeu();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			vc.partieTerminer();
 		}
 
