@@ -109,7 +109,7 @@ public class ViewController implements ViewControllerInterface
 		if (s.equals("ascarreau")){
 			k = 32;
 		}
-		for (int yCarte = -50 ; yCarte<250 ; yCarte = yCarte + 5){
+		for (int yCarte = -50 ; yCarte<fen.getPan().getHeight()*0.1 ; yCarte = yCarte + 5){
 			fen.getPan().setYCarte(yCarte);
 			fen.getPan().setI(k);
 			fen.repaint();
