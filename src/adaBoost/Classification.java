@@ -79,6 +79,11 @@ public class Classification
         listeners.add(GlobalListener.class, listener);
     }
     
+    public void removeListener(GlobalListener listener)
+    {
+    	listeners.remove(GlobalListener.class, listener);
+    }
+    
     public GlobalListener[] getListeners() {
         return listeners.getListeners(GlobalListener.class);
     }
@@ -87,7 +92,7 @@ public class Classification
 	{
 		switch(i)
 		{
-		// Pour le prototype alléger on change retour en passer.
+		// Pour le prototype allï¿½ger on change retour en passer.
 		
 		case 0:
 			//envoiMouvement(new MouvementEvent("passer"));
