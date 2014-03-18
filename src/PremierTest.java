@@ -93,50 +93,50 @@ public class PremierTest {
 		CardEvent AsTrEvent = new CardEvent(AsTr);
 		
 //Distribution
-		belote.nouvelleCarte(ValCaEvent);
-		belote.nouvelleCarte(NeuCaEvent);
-		belote.nouvelleCarte(RenPiEvent);
-		belote.nouvelleCarte(NeuPiEvent);
-		belote.nouvelleCarte(AsTrEvent);
-		belote.nouvelleCarte(AsCoEvent);
-		belote.nouvelleCarte(ValCoEvent);
-		belote.nouvelleCarte(DixCoEvent);
+		belote.nouvelleCarte(SepCaEvent);
+		belote.nouvelleCarte(AsCaEvent);
+		belote.nouvelleCarte(SepTrEvent);
+		belote.nouvelleCarte(RoiCoEvent);
+		belote.nouvelleCarte(SepPiEvent);
+		belote.nouvelleCarte(HuiTrEvent);
+		belote.nouvelleCarte(AsPiEvent);
+		belote.nouvelleCarte(RenTrEvent);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(passer); //joueur 1 passe
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(passer); //joueur 2 passe
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(accepter);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(accepter);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(passer);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(passer);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(accepter); //joueur 3 prend a 80 pique
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.setAnnonce(null); //joueur 4 passe
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(accepter);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(passer);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(accepter);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(passer);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(passer);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(accepter); // joueur 1 prend a 100 carreau
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(passer); //Joueur 2 passer
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.nouveauGeste(passer); //Joueur 3 passer
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			belote.setAnnonce(null); //Joueur 4 passe
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			
 			belote.nouvelleCarte(ValCaEvent);
 			Thread.sleep(1000);

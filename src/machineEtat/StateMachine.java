@@ -9,7 +9,7 @@ public class StateMachine
 {
 	private enum State {Distribution,
 						Annonce,AnnoncePasse1,AnnonceFaite,AnnoncePasse2,AnnoncePasse3,AnnonceAFaire,AnnonceAFaire2,
-						DebutTour,DebutTour1,DebutTour2,DebutTour3,DebutTour4,FinDebutTour, 
+						DebutTour,DebutTour1,DebutTour2,DebutTour3,DebutTour4,
 						SecondTour,SecondTour1, SecondTour2, SecondTour3, SecondTour4,
 						MontreCarte1,MontreCarte2,MontreCarte3,MontreCarte4,
 						ResteDesTours, };
@@ -35,8 +35,9 @@ public class StateMachine
 		 
 /*********************** Distribution *******************/		 
 		case Distribution:
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
 			joueurD.addCard(carte.getCarte());
-			if (joueurD.aHuitCarte()&&etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (joueurD.aHuitCarte())
 			{
 				this.state = State.Annonce;
 				vci.modeAnnonce();
@@ -91,17 +92,6 @@ public class StateMachine
 					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
 				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
 				this.state = State.DebutTour4;
-			}
-			break;
-		case DebutTour4:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
-			{
-				if (this.numJoueurDistant==etat.getNumJoueur())
-					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
-				else
-					joueurD.sendCard(carte.getCarte(), etat.getNumJoueur());
-				etat.joue(carte.getCarte(),vci,joueurD,numJoueurDistant);	//joue la carte et passe au joueur suivant
-				this.state = State.FinDebutTour;
 			}
 			break;
 			
