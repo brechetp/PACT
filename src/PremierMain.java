@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import structure.Carte;
+import camera.MainThreadImage;
 
 import com.leapmotion.leap.Controller;
 

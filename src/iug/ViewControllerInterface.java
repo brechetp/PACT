@@ -42,5 +42,9 @@ public interface ViewControllerInterface
 	public void valideValeurAnnonce();
 	
 	public void annonceJoueurDistant(String valeur, String couleur);
+	
+	public void droite();
+	
+	public void gauche();
 
 }

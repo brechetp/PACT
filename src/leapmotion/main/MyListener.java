@@ -3,6 +3,7 @@ package leapmotion.main;
 import java.io.*;
 
 import adaBoost.Classification;
+import camera.MainThreadImage;
 
 import com.leapmotion.leap.*;
 
@@ -42,6 +43,7 @@ public class MyListener extends Listener{
     		Frame frame = controller.frame();
         	if (frame.hands().count()>0)
         	{
+        		MainThreadImage.pasDeMain=false;
         		ParamUtiles param = new ParamUtiles();
         		param.addToList(frame, controller.frame(1));
         		double tab[] = new double[Classification.NOMBRE_DE_FEATURES];
@@ -53,6 +55,7 @@ public class MyListener extends Listener{
         	}
         	else{
         		classi.lancerClassi();
+        		MainThreadImage.pasDeMain=true;
         	}
     	}catch(Exception e){
     		e.printStackTrace();

@@ -7,7 +7,12 @@ public class IUGMain {
 		int k = 0;
 		
 		ViewController vc = new ViewController();
+		Thread.sleep(1000);
+		vc.droite();
+		Thread.sleep(1000);
+		vc.gauche();
 		
+		/*
 		vc.modeAnnonce();
 		vc.joueurEnCours(1);
 		Thread.sleep(1000);
@@ -93,7 +98,7 @@ public class IUGMain {
 		Thread.sleep(1000);
 		vc.effacerCartes();
 		vc.partieTerminer();
-		
+		*/
 		}
 
 }

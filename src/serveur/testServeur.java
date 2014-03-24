@@ -93,19 +93,19 @@ public class testServeur
 		try {
 			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(100);
-			serveur.envoiCarteDistribution(AsPi);
+			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(100);
-			serveur.envoiCarteDistribution(AsCo);
+			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(100);
-			serveur.envoiCarteDistribution(AsCa);
+			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(100);
-			serveur.envoiCarteDistribution(SepTr);
+			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(100);
-			serveur.envoiCarteDistribution(SepCo);
+			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(100);
-			serveur.envoiCarteDistribution(SepPi);
+			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(100);
-			serveur.envoiCarteDistribution(SepCa);
+			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(1000);
 			System.out.println("Envoi terminer");
 			serveur.envoiAnnonce(null, 1);

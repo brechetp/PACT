@@ -109,7 +109,7 @@ public class ViewController implements ViewControllerInterface
 		if (s.equals("ascarreau")){
 			k = 32;
 		}
-		for (int yCarte = -50 ; yCarte<fen.getPan().getHeight()*0.1 ; yCarte = yCarte + 5){
+		for (int yCarte = -fen.getPan().getCarte1().getImage().getHeight(null) ; yCarte<fen.getPan().getHeight()*0.1 ; yCarte = yCarte + 5){
 			fen.getPan().setYCarte(yCarte);
 			fen.getPan().setI(k);
 			fen.repaint();
@@ -237,5 +237,56 @@ public class ViewController implements ViewControllerInterface
 		}
 		
 	}
+	
+	
+	public void gauche(){
+		fen.getPan().setPlacement(-1);
+		for (int menu = 0 ; menu > -fen.getPan().getWidth() ; menu = menu - 10){
+			fen.getPan().setXMenuCentre(menu);
+			fen.getPan().setYMenuCentre(menu);
+			fen.getPan().setXMenuGauche(menu);
+			fen.getPan().setXMenuDroite(menu);
+			fen.getPan().setYMenuDroite(-menu);
+			fen.getPan().setXMenuNew2(menu);
+			fen.repaint();
+			try {
+				Thread.sleep(15);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		fen.getPan().setImageMenuGauche(fen.getPan().getImageMenuCentre());
+		fen.getPan().setImageMenuCentre(fen.getPan().getImageMenuDroite());
+		fen.getPan().setImageMenuDroite(fen.getPan().getImageMenuNew());
+		fen.getPan().resetCoords();
+		fen.getPan().setPlacement(0);
+	}
+	
+	public void droite(){
+		fen.getPan().setPlacement(1);
+		for (int menu = 0 ; menu < fen.getPan().getWidth() ; menu = menu + 10){
+			fen.getPan().setXMenuCentre(menu);
+			fen.getPan().setYMenuCentre(-menu);
+			fen.getPan().setXMenuGauche(menu);
+			fen.getPan().setYMenuGauche(menu);
+			fen.getPan().setXMenuDroite(menu);
+			fen.getPan().setXMenuNew1(menu-fen.getPan().getImageMenuNew().getImage().getWidth(null));
+			fen.repaint();
+			try {
+				Thread.sleep(15);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		fen.getPan().setImageMenuDroite(fen.getPan().getImageMenuCentre());
+		fen.getPan().setImageMenuCentre(fen.getPan().getImageMenuGauche());
+		fen.getPan().setImageMenuGauche(fen.getPan().getImageMenuNew());
+		fen.getPan().resetCoords();
+		fen.getPan().setPlacement(0);
+	}
+	
+	
 
 }
