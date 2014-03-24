@@ -2,6 +2,7 @@ package iug;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -50,6 +51,7 @@ public class Panneau extends JPanel {
 	int j = 0;
 	int h = 0;
 	int y = 0;
+	int m = 0;
 	int yCarte = 0;
 	String s1;
 	String s2;
@@ -65,100 +67,100 @@ public class Panneau extends JPanel {
 		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN2.png"));
 		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    if(i==1){	 
-		    	  g.drawImage(carte1.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte1.getImage(), (this.getWidth()/2)-(carte1.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==2){
-		    	  g.drawImage(carte2.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte2.getImage(), (this.getWidth()/2)-(carte2.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==3){
-		    	  g.drawImage(carte3.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte3.getImage(), (this.getWidth()/2)-(carte3.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==4){
-		    	  g.drawImage(carte4.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte4.getImage(), (this.getWidth()/2)-(carte4.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==5){
-		    	  g.drawImage(carte5.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte5.getImage(), (this.getWidth()/2)-(carte5.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==6){
-		    	  g.drawImage(carte6.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte6.getImage(), (this.getWidth()/2)-(carte6.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==7){
-		    	  g.drawImage(carte7.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte7.getImage(), (this.getWidth()/2)-(carte7.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==8){
-		    	  g.drawImage(carte8.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte8.getImage(), (this.getWidth()/2)-(carte8.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==9){
-		    	  g.drawImage(carte9.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte9.getImage(), (this.getWidth()/2)-(carte9.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==10){
-		    	  g.drawImage(carte10.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte10.getImage(), (this.getWidth()/2)-(carte10.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==11){
-		    	  g.drawImage(carte11.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte11.getImage(), (this.getWidth()/2)-(carte11.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==12){
-		    	  g.drawImage(carte12.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte12.getImage(), (this.getWidth()/2)-(carte12.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==13){
-		    	  g.drawImage(carte13.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte13.getImage(), (this.getWidth()/2)-(carte13.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==14){
-		    	  g.drawImage(carte14.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte14.getImage(), (this.getWidth()/2)-(carte14.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==15){
-		    	  g.drawImage(carte15.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte15.getImage(), (this.getWidth()/2)-(carte15.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==16){
-		    	  g.drawImage(carte16.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte16.getImage(), (this.getWidth()/2)-(carte16.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==17){
-		    	  g.drawImage(carte17.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte17.getImage(), (this.getWidth()/2)-(carte17.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==18){
-		    	  g.drawImage(carte18.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte18.getImage(), (this.getWidth()/2)-(carte18.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==19){
-		    	  g.drawImage(carte19.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte19.getImage(), (this.getWidth()/2)-(carte19.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==20){
-		    	  g.drawImage(carte20.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte20.getImage(), (this.getWidth()/2)-(carte20.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==21){
-		    	  g.drawImage(carte21.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte21.getImage(), (this.getWidth()/2)-(carte21.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==22){
-		    	  g.drawImage(carte22.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte22.getImage(), (this.getWidth()/2)-(carte22.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==23){
-		    	  g.drawImage(carte23.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte23.getImage(), (this.getWidth()/2)-(carte23.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==24){
-		    	  g.drawImage(carte24.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte24.getImage(), (this.getWidth()/2)-(carte24.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==25){
-		    	  g.drawImage(carte25.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte25.getImage(), (this.getWidth()/2)-(carte25.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==26){
-		    	  g.drawImage(carte26.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte26.getImage(), (this.getWidth()/2)-(carte26.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==27){
-		    	  g.drawImage(carte27.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte27.getImage(), (this.getWidth()/2)-(carte27.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==28){
-		    	  g.drawImage(carte28.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte28.getImage(), (this.getWidth()/2)-(carte28.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==29){
-		    	  g.drawImage(carte29.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte29.getImage(), (this.getWidth()/2)-(carte29.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==30){
-		    	  g.drawImage(carte30.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte30.getImage(), (this.getWidth()/2)-(carte30.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==31){
-		    	  g.drawImage(carte31.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte31.getImage(), (this.getWidth()/2)-(carte31.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==32){
-		    	  g.drawImage(carte32.getImage(), 480, yCarte, this);
+		    	  g.drawImage(carte32.getImage(), (this.getWidth()/2)-(carte32.getImage().getWidth(null)/2), yCarte, this);
 		    }
 		    else if(i==0){
 
@@ -169,23 +171,27 @@ public class Panneau extends JPanel {
 		    }
 		    else if (k>0 && k<5){
 		    	g.setColor(new Color(204, 0, 51));
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-		    	g.drawString("Le joueur " + k + " a coinché !!!!!", 300, 400);
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+				FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("Le joueur " + k + " a coinché !!!!!", (this.getWidth()/2)-(metrics.stringWidth("Le joueur " + k + " a coinché !!!!!")/2), (this.getHeight()/2));
 		    }
 		    else if (k==5){
 		    	g.setColor(new Color(204, 0, 51));
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-		    	g.drawString("CONTRE-COINCHE !!!", 320, 400);
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+				FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("CONTRE-COINCHE !!!", (this.getWidth()/2)-(metrics.stringWidth("CONTRE-COINCHE !!!")/2), (this.getHeight()/2));
 		    }
 		    else if (k==6){
 		    	g.setColor(new Color(204, 0, 51));
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-		    	g.drawString("Annonce joueur distant : " + valeur + " " + couleur, 200, 400);
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+				FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("Annonce joueur distant : " + valeur + " " + couleur, (this.getWidth()/2)-(metrics.stringWidth("Annonce joueur distant : " + valeur + " " + couleur)/2), (this.getHeight()/2));
 		    }
 		    else if (k==7){
 		    	g.setColor(new Color(204, 0, 51));
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-		    	g.drawString("Le joueur distant a passé", 320, 400);
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+				FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("Le joueur distant a passé", (this.getWidth()/2)-(metrics.stringWidth("Le joueur distant a passé")/2), (this.getHeight()/2));
 		    }
 		    else if (k==666){
 		    	j=0;
@@ -194,42 +200,57 @@ public class Panneau extends JPanel {
 		    	h=0;
 		    	g.setColor(new Color(255, 0, 0));
 				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 80));
-		    	g.drawString("PARTIE TERMINEE", 180, 400);
+				FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("PARTIE TERMINEE", (this.getWidth()/2)-(metrics.stringWidth("PARTIE TERMINEE")/2), (this.getHeight()/2));
 		    }
 		    if (j!=0 && h==0){
 		    	g.setColor(new Color(0,51,153));
-		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-		    	g.drawString("C'est au joueur " + j + " de jouer !", 350 , 600);
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+		    	FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("C'est au joueur " + j + " de jouer !", (this.getWidth()/2)-(metrics.stringWidth("C'est au joueur " + j + " de jouer !")/2) , (int) ((this.getHeight()*0.7)));
 		    }
 		    if (j!=0 && h==1){
 		    	g.setColor(new Color(0,153,153));
-		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-		    	g.drawString("C'est au joueur " + j + " d'annoncer !", 350 , 600);
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+		    	FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("C'est au joueur " + j + " d'annoncer !", (this.getWidth()/2)-(metrics.stringWidth("C'est au joueur " + j + " d'annoncer !")/2) , (int) ((this.getHeight())*0.7));
 		    }
 		    if (j==0){
 		    	
 		    }
 		    if (y!=0){
 		    	g.setColor(new Color(255,153,51));
-		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-		    	g.drawString("Annonce en cours : ", 300 , 650);
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+		    	FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("Annonce en cours : ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2) , (int) ((this.getHeight()*0.8)));
 		    	if(y==1){
 		    		g.setColor(new Color(255,0,0));
-			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-			    	g.drawString(s1, 540 , 650);
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+			    	g.drawString(s1, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : ") , (int) ((this.getHeight()*0.8)));
 			    	g.setColor(new Color(255,153,51));
-			    	g.drawString(s2, 650 , 650);
+			    	g.drawString(" - ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1), (int) ((this.getHeight()*0.8)));
+			    	g.drawString(s2, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1 + " - ") , (int) ((this.getHeight()*0.8)));
 		    	}
 		    	if(y==2){
 		    		g.setColor(new Color(255,153,51));
-			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-			    	g.drawString(s1, 540 , 650);
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+			    	g.drawString(s1, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : ") , (int) ((this.getHeight()*0.8)));
+			    	g.drawString(" - ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1), (int) ((this.getHeight()*0.8)));
 			    	g.setColor(new Color(255,0,0));
-			    	g.drawString(s2, 670 , 650);
+			    	g.drawString(s2, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1 + " - ") , (int) ((this.getHeight()*0.8)));
 		    	}
 		    }
 		    if (y==0){
 		    	
+		    }
+		    if (m==0){
+		    	
+		    }
+		    if (m==1){
+		    	g.setColor(new Color(51,0,153));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+		    	FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("Le jeu commence !", (this.getWidth()/2)-(metrics.stringWidth("Le jeu commence !")/2), this.getHeight()/2);
 		    }
 		} catch (IOException e) {
 		    e.printStackTrace();
@@ -288,6 +309,10 @@ public class Panneau extends JPanel {
 	public void setValeurCouleur(String valeur, String couleur){
 		this.valeur = valeur;
 		this.couleur = couleur;
+	}
+	
+	public void setM(int m){
+		this.m = m ;
 	}
 
 }
