@@ -65,5 +65,15 @@ public interface ViewControllerInterface
 	//valide le menu au centre
 	public void validerMenu();
 	
-
+	//accede à l'option k
+	public void option(int k);
+	
+	//modifie option 1
+	public void modifOption1();
+	
+	//modifie option 2
+	public void modifOption2();
+	
+	//modifie option 3
+	public void modifOption3(int option3);
 }

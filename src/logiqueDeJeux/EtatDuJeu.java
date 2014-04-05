@@ -21,7 +21,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	private int pointsTeamPair = 0;
 	private int pointsTeamImpair = 0;
 	private int coefCoinche = 1;
-	private int valeurFinPartie = 2000;
+	public static int valeurFinPartie = 2000;
 	private int pointAnnonceTeamPair;
 	private int pointAnnonceTeamImpair;
 	

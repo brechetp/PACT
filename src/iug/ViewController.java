@@ -331,6 +331,48 @@ public class ViewController implements ViewControllerInterface
 	public void option(int k){
 		fen.getPan().setOptionEnCours(k);
 		fen.repaint();
-		
 	}
+	
+	public void modifOption1(){
+		
+		if(fen.getPan().getOption1()==0){
+			fen.getPan().setOption1(1);
+			fen.repaint();
+		}
+		
+		else if(fen.getPan().getOption1()==1){
+			fen.getPan().setOption1(0);
+			fen.repaint();
+		}
+	}
+	
+	public void modifOption2(){
+		
+		if(fen.getPan().getOption2()==0){
+			fen.getPan().setOption2(1);
+			fen.repaint();
+		}
+		
+		else if(fen.getPan().getOption2()==1){
+			fen.getPan().setOption2(0);
+			fen.repaint();
+		}
+	}
+	
+	public void modifOption3(int option3){
+		fen.getPan().setOption3(option3);
+		fen.repaint();
+	}
+	
+	public void validerOptions(){
+		fen.getPan().setOptionEnCours(5);
+		fen.repaint();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

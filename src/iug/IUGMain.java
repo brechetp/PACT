@@ -8,23 +8,36 @@ public class IUGMain {
 		
 		ViewController vc = new ViewController();
 		
-		vc.modeOption();
-		vc.option(1);
-		Thread.sleep(1000);
-		vc.option(2);
-		Thread.sleep(1000);
-		vc.option(3);
-		Thread.sleep(1000);
-		vc.option(4);
-		Thread.sleep(1000);
-		
-		/*
 		vc.init(new ImageMenu(1), new ImageMenu(2), new ImageMenu(3));
 		Thread.sleep(1000);
 		vc.droite(new ImageMenu(4));
 		vc.gauche(new ImageMenu(3));
 		vc.gauche(new ImageMenu(4));
 		vc.validerMenu();
+		vc.modeOption();
+		vc.option(1);
+		Thread.sleep(1000);
+		vc.modifOption1();
+		Thread.sleep(1000);
+		vc.modifOption1();
+		Thread.sleep(1000);
+		vc.modifOption1();
+		Thread.sleep(1000);
+		vc.option(2);
+		Thread.sleep(1000);
+		vc.modifOption2();
+		Thread.sleep(1000);
+		vc.modifOption2();
+		Thread.sleep(1000);
+		vc.option(3);
+		Thread.sleep(1000);
+		vc.modifOption3(2200);
+		Thread.sleep(1000);
+		vc.modifOption3(1800);
+		Thread.sleep(1000);
+		vc.option(4);
+		Thread.sleep(1000);
+		vc.validerOptions();
 		vc.modePartie();
 		vc.modeAnnonce();
 		vc.joueurEnCours(1);
@@ -111,7 +124,7 @@ public class IUGMain {
 		Thread.sleep(1000);
 		vc.effacerCartes();
 		vc.partieTerminer();
-		*/
+		
 		}
 
 }
