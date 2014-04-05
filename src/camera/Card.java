@@ -10,8 +10,8 @@ public class Card extends Image{
 	
 
 	// double [] matchTable = new double [5];
-	static double WIDTH = 153.2003268837953 ; // taille de la carte sur l'ecran
-	static double HEIGHT = 191.10052394353679;
+	static double WIDTH = 349.0434173979497 ; // taille de la carte sur l'ecran
+	static double HEIGHT = 500.0814360266038;
 	
 
 

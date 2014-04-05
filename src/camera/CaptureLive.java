@@ -10,7 +10,7 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 public class CaptureLive implements Runnable {
 
-	private static final int DISTANCE_THRESHOLD = 20;
+	private static final int DISTANCE_THRESHOLD = 30;
 
 	public void run(){	
 
@@ -33,11 +33,11 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 			/*creation de l'objet d'acquisition de trames video � partir du fichier indiqu� comme param�tre du programme*/
 			OpenCVFrameGrabber grabber = null;
 			//        grabber = new OpenCVFrameGrabber(args[0]);
-			grabber = new OpenCVFrameGrabber(0);
+			grabber = new OpenCVFrameGrabber(1);
 
 			grabber.start();
 
-			IplImage image2;
+			IplImage image2 = grabber.grab() ;
 			//mainframe.setSize(width/5, height/5);
 	
 			int compteur = 0;

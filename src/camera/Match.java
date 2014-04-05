@@ -20,13 +20,13 @@ public class Match implements Runnable {
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
 		bin1.save("data/test/binary/bin1.jpg");
-		BinaryImage bin2 = im2.binaryThreshold(1);
+		BinaryImage bin2 = im2.binaryThreshold(1).largeComponents();
 		bin2.save("data/test/binary/bin2.jpg");
 		BinaryImage bin = bin1.and(bin2);
 		
 		
 		
-		BinaryComponent bin3 = bin.largeComponents();
+		BinaryComponent bin3 = bin.largestComponent();
 		bin3.save("data/test/binary/bin.jpg");
 		bin3.getEdge().save("data/test/contour.jpg");
 		
