@@ -89,6 +89,8 @@ public class Panneau extends JPanel {
 	int posXMenuDroite = (int) (((width/2)-(imageMenuDroite.getImage().getWidth(null)/2))*1.5);
 	int posYMenuDroite = (int) (0.4*height);
 	
+	int dxdy=0;
+	
 	
 	String s1;
 	String s2;
@@ -328,7 +330,17 @@ public class Panneau extends JPanel {
 			    	g.drawImage(imageMenuNew.getImage(), xMenuNew, posYMenuGauche, this);
 		    	}
 		    	
+		    	if (placement == 2){
+		    		g.drawImage(imageMenuCentre.getImage(), posXMenuCentre+xMenuCentre-dxdy/2, posYMenuCentre+yMenuCentre-dxdy, imageMenuCentre.getImage().getWidth(null)+dxdy, imageMenuCentre.getImage().getHeight(null)+dxdy, this);
+			    	g.drawImage(imageMenuGauche.getImage(), posXMenuGauche+xMenuGauche, posYMenuGauche+yMenuGauche, this);
+			    	g.drawImage(imageMenuDroite.getImage(), posXMenuDroite+xMenuDroite, posYMenuDroite+yMenuDroite, this);
+		    	}
+		    	
 		    }
+		    
+		    /******************************************************************************************************/
+		    /**                                         MODE OPTIONS                                             **/
+		    /******************************************************************************************************/
 		    
 		} catch (IOException e) {
 		    e.printStackTrace();
@@ -507,6 +519,15 @@ public class Panneau extends JPanel {
 		xMenuDroite = 0;
 		yMenuDroite = 0;
 		xMenuNew = 0;
+	}
+	
+	public void setModeActuel(int modeActuel){
+		this.modeActuel = modeActuel;
+	}
+	
+	public void resizeImage(int dxdy){
+		placement = 2;
+		this.dxdy=dxdy;
 	}
 
 }

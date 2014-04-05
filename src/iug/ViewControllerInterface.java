@@ -41,10 +41,29 @@ public interface ViewControllerInterface
 	//Aprés validation des valeur
 	public void valideValeurAnnonce();
 	
+	//annonce du joueur distant
 	public void annonceJoueurDistant(String valeur, String couleur);
 	
-	public void droite();
+	//Initialisation des menus
+	public void init(ImageMenu imageMenuCentre, ImageMenu imageMenuGauche, ImageMenu imageMenuDroite);
 	
-	public void gauche();
+	//faire défiler les menus vers la droite
+	public void droite(ImageMenu imageMenuNew);
+	
+	//faire défiler les menus vers la gauche
+	public void gauche(ImageMenu imageMenuNew);
+	
+	//passer en mode menu
+	public void modeMenu();
+	
+	//passer en mode partie
+	public void modePartie();
+	
+	//passer en mode options de jeu
+	public void modeOption();
+	
+	//valide le menu au centre
+	public void validerMenu();
+	
 
 }

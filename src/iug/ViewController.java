@@ -238,14 +238,15 @@ public class ViewController implements ViewControllerInterface
 		
 	}
 	
-	public void init(ImageMenu imageMenuCentre, ImageMenu imageMenuGauche, ImageMenu imageMenuDroite){
+	public void init(ImageMenu imageMenuGauche, ImageMenu imageMenuCentre, ImageMenu imageMenuDroite){
 		fen.getPan().setImageMenuCentre(imageMenuCentre);
 		fen.getPan().setImageMenuGauche(imageMenuGauche);
 		fen.getPan().setImageMenuDroite(imageMenuDroite);
 		fen.getPan().repaint();
 	}
 	
-	public void gauche(){
+	public void gauche(ImageMenu imageMenuNew){
+		fen.getPan().setImageMenuNew(imageMenuNew);
 		fen.getPan().setPlacement(-1);
 		for (int menu = 0 ; menu > -fen.getPan().getWidth() ; menu = menu - 10){
 			fen.getPan().setXMenuCentre(menu);
@@ -271,7 +272,8 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setPlacement(0);
 	}
 	
-	public void droite(){
+	public void droite(ImageMenu imageMenuNew){
+		fen.getPan().setImageMenuNew(imageMenuNew);
 		fen.getPan().setPlacement(1);
 		for (int menu = 0 ; menu < fen.getPan().getWidth() ; menu = menu + 10){
 			fen.getPan().setXMenuCentre(menu);
@@ -295,6 +297,36 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setImageMenuNew(temp);
 		fen.getPan().resetCoords();
 		fen.getPan().setPlacement(0);
+	}
+	
+	public void modeMenu(){
+		fen.getPan().setModeActuel(0);
+		fen.repaint();
+	}
+	
+	public void modePartie(){
+		fen.getPan().setModeActuel(1);
+		fen.repaint();
+	}
+	
+	public void modeOption(){
+		fen.getPan().setModeActuel(2);
+		fen.repaint();
+	}
+	
+	public void validerMenu(){
+		for (int dxdy=0 ; dxdy<fen.getPan().getHeight()/2 ; dxdy=dxdy+10){
+			fen.getPan().resizeImage(dxdy);
+			fen.getPan().setXMenuDroite(2*dxdy);
+			fen.getPan().setXMenuGauche(-2*dxdy);
+			try {
+				Thread.sleep(15);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			fen.repaint();
+		}
 	}
 	
 	
