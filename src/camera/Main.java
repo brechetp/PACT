@@ -4,9 +4,11 @@ import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
+
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+
 
 
 
@@ -176,11 +178,9 @@ public class Main {
 	 * Capture de deux cartes
 	 * 
 	 */
-		/*Capture.captureFrame("data/test/fond.jpg");
-		Thread.sleep(5000);
-		Capture.captureFrame("data/test/carte.jpg");*/
+		new Thread(new CaptureLive()).start();
 		
-		Image im1 = new Image("data/test/fond.jpg");
+		/*Image im1 = new Image("data/test/fond.jpg");
 		Image im2 = new Image ("data/test/carte.jpg");
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
@@ -207,7 +207,7 @@ public class Main {
 		
 	
 		
-		System.out.println(carte.getType());
+		System.out.println(carte.getType());*/
 		
 		/*new Database("data/database/database5/carte");
 		System.out.println(carte.find(Database.database));

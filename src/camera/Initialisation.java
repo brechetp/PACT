@@ -4,7 +4,7 @@ public class Initialisation {
 	
 	public static void setCardSize(){
 		
-		/*Capture.captureFrame("data/initialisation/fond.jpg");
+		Capture.captureFrame("data/initialisation/fond.jpg");
 		System.out.println("Le fond est pris, posez la carte blanche");
 		
 		try {
@@ -14,7 +14,7 @@ public class Initialisation {
 			e.printStackTrace();
 		}
 		Capture.captureFrame("data/initialisation/carteblanche.jpg");
-		System.out.println("La carte blanche a été prise");*/
+		System.out.println("La carte blanche a été prise");
 		
 		
 		Image im1 = new Image("data/initialisation/fond.jpg");

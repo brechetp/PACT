@@ -1,6 +1,6 @@
 package camera;
 
-import Comparaison;
+
 import logiqueDeJeux.BeloteCoinche;
 
 

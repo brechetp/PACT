@@ -10,8 +10,8 @@ public class Card extends Image{
 	
 
 	// double [] matchTable = new double [5];
-	static double WIDTH = 154.18001576092007 ; // taille de la carte sur l'ecran
-	static double HEIGHT = 219.00062419821728;
+	static double WIDTH = 153.2003268837953 ; // taille de la carte sur l'ecran
+	static double HEIGHT = 191.10052394353679;
 	
 
 
@@ -21,15 +21,12 @@ public class Card extends Image{
 	
 
 	
-	public Card(IplImage image) throws Exception{
+	public Card(IplImage image) {
 		
 		super(image);
 		average = new double[3]; // moyenne sur RGB
 		sigma = new double[3]; // ecart type sur RGB
-		if (width != 635 || height != 889){
-			throw new Exception("Ce n'est pas une carte");
-		}
-
+		
 		corner = this.cut(0,0,110, 220);
 
 
@@ -39,15 +36,13 @@ public class Card extends Image{
 		
 	}
 	
-	public Card(String fileName) throws Exception{
+	public Card(String fileName) {
 		
 		super(fileName);
 		name = fileName;
 		average = new double[3]; // moyenne sur RGB
 		sigma = new double[3]; // ecart type sur RGB
-		if (width != 635 || height != 889){
-			throw new Exception("Ce n'est pas une carte");
-		}
+	
 
 		corner = this.cut(0,0, 110,  220);
 
