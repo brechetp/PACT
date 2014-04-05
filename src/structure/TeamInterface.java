@@ -2,7 +2,7 @@ package structure;
 
 public interface TeamInterface 
 {
-	//Rajoute une carte joué par le joueure num i
+	//Rajoute une carte jouï¿½ par le joueure num i
 	public void ajoute(CarteInterface carte,int i); 
 	
 	//Renvoi les point de l'equipe
@@ -19,4 +19,9 @@ public interface TeamInterface
 	
 	//indique que cet team a fait le dernier pli
 	public void dernierPli();
+
+	//renvoi la carte joueur au premier tour par le joueur numJoueur
+	public CarteInterface getCartes(int numJoueur);
+	
+	
 }

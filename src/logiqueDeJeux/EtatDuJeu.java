@@ -1,5 +1,8 @@
 package logiqueDeJeux;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import machineEtat.StateMachine;
 import iug.ViewControllerInterface;
 import structure.*;
@@ -17,6 +20,8 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	private int pointsTeamImpair = 0;
 	private int coefCoinche = 1;
 	private int valeurFinPartie = 2000;
+	private int pointAnnonceTeamPair;
+	private int pointAnnonceTeamImpair;
 	
 	public EtatDuJeu ()
 	{
@@ -138,24 +143,24 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		{
 			if (teamPairPoint>=annonce.getValue())
 			{
-				this.pointsTeamPair = pointsTeamPair + coefCoinche*(teamPairPoint + annonce.getValue());
-				this.pointsTeamImpair = pointsTeamImpair + teamImpairPoint;
+				this.pointsTeamPair = pointsTeamPair + coefCoinche*(teamPairPoint + annonce.getValue()) +pointAnnonceTeamPair;
+				this.pointsTeamImpair = pointsTeamImpair + teamImpairPoint + pointAnnonceTeamImpair;
 			}
 			else
 			{
-				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(162 + annonce.getValue());
+				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(162 + annonce.getValue())+pointAnnonceTeamImpair+pointAnnonceTeamPair;
 			}
 		}
 		else
 		{
 			if (teamImpairPoint>=annonce.getValue())
 			{
-				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(teamImpairPoint + annonce.getValue());
-				this.pointsTeamPair = pointsTeamPair + teamPairPoint;
+				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(teamImpairPoint + annonce.getValue()) + pointAnnonceTeamImpair;
+				this.pointsTeamPair = pointsTeamPair + teamPairPoint + pointAnnonceTeamPair;
 			}
 			else
 			{
-				this.pointsTeamPair = pointsTeamPair + coefCoinche*(162 + annonce.getValue());
+				this.pointsTeamPair = pointsTeamPair + coefCoinche*(162 + annonce.getValue())+pointAnnonceTeamImpair+pointAnnonceTeamPair;
 			}
 		}
 		//pour les tests
@@ -167,8 +172,13 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		this.TeamPair=new Team();
 		this.TeamImpair = new Team();
 		this.coefCoinche = 1;
+		this.pointAnnonceTeamPair=0;
+		this.pointAnnonceTeamImpair=0;
 		
-		//if (this.pointsTeamPair>this.valeurFinPartie)
+		if (this.pointsTeamPair>this.valeurFinPartie)
+			;
+		else if (this.pointsTeamImpair>this.valeurFinPartie)
+			;
 			
 			
 	}
@@ -196,7 +206,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (valeur==250)
 			val="capot";
 		else if (valeur==500)
-			val="g�n�rale";
+			val="générale";
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
@@ -213,7 +223,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (valeur==250)
 			val="capot";
 		else if (valeur==500)
-			val="g�n�rale";
+			val="générale";
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
@@ -233,7 +243,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (valeur==250)
 			val="capot";
 		else if (valeur==500)
-			val="g�n�rale";
+			val="générale";
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
@@ -265,13 +275,11 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			this.coefCoinche=this.coefCoinche*2;
 	}
 
-	@Override
 	public boolean dernierPli() 
 	{
 		return playedCard.size()==32;
 	}
 
-	@Override
 	public boolean setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci) 
 	{
 		if (annonce == null)
@@ -287,7 +295,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			if (valeur==250)
 				val="capot";
 			else if (valeur==500)
-				val="g�n�rale";
+				val="générale";
 			else
 				val =""+valeur;
 			String couleur = this.getAtout();
@@ -299,5 +307,53 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	public AnnonceInterface getAnnonce ()
 	{
 		return annonce;
+	}
+
+	public CarteInterface getTeamCarte()
+	{
+		if (numJoueur%2==0)
+			return TeamPair.getCartes(numJoueur);
+		else
+			return TeamImpair.getCartes(numJoueur);
+	}
+	
+	public void verifieAnnonceCartes(JoueurDistantInterface joueurD, CarteListInterface carteAnnonce) 
+	{
+		ArrayList<CarteInterface> listeCartes =new ArrayList<CarteInterface>();
+		listeCartes.add(getTeamCarte());
+		
+		Iterator<CarteInterface> itr = carteAnnonce.iterator();
+		while (itr.hasNext())
+		{
+			listeCartes.add(itr.next());
+		}
+		
+		int length = listeCartes.size();
+		boolean mmCouleur = true;
+		String couleur = listeCartes.get(0).getSuit();
+		for (int k=1;k<length-1;k++)
+		{
+			mmCouleur = (couleur == listeCartes.get(k).getSuit());
+		}
+		
+		if (!mmCouleur)
+		{
+			if (length==4)
+			{
+				if (listeCartes.get(0).getLabelNum()==listeCartes.get(1).getLabelNum()
+						&&listeCartes.get(1).getLabelNum()==listeCartes.get(2).getLabelNum()
+								&&listeCartes.get(2).getLabelNum()==listeCartes.get(3).getLabelNum()
+					)
+				{
+					annonceSquare(listeCartes.get(0));
+				}
+			}
+		}
+		
+	}
+
+	private void annonceSquare(CarteInterface carteInterface) 
+	{
+		
 	}
 }
