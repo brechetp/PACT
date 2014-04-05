@@ -248,13 +248,13 @@ public class ViewController implements ViewControllerInterface
 	public void gauche(ImageMenu imageMenuNew){
 		fen.getPan().setImageMenuNew(imageMenuNew);
 		fen.getPan().setPlacement(-1);
-		for (int menu = 0 ; menu > -fen.getPan().getWidth() ; menu = menu - 10){
+		for (int menu = 0 ; menu > -fen.getPan().getWidth()/2 ; menu = menu - 10){
 			fen.getPan().setXMenuCentre(menu);
 			fen.getPan().setYMenuCentre(menu);
-			fen.getPan().setXMenuGauche(menu);
+			fen.getPan().setXMenuGauche(2*menu);
 			fen.getPan().setXMenuDroite(menu);
 			fen.getPan().setYMenuDroite(-menu);
-			fen.getPan().setXMenuNew2(menu);
+			fen.getPan().setXMenuNew2(2*menu);
 			fen.repaint();
 			try {
 				Thread.sleep(15);
@@ -275,18 +275,17 @@ public class ViewController implements ViewControllerInterface
 	public void droite(ImageMenu imageMenuNew){
 		fen.getPan().setImageMenuNew(imageMenuNew);
 		fen.getPan().setPlacement(1);
-		for (int menu = 0 ; menu < fen.getPan().getWidth() ; menu = menu + 10){
+		for (int menu = 0 ; menu < fen.getPan().getWidth()/2 ; menu = menu + 10){
 			fen.getPan().setXMenuCentre(menu);
 			fen.getPan().setYMenuCentre(-menu);
 			fen.getPan().setXMenuGauche(menu);
 			fen.getPan().setYMenuGauche(menu);
-			fen.getPan().setXMenuDroite(menu);
-			fen.getPan().setXMenuNew1(menu-fen.getPan().getImageMenuNew().getImage().getWidth(null));
+			fen.getPan().setXMenuDroite(2*menu);
+			fen.getPan().setXMenuNew1(2*menu-fen.getPan().getImageMenuNew().getImage().getWidth(null));
 			fen.repaint();
 			try {
 				Thread.sleep(15);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
