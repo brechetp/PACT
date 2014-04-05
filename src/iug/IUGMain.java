@@ -7,6 +7,18 @@ public class IUGMain {
 		int k = 0;
 		
 		ViewController vc = new ViewController();
+		
+		vc.modeOption();
+		vc.option(1);
+		Thread.sleep(1000);
+		vc.option(2);
+		Thread.sleep(1000);
+		vc.option(3);
+		Thread.sleep(1000);
+		vc.option(4);
+		Thread.sleep(1000);
+		
+		/*
 		vc.init(new ImageMenu(1), new ImageMenu(2), new ImageMenu(3));
 		Thread.sleep(1000);
 		vc.droite(new ImageMenu(4));
@@ -99,6 +111,7 @@ public class IUGMain {
 		Thread.sleep(1000);
 		vc.effacerCartes();
 		vc.partieTerminer();
+		*/
 		}
 
 }

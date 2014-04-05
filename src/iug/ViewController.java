@@ -328,6 +328,9 @@ public class ViewController implements ViewControllerInterface
 		}
 	}
 	
-	
-
+	public void option(int k){
+		fen.getPan().setOptionEnCours(k);
+		fen.repaint();
+		
+	}
 }
