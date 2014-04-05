@@ -226,7 +226,7 @@ public class Panneau extends JPanel {
 			    	g.setColor(new Color(204, 0, 51));
 					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 					FontMetrics metrics = g.getFontMetrics();
-			    	g.drawString("Le joueur " + k + " a coinché !!!!!", (this.getWidth()/2)-(metrics.stringWidth("Le joueur " + k + " a coinché !!!!!")/2), (this.getHeight()/2));
+			    	g.drawString("COINCHE !!!", (this.getWidth()/2)-(metrics.stringWidth("COINCHE !!!")/2), (this.getHeight()/2));
 			    }
 			    else if (k==5){
 			    	g.setColor(new Color(204, 0, 51));
