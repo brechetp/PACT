@@ -9,7 +9,7 @@ public class IUGMain {
 		ViewController vc = new ViewController();
 		Thread.sleep(1000);
 		vc.droite();
-		Thread.sleep(1000);
+		vc.gauche();
 		vc.gauche();
 		
 		/*

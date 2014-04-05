@@ -238,6 +238,12 @@ public class ViewController implements ViewControllerInterface
 		
 	}
 	
+	public void init(ImageMenu imageMenuCentre, ImageMenu imageMenuGauche, ImageMenu imageMenuDroite){
+		fen.getPan().setImageMenuCentre(imageMenuCentre);
+		fen.getPan().setImageMenuGauche(imageMenuGauche);
+		fen.getPan().setImageMenuDroite(imageMenuDroite);
+		fen.getPan().repaint();
+	}
 	
 	public void gauche(){
 		fen.getPan().setPlacement(-1);
@@ -256,9 +262,11 @@ public class ViewController implements ViewControllerInterface
 				e.printStackTrace();
 			}
 		}
+		ImageMenu temp = fen.getPan().getImageMenuGauche();
 		fen.getPan().setImageMenuGauche(fen.getPan().getImageMenuCentre());
 		fen.getPan().setImageMenuCentre(fen.getPan().getImageMenuDroite());
 		fen.getPan().setImageMenuDroite(fen.getPan().getImageMenuNew());
+		fen.getPan().setImageMenuNew(temp);
 		fen.getPan().resetCoords();
 		fen.getPan().setPlacement(0);
 	}
@@ -280,9 +288,11 @@ public class ViewController implements ViewControllerInterface
 				e.printStackTrace();
 			}
 		}
+		ImageMenu temp = fen.getPan().getImageMenuDroite();
 		fen.getPan().setImageMenuDroite(fen.getPan().getImageMenuCentre());
 		fen.getPan().setImageMenuCentre(fen.getPan().getImageMenuGauche());
 		fen.getPan().setImageMenuGauche(fen.getPan().getImageMenuNew());
+		fen.getPan().setImageMenuNew(temp);
 		fen.getPan().resetCoords();
 		fen.getPan().setPlacement(0);
 	}

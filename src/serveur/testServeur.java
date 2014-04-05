@@ -91,6 +91,7 @@ public class testServeur
 		CardEvent AsTrEvent = new CardEvent(AsTr);
 
 		try {
+			Thread.sleep(1000);
 			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(100);
 			serveur.envoiCarteDistribution(AsTr);
