@@ -478,10 +478,11 @@ public class BinaryImage extends GrayImage {
 		
 	}
 	
-	public int[][] ransac(){
+	public int[][] ransac(int type){
 		
-		return getEdge().ransac();
+		return getEdge().ransac(type);
 	}
+
 }
 	
 	

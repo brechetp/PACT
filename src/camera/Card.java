@@ -10,8 +10,8 @@ public class Card extends Image{
 	
 
 	// double [] matchTable = new double [5];
-	static double WIDTH = 143.9191667805632 ; // taille de la carte sur l'ecran
-	static double HEIGHT = 201.9325976383875;
+	static double WIDTH = 154.18001576092007 ; // taille de la carte sur l'ecran
+	static double HEIGHT = 219.00062419821728;
 	
 
 
@@ -30,7 +30,7 @@ public class Card extends Image{
 			throw new Exception("Ce n'est pas une carte");
 		}
 
-		corner = this.cut(0,0,100, 250);
+		corner = this.cut(0,0,110, 220);
 
 
 		
@@ -49,7 +49,7 @@ public class Card extends Image{
 			throw new Exception("Ce n'est pas une carte");
 		}
 
-		corner = this.cut(0,0, 100,  250);
+		corner = this.cut(0,0, 110,  220);
 
 
 		

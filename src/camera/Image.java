@@ -15,8 +15,8 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class Image {
 	
 
-	public static final int WHITE_THRESHOLD = 180;
-	public static final int DISTANCE_THRESHOLD = 20; // pour la distance entre deux images
+	public static final int WHITE_THRESHOLD = 210;
+	public static final int DISTANCE_THRESHOLD = 40; // pour la distance entre deux images
 	private static final int NEIGHBOUR_NUMBER = 0; // pour l'algorithme de distance
 	
 	protected int compt =0; //compte le nombre de pixels non blancs
@@ -321,7 +321,7 @@ public class Image {
 					distance = distance + Math.abs(pixel2[k] - pixel[k]);	
 				}	
 			
-				if (distance > WHITE_THRESHOLD)
+				if (distance > DISTANCE_THRESHOLD)
 					diff[j][i] = 1;
 				else
 					diff[j][i] = 0 ;

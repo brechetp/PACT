@@ -17,9 +17,9 @@ public class BinaryComponent extends BinaryImage{
 		return compt;
 	}
 
-	public int[][] getCornersRansac(){
+	public int[][] getCornersRansac(int type){
 
-		int[][] corners = edgeImage.ransac();
+		int[][] corners = edgeImage.ransac(type);
 		int[][] res = new int[][]{{0,height},{0,0},{width,0},{0,0}};
 		for(int i =0; i < 4; i++){
 
