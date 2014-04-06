@@ -10,8 +10,8 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 public class CaptureLive implements Runnable {
 
-	private static final int DISTANCE_THRESHOLD = 30;
-
+	private static final int DISTANCE_THRESHOLD = 20;
+	private static final int DIF_NUM = 500; // nombre de pixels qui doivent etre differents
 	public void run(){	
 
 		try{ 
@@ -33,11 +33,11 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 			/*creation de l'objet d'acquisition de trames video � partir du fichier indiqu� comme param�tre du programme*/
 			OpenCVFrameGrabber grabber = null;
 			//        grabber = new OpenCVFrameGrabber(args[0]);
-			grabber = new OpenCVFrameGrabber(1);
+			grabber = new OpenCVFrameGrabber(0);
 
 			grabber.start();
 
-			IplImage image2 = grabber.grab() ;
+			IplImage image2, image1 = null, imageA = null;
 			//mainframe.setSize(width/5, height/5);
 	
 			int compteur = 0;
@@ -52,13 +52,15 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 
 			while ((image2 = grabber.grab()) != null ) {
 				if (compteur == 30){
-					cvSaveImage("data/courant/image1.jpg", image2);
-					cvSaveImage("data/courant/imageA.jpg", image2);
+					imageA = image2.clone();
+					image1 = image2.clone();
+					
 				}
 				
 				if ( compteur>30) {
 
-					IplImage image1 = cvLoadImage("data/courant/image1.jpg");
+					
+					//cvSaveImage("data/courant/image2.jpg", image2);
 
 					if(areDifferent(image1, image2)){
 						System.out.println("Les images sont differentes");
@@ -67,15 +69,14 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 					else{
 						if (hasMoved){
 							hasMoved = false;
-							IplImage imageA = cvLoadImage("data/courant/imageA.jpg");
 							System.out.println("On lance la comparaison "+(++comptA)+".");
-							new Thread(new Match(imageA, image2)).start();
-							cvSaveImage("data/courant/imageA.jpg",image2);
+							new Thread(new Match(imageA, image2, compteur)).start();
+							imageA = image2.clone();
+							
 						}
 					}
 
-					cvSaveImage("data/courant/image1.jpg", image2);
-					
+					image1 = image2.clone();
 
 
 
@@ -90,6 +91,7 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 
 				/*deuxi�me ligne magique JavaCV, � appeler r�guli�rement (apr�s chaque capture ou affichage de trame, ...)*/
 				cvClearMemStorage(storage);
+				Thread.sleep(100);
 			}
 			//nettoyage des ressources        
 			grabber.stop();
@@ -107,10 +109,10 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 		while(!res && i < image2.width()){
 			while(!res && j < image2.height()){
 
-				if(different(image1, image2, i, j, 6)) // si les pixels i et j sont differents
+				if(different(image1, image2, i, j, 0)) // si les pixels i et j sont differents
 					compt++;
 
-				res = (compt > 50);
+				res = (compt > DIF_NUM);
 				j++;
 
 
@@ -127,12 +129,12 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 
 		int distance = 0 , distanceMin = Integer.MAX_VALUE;
 		int n = Math.max(0, i-k), p = Math.max(0, j-k);
-		int[] pixel = getRgbByte(image2, i, j);
-		while(n <= Math.min(image1.width()-1, i+k)&& !res){
-			while( p <= Math.min(image1.height()-1,  j+k)&& !res){
-				int[] rgbByte = getRgbByte(image1, n, p); // pixel de l'image1
+		int[] pixel = getRgbByte(image1, i, j);
+		while(n <= Math.min(image1.width()-1, i+k)){
+			while( p <= Math.min(image1.height()-1,  j+k)){
+				int[] rgbByte = getRgbByte(image2, n, p); // pixel de l'image1
 				distance = 0;
-				for (int q = 0; q < 3; q ++){
+				for (int q = 0; q < 3; q++){
 					distance = distance + Math.abs(rgbByte[q] - pixel[q]);
 				}
 				if (distance < distanceMin){
@@ -146,8 +148,8 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 		}
 		
 
-		if (distanceMin > DISTANCE_THRESHOLD)
-			res = true;
+		res = (distanceMin > DISTANCE_THRESHOLD);
+			
 
 		return res;
 	}

@@ -172,7 +172,8 @@ public class Main {
 		 * Initialisation
 		 * 
 		 */
-		// Initialisation.setCardSize();
+		
+		//Initialisation.setCardSize();
 		
 	/*
 	 * Capture de deux cartes
