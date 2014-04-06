@@ -4,9 +4,11 @@ import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
+
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+
 
 
 
@@ -170,17 +172,16 @@ public class Main {
 		 * Initialisation
 		 * 
 		 */
-		// Initialisation.setCardSize();
+		
+		//Initialisation.setCardSize();
 		
 	/*
 	 * Capture de deux cartes
 	 * 
 	 */
-		Capture.captureFrame("data/test/fond.jpg");
-		Thread.sleep(5000);
-		Capture.captureFrame("data/test/carte.jpg");
+		new Thread(new CaptureLive()).start();
 		
-		Image im1 = new Image("data/test/fond.jpg");
+		/*Image im1 = new Image("data/test/fond.jpg");
 		Image im2 = new Image ("data/test/carte.jpg");
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
@@ -195,22 +196,24 @@ public class Main {
 		bin3.save("data/test/binary/bin.jpg");
 		bin3.getEdge().save("data/test/contour.jpg");
 		
-		int[][] coins = bin3.getCornersRansac();
+		int[][] coins = bin3.getCornersRansac(3);
 		
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/test/cartetest.jpg");
 		
-		System.out.println(carte.getType());
+		
+		carte.binaryThreshold(0).getEdge().save("data/test/contour2.jpg");
+		carte.binaryThreshold(0).save("data/test/binaire.jpg");
+	
 		
 	
 		
+		System.out.println(carte.getType());*/
+		
 		/*new Database("data/database/database5/carte");
+		System.out.println(carte.find(Database.database));
 		
-		System.out.println(carte.getType());
-		
-		System.out.println(carte.find(Database.database));*/
-		
-		//Database database = new Database("data/database/database5/carte");
+		//Database database = new Database("data/database/database5/carte");*/
 	
 		
 		
@@ -270,7 +273,7 @@ public class Main {
 			BinaryImage bin = new BinaryImage(binSource+i+".jpg");
 			BinaryComponent card = bin.largestComponent();
 			Image img = new Image(rgbSource+i+".jpg");
-			coins = card.getCornersRansac();
+			coins = card.getCornersRansac(3);
 			Image resample = img.resample(coins, 635, 889);
 	      	cvSaveImage(destination+i+".jpg", resample.getRgbImage());
 	      	
