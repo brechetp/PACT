@@ -89,13 +89,107 @@ public class Capture {
 
 
 		}
-
-
-
+<<<<<<< Updated upstream
+=======
 	}
 
 
 
+	public static void liveCapture() throws Exception {
+
+		try{ 
+
+
+
+
+			/*creation de la fenetre principale*/
+			/*JFrame mainframe = new JFrame();
+		mainframe.setLayout(new GridLayout(1, 1));
+		mainframe.setVisible(true);*/
+
+			/*creation de la fenetre utilisÈe pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
+    l'accÈlÈration materielle pour afficher les vidÈos, profitons-en ! */
+			/*	CanvasFrame rgb_frame = new CanvasFrame("AVI Playback Demo");        
+		mainframe.getContentPane().add(rgb_frame.getCanvas() );
+		rgb_frame.setVisible(false);*/
+
+			/*creation de l'objet d'acquisition de trames video ‡ partir du fichier indiquÈ comme paramÍtre du programme*/
+			OpenCVFrameGrabber grabber = null;
+			//        grabber = new OpenCVFrameGrabber(args[0]);
+			grabber = new OpenCVFrameGrabber(0);
+
+			grabber.start();
+
+			IplImage rgb_image = grabber.grab();
+
+			//mainframe.setSize(width/5, height/5);
+			cvSaveImage("data/courant/image1.jpg", rgb_image);
+			int compteur = 0;
+
+			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilisÈes sont bien libÈrÈes de la mÈmoire
+    (en quelque sorte en forcant un appel au "Garbage Collector"*/
+			CvMemStorage storage = CvMemStorage.create();
+
+			while ((rgb_image = grabber.grab()) != null ) {
+				if ( compteur>=30) {
+
+
+
+					IplImage image1 = cvLoadImage("data/courant/image1.jpg");
+					if(areDifferent(image1, rgb_image))
+						System.out.println("Les images sont differentes");
+
+					cvSaveImage("data/courant/image1.jpg", rgb_image);
+
+
+
+
+				}
+				compteur++;
+>>>>>>> Stashed changes
+
+
+
+<<<<<<< Updated upstream
+=======
+
+				/*deuxiËme ligne magique JavaCV, ‡ appeler rÈguliËrement (aprËs chaque capture ou affichage de trame, ...)*/
+				cvClearMemStorage(storage);
+			}
+			//nettoyage des ressources        
+			grabber.stop();
+			// rgb_frame.dispose();
+		} catch(Exception e){
+			System.out.println(e.getStackTrace());
+		}       
+>>>>>>> Stashed changes
+	}
+
+
+
+<<<<<<< Updated upstream
+=======
+	private static boolean different(IplImage image1, IplImage rgb_image,
+			int i, int j, int k) {
+
+		boolean res = false;
+		int[] vector = new int[3];
+		int distance = 0 , distanceMin = Integer.MAX_VALUE;
+		int n = Math.max(0, i-k), p = Math.max(0, j-k);
+		int[] pixel = getRgbByte(rgb_image, i, j);
+		while(n <= Math.min(image1.width()-1, i+k)&& !res){
+			while( p <= Math.min(image1.height()-1,  j+k)&& !res){
+				int[] rgbByte = getRgbByte(image1, n, p); // pixel de l'image1
+				distance = 0;
+				for (int q = 0; q < 3; q++){
+					distance = distance + Math.abs(rgbByte[q] - pixel[q]);
+				}
+				if (distance < distanceMin){
+					distanceMin = distance;
+					vector = rgbByte;
+				}
+				p++;
+>>>>>>> Stashed changes
 
 
 }

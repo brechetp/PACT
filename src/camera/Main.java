@@ -176,11 +176,9 @@ public class Main {
 	 * Capture de deux cartes
 	 * 
 	 */
-		Capture.captureFrame("data/test/fond.jpg");
-		Thread.sleep(5000);
-		Capture.captureFrame("data/test/carte.jpg");
-		
-		Image im1 = new Image("data/test/fond.jpg");
+
+		/*Image im1 = new Image("data/test/fond.jpg");
+>>>>>>> Stashed changes
 		Image im2 = new Image ("data/test/carte.jpg");
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
@@ -270,7 +268,7 @@ public class Main {
 			BinaryImage bin = new BinaryImage(binSource+i+".jpg");
 			BinaryComponent card = bin.largestComponent();
 			Image img = new Image(rgbSource+i+".jpg");
-			coins = card.getCornersRansac();
+			coins = card.getCornersRansac(3);
 			Image resample = img.resample(coins, 635, 889);
 	      	cvSaveImage(destination+i+".jpg", resample.getRgbImage());
 	      	

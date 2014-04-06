@@ -290,7 +290,7 @@ public class Image {
 				distance = 0;
 				pixel = getRgbByte(i,j);
 				voisin = image.neighbour(i, j, pixel, NEIGHBOUR_NUMBER);
-				for (int k = 0; k < 2; k ++){
+				for (int k = 0; k < 3; k ++){
 					distance = distance + Math.abs(voisin[k] - pixel[k]);	
 				}	
 				
