@@ -96,6 +96,11 @@ public class Capture {
 
 
 		}
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> refs/remotes/origin/Pierre
 	}
 
 
@@ -112,16 +117,28 @@ public class Capture {
 		mainframe.setLayout(new GridLayout(1, 1));
 		mainframe.setVisible(true);*/
 
+<<<<<<< HEAD
 			/*creation de la fenetre utilis�e pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
     l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
+=======
+			/*creation de la fenetre utilisÈe pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
+    l'accÈlÈration materielle pour afficher les vidÈos, profitons-en ! */
+>>>>>>> refs/remotes/origin/Pierre
 			/*	CanvasFrame rgb_frame = new CanvasFrame("AVI Playback Demo");        
 		mainframe.getContentPane().add(rgb_frame.getCanvas() );
 		rgb_frame.setVisible(false);*/
 
+<<<<<<< HEAD
 			/*creation de l'objet d'acquisition de trames video � partir du fichier indiqu� comme param�tre du programme*/
 			OpenCVFrameGrabber grabber = null;
 			//        grabber = new OpenCVFrameGrabber(args[0]);
 			grabber = new OpenCVFrameGrabber(WEBCAM);
+=======
+			/*creation de l'objet d'acquisition de trames video ‡ partir du fichier indiquÈ comme paramÍtre du programme*/
+			OpenCVFrameGrabber grabber = null;
+			//        grabber = new OpenCVFrameGrabber(args[0]);
+			grabber = new OpenCVFrameGrabber(0);
+>>>>>>> refs/remotes/origin/Pierre
 
 			grabber.start();
 
@@ -131,6 +148,7 @@ public class Capture {
 			cvSaveImage("data/courant/image1.jpg", rgb_image);
 			int compteur = 0;
 
+<<<<<<< HEAD
 			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilis�es sont bien lib�r�es de la m�moire
     (en quelque sorte en forcant un appel au "Garbage Collector"*/
 			CvMemStorage storage = CvMemStorage.create();
@@ -151,13 +169,42 @@ public class Capture {
 
 				}
 				compteur++;
+=======
+			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilisÈes sont bien libÈrÈes de la mÈmoire
+    (en quelque sorte en forcant un appel au "Garbage Collector"*/
+			CvMemStorage storage = CvMemStorage.create();
+>>>>>>> refs/remotes/origin/Pierre
 
+			while ((rgb_image = grabber.grab()) != null ) {
+				if ( compteur>=30) {
 
 				/*affichage de l'image*/          
 				//rgb_frame.showImage(rgb_image);
 
 
+<<<<<<< HEAD
 				/*deuxi�me ligne magique JavaCV, � appeler r�guli�rement (apr�s chaque capture ou affichage de trame, ...)*/
+=======
+					IplImage image1 = cvLoadImage("data/courant/image1.jpg");
+					if(areDifferent(image1, rgb_image))
+						System.out.println("Les images sont differentes");
+
+					cvSaveImage("data/courant/image1.jpg", rgb_image);
+
+
+
+
+				}
+				compteur++;
+>>>>>>> Stashed changes
+
+
+
+<<<<<<< Updated upstream
+=======
+
+				/*deuxiËme ligne magique JavaCV, ‡ appeler rÈguliËrement (aprËs chaque capture ou affichage de trame, ...)*/
+>>>>>>> refs/remotes/origin/Pierre
 				cvClearMemStorage(storage);
 			}
 			//nettoyage des ressources        
@@ -166,6 +213,10 @@ public class Capture {
 		} catch(Exception e){
 			System.out.println(e.getStackTrace());
 		}       
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> refs/remotes/origin/Pierre
 	}
 
 	private static boolean areDifferent(IplImage image1, IplImage rgb_image) {
@@ -189,6 +240,11 @@ public class Capture {
 		return res;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> refs/remotes/origin/Pierre
 	private static boolean different(IplImage image1, IplImage rgb_image,
 			int i, int j, int k) {
 
@@ -201,7 +257,11 @@ public class Capture {
 			while( p <= Math.min(image1.height()-1,  j+k)&& !res){
 				int[] rgbByte = getRgbByte(image1, n, p); // pixel de l'image1
 				distance = 0;
+<<<<<<< HEAD
 				for (int q = 0; k < 3; k ++){
+=======
+				for (int q = 0; q < 3; q++){
+>>>>>>> refs/remotes/origin/Pierre
 					distance = distance + Math.abs(rgbByte[q] - pixel[q]);
 				}
 				if (distance < distanceMin){
@@ -209,6 +269,10 @@ public class Capture {
 					vector = rgbByte;
 				}
 				p++;
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> refs/remotes/origin/Pierre
 
 			}
 			n++;

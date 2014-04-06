@@ -4,17 +4,25 @@ import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
+<<<<<<< HEAD
 import java.io.File;
 
+=======
+>>>>>>> refs/remotes/origin/Pierre
 import com.googlecode.javacv.OpenCVFrameGrabber;
 import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 public class CaptureLive implements Runnable {
 
+<<<<<<< HEAD
 	private static final int DISTANCE_THRESHOLD = 20;
 	private static final int DIF_NUM = 300; // nombre de pixels qui doivent etre differents
 	private static final int WEBCAM = 0;
+=======
+	private static final int DISTANCE_THRESHOLD = 15;
+	private static final int DIF_NUM = 200; // nombre de pixels qui doivent etre differents
+>>>>>>> refs/remotes/origin/Pierre
 	public void run(){	
 
 		try{ 
@@ -36,7 +44,11 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 			/*creation de l'objet d'acquisition de trames video � partir du fichier indiqu� comme param�tre du programme*/
 			OpenCVFrameGrabber grabber = null;
 			//        grabber = new OpenCVFrameGrabber(args[0]);
+<<<<<<< HEAD
 			grabber = new OpenCVFrameGrabber(WEBCAM);
+=======
+			grabber = new OpenCVFrameGrabber(0);
+>>>>>>> refs/remotes/origin/Pierre
 
 			grabber.start();
 
@@ -94,7 +106,11 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 
 				/*deuxi�me ligne magique JavaCV, � appeler r�guli�rement (apr�s chaque capture ou affichage de trame, ...)*/
 				cvClearMemStorage(storage);
+<<<<<<< HEAD
 				//Thread.sleep(100);
+=======
+				Thread.sleep(100);
+>>>>>>> refs/remotes/origin/Pierre
 			}
 			//nettoyage des ressources        
 			grabber.stop();

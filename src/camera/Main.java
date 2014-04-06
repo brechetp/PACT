@@ -179,9 +179,15 @@ public class Main {
 	 * Capture de deux cartes
 	 * 
 	 */
+<<<<<<< HEAD
 		new Thread(new CaptureLive()).start();
 		
 		/*Image im1 = new Image("data/test/fond.jpg");
+=======
+
+		/*Image im1 = new Image("data/test/fond.jpg");
+>>>>>>> Stashed changes
+>>>>>>> refs/remotes/origin/Pierre
 		Image im2 = new Image ("data/test/carte.jpg");
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
