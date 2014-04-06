@@ -61,4 +61,12 @@ public class Team implements TeamInterface
 		this.dixDeDer=10;
 		
 	}
+
+	@Override
+	public CarteInterface getCartes(int numJoueur) 
+	{
+		if (numJoueur<3)
+			return CarteJoueur1.getPlusFort();
+		else return CarteJoueur2.getPlusFort();
+	}
 }

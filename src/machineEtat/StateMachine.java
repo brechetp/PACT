@@ -3,6 +3,7 @@ package machineEtat;
 import iug.ViewController;
 import iug.ViewControllerInterface;
 import structure.AnnonceInterface;
+import structure.CarteList;
 import structure.CarteListInterface;
 import logiqueDeJeux.*;
 
@@ -22,7 +23,7 @@ public class StateMachine
 	private int premierAJouer =1;
 	private ViewControllerInterface vci;
 	private int numJoueurDistant=4;
-	private CarteListInterface carteAnnonce;
+	private CarteListInterface carteAnnonce = new CarteList();
 	
 	public StateMachine(JoueurDistantInterface joueurD, EtatDuJeu etat) 
 	{

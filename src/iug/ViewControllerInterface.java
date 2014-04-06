@@ -35,10 +35,10 @@ public interface ViewControllerInterface
 	//Affiche l'annonce avec la valeur et couleur
 	public void afficheAnnonce(String val, String couleur);
 	
-	//Actualise l'annonce aprés modification
+	//Actualise l'annonce aprÃ¨s modification
 	public void actualiseAnnonce(String valeur, String couleur);
 	
-	//Aprés validation des valeur
+	//AprÃ¨s validation des valeur
 	public void valideValeurAnnonce();
 	
 	public void annonceJoueurDistant(String valeur, String couleur);

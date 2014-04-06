@@ -16,4 +16,7 @@ public interface CarteInterface
 
 	//Compare les deux CarteInterface. Renvoi -1 si "carte" est plus fort
 	public int compare(CarteInterface carte);
+
+	//donne le rang de la carte en fonction de sa valeur
+	public int getRang();
 }

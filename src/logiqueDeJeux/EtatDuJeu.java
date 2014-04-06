@@ -1,6 +1,8 @@
 package logiqueDeJeux;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import machineEtat.StateMachine;
@@ -327,33 +329,120 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		{
 			listeCartes.add(itr.next());
 		}
-		
+
 		int length = listeCartes.size();
-		boolean mmCouleur = true;
-		String couleur = listeCartes.get(0).getSuit();
-		for (int k=1;k<length-1;k++)
-		{
-			mmCouleur = (couleur == listeCartes.get(k).getSuit());
-		}
-		
-		if (!mmCouleur)
-		{
-			if (length==4)
+		Collections.sort(listeCartes, new Comparator<CarteInterface>() {
+			@Override
+			public int compare(CarteInterface  carte1, CarteInterface  carte2)
 			{
-				if (listeCartes.get(0).getLabelNum()==listeCartes.get(1).getLabelNum()
-						&&listeCartes.get(1).getLabelNum()==listeCartes.get(2).getLabelNum()
-								&&listeCartes.get(2).getLabelNum()==listeCartes.get(3).getLabelNum()
-					)
-				{
-					annonceSquare(listeCartes.get(0));
-				}
+				return (carte1.getRang()-carte2.getRang());
 			}
+		});
+		int suiteMax = 1;
+		String suiteMaxSuit= listeCartes.get(0).getSuit();
+		int suite = 1;
+		int nbMemeValue=1;
+		String value ="";
+		for (int k=0;k<length-1;k++)
+		{
+			if (listeCartes.get(k).getRang()==listeCartes.get(k+1).getRang())
+			{
+				value=listeCartes.get(k).getLabelNum();
+				nbMemeValue++;
+				suite=1;
+			}
+			else if((listeCartes.get(k).getRang()==listeCartes.get(k+1).getRang()-1)
+					&&listeCartes.get(k).getSuit()==listeCartes.get(k+1).getSuit())
+			{
+				suite++;
+			}
+			else if ((listeCartes.get(k).getRang()==listeCartes.get(k+1).getRang()-1)
+					&&listeCartes.get(k).getSuit()==suiteMaxSuit)
+			{
+				suite=suiteMax+1;
+			}
+			else if (suite>suiteMax)
+			{
+				suiteMaxSuit=listeCartes.get(k-1).getSuit();
+				suiteMax=suite;
+				suite=1;
+			}
+			else suite = 1;
 		}
+		if (suite>suiteMax)
+			suiteMax=suite;
+		
+		//test sur suite et nbMemeValue
+		if (nbMemeValue==4)
+			annonceSquare(value);
+		if (suiteMax==3)
+			annonceTierce();
+		if (suiteMax==4)
+			annonceCinquante();
+		if (suiteMax==5)
+			annonceCent();
+	}
+
+	private void annonceCent() 
+	{
+		if (numJoueur%2==0)
+			pointAnnonceTeamPair +=100;
+		else
+			pointAnnonceTeamImpair += 100;
+	}
+
+	private void annonceCinquante() {
+		if (numJoueur%2==0)
+			pointAnnonceTeamPair +=50;
+		else
+			pointAnnonceTeamImpair += 50;
 		
 	}
 
-	private void annonceSquare(CarteInterface carteInterface) 
-	{
+	private void annonceTierce() {
+		if (numJoueur%2==0)
+			pointAnnonceTeamPair +=20;
+		else
+			pointAnnonceTeamImpair += 20;
 		
+	}
+
+	private void annonceSquare(String value) 
+	{
+		switch(value)
+		{
+		case "valet":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=200;
+			else
+				pointAnnonceTeamImpair += 200;
+			break;
+		case "9":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=150;
+			else
+				pointAnnonceTeamImpair += 150;
+			break;
+		case "as":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=100;
+			else
+				pointAnnonceTeamImpair += 100;
+			break;
+		case "roi":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=100;
+			else
+				pointAnnonceTeamImpair += 100;
+			break;
+		case "reine":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=100;
+			else
+				pointAnnonceTeamImpair += 100;
+			break;
+			default:
+				break;
+		}
 	}
 }
