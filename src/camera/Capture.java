@@ -1,5 +1,7 @@
 package camera;
 
+import java.io.File;
+
 import com.googlecode.javacv.OpenCVFrameGrabber;
 import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
@@ -13,10 +15,11 @@ public class Capture {
 
 
 	private static final int DISTANCE_THRESHOLD = 100;
+	private static final int WEBCAM = 1;
 
 	public static void captureFrame(String fileName)
 	{
-		OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(0);
+		OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(WEBCAM);
 		try
 		{
 
@@ -109,16 +112,16 @@ public class Capture {
 		mainframe.setLayout(new GridLayout(1, 1));
 		mainframe.setVisible(true);*/
 
-			/*creation de la fenetre utilisée pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
-    l'accélération materielle pour afficher les vidéos, profitons-en ! */
+			/*creation de la fenetre utilisï¿½e pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
+    l'accï¿½lï¿½ration materielle pour afficher les vidï¿½os, profitons-en ! */
 			/*	CanvasFrame rgb_frame = new CanvasFrame("AVI Playback Demo");        
 		mainframe.getContentPane().add(rgb_frame.getCanvas() );
 		rgb_frame.setVisible(false);*/
 
-			/*creation de l'objet d'acquisition de trames video à partir du fichier indiqué comme paramêtre du programme*/
+			/*creation de l'objet d'acquisition de trames video ï¿½ partir du fichier indiquï¿½ comme paramï¿½tre du programme*/
 			OpenCVFrameGrabber grabber = null;
 			//        grabber = new OpenCVFrameGrabber(args[0]);
-			grabber = new OpenCVFrameGrabber(1);
+			grabber = new OpenCVFrameGrabber(WEBCAM);
 
 			grabber.start();
 
@@ -128,7 +131,7 @@ public class Capture {
 			cvSaveImage("data/courant/image1.jpg", rgb_image);
 			int compteur = 0;
 
-			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilisées sont bien libérées de la mémoire
+			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilisï¿½es sont bien libï¿½rï¿½es de la mï¿½moire
     (en quelque sorte en forcant un appel au "Garbage Collector"*/
 			CvMemStorage storage = CvMemStorage.create();
 
@@ -154,7 +157,7 @@ public class Capture {
 				//rgb_frame.showImage(rgb_image);
 
 
-				/*deuxième ligne magique JavaCV, à appeler régulièrement (après chaque capture ou affichage de trame, ...)*/
+				/*deuxiï¿½me ligne magique JavaCV, ï¿½ appeler rï¿½guliï¿½rement (aprï¿½s chaque capture ou affichage de trame, ...)*/
 				cvClearMemStorage(storage);
 			}
 			//nettoyage des ressources        

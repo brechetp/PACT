@@ -29,7 +29,7 @@ public class Match implements Runnable {
 		
 		BinaryComponent bin3 = bin.largestComponent();
 		bin3.save("data/test/binary/bin"+(3*compteur+2)+".jpg");
-		bin3.getEdge().save("data/test/contour/contour+"+compteur+".jpg");
+		bin3.getEdge().save("data/test/contour/contour"+compteur+".jpg");
 		
 		int[][] coins = bin3.getCornersRansac(3);
 		
