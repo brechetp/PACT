@@ -2,12 +2,15 @@ package comparaison;
 
 public class EdgeSignature {
 	
-	private int[][] doubleTab; // initialisée avec une image à une composante connexe
+	private int[][] doubleTab; // initialis√©e avec une image √† une composante connexe
 	private int size1;
 	private int size2;
 	private int perimeter;
-	private int[][] flagTab;
 	private double[] signature;
+	private double average;
+	private double sigma;
+	double [] matchTable = new double [2];
+	double [] translaTable = new double [perimeter];
 	
 	public EdgeSignature (int[][] binaryMatrix){
 		this.size1 = 635;
@@ -17,14 +20,14 @@ public class EdgeSignature {
 		this.doubleTab = new int[size2][size1];
 		this.doubleTab = binaryMatrix;
 		
-		this.flagTab = new int[size2][size1];
+		/*this.flagTab = new int[size2][size1];
 		for (int i =0; i<size2; i++)
 		{
 			for (int j=0; j<size1; j++)
 			{
 				flagTab[i][j]=0;
 			}
-		}
+		}*/
 		
 		this.signature = new double[perimeter];
 		for (int i =0; i<perimeter; i++)
@@ -34,58 +37,9 @@ public class EdgeSignature {
 		
 	}
 	
-	public void getEdge(){
-		//modifie doubleTab	
-	}
-	
-	public int[] getNext(int x, int y){
-		int[] rep = new int[2];
-		flagTab[y][x]=1;
-		if(doubleTab[y][x+1]==1 && flagTab[y][x+1]==0){
-			rep[0]=x+1; rep[1]=y;}
-			else{
-				if(doubleTab[y-1][x+1]==1 && flagTab[y-1][x+1]==0){
-					rep[0]=x+1; rep[1]=y-1;}
-					else{
-						if(doubleTab[y-1][x]==1 && flagTab[y-1][x]==0){
-							rep[0]=x; rep[1]=y-1;}
-							else{
-								if(doubleTab[y-1][x-1]==1 && flagTab[y-1][x-1]==0){
-									rep[0]=x-1; rep[1]=y-1;}
-									else{
-										if(doubleTab[y][x-1]==1 && flagTab[y][x-1]==0){
-											rep[0]=x-1; rep[1]=y;}
-											else{
-												if(doubleTab[y+1][x-1]==1 && flagTab[y+1][x-1]==0){
-													rep[0]=x-1; rep[1]=y+1;}
-													else{
-														if(doubleTab[y+1][x]==1 && flagTab[y+1][x]==0){
-															rep[0]=x; rep[1]=y+1;}
-															else{
-																if(doubleTab[y+1][x+1]==1 && flagTab[y+1][x+1]==0){
-																	rep[0]=x+1; rep[1]=y+1;}
-																	
-															}
-													
-													}
-												
-											}
-										
-									}
-								
-							}
-			            }
-		         
-		   }
-		
-	
-		return rep;
-	}
-	
 	public double[] getSignature(){
-		this.getEdge();
 		
-		//détermination du barycentre
+		//d√©termination du barycentre
 		int xb = 0;
 		int yb =0;
 		for (int i =0; i<size2; i++)
@@ -99,18 +53,15 @@ public class EdgeSignature {
 		xb=xb/perimeter;
 		yb=yb/perimeter;
 		
-		//détermination du premier pixel à tester
-		int x = xb;
-		int y = yb;
-		while (doubleTab[y][x] == 0){
-			y++;
-		}
 		
 		//remplissage de la table
 		for (int s=0 ; s<perimeter ; s++){
-		 signature[s]=Math.sqrt( Math.pow(x-xb,2) + Math.pow(y-yb,2) );
-		 x = getNext(x,y)[0];
-		 y = getNext(x,y)[1];
+			int t =0;
+			if (doubleTab[(int) Math.floor(t*Math.cos(s))][(int) Math.floor(t*Math.sin(s))]==0 ){
+				signature[s]=Math.sqrt( Math.pow(t*Math.cos(s),2) + Math.pow(t*Math.sin(s),2));
+			} else {
+				t++;
+			}
 		}
 				
 		return signature;
@@ -118,10 +69,65 @@ public class EdgeSignature {
 	
 	
 	
-	public int compareSignature(SignatureBase signatureBase){
+	public int getCardValue (CornerDatabase baseDonneesCoin){
+			getSignature();
+		
+		  // Calcul de average et sigma 
+			average = 0; double variance = 0;
+			for (int i =0; i<perimeter; i++){	
+					average += signature[i];
+			}	
+			average = average/(perimeter);	
+			
+			for (int i =0; i<perimeter; i++){
+					variance += Math.pow(signature[i]-average,2);
+				}
+			sigma = Math.sqrt(variance/(perimeter)); //sigma=1; average = 0;
+			
+		  // comparaison avec chaque carte de la base de donn√©e	
+			for (int i=0 ; i < 2 ; i++)
+			{
+				matchTable[i] = compare(baseDonneesCoin, i);
+			}
+			
+		  // d√©termination du meilleur match	
+		    double max = 0;
+		    int imax = 0;
+		    
+		    for (int i=0 ; i < 2 ; i++)
+		    {
+				if (max<matchTable[i]) 
+				{
+					imax = i; max = matchTable[i];
+				}
+			}
+			return imax;
+		}
+		
+		public double compare(CornerDatabase baseDonnesCoin, int i ){
+			
+			double rep;
+			for (int j=0 ; j<perimeter ; i++){
+				rep = 0;
+				for (int k =0; k<perimeter; k++){
+					double pixel = (signature[k+j]-average)/sigma;
+					rep = rep + pixel*(baseDonnesCoin.getSign(i,k)-baseDonnesCoin.getSignAverage(i))/baseDonnesCoin.getSignSigma(i) ;
+					}
+				translaTable[j] = rep;
+			}
+			// d√©termination de la translation la plus proche
+			rep = 0;
+			int imax = 0;
+		    for (int k=0 ; k < perimeter ; k++)
+		    {
+				if (rep<translaTable[k]) 
+				{
+					imax = i; rep = translaTable[k];
+				}
+			}
+			return rep;
+		}
 
-		return 0;
-	}
 	
 	
 }
