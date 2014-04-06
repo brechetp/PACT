@@ -59,7 +59,32 @@ public class Carte implements CarteInterface
 			return (int) Math.signum(this.getValue()-carte.getValue());
 		else return 1;
 	}
-	
+
+	@Override
+	public int getRang() 
+	{
+		switch(labelNum)
+		{
+		case "7":
+			return 0;
+		case "8":
+			return 1;
+		case "9":
+			return 2;
+		case "10":
+			return 3;
+		case "valet":
+			return 4;
+		case "reine":
+			return 5;
+		case "roi":
+			return 6;
+		case "as":
+			return 7;
+		default:
+			return 0;// n'est jamais attein
+		}
+	}
 
 
 }

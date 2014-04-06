@@ -1,5 +1,10 @@
 package logiqueDeJeux;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+
 import machineEtat.StateMachine;
 import iug.ViewControllerInterface;
 import structure.*;
@@ -17,6 +22,8 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	private int pointsTeamImpair = 0;
 	private int coefCoinche = 1;
 	private int valeurFinPartie = 2000;
+	private int pointAnnonceTeamPair;
+	private int pointAnnonceTeamImpair;
 	
 	public EtatDuJeu ()
 	{
@@ -138,24 +145,24 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		{
 			if (teamPairPoint>=annonce.getValue())
 			{
-				this.pointsTeamPair = pointsTeamPair + coefCoinche*(teamPairPoint + annonce.getValue());
-				this.pointsTeamImpair = pointsTeamImpair + teamImpairPoint;
+				this.pointsTeamPair = pointsTeamPair + coefCoinche*(teamPairPoint + annonce.getValue()) +pointAnnonceTeamPair;
+				this.pointsTeamImpair = pointsTeamImpair + teamImpairPoint + pointAnnonceTeamImpair;
 			}
 			else
 			{
-				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(162 + annonce.getValue());
+				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(162 + annonce.getValue())+pointAnnonceTeamImpair+pointAnnonceTeamPair;
 			}
 		}
 		else
 		{
 			if (teamImpairPoint>=annonce.getValue())
 			{
-				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(teamImpairPoint + annonce.getValue());
-				this.pointsTeamPair = pointsTeamPair + teamPairPoint;
+				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(teamImpairPoint + annonce.getValue()) + pointAnnonceTeamImpair;
+				this.pointsTeamPair = pointsTeamPair + teamPairPoint + pointAnnonceTeamPair;
 			}
 			else
 			{
-				this.pointsTeamPair = pointsTeamPair + coefCoinche*(162 + annonce.getValue());
+				this.pointsTeamPair = pointsTeamPair + coefCoinche*(162 + annonce.getValue())+pointAnnonceTeamImpair+pointAnnonceTeamPair;
 			}
 		}
 		//pour les tests
@@ -167,8 +174,13 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		this.TeamPair=new Team();
 		this.TeamImpair = new Team();
 		this.coefCoinche = 1;
+		this.pointAnnonceTeamPair=0;
+		this.pointAnnonceTeamImpair=0;
 		
-		//if (this.pointsTeamPair>this.valeurFinPartie)
+		if (this.pointsTeamPair>this.valeurFinPartie)
+			;
+		else if (this.pointsTeamImpair>this.valeurFinPartie)
+			;
 			
 			
 	}
@@ -196,7 +208,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (valeur==250)
 			val="capot";
 		else if (valeur==500)
-			val="g�n�rale";
+			val="générale";
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
@@ -213,7 +225,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (valeur==250)
 			val="capot";
 		else if (valeur==500)
-			val="g�n�rale";
+			val="générale";
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
@@ -233,7 +245,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (valeur==250)
 			val="capot";
 		else if (valeur==500)
-			val="g�n�rale";
+			val="générale";
 		else
 			val =""+valeur;
 		String couleur = this.getAtout();
@@ -265,13 +277,11 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			this.coefCoinche=this.coefCoinche*2;
 	}
 
-	@Override
 	public boolean dernierPli() 
 	{
 		return playedCard.size()==32;
 	}
 
-	@Override
 	public boolean setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci) 
 	{
 		if (annonce == null)
@@ -287,7 +297,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			if (valeur==250)
 				val="capot";
 			else if (valeur==500)
-				val="g�n�rale";
+				val="générale";
 			else
 				val =""+valeur;
 			String couleur = this.getAtout();
@@ -299,5 +309,140 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	public AnnonceInterface getAnnonce ()
 	{
 		return annonce;
+	}
+
+	public CarteInterface getTeamCarte()
+	{
+		if (numJoueur%2==0)
+			return TeamPair.getCartes(numJoueur);
+		else
+			return TeamImpair.getCartes(numJoueur);
+	}
+	
+	public void verifieAnnonceCartes(JoueurDistantInterface joueurD, CarteListInterface carteAnnonce) 
+	{
+		ArrayList<CarteInterface> listeCartes =new ArrayList<CarteInterface>();
+		listeCartes.add(getTeamCarte());
+		
+		Iterator<CarteInterface> itr = carteAnnonce.iterator();
+		while (itr.hasNext())
+		{
+			listeCartes.add(itr.next());
+		}
+
+		int length = listeCartes.size();
+		Collections.sort(listeCartes, new Comparator<CarteInterface>() {
+			@Override
+			public int compare(CarteInterface  carte1, CarteInterface  carte2)
+			{
+				return (carte1.getRang()-carte2.getRang());
+			}
+		});
+		int suiteMax = 1;
+		String suiteMaxSuit= listeCartes.get(0).getSuit();
+		int suite = 1;
+		int nbMemeValue=1;
+		String value ="";
+		for (int k=0;k<length-1;k++)
+		{
+			if (listeCartes.get(k).getRang()==listeCartes.get(k+1).getRang())
+			{
+				value=listeCartes.get(k).getLabelNum();
+				nbMemeValue++;
+				suite=1;
+			}
+			else if((listeCartes.get(k).getRang()==listeCartes.get(k+1).getRang()-1)
+					&&listeCartes.get(k).getSuit()==listeCartes.get(k+1).getSuit())
+			{
+				suite++;
+			}
+			else if ((listeCartes.get(k).getRang()==listeCartes.get(k+1).getRang()-1)
+					&&listeCartes.get(k).getSuit()==suiteMaxSuit)
+			{
+				suite=suiteMax+1;
+			}
+			else if (suite>suiteMax)
+			{
+				suiteMaxSuit=listeCartes.get(k-1).getSuit();
+				suiteMax=suite;
+				suite=1;
+			}
+			else suite = 1;
+		}
+		if (suite>suiteMax)
+			suiteMax=suite;
+		
+		//test sur suite et nbMemeValue
+		if (nbMemeValue==4)
+			annonceSquare(value);
+		if (suiteMax==3)
+			annonceTierce();
+		if (suiteMax==4)
+			annonceCinquante();
+		if (suiteMax==5)
+			annonceCent();
+	}
+
+	private void annonceCent() 
+	{
+		if (numJoueur%2==0)
+			pointAnnonceTeamPair +=100;
+		else
+			pointAnnonceTeamImpair += 100;
+	}
+
+	private void annonceCinquante() {
+		if (numJoueur%2==0)
+			pointAnnonceTeamPair +=50;
+		else
+			pointAnnonceTeamImpair += 50;
+		
+	}
+
+	private void annonceTierce() {
+		if (numJoueur%2==0)
+			pointAnnonceTeamPair +=20;
+		else
+			pointAnnonceTeamImpair += 20;
+		
+	}
+
+	private void annonceSquare(String value) 
+	{
+		switch(value)
+		{
+		case "valet":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=200;
+			else
+				pointAnnonceTeamImpair += 200;
+			break;
+		case "9":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=150;
+			else
+				pointAnnonceTeamImpair += 150;
+			break;
+		case "as":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=100;
+			else
+				pointAnnonceTeamImpair += 100;
+			break;
+		case "roi":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=100;
+			else
+				pointAnnonceTeamImpair += 100;
+			break;
+		case "reine":
+			if (numJoueur%2==0)
+				pointAnnonceTeamPair +=100;
+			else
+				pointAnnonceTeamImpair += 100;
+			break;
+			default:
+				break;
+		}
 	}
 }

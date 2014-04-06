@@ -3,6 +3,8 @@ package machineEtat;
 import iug.ViewController;
 import iug.ViewControllerInterface;
 import structure.AnnonceInterface;
+import structure.CarteList;
+import structure.CarteListInterface;
 import logiqueDeJeux.*;
 
 public class StateMachine 
@@ -12,7 +14,8 @@ public class StateMachine
 						DebutTour,DebutTour1,DebutTour2,DebutTour3,DebutTour4,
 						SecondTour,SecondTour1, SecondTour2, SecondTour3, SecondTour4,
 						MontreCarte1,MontreCarte2,MontreCarte3,MontreCarte4,
-						ResteDesTours, };
+						ResteDesTours;
+						};
 	private State state;
 	private EtatDuJeuInterface etat;
 	private JoueurDistantInterface joueurD;
@@ -20,6 +23,7 @@ public class StateMachine
 	private int premierAJouer =1;
 	private ViewControllerInterface vci;
 	private int numJoueurDistant=4;
+	private CarteListInterface carteAnnonce = new CarteList();
 	
 	public StateMachine(JoueurDistantInterface joueurD, EtatDuJeu etat) 
 	{
@@ -143,20 +147,20 @@ public class StateMachine
 			 
 /********************* Montre Cartes ************************/
 		case MontreCarte1:
-			if (true /*carte valide*/)
-				this.state = State.MontreCarte1;
+			this.carteAnnonce.ajoute(carte.getCarte());
+			this.state = State.MontreCarte1;
 			break;	 
 		case MontreCarte2:
-			if (true /*carte valide*/)
-				this.state = State.MontreCarte2;
+			this.carteAnnonce.ajoute(carte.getCarte());
+			this.state = State.MontreCarte2;
 			break;	 
 		case MontreCarte3:
-			if (true /*carte valide*/)
-				this.state = State.MontreCarte3;
+			this.carteAnnonce.ajoute(carte.getCarte());
+			this.state = State.MontreCarte3;
 			break;	 
 		case MontreCarte4:
-			if (true /*carte valide*/)
-				this.state = State.MontreCarte4;
+			this.carteAnnonce.ajoute(carte.getCarte());
+			this.state = State.MontreCarte4;
 			break;	 
 			
 			 
@@ -299,7 +303,7 @@ public class StateMachine
 			 break;
 		 
 /************************ Second Tour/Montre Carte **********************/
-	/*	 case SecondTour1:
+		 case SecondTour1:
 			 this.state = State.MontreCarte1;
 			 break;
 		 case SecondTour2:
@@ -310,23 +314,23 @@ public class StateMachine
 			 break;
 		 case SecondTour4:
 			 this.state = State.MontreCarte4;
-			 break;		*/
+			 break;
 			 
 			 
 		 case MontreCarte1:
-			 //Action
+			 etat.verifieAnnonceCartes(joueurD,carteAnnonce);
 			 this.state = State.SecondTour1;
 			 break;
 		 case MontreCarte2:
-			 //Action
+			 etat.verifieAnnonceCartes(joueurD,carteAnnonce);
 			 this.state = State.SecondTour2;
 			 break;
 		 case MontreCarte3:
-			 //Action
+			 etat.verifieAnnonceCartes(joueurD,carteAnnonce);
 			 this.state = State.SecondTour3;
 			 break;
 		 case MontreCarte4:
-			 //Action
+			 etat.verifieAnnonceCartes(joueurD,carteAnnonce);
 			 this.state = State.SecondTour4;
 			 break;
 		 

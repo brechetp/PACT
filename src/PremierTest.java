@@ -138,19 +138,25 @@ public class PremierTest {
 			belote.setAnnonce(null); //Joueur 4 passe
 			Thread.sleep(100);
 			
-			belote.nouvelleCarte(ValCaEvent);
+			belote.nouvelleCarte(ValCaEvent);//joueur 1
 			Thread.sleep(1000);
-			belote.nouvelleCarte(HuiCaEvent);
+			belote.nouvelleCarte(HuiCaEvent);//joueur 2
 			Thread.sleep(1000);
-			belote.nouvelleCarte(RoiCaEvent);
+			belote.nouvelleCarte(RoiCaEvent);//joueur 3
 			Thread.sleep(1000);
-			belote.nouvelleCarte(SepCaEvent);
+			belote.nouvelleCarte(SepCaEvent);//joueur 4
 			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
 			
-			belote.nouvelleCarte(NeuCaEvent);
+			belote.nouvelleCarte(NeuCaEvent);//joueur 1
 			Thread.sleep(1000);
+			//le joueur 2 montre une tierce
+			belote.nouveauGeste(accepter);
+			belote.nouvelleCarte(NeuCaEvent);
+			belote.nouvelleCarte(DixCaEvent);
+			belote.nouvelleCarte(ValCaEvent);
+			belote.nouveauGeste(accepter);
 			belote.nouvelleCarte(RenCaEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(DixCaEvent);
