@@ -44,7 +44,7 @@ public class MyListener extends Listener{
     	/*************************************************************************************************************************/
     	/**                             FONCTION PRINCIPALE : ENVOI VERS LA CLASSIFICATION EN CONTINU                           **/
     	/*************************************************************************************************************************/
-    /*
+    
     	try{
     		Frame frame = controller.frame();
         	if (frame.hands().count()>0)
@@ -64,14 +64,14 @@ public class MyListener extends Listener{
     	}catch(Exception e){
     		e.printStackTrace();
     	}
-		*/
+		
 
     	
     	
     	/*************************************************************************************************************************/
     	/**                                    CAPTURE ET ENREGISTREMENT POUR LA CLASSIFICATION                                 **/
     	/*************************************************************************************************************************/
-    	
+    /*	
   	
     	// INITIALISATION DU PROGRAMME DE CAPTURE DE MOUVEMENTS
     	if (k1.getC()=='/'){
@@ -203,7 +203,7 @@ public class MyListener extends Listener{
     		}
     		
     	}
-		
+		*/
    	}
         
 }
