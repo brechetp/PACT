@@ -179,7 +179,7 @@ public class Main {
 	 * Capture de deux cartes
 	 * 
 	 */
-<<<<<<< HEAD
+
 		new Thread(new CaptureLive()).start();
 		
 		/*Image im1 = new Image("data/test/fond.jpg");
