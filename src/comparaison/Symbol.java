@@ -1,6 +1,6 @@
 package comparaison;
 
-public class EdgeSignature {
+public class Symbol {
 	
 	private int[][] doubleTab; // initialisée avec une image à une composante connexe
 	private int size1;
@@ -12,10 +12,10 @@ public class EdgeSignature {
 	double [] matchTable = new double [2];
 	double [] translaTable = new double [perimeter];
 	
-	public EdgeSignature (int[][] binaryMatrix){
-		this.size1 = 635;
-		this.size2 = 889;
-		this.perimeter = 2000;
+	public Symbol (int[][] binaryMatrix){
+		this.size1 = 185;
+		this.size2 = 185;
+		this.perimeter = 1000;
 		
 		this.doubleTab = new int[size2][size1];
 		this.doubleTab = binaryMatrix;
@@ -57,7 +57,7 @@ public class EdgeSignature {
 		//remplissage de la table
 		for (int s=0 ; s<perimeter ; s++){
 			int t =0;
-			if (doubleTab[(int) Math.floor(t*Math.cos(s))][(int) Math.floor(t*Math.sin(s))]==0 ){
+			if (doubleTab[(int) Math.floor(t*Math.cos(s))+xb][(int) Math.floor(t*Math.sin(s))+yb]==0 ){
 				signature[s]=Math.sqrt( Math.pow(t*Math.cos(s),2) + Math.pow(t*Math.sin(s),2));
 			} else {
 				t++;

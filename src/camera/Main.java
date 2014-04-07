@@ -180,27 +180,26 @@ public class Main {
 	 * 
 	 */
 
-		new Thread(new CaptureLive()).start();
+		//new Thread(new CaptureLive()).start();
 		
-		/*Image im1 = new Image("data/test/fond.jpg");
-=======
+		//Capture.captureFrame("data/test/capture/image1.jpg");
+		//Thread.sleep(3000);
+		//Capture.captureFrame("data/test/capture/image2.jpg");
+		Image im1 = new Image("data/test/capture/image1.jpg");
+		Image im2 = new Image("data/test/capture/image2.jpg");
 
-		/*Image im1 = new Image("data/test/fond.jpg");
->>>>>>> Stashed changes
->>>>>>> refs/remotes/origin/Pierre
-		Image im2 = new Image ("data/test/carte.jpg");
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
-		bin1.save("data/test/binary/bin1.jpg");
+		//bin1.save("data/test/binary/bin1.jpg");
 		BinaryImage bin2 = im2.binaryThreshold(1);
-		bin2.save("data/test/binary/bin2.jpg");
+		//bin2.save("data/test/binary/bin2.jpg");
 		BinaryImage bin = bin1.and(bin2);
 		
 		
 		
 		BinaryComponent bin3 = bin.largeComponents();
-		bin3.save("data/test/binary/bin.jpg");
-		bin3.getEdge().save("data/test/contour.jpg");
+		//bin3.save("data/test/binary/bin.jpg");
+		//bin3.getEdge().save("data/test/contour.jpg");
 		
 		int[][] coins = bin3.getCornersRansac(3);
 		
@@ -208,13 +207,13 @@ public class Main {
 		carte.save("data/test/cartetest.jpg");
 		
 		
-		carte.binaryThreshold(0).getEdge().save("data/test/contour2.jpg");
-		carte.binaryThreshold(0).save("data/test/binaire.jpg");
+	//	carte.binaryThreshold(0).getEdge().save("data/test/contour2.jpg");
+	//	carte.binaryThreshold(0).save("data/test/binaire.jpg");
 	
+		new BinaryImage(carte.getFirstSymbol(10000, 50000)).save("data/test/symbol/symbol.jpg");
 		
-	
-		
-		System.out.println(carte.getType());*/
+		//System.out.println(carte.getSignature());
+		System.out.println(carte.getType());
 		
 		/*new Database("data/database/database5/carte");
 		System.out.println(carte.find(Database.database));

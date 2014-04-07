@@ -3,6 +3,7 @@ package camera;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 import comparaison.CardDatabase;
+import comparaison.Symbol;
 
 
 public class Card extends Image{
@@ -10,12 +11,15 @@ public class Card extends Image{
 	
 
 	// double [] matchTable = new double [5];
-	static double WIDTH = 107.96758772891057 ; // taille de la carte sur l'ecran
-	static double HEIGHT = 174.4505660638566;
+	static double WIDTH = 152.55918747922567 ; // taille de la carte sur l'ecran
+	static double HEIGHT = 214.23624601871882;
 	
 
 
+
 	private Image corner;
+	private Symbol symbol;
+	private int number=-1;
 
 	
 	
@@ -28,6 +32,7 @@ public class Card extends Image{
 		sigma = new double[3]; // ecart type sur RGB
 		
 		corner = this.cut(0,0,110, 220);
+		symbol = new Symbol(this.cut(60, 90, 185, 185).binaryThreshold(0).getBinaryMatrix());
 
 
 		
@@ -45,6 +50,7 @@ public class Card extends Image{
 	
 
 		corner = this.cut(0,0, 110,  220);
+		symbol = new Symbol(this.cut(60, 90, 185, 185).binaryThreshold(0).getBinaryMatrix());
 
 
 		
@@ -222,13 +228,15 @@ public class Card extends Image{
 				string = "1";
 			else
 				string = "0"; // carte noire
-			int nbr = getComponentsNumber (6000);
-			if (nbr ==0)
+			
+			symbol = new Symbol (getFirstSymbol(20000, 50000));
+			
+			if (number ==0)
 				string = null;
-			else if (nbr ==1 && compt < 100000) // as
+			else if (number ==1 && compt < 100000) // as
 				string = string+"0";
-			else if (nbr >= 7 && nbr <= 10) // 7, 8, 9, 10
-				string =string+ (nbr-6);
+			else if (number >= 7 && number <= 10) // 7, 8, 9, 10
+				string =string+ (number-6);
 			else 
 				string = string+5; // V, D, R
 			return string;
@@ -236,16 +244,18 @@ public class Card extends Image{
 			
 		}
 		
-		public int getComponentsNumber(int size){
+		public int[][] getFirstSymbol(int sizeMin, int sizeMax){
 			
-			BinaryImage bin = new BinaryImage(this.binaryThreshold(0).cut(50, 50, 535, 789)); //on enleve les bords
-			int res = bin.componentsNumber(size);
+			BinaryImage bin = new BinaryImage(this.binaryThreshold(0)/*.cut(50, 50, 535, 789)*/); //on enleve les bords
+			bin.save("data/test/carte/cartebin.jpg");
+			int[] res = bin.componentsNumberAndFirst(sizeMin, sizeMax);
+			number = res[0];
 			
-			return res;
-			
-
-			
+			return bin.filter(res[1]);
+		
 		}
+		
+		
 		
 		public String find(CardDatabase[][] tab){
 			
@@ -278,7 +288,9 @@ public class Card extends Image{
 		
 			
 			
-			
+		public double[] getSignature(){
+			return symbol.getSignature();
+		}
 		
 
 		public Image getCorner() {

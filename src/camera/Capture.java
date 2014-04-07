@@ -15,7 +15,7 @@ public class Capture {
 
 
 	private static final int DISTANCE_THRESHOLD = 100;
-	private static final int WEBCAM = 1;
+	private static final int WEBCAM = 0;
 
 	public static void captureFrame(String fileName)
 	{
@@ -30,6 +30,7 @@ public class Capture {
 				cvSaveImage(fileName, img);
 			}
 			grabber.stop();
+			
 
 
 

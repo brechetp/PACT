@@ -187,7 +187,7 @@ public class BinaryImage extends GrayImage {
 				
 				for(i=0;i<width;i++){
 					
-					pw.print(get(i,j)); // on Žcrit l'etiquette
+					pw.print(get(i,j)); // on ï¿½crit l'etiquette
 
 				}
 				pw.print("\n");	// a la fin d'une ligne, on va a la ligne
@@ -365,6 +365,7 @@ public class BinaryImage extends GrayImage {
 		return new BinaryComponent (largest, max);
 	}
 	
+
 	public BinaryComponent largeComponents(){ // renvoie les grandes composantes
 		
 		int [][] tab = conncetedComponents();
@@ -400,7 +401,7 @@ public class BinaryImage extends GrayImage {
 		return new BinaryComponent (largest, compt);
 	}
 	
-	public int componentsNumber(int size){
+	public int[] componentsNumberAndFirst(int size, int sizeMax){
 		
 		int [][] tab = conncetedComponents();
 	
@@ -417,15 +418,35 @@ public class BinaryImage extends GrayImage {
 			}
 		}
 		
-		int res =0;
+		int[] res = new int[]{0,-1}; // res[0] contient le nombre de composantes connexes, res[1] l'indice de la premiÃ¨re
 		for (int i=0; i<nbTags; i++){
 			if (compteur[i] >= size){
-				res++;
+				res[0]++;
+				if(res[1] == -1 && compteur[i] <= sizeMax){
+					res[1] = i;
+				}
+				
 			}
 		}
 		
 			
 		
+		return res;
+	}
+	
+	public int[][] filter(int indice){
+		
+		int[][] res  = new int[height][width];
+		
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (taggedBinaryImage[i][j] == indice) {
+					res[i][j] = 1;
+				}
+				else
+					res[i][j] =0;
+			}
+		}
 		return res;
 	}
 	
