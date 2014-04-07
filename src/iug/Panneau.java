@@ -349,7 +349,6 @@ public class Panneau extends JPanel {
 		    /**                                         MODE OPTIONS                                             **/
 		    /******************************************************************************************************/
 		    
-		    //        tout-atout / sans-atout /// annonces Y/N /// nombre de points max
 		    
 		    if (modeActuel == 2){
 		    	
