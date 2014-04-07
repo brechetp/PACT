@@ -28,12 +28,12 @@ public class MainMenu implements GlobalListener
 		if (mouvement.getLabel()=="passer")
 		{
 			liste.moveLeft();
-			vci.gauche();
+			vci.gauche(liste.get(1).getImage());
 		}
 		else if (mouvement.getLabel()=="retour")
 		{
 			liste.moveRight();
-			vci.droite();
+			vci.droite(liste.get(-1).getImage());
 		}
 		else if (mouvement.getLabel()=="coinche")
 			;//nothing pour l'instant

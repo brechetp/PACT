@@ -1,7 +1,5 @@
 package structure;
 
-import java.util.ArrayList;
-
 public class CircularArray<E> 
 {
 	
@@ -25,7 +23,11 @@ public class CircularArray<E>
 	 */
 	public E get(int index)
 	{
-		return array[index];
+		if (index>0&&index<array.length)
+			return array[index];
+		else if (index<0)
+			return get(index+array.length);
+		else return array[index%array.length];
 	}
 	
 	/**
