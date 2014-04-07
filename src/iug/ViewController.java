@@ -374,5 +374,9 @@ public class ViewController implements ViewControllerInterface
 			e.printStackTrace();
 		}
 	}
+	
+	public int optionEnCours(){
+		return fen.getPan().getOptionEnCours();
+	}
 
 }

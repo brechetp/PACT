@@ -25,6 +25,7 @@ public class Classification
 	public void onFrame(double[] frame)
 	{
 		compteur++;
+		System.out.println(compteur);
 		this.ajoute(frame);
 		
 		if (compteur>=30)

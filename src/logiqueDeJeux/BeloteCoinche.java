@@ -1,5 +1,6 @@
 package logiqueDeJeux;
 
+import iug.ViewControllerInterface;
 import structure.AnnonceInterface;
 import machineEtat.*;
 
@@ -8,10 +9,10 @@ public class BeloteCoinche implements GlobalListener
 	private StateMachine machine;
 	
 	
-	public BeloteCoinche(EtatDuJeu etat)
+	public BeloteCoinche(EtatDuJeu etat, ViewControllerInterface vci)
 	{
 		
-		this.machine = new StateMachine(new JoueurDistant(this), etat);
+		this.machine = new StateMachine(new JoueurDistant(this), etat, vci);
 	}
 	
 	public void nouvelleCarte(CardEvent carte) 

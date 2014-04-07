@@ -958,5 +958,9 @@ public class Panneau extends JPanel {
 	public int getOption3(){
 		return option3;
 	}
+	
+	public int getOptionEnCours(){
+		return optionEnCours;
+	}
 
 }

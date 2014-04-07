@@ -45,7 +45,7 @@ public interface ViewControllerInterface
 	public void annonceJoueurDistant(String valeur, String couleur);
 	
 	//Initialisation des menus
-	public void init(ImageMenu imageMenuCentre, ImageMenu imageMenuGauche, ImageMenu imageMenuDroite);
+	public void init(ImageMenu imageMenuGauche, ImageMenu imageMenuCentre, ImageMenu imageMenuDroite);
 	
 	//faire défiler les menus vers la droite
 	public void droite(ImageMenu imageMenuNew);
@@ -76,4 +76,10 @@ public interface ViewControllerInterface
 	
 	//modifie option 3
 	public void modifOption3(int option3);
+	
+	//option en cours
+	public int optionEnCours();
+	
+	//valide les options
+	public void validerOptions();
 }

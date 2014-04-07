@@ -7,9 +7,9 @@ import adaBoost.Classification;
 import com.leapmotion.leap.Controller;
 
 import leapmotion.main.MyListener;
-import menus.MainMenu;
-import menus.menu;
+import menus.*;
 import structure.CircularArray;
+import iug.ImageMenu;
 import iug.ViewController;
 
 
@@ -17,15 +17,15 @@ public class MainFinal {
 
 	public static void main(String[] args) {
 		
-		ViewController vc = new ViewController();
-		menu[] tab = new menu[3];
-		//remplir tab
-		CircularArray<menu> menus = new CircularArray<menu>(tab);
-		MainMenu mainMenu = new MainMenu(menus, vc);
 		
 		//Classification
 		ClassiFinal[] classilol = BaseApprentissage.main(null);
 		Classification classi = new Classification(classilol);
+		ViewController vc = new ViewController();
+		
+		//Creation menus
+		MainMenu mainMenu = new MainMenu(classi, vc);
+		mainMenu.init();
 		classi.addListener(mainMenu);
 		
 		//Start leap

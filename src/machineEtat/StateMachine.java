@@ -25,12 +25,12 @@ public class StateMachine
 	private int numJoueurDistant=4;
 	private CarteListInterface carteAnnonce = new CarteList();
 	
-	public StateMachine(JoueurDistantInterface joueurD, EtatDuJeu etat) 
+	public StateMachine(JoueurDistantInterface joueurD, EtatDuJeu etat,ViewControllerInterface vci) 
 	{
 		this.state = State.Distribution;
 		this.etat = etat;
 		this.joueurD = joueurD;
-		this.vci = new ViewController();
+		this.vci = vci;
 	}
 	 
 	public void eventCarte(CardEvent carte) 
