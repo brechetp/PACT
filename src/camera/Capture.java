@@ -1,5 +1,7 @@
 package camera;
 
+import java.io.File;
+
 import com.googlecode.javacv.OpenCVFrameGrabber;
 import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
@@ -13,10 +15,11 @@ public class Capture {
 
 
 	private static final int DISTANCE_THRESHOLD = 100;
+	private static final int WEBCAM = 1;
 
 	public static void captureFrame(String fileName)
 	{
-		OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(0);
+		OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(WEBCAM);
 		try
 		{
 
@@ -93,6 +96,7 @@ public class Capture {
 
 
 		}
+
 	}
 
 
@@ -109,16 +113,23 @@ public class Capture {
 		mainframe.setLayout(new GridLayout(1, 1));
 		mainframe.setVisible(true);*/
 
-			/*creation de la fenetre utilisée pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
-    l'accélération materielle pour afficher les vidéos, profitons-en ! */
+
+			/*creation de la fenetre utilisï¿½e pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
+    l'accï¿½lï¿½ration materielle pour afficher les vidï¿½os, profitons-en ! */
+
+			/*creation de la fenetre utilisÃˆe pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
+    l'accÃˆlÃˆration materielle pour afficher les vidÃˆos, profitons-en ! */
+
 			/*	CanvasFrame rgb_frame = new CanvasFrame("AVI Playback Demo");        
 		mainframe.getContentPane().add(rgb_frame.getCanvas() );
 		rgb_frame.setVisible(false);*/
 
-			/*creation de l'objet d'acquisition de trames video à partir du fichier indiqué comme paramêtre du programme*/
+
+			/*creation de l'objet d'acquisition de trames video ï¿½ partir du fichier indiquï¿½ comme paramï¿½tre du programme*/
 			OpenCVFrameGrabber grabber = null;
 			//        grabber = new OpenCVFrameGrabber(args[0]);
-			grabber = new OpenCVFrameGrabber(1);
+			grabber = new OpenCVFrameGrabber(WEBCAM);
+
 
 			grabber.start();
 
@@ -128,7 +139,7 @@ public class Capture {
 			cvSaveImage("data/courant/image1.jpg", rgb_image);
 			int compteur = 0;
 
-			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilisées sont bien libérées de la mémoire
+			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilisï¿½es sont bien libï¿½rï¿½es de la mï¿½moire
     (en quelque sorte en forcant un appel au "Garbage Collector"*/
 			CvMemStorage storage = CvMemStorage.create();
 
@@ -150,11 +161,8 @@ public class Capture {
 				compteur++;
 
 
-				/*affichage de l'image*/          
-				//rgb_frame.showImage(rgb_image);
+				/*deuxiÃ‹me ligne magique JavaCV, â€¡ appeler rÃˆguliÃ‹rement (aprÃ‹s chaque capture ou affichage de trame, ...)*/
 
-
-				/*deuxième ligne magique JavaCV, à appeler régulièrement (après chaque capture ou affichage de trame, ...)*/
 				cvClearMemStorage(storage);
 			}
 			//nettoyage des ressources        
@@ -163,6 +171,7 @@ public class Capture {
 		} catch(Exception e){
 			System.out.println(e.getStackTrace());
 		}       
+
 	}
 
 	private static boolean areDifferent(IplImage image1, IplImage rgb_image) {
@@ -186,6 +195,7 @@ public class Capture {
 		return res;
 	}
 
+
 	private static boolean different(IplImage image1, IplImage rgb_image,
 			int i, int j, int k) {
 
@@ -198,7 +208,9 @@ public class Capture {
 			while( p <= Math.min(image1.height()-1,  j+k)&& !res){
 				int[] rgbByte = getRgbByte(image1, n, p); // pixel de l'image1
 				distance = 0;
-				for (int q = 0; k < 3; k ++){
+
+				for (int q = 0; q < 3; q++){
+
 					distance = distance + Math.abs(rgbByte[q] - pixel[q]);
 				}
 				if (distance < distanceMin){
@@ -206,6 +218,7 @@ public class Capture {
 					vector = rgbByte;
 				}
 				p++;
+
 
 			}
 			n++;
