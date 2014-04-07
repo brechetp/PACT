@@ -23,14 +23,14 @@ public class LeapMotionMain {
 	public static void main(String[] args) throws InterruptedException {
 		
 		// Création d'une fenêtre pour un usage plus convivial
-		/*KListener kk = new KListener();
+		KListener kk = new KListener();
 		JFrame fenetre = new JFrame();
 		fenetre.addKeyListener(kk);
 		fenetre.setVisible(true);
 		fenetre.setSize(100, 50);
 		fenetre.setLocation(25, 25);
 		fenetre.setTitle("Leap Motion Control Panel");
-		fenetre.setResizable(false);*/
+		fenetre.setResizable(false);
 		
 		
 		/*try {
@@ -57,15 +57,15 @@ public class LeapMotionMain {
 			e1.printStackTrace();
 		}*/
 		
-		ClassiFinal[] classilol = BaseApprentissage.main(null);
+		/*ClassiFinal[] classilol = BaseApprentissage.main(null);
 		EtatDuJeu etat = new EtatDuJeu();
-		BeloteCoinche belote = new BeloteCoinche(etat);
+		BeloteCoinche belote = new BeloteCoinche(etat, null);
 		Classification classi = new Classification(classilol);
-		classi.addListener(belote);
-        MyListener listener = new MyListener(classi);
+		classi.addListener(belote);*/
+        MyListener listener = new MyListener();
         Controller controller = new Controller();
         controller.addListener(listener);
-        
+        /*
         Carte RoiCa = new Carte("roi","carreau",etat);
 		CardEvent RoiCaEvent = new CardEvent(RoiCa);
 		Carte RoiCo = new Carte("roi","coeur",etat);
@@ -155,7 +155,7 @@ public class LeapMotionMain {
 		Thread.sleep(100);
 		belote.nouvelleCarte(DixCoEvent);
 		Thread.sleep(100);
-        
+        */
         try {
             System.in.read();
         } catch (IOException e) {

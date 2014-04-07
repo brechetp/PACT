@@ -46,7 +46,7 @@ public class MenuOptions implements GlobalListener
 
 			if (optionEnCours == 3){
 				EtatDuJeu.valeurFinPartie=EtatDuJeu.valeurFinPartie+100;
-				vci.modifOption3(EtatDuJeu.valeurFinPartie+100);
+				vci.modifOption3(EtatDuJeu.valeurFinPartie);
 			}
 		}
 		else if (mouvement.getLabel()=="retour")

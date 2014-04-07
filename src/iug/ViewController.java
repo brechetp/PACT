@@ -161,7 +161,8 @@ public class ViewController implements ViewControllerInterface
 
 	public void modeJeu(){
 		fen.getPan().setH(0);
-		fen.getPan().setM(1);
+		fen.getPan().setK(11);
+		fen.getPan().setJ(0);
 		fen.repaint();
 		try {
 			Thread.sleep(2000);
@@ -169,7 +170,7 @@ public class ViewController implements ViewControllerInterface
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		fen.getPan().setM(0);
+		fen.getPan().setK(0);
 		fen.repaint();
 	}
 
@@ -322,7 +323,6 @@ public class ViewController implements ViewControllerInterface
 			try {
 				Thread.sleep(15);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			fen.repaint();
