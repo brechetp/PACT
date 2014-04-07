@@ -15,7 +15,7 @@ public class Capture {
 
 
 	private static final int DISTANCE_THRESHOLD = 100;
-	private static final int WEBCAM = 0;
+	private static final int WEBCAM = 1;
 
 	public static void captureFrame(String fileName)
 	{
@@ -44,6 +44,33 @@ public class Capture {
 
 		}
 	}
+	
+	public static IplImage captureFrame(){
+	
+		OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(WEBCAM);
+		IplImage res = null ;
+		try
+		{
+
+			grabber.start();
+			IplImage img=grabber.grab();
+			if(img!=null)
+			{
+				res = img.clone();
+			}
+			grabber.stop();
+			
+
+		}
+		catch(Exception ae)
+		{
+			ae.printStackTrace();
+
+
+		}
+		return res;
+	}
+	
 	public static void capture(int debut, int compt, String fileName){ //enregistre compt images
 
 		for(int i = debut; i<compt; i++){
@@ -151,7 +178,7 @@ public class Capture {
 
 					IplImage image1 = cvLoadImage("data/courant/image1.jpg");
 					if(areDifferent(image1, rgb_image))
-						System.out.println("Les images sont differentes");
+						System.out.println("Les images sont differentes "+compteur);
 
 					cvSaveImage("data/courant/image1.jpg", rgb_image);
 

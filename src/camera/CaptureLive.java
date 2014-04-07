@@ -13,7 +13,7 @@ public class CaptureLive implements Runnable {
 
 
 	private static final int DISTANCE_THRESHOLD = 30;
-	private static final int DIF_NUM = 400; // nombre de pixels qui doivent etre differents
+	private static final int DIF_NUM = 100; // nombre de pixels qui doivent etre differents
 	private static final int WEBCAM = 0;
 
 	public void run(){	
@@ -98,7 +98,7 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 				/*deuxi�me ligne magique JavaCV, � appeler r�guli�rement (apr�s chaque capture ou affichage de trame, ...)*/
 				cvClearMemStorage(storage);
 
-				//Thread.sleep(100);
+				//Thread.sleep(500);
 
 			}
 			//nettoyage des ressources        

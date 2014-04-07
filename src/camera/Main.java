@@ -180,13 +180,12 @@ public class Main {
 	 * 
 	 */
 
-		//new Thread(new CaptureLive()).start();
-		
-		//Capture.captureFrame("data/test/capture/image1.jpg");
-		//Thread.sleep(3000);
-		//Capture.captureFrame("data/test/capture/image2.jpg");
-		Image im1 = new Image("data/test/capture/image1.jpg");
-		Image im2 = new Image("data/test/capture/image2.jpg");
+		new Thread(new CaptureLive()).start();
+		//Capture.liveCapture();
+		/*Image im1 = new Image(Capture.captureFrame());
+		Thread.sleep(3000);
+		Image im2 = new Image(Capture.captureFrame());
+
 
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
@@ -205,6 +204,7 @@ public class Main {
 		
 		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/test/cartetest.jpg");
+		
 		
 		
 	//	carte.binaryThreshold(0).getEdge().save("data/test/contour2.jpg");

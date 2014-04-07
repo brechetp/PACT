@@ -25,7 +25,7 @@ public class EdgeImage extends BinaryImage {
 		int i = 0;
 
 		if (type ==3){
-			while (max < ((double)5/3)*(Card.WIDTH + Card.HEIGHT) && i < size){
+			while (max < ((double)5/3)*(Card.WIDTH + Card.HEIGHT) && i < 3*size){
 				i++;
 
 				int[][] points = new int[3][2];

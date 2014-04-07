@@ -238,7 +238,7 @@ public class BinaryImage extends GrayImage {
 	
 	
 	// algorithme de double passage
-	public int[][] conncetedComponents() {
+	public int[][] connectedComponents() {
 
 
 		int k = 1;
@@ -328,7 +328,7 @@ public class BinaryImage extends GrayImage {
 
 	public BinaryComponent largestComponent(){
 		
-		int [][] tab = conncetedComponents();
+		int [][] tab = connectedComponents();
 		int[][] largest = new int[height][width];
 		int[] compteur = new int[nbTags];
 		for (int i=0; i<nbTags; i++){
@@ -368,7 +368,7 @@ public class BinaryImage extends GrayImage {
 
 	public BinaryComponent largeComponents(){ // renvoie les grandes composantes
 		
-		int [][] tab = conncetedComponents();
+		int [][] tab = connectedComponents();
 		int[][] largest = new int[height][width];
 		int[] compteur = new int[nbTags];
 		int compt = 0; // compte le nombre de pixels gardes
@@ -403,7 +403,7 @@ public class BinaryImage extends GrayImage {
 	
 	public int[] componentsNumberAndFirst(int size, int sizeMax){
 		
-		int [][] tab = conncetedComponents();
+		int [][] tab = connectedComponents();
 	
 		int[] compteur = new int[nbTags];
 		for (int i=0; i<nbTags; i++){

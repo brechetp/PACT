@@ -11,8 +11,8 @@ public class Card extends Image{
 	
 
 	// double [] matchTable = new double [5];
-	static double WIDTH = 152.55918747922567 ; // taille de la carte sur l'ecran
-	static double HEIGHT = 214.23624601871882;
+	static double WIDTH = 154.4845505703325 ; // taille de la carte sur l'ecran
+	static double HEIGHT = 216.90557484451733;
 	
 
 
@@ -229,12 +229,12 @@ public class Card extends Image{
 			else
 				string = "0"; // carte noire
 			
-			symbol = new Symbol (getFirstSymbol(20000, 50000));
+			symbol = new Symbol (getFirstSymbol(10000, 50000));
 			
 			if (number ==0)
 				string = null;
 			else if (number ==1 && compt < 100000) // as
-				string = string+"0";
+				string = string+0;
 			else if (number >= 7 && number <= 10) // 7, 8, 9, 10
 				string =string+ (number-6);
 			else 
@@ -246,8 +246,8 @@ public class Card extends Image{
 		
 		public int[][] getFirstSymbol(int sizeMin, int sizeMax){
 			
-			BinaryImage bin = new BinaryImage(this.binaryThreshold(0)/*.cut(50, 50, 535, 789)*/); //on enleve les bords
-			bin.save("data/test/carte/cartebin.jpg");
+			BinaryImage bin = (this.binaryThreshold(0)); 
+			bin.save("data/test/binary/test.jpg");
 			int[] res = bin.componentsNumberAndFirst(sizeMin, sizeMax);
 			number = res[0];
 			
