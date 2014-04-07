@@ -220,9 +220,14 @@ public class Panneau extends JPanel {
 			    else if(i==0){
 
 			    }
-			    
 			    if (k==0){
 			    	
+			    }
+			    if (k==10){
+			    	g.setColor(new Color(204, 0, 51));
+					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+					FontMetrics metrics = g.getFontMetrics();
+			    	g.drawString("Distribution des cartes", (this.getWidth()/2)-(metrics.stringWidth("Distribution des cartes")/2), (this.getHeight()/2));
 			    }
 			    else if (k>0 && k<5){
 			    	g.setColor(new Color(204, 0, 51));

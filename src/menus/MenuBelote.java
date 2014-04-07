@@ -32,6 +32,7 @@ public class MenuBelote extends menu {
 		BeloteCoinche belote = new BeloteCoinche(etat, getVci());
 		getClassi().addListener(belote);
 		getVci().modePartie();
+		getVci().distribution();
 		//Start Camera
 		//new Thread(new MainThreadImage(belote)).start();
 	}

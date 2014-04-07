@@ -82,4 +82,7 @@ public interface ViewControllerInterface
 	
 	//valide les options
 	public void validerOptions();
+	
+	//début distribution
+	public void distribution();
 }
