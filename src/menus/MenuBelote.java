@@ -1,72 +1,54 @@
-package leapmotion.main;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
-import javax.swing.JFrame;
+package menus;
 
 import structure.Carte;
 import logiqueDeJeux.BeloteCoinche;
 import logiqueDeJeux.EtatDuJeu;
 import machineEtat.CardEvent;
-import adaBoost.BaseApprentissage;
-import adaBoost.ClassiFinal;
-import adaBoost.ClassiFinauxListe;
+import machineEtat.MouvementEvent;
 import adaBoost.Classification;
+import iug.ImageMenu;
+import iug.ViewControllerInterface;
 
-import com.leapmotion.leap.Controller;
+public class MenuBelote extends menu {
 
-public class LeapMotionMain {
+	private MainMenu mainMenu;
+	public MenuBelote(ImageMenu image, ViewControllerInterface vci, Classification classi,MainMenu mainMenu) {
+		super(image, vci, classi);
+		this.mainMenu = mainMenu;
+	}
 
-	public static void main(String[] args) throws InterruptedException {
+	@Override
+	public void run() 
+	{
+		getClassi().removeListener(mainMenu);
+		MenuOptions menuOptions = new MenuOptions(getVci(),this);
+		menuOptions.init();
+		getClassi().addListener(menuOptions);
 		
-		// Création d'une fenêtre pour un usage plus convivial
-		KListener kk = new KListener();
-		JFrame fenetre = new JFrame();
-		fenetre.addKeyListener(kk);
-		fenetre.setVisible(true);
-		fenetre.setSize(100, 50);
-		fenetre.setLocation(25, 25);
-		fenetre.setTitle("Leap Motion Control Panel");
-		fenetre.setResizable(false);
-		
-		
-		/*try {
-			File fichier = new File("./adaboost/Classificateurs Finaux.ser");
-			ObjectInputStream ois;
-			ois = new ObjectInputStream(new FileInputStream(fichier));
-			ClassiFinauxListe classilol = (ClassiFinauxListe)ois.readObject();
-			EtatDuJeu etat = new EtatDuJeu();
-			BeloteCoinche belote = new BeloteCoinche(etat);
-			Classification classi = new Classification(classilol.get());
-			classi.addListener(belote);
-	        MyListener listener = new MyListener(classi);
-	        Controller controller = new Controller();
-	        controller.addListener(listener);
-	        try {
-	            System.in.read();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	        controller.removeListener(listener);
-	        ois.close();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-		
-		/*ClassiFinal[] classilol = BaseApprentissage.main(null);
+	}
+	
+	public void startBelote(MenuOptions menuOptions)
+	{
+		getClassi().removeListener(menuOptions);
+		//Cration logique de jeu
 		EtatDuJeu etat = new EtatDuJeu();
-		BeloteCoinche belote = new BeloteCoinche(etat, null);
-		Classification classi = new Classification(classilol);
-		classi.addListener(belote);*/
-        MyListener listener = new MyListener();
-        Controller controller = new Controller();
-        controller.addListener(listener);
-        /*
-        Carte RoiCa = new Carte("roi","carreau",etat);
+		BeloteCoinche belote = new BeloteCoinche(etat, getVci());
+		getClassi().addListener(belote);
+		getVci().modePartie();
+		getVci().distribution();
+		//Start Camera
+		//new Thread(new MainThreadImage(belote)).start();
+		
+		
+		
+		MouvementEvent passer = new MouvementEvent("passer");
+		MouvementEvent quitter = new MouvementEvent("quitter");
+		MouvementEvent retour = new MouvementEvent("retour");
+		MouvementEvent accepter = new MouvementEvent("accepter");
+		MouvementEvent coinche = new MouvementEvent("coinche");
+		
+		
+		Carte RoiCa = new Carte("roi","carreau",etat);
 		CardEvent RoiCaEvent = new CardEvent(RoiCa);
 		Carte RoiCo = new Carte("roi","coeur",etat);
 		CardEvent RoiCoEvent = new CardEvent(RoiCo);
@@ -139,29 +121,54 @@ public class LeapMotionMain {
 		CardEvent AsTrEvent = new CardEvent(AsTr);
 		
 //Distribution
-		belote.nouvelleCarte(ValCaEvent);
-		Thread.sleep(100);
-		belote.nouvelleCarte(NeuCaEvent);
-		Thread.sleep(100);
-		belote.nouvelleCarte(RenPiEvent);
-		Thread.sleep(100);
-		belote.nouvelleCarte(NeuPiEvent);
-		Thread.sleep(100);
-		belote.nouvelleCarte(AsTrEvent);
-		Thread.sleep(100);
-		belote.nouvelleCarte(AsCoEvent);
-		Thread.sleep(100);
-		belote.nouvelleCarte(ValCoEvent);
-		Thread.sleep(100);
-		belote.nouvelleCarte(DixCoEvent);
-		Thread.sleep(100);
-        */
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+		try {
+			Thread.sleep(1000);
+			belote.nouvelleCarte(SepCaEvent);
+			belote.nouvelleCarte(AsCaEvent);
+			belote.nouvelleCarte(SepTrEvent);
+			belote.nouvelleCarte(RoiCoEvent);
+			belote.nouvelleCarte(SepPiEvent);
+			belote.nouvelleCarte(HuiTrEvent);
+			belote.nouvelleCarte(AsPiEvent);
+			Thread.sleep(1000);
+			belote.nouvelleCarte(RenTrEvent);
+			Thread.sleep(1000);
+			
+			Thread.sleep(100);
+			belote.nouveauGeste(passer); //joueur 1 passe
+			Thread.sleep(100);
+			belote.nouveauGeste(passer); //joueur 2 passe
+			Thread.sleep(100);
+			belote.nouveauGeste(accepter);
+			Thread.sleep(100);
+			belote.nouveauGeste(accepter);
+			Thread.sleep(100);
+			belote.nouveauGeste(passer);
+			Thread.sleep(100);
+			belote.nouveauGeste(passer);
+			Thread.sleep(100);
+			belote.nouveauGeste(accepter); //joueur 3 prend a 80 pique
+			belote.nouveauGeste(coinche);
+			belote.nouveauGeste(coinche);
+			Thread.sleep(5000);
+			
+			belote.nouvelleCarte(ValCaEvent);//joueur 1
+			Thread.sleep(1000);
+			belote.nouvelleCarte(HuiCaEvent);//joueur 2
+			Thread.sleep(1000);
+			belote.nouvelleCarte(RoiCaEvent);//joueur 3
+			Thread.sleep(1000);
+			belote.nouvelleCarte(SepCaEvent);//joueur 4
+			Thread.sleep(1000);
+			belote.finPli();
+			Thread.sleep(1000);
+			
+			belote.nouvelleCarte(NeuCaEvent);//joueur 1
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-
 }

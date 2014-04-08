@@ -32,11 +32,11 @@ public class PremierMain {
 		Classification classi = new Classification(classilol);
 		classi.addListener(belote);
 		//Start Leap
-      /*  MyListener listener = new MyListener(classi);
+        MyListener listener = new MyListener(classi);
         Controller controller = new Controller();
-        controller.addListener(listener);*/
+        controller.addListener(listener);
         //Start Camera
-        new Thread(new MainThreadImage(belote)).start();
+        //new Thread(new MainThreadImage(belote)).start();
         
         /**Carte RoiCa = new Carte("roi","carreau",etat);
 		CardEvent RoiCaEvent = new CardEvent(RoiCa);
@@ -127,12 +127,12 @@ public class PremierMain {
 		Thread.sleep(100);
 		belote.nouvelleCarte(DixCoEvent);
 		Thread.sleep(100);
-        
+        */
         try {
             System.in.read();
         } catch (IOException e) {
             e.printStackTrace();
-        }**/
+        }
 	}
 
 }

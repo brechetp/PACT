@@ -23,7 +23,7 @@ public class CircularArray<E>
 	 */
 	public E get(int index)
 	{
-		if (index>0&&index<array.length)
+		if (index>=0&&index<array.length)
 			return array[index];
 		else if (index<0)
 			return get(index+array.length);
@@ -40,7 +40,7 @@ public class CircularArray<E>
 		{
 			array[i]=array[i+1];
 		}
-		array[array.length]= dernier;
+		array[array.length-1]= dernier;
 	}
 	
 	/**

@@ -7,7 +7,6 @@ public class IUGMain {
 		int k = 0;
 		
 		ViewController vc = new ViewController();
-		
 		vc.init(new ImageMenu(1), new ImageMenu(2), new ImageMenu(3));
 		Thread.sleep(1000);
 		vc.droite(new ImageMenu(4));
@@ -39,6 +38,8 @@ public class IUGMain {
 		Thread.sleep(1000);
 		vc.validerOptions();
 		vc.modePartie();
+		vc.distribution();
+		Thread.sleep(3000);
 		vc.modeAnnonce();
 		vc.joueurEnCours(1);
 		Thread.sleep(1000);
@@ -77,8 +78,8 @@ public class IUGMain {
 		vc.joueurEnCours(3);
 		Thread.sleep(1000);
 		vc.coinche(3);
-		vc.joueurEnCours(1);
 		vc.modeJeu();
+		vc.joueurEnCours(1);
 		Thread.sleep(1000);
 		vc.joueurEnCours(2);
 		Thread.sleep(1000);

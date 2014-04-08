@@ -69,7 +69,6 @@ public class Panneau extends JPanel {
 	int j = 0;
 	int h = 0;
 	int y = 0;
-	int m = 0;
 	
 	
 	int placement = 0;
@@ -115,6 +114,8 @@ public class Panneau extends JPanel {
 		    /******************************************************************************************************/
 		    /**                                          MODE PARTIE                                             **/
 		    /******************************************************************************************************/
+		    
+		    
 		    if(modeActuel == 1){
 		    	if (i>32){
 					i=0;
@@ -218,9 +219,20 @@ public class Panneau extends JPanel {
 			    else if(i==0){
 
 			    }
-			    
 			    if (k==0){
 			    	
+			    }
+			    if (k==10){
+			    	g.setColor(new Color(204, 0, 51));
+					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+					FontMetrics metrics = g.getFontMetrics();
+			    	g.drawString("Distribution des cartes", (this.getWidth()/2)-(metrics.stringWidth("Distribution des cartes")/2), (this.getHeight()/2));
+			    }
+			    if (k==11){
+			    	g.setColor(new Color(51,0,153));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+			    	FontMetrics metrics = g.getFontMetrics();
+			    	g.drawString("Le jeu commence !", (this.getWidth()/2)-(metrics.stringWidth("Le jeu commence !")/2), this.getHeight()/2);
 			    }
 			    else if (k>0 && k<5){
 			    	g.setColor(new Color(204, 0, 51));
@@ -296,15 +308,7 @@ public class Panneau extends JPanel {
 			    if (y==0){
 			    	
 			    }
-			    if (m==0){
-			    	
-			    }
-			    if (m==1){
-			    	g.setColor(new Color(51,0,153));
-			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
-			    	FontMetrics metrics = g.getFontMetrics();
-			    	g.drawString("Le jeu commence !", (this.getWidth()/2)-(metrics.stringWidth("Le jeu commence !")/2), this.getHeight()/2);
-			    }
+			    
 		    }
 		    
 		    
@@ -312,6 +316,7 @@ public class Panneau extends JPanel {
 		    /******************************************************************************************************/
 		    /**                                          MODE MENUS                                              **/
 		    /******************************************************************************************************/
+		    
 		    
 		    if (modeActuel == 0){
 		    	
@@ -799,10 +804,6 @@ public class Panneau extends JPanel {
 		this.couleur = couleur;
 	}
 	
-	public void setM(int m){
-		this.m = m ;
-	}
-	
 	public Carte getCarte1(){
 		return carte1;
 	}
@@ -954,6 +955,10 @@ public class Panneau extends JPanel {
 	
 	public int getOption3(){
 		return option3;
+	}
+	
+	public int getOptionEnCours(){
+		return optionEnCours;
 	}
 
 }
