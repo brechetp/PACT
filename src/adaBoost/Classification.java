@@ -25,7 +25,7 @@ public class Classification
 	public void onFrame(double[] frame)
 	{
 		compteur++;
-		System.out.println(compteur);
+		//System.out.println(compteur);
 		this.ajoute(frame);
 		
 		if (compteur>=30)
@@ -139,7 +139,7 @@ public class Classification
 
 	public void lancerClassi() 
 	{
-		if (compteur>30)
+		if (compteur>20)
 		{
 			determineClasse(this.moyenneVecteur);
 			this.moyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES];

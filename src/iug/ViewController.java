@@ -384,5 +384,23 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setK(10);
 		fen.repaint();
 	}
+	
+	public void faireAnnonce(){
+		fen.getPan().setK(12);
+		fen.repaint();
+	}
+	
+	public void annonceCarte(String string){
+		fen.getPan().setAnnonce(string);
+		fen.getPan().setK(13);
+		fen.repaint();try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		fen.getPan().setK(0);
+		fen.repaint();
+	}
 
 }

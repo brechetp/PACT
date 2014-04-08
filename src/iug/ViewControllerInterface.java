@@ -85,4 +85,10 @@ public interface ViewControllerInterface
 	
 	//début distribution
 	public void distribution();
+	
+	//message faites vos annonces
+	public void faireAnnonce();
+	
+	//affichage annonce carte
+	public void annonceCarte(String string);
 }

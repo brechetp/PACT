@@ -44,7 +44,7 @@ public class MyListener extends Listener{
     	/*************************************************************************************************************************/
     	/**                             FONCTION PRINCIPALE : ENVOI VERS LA CLASSIFICATION EN CONTINU                           **/
     	/*************************************************************************************************************************/
-    
+/*    
     	try{
     		Frame frame = controller.frame();
         	if (frame.hands().count()>0)
@@ -67,12 +67,12 @@ public class MyListener extends Listener{
     	}
 		
 
-    	
+*/    	
     	
     	/*************************************************************************************************************************/
     	/**                                    CAPTURE ET ENREGISTREMENT POUR LA CLASSIFICATION                                 **/
     	/*************************************************************************************************************************/
-    /*	
+    	
   	
     	// INITIALISATION DU PROGRAMME DE CAPTURE DE MOUVEMENTS
     	if (k1.getC()=='/'){
@@ -159,7 +159,7 @@ public class MyListener extends Listener{
     	if (k1.getC()=='p'){
     		
     		try{
-        		File fichier = new File("./Gestes/Geste4 (quitter)/Geste4 Edouard E (quitter).ser");
+        		File fichier = new File("./Gestes/Geste4 (quitter)/Geste4 Pierre (quitter).ser");
         		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;
         		ListeDeMouvements hyk = (ListeDeMouvements)ois.readObject();
         		for (int k = 0 ; k<hyk.size() ; k++){
@@ -204,7 +204,7 @@ public class MyListener extends Listener{
     		}
     		
     	}
-		*/
+		
    	}
         
 }

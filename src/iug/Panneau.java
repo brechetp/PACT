@@ -96,7 +96,7 @@ public class Panneau extends JPanel {
 	
 	int dxdy=0;
 	
-	
+	String annonce;
 	
 	String s1;
 	String s2;
@@ -222,6 +222,12 @@ public class Panneau extends JPanel {
 			    if (k==0){
 			    	
 			    }
+			    if (k==12){
+			    	g.setColor(new Color(204, 0, 51));
+					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+					FontMetrics metrics = g.getFontMetrics();
+			    	g.drawString("Faites vos annonces !", (this.getWidth()/2)-(metrics.stringWidth("Faites vos annonces !")/2), (this.getHeight()/2));
+			    }
 			    if (k==10){
 			    	g.setColor(new Color(204, 0, 51));
 					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
@@ -233,6 +239,12 @@ public class Panneau extends JPanel {
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 			    	FontMetrics metrics = g.getFontMetrics();
 			    	g.drawString("Le jeu commence !", (this.getWidth()/2)-(metrics.stringWidth("Le jeu commence !")/2), this.getHeight()/2);
+			    }
+			    if (k==13){
+			    	g.setColor(new Color(204, 0, 51));
+					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+					FontMetrics metrics = g.getFontMetrics();
+			    	g.drawString(annonce, (this.getWidth()/2)-(metrics.stringWidth(annonce)/2), (this.getHeight()/2));
 			    }
 			    else if (k>0 && k<5){
 			    	g.setColor(new Color(204, 0, 51));
@@ -959,6 +971,10 @@ public class Panneau extends JPanel {
 	
 	public int getOptionEnCours(){
 		return optionEnCours;
+	}
+	
+	public void setAnnonce(String annonce){
+		this.annonce=annonce;
 	}
 
 }

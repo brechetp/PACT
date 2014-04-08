@@ -324,7 +324,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			return TeamImpair.getCartes(numJoueur);
 	}
 	
-	public void verifieAnnonceCartes(JoueurDistantInterface joueurD, CarteListInterface carteAnnonce) 
+	public void verifieAnnonceCartes(JoueurDistantInterface joueurD, CarteListInterface carteAnnonce, ViewControllerInterface vci) 
 	{
 		ArrayList<CarteInterface> listeCartes =new ArrayList<CarteInterface>();
 		listeCartes.add(getTeamCarte());
@@ -379,24 +379,26 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		
 		//test sur suite et nbMemeValue
 		if (nbMemeValue==4)
-			annonceSquare(value);
+			annonceSquare(value, vci);
 		if (suiteMax==3)
-			annonceTierce();
+			annonceTierce(vci);
 		if (suiteMax==4)
-			annonceCinquante();
+			annonceCinquante(vci);
 		if (suiteMax==5)
-			annonceCent();
+			annonceCent(vci);
 	}
 
-	private void annonceCent() 
+	private void annonceCent(ViewControllerInterface vci) 
 	{
+		vci.annonceCarte("Cent validé");
 		if (numJoueur%2==0)
 			pointAnnonceTeamPair +=100;
 		else
 			pointAnnonceTeamImpair += 100;
 	}
 
-	private void annonceCinquante() {
+	private void annonceCinquante(ViewControllerInterface vci) {
+		vci.annonceCarte("Cinquante validé");
 		if (numJoueur%2==0)
 			pointAnnonceTeamPair +=50;
 		else
@@ -404,7 +406,8 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		
 	}
 
-	private void annonceTierce() {
+	private void annonceTierce(ViewControllerInterface vci) {
+		vci.annonceCarte("Tierce validée");
 		if (numJoueur%2==0)
 			pointAnnonceTeamPair +=20;
 		else
@@ -412,8 +415,9 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		
 	}
 
-	private void annonceSquare(String value) 
+	private void annonceSquare(String value,ViewControllerInterface vci) 
 	{
+		vci.annonceCarte("Carré de "+value+" validé");
 		switch(value)
 		{
 		case "valet":

@@ -71,5 +71,5 @@ public interface EtatDuJeuInterface
 	public boolean isAtout(Carte carte);
 
 	//Vérifie les annonce de type tierce, carré ... et rajoute les point a la team qui les posent.
-	public void verifieAnnonceCartes(JoueurDistantInterface joueurD, CarteListInterface carteAnnonce);
+	public void verifieAnnonceCartes(JoueurDistantInterface joueurD, CarteListInterface carteAnnonce,ViewControllerInterface vci);
 }
