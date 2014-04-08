@@ -137,7 +137,7 @@ public class MyListener extends Listener{
     	if (k1.getC()=='s'){
     		
     		try{
-    			FileOutputStream fileOut = new FileOutputStream("./Gestes/Geste4 (quitter)/Geste4 Edouard E (quitter).ser");
+    			FileOutputStream fileOut = new FileOutputStream("./Gestes/Geste2 (coinche)/Geste2 Tim (coinche).ser");
     			ObjectOutputStream out = new ObjectOutputStream(fileOut);
     			out.writeObject(liste);
     			out.flush();
@@ -159,18 +159,18 @@ public class MyListener extends Listener{
     	if (k1.getC()=='p'){
     		
     		try{
-        		File fichier = new File("./Gestes/Geste4 (quitter)/Geste4 Pierre (quitter).ser");
+        		File fichier = new File("./Gestes/Geste2 (coinche)/Geste2 Tim (coinche).ser");
         		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;
         		ListeDeMouvements hyk = (ListeDeMouvements)ois.readObject();
         		for (int k = 0 ; k<hyk.size() ; k++){
         			System.out.print("Geste n°" + k + " : ");
         			for (int g = 0 ; g<hyk.get(k).getSize() ; g++){
-        				if (hyk.get(k).get(g).get(0)==2.0){
-                			System.out.print((int)hyk.get(k).get(g).get(0) + ", "); // Affichage du nombre de mains
+        				if (hyk.get(k).get(g).get(7)==0.0){
+                			System.out.print((int)hyk.get(k).get(g).get(7) + ", "); // Affichage du nombre de doigts
                 			compteur2Main++;
         				}
         				else{
-                			System.out.print((int)hyk.get(k).get(g).get(0) + "(PAS OK), "); // Affichage du nombre de mains
+                			System.out.print((int)hyk.get(k).get(g).get(7) + "(PAS OK), "); // Affichage du nombre de doigts
         				}
         				compteurMain++;
         			}
@@ -178,7 +178,7 @@ public class MyListener extends Listener{
         		}
         		ois.close();
         		double pourcentage = ((double)compteur2Main/(double)compteurMain)*100;
-        		System.out.println("Nombre de données : " + compteurMain + " ||| Nombre de 2 Mains : " + compteur2Main + " ||| " + pourcentage + "% de 2 Mains");
+        		System.out.println("Nombre de données : " + compteurMain + " ||| Nombre de 0 doigts : " + compteur2Main + " ||| " + pourcentage + "% de 0 doigts");
     		}
     		catch(Exception i)
     		{
