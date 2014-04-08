@@ -12,9 +12,9 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 public class CaptureLive implements Runnable {
 
 
-	private static final int DISTANCE_THRESHOLD = 30;
+	private static final int DISTANCE_THRESHOLD = 20;
 	private static final int DIF_NUM = 100; // nombre de pixels qui doivent etre differents
-	private static final int WEBCAM = 0;
+	private static final int WEBCAM = 1;
 
 	public void run(){	
 
@@ -70,11 +70,15 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 
 					if(areDifferent(image1, image2)){
 						System.out.println("Les images sont differentes");
+						Thread.sleep(500);
 						hasMoved =true;
 					}
 					else{
 						if (hasMoved){
 							hasMoved = false;
+							Thread.sleep(10);
+							cvClearMemStorage(storage);
+							image2=grabber.grab();
 							System.out.println("On lance la comparaison "+(++comptA)+".");
 							new Thread(new Match(imageA, image2, compteur)).start();
 							imageA = image2.clone();
