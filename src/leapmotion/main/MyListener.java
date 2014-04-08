@@ -49,6 +49,7 @@ public class MyListener extends Listener{
     		Frame frame = controller.frame();
         	if (frame.hands().count()>0)
         	{
+        		System.out.println(frame.hands().count());
         		ParamUtiles param = new ParamUtiles();
         		param.addToList(frame, controller.frame(1));
         		double tab[] = new double[Classification.NOMBRE_DE_FEATURES];

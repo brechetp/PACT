@@ -45,6 +45,8 @@ public class Classification
 	public void determineClasse (double[] mvment)
 	{
 		ArrayList<Integer> classesRetour= new ArrayList<Integer>();
+		double resultMax = 0;
+		int indice =0;
 		for(int k=0;k<classi.length;k++)
 		{
 			double result = classi[k].result(mvment);
@@ -52,9 +54,16 @@ public class Classification
 			{
 				classesRetour.add(new Integer(k));
 			}
+			if (result>resultMax)
+			{
+				resultMax=result;
+				indice = k;
+			}
 		}
 		if (classesRetour.size()==1)
 			this.envoiMouvement(classesRetour.get(0));
+		else if (classesRetour.size()>1)
+			envoiMouvement(indice);
 	}
 	
 	public void ajoute(double[] frame)
