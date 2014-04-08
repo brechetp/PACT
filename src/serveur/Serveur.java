@@ -136,7 +136,7 @@ public class Serveur
 			}
 			else 
 			{
-				Thread t2 = new Thread(new ServeurEmission(out,"annonce "+annonce.getValue()+" "+annonce.getAtout()+" "+i));
+				Thread t2 = new Thread(new ServeurEmission(out,"annonce "+annonce.getAtout()+" "+annonce.getValue()+" "+i));
 				t2.start();
 			}
 		} 

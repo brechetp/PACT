@@ -62,7 +62,7 @@ public interface EtatDuJeuInterface
 	public void setNumJoueur(int premierAJouer, JoueurDistantInterface joueurD, int numJoueurDistant);
 
 	//met la bonne valeur de l'annonce
-	public boolean setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci);
+	public int setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci, JoueurDistantInterface joueurD);
 
 
 	public AnnonceInterface getAnnonce();

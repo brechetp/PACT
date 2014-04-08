@@ -13,8 +13,8 @@ public class testServeur
 
 	public static void main(String[] args) throws IOException 
 	{
-		EtatDuJeu etat = new EtatDuJeu();
-		BeloteCoinche belote = new BeloteCoinche(etat);
+		EtatDuJeu etat = null;
+		BeloteCoinche belote = null;
 		Serveur serveur = new Serveur(belote);
 		serveur.start();
 		System.out.println("Boo2 !!");
@@ -111,7 +111,7 @@ public class testServeur
 			System.out.println("Envoi terminer");
 			serveur.envoiAnnonce(null, 1);
 			Thread.sleep(2000);
-			serveur.envoiAnnonce(null, 2);
+			serveur.envoiAnnonce(new Annonce("trefle", 100, 1), 2);
 			Thread.sleep(2000);
 			serveur.envoiAnnonce(new Annonce("trefle", 100, 1), 3);
 			Thread.sleep(1000);

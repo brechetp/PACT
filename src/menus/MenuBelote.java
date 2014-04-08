@@ -124,41 +124,54 @@ public class MenuBelote extends menu {
 		try {
 			Thread.sleep(1000);
 			belote.nouvelleCarte(SepCaEvent);
+			Thread.sleep(100);
 			belote.nouvelleCarte(AsCaEvent);
+			Thread.sleep(100);
 			belote.nouvelleCarte(SepTrEvent);
+			Thread.sleep(100);
 			belote.nouvelleCarte(RoiCoEvent);
+			Thread.sleep(100);
 			belote.nouvelleCarte(SepPiEvent);
+			Thread.sleep(100);
 			belote.nouvelleCarte(HuiTrEvent);
+			Thread.sleep(100);
 			belote.nouvelleCarte(AsPiEvent);
 			Thread.sleep(1000);
 			belote.nouvelleCarte(RenTrEvent);
 			Thread.sleep(1000);
-
+			
+			/*belote.nouveauGeste(accepter);
 			Thread.sleep(100);
-			belote.nouveauGeste(passer); //joueur 1 passe
+			belote.nouveauGeste(accepter);
 			Thread.sleep(100);
-			belote.nouveauGeste(passer); //joueur 2 passe
-			Thread.sleep(100);
+			belote.nouveauGeste(accepter); //joueur 1 prend 80 carreau
+			Thread.sleep(2000);
 			belote.nouveauGeste(accepter);
 			Thread.sleep(100);
 			belote.nouveauGeste(accepter);
 			Thread.sleep(100);
-			belote.nouveauGeste(passer);
+			belote.nouveauGeste(accepter); //joueur 2 prend 90 carreau
+			Thread.sleep(2000);
+			belote.nouveauGeste(accepter);
 			Thread.sleep(100);
-			belote.nouveauGeste(passer);
+			belote.nouveauGeste(accepter);
 			Thread.sleep(100);
-			belote.nouveauGeste(accepter); //joueur 3 prend a 80 pique
-			belote.nouveauGeste(coinche);
-			belote.nouveauGeste(coinche);
-			Thread.sleep(5000);
-
+			belote.nouveauGeste(accepter);//joueur 3 prend à 100 carreau
+			while(belote.getEtat().getNumJoueur()==4){}
+			belote.nouveauGeste(passer);
+			Thread.sleep(1000);
+			belote.nouveauGeste(passer);
+			Thread.sleep(1000);
+			belote.nouveauGeste(passer);
+			Thread.sleep(1000);
+			
 			belote.nouvelleCarte(ValCaEvent);//joueur 1
 			Thread.sleep(1000);
 			belote.nouvelleCarte(HuiCaEvent);//joueur 2
 			Thread.sleep(1000);
 			belote.nouvelleCarte(RoiCaEvent);//joueur 3
 			Thread.sleep(1000);
-			belote.nouvelleCarte(SepCaEvent);//joueur 4
+			/*belote.nouvelleCarte(SepCaEvent);//joueur 4
 			Thread.sleep(1000);
 			belote.finPli();
 			Thread.sleep(1000);
@@ -168,7 +181,7 @@ public class MenuBelote extends menu {
 			belote.nouvelleCarte(NeuCaEvent);
 			belote.nouvelleCarte(DixCaEvent);
 			belote.nouvelleCarte(ValCaEvent);
-			Thread.sleep(1000);
+			Thread.sleep(1000);*/
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

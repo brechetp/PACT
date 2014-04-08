@@ -123,7 +123,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			this.numJoueur = (numJoueur % 4) + 1;
 			vci.joueurEnCours(numJoueur);
 			if (numJoueur == numJoueurD) {
-				if (string.equals(annonce))
+				if (string.equals("annonce"))
 					joueurD.waitAnnonce();
 				else
 					joueurD.waitCard();
@@ -287,27 +287,33 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		return playedCard.size()==32;
 	}
 
-	public boolean setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci) 
+	public int setAnnonce(AnnonceInterface annonce, ViewControllerInterface vci, JoueurDistantInterface joueurD) 
 	{
 		if (annonce == null)
 		{
 			vci.annonceJoueurDistant("", "");
-			return false;
+			return 0;
 		}
 		else
 		{
-			this.annonce=annonce;
-			int valeur = this.valeurAnnonce();
-			String val;
-			if (valeur==250)
-				val="capot";
-			else if (valeur==500)
-				val="gÃ©nÃ©rale";
-			else
-				val =""+valeur;
-			String couleur = this.getAtout();
-			vci.annonceJoueurDistant(val, couleur);
-			return true;
+			if (annonce.getValue()>this.annonce.getValue()) {
+				this.annonce = annonce;
+				int valeur = this.valeurAnnonce();
+				String val;
+				if (valeur == 250)
+					val = "capot";
+				else if (valeur == 500)
+					val = "générale";
+				else
+					val = "" + valeur;
+				String couleur = this.getAtout();
+				vci.annonceJoueurDistant(val, couleur);
+				return 1;
+			}
+			else {
+				joueurD.waitAnnonce();
+				return 2;
+			}
 		}
 	}
 	
