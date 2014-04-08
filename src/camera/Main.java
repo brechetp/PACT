@@ -173,14 +173,14 @@ public class Main {
 		 * 
 		 */
 		
-		Initialisation.setCardSize();
+		//Initialisation.setCardSize();
 		
 	/*
 	 * Capture de deux cartes
 	 * 
 	 */
 
-	//	new Thread(new CaptureLive()).start();
+		new Thread(new CaptureLive()).start();
 		//Capture.liveCapture();
 		/*Image im1 = new Image(Capture.captureFrame());
 		Thread.sleep(3000);

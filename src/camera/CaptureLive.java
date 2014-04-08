@@ -12,7 +12,7 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 public class CaptureLive implements Runnable {
 
 
-	private static final int DISTANCE_THRESHOLD = 20;
+	private static final int DISTANCE_THRESHOLD = 40;
 	private static final int DIF_NUM = 100; // nombre de pixels qui doivent etre differents
 	private static final int WEBCAM = 1;
 
@@ -80,7 +80,7 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 							cvClearMemStorage(storage);
 							image2=grabber.grab();
 							System.out.println("On lance la comparaison "+(++comptA)+".");
-							new Thread(new Match(imageA, image2, compteur)).start();
+							new Thread(new Match(imageA, image2, comptA)).start();
 							imageA = image2.clone();
 							
 						}
