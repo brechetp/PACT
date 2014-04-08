@@ -9,6 +9,8 @@ import com.leapmotion.leap.*;
 
 public class MyListener extends Listener{
 	
+	int compteurMain = 0;
+	int compteur2Main = 0;
 	
 	private static KListener k1 = new KListener();  //KeyListener pour controle par clavier
 	
@@ -27,6 +29,10 @@ public class MyListener extends Listener{
 		this.classi=classi;
 	}
 	
+	public MyListener(){
+		
+	}
+	
 	// Initialisation
 	public void onInit(Controller controller) {
         System.out.println("Initialisation Leap Motion");
@@ -38,7 +44,7 @@ public class MyListener extends Listener{
     	/*************************************************************************************************************************/
     	/**                             FONCTION PRINCIPALE : ENVOI VERS LA CLASSIFICATION EN CONTINU                           **/
     	/*************************************************************************************************************************/
-    	
+    
     	try{
     		Frame frame = controller.frame();
         	if (frame.hands().count()>0)
@@ -65,8 +71,8 @@ public class MyListener extends Listener{
     	/*************************************************************************************************************************/
     	/**                                    CAPTURE ET ENREGISTREMENT POUR LA CLASSIFICATION                                 **/
     	/*************************************************************************************************************************/
-    	
-  	/*
+    /*	
+  	
     	// INITIALISATION DU PROGRAMME DE CAPTURE DE MOUVEMENTS
     	if (k1.getC()=='/'){
     		
@@ -152,17 +158,26 @@ public class MyListener extends Listener{
     	if (k1.getC()=='p'){
     		
     		try{
-        		File fichier = new File("./Gestes/Geste4 (quitter)/Geste4 Edoouard E (quitter).ser");
+        		File fichier = new File("./Gestes/Geste4 (quitter)/Geste4 Edouard E (quitter).ser");
         		ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(fichier)) ;
         		ListeDeMouvements hyk = (ListeDeMouvements)ois.readObject();
         		for (int k = 0 ; k<hyk.size() ; k++){
         			System.out.print("Geste n°" + k + " : ");
         			for (int g = 0 ; g<hyk.get(k).getSize() ; g++){
-            			System.out.print(hyk.get(k).get(g).get(2) + ", "); // Affichage de posX de la main 0
+        				if (hyk.get(k).get(g).get(0)==2.0){
+                			System.out.print((int)hyk.get(k).get(g).get(0) + ", "); // Affichage du nombre de mains
+                			compteur2Main++;
+        				}
+        				else{
+                			System.out.print((int)hyk.get(k).get(g).get(0) + "(PAS OK), "); // Affichage du nombre de mains
+        				}
+        				compteurMain++;
         			}
         			System.out.println(" ");
         		}
         		ois.close();
+        		double pourcentage = ((double)compteur2Main/(double)compteurMain)*100;
+        		System.out.println("Nombre de données : " + compteurMain + " ||| Nombre de 2 Mains : " + compteur2Main + " ||| " + pourcentage + "% de 2 Mains");
     		}
     		catch(Exception i)
     		{
@@ -171,7 +186,12 @@ public class MyListener extends Listener{
     				for (int k = 0 ; k<liste.size() ; k++){
             			System.out.print("Geste n°" + k + " : ");
             			for (int g = 0 ; g<liste.get(k).getSize() ; g++){
-                			System.out.print(liste.get(k).get(g).get(2) + ", "); // Affichage de posX de la main 0
+            				if (liste.get(k).get(g).get(0)==2.0){
+                    			System.out.print((int)liste.get(k).get(g).get(0) + ", "); // Affichage du nombre de mains
+            				}
+            				else{
+                    			System.out.print((int)liste.get(k).get(g).get(0) + "(PAS OK), "); // Affichage du nombre de mains
+            				}
             			}
             			System.out.println(" ");
             		}

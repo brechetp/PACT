@@ -1,22 +1,30 @@
 package comparaison;
 
+import java.util.Arrays;
+import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.Set;
+
+
 public class Symbol {
 	
 	private int[][] doubleTab; // initialisée avec une image à une composante connexe
 	private int size1;
 	private int size2;
 	private int perimeter;
-	private double[] signature;
+	private Hashtable<Double, Double> signature;
 	private double average;
 	private double sigma;
 	double [] matchTable = new double [2];
 	double [] translaTable = new double [perimeter];
+	int taille ;
+	private ArrayList<Double> signatureTable;
 	
 	public Symbol (int[][] binaryMatrix){
 		this.size1 = 185;
 		this.size2 = 185;
 		this.perimeter = 1000;
-		
+		this.taille = 100;
 		this.doubleTab = new int[size2][size1];
 		this.doubleTab = binaryMatrix;
 		
@@ -29,15 +37,11 @@ public class Symbol {
 			}
 		}*/
 		
-		this.signature = new double[perimeter];
-		for (int i =0; i<perimeter; i++)
-		{
-				signature[i]=0;
-		} 
-		
+		this.signature = new Hashtable<Double, Double>();
+		signatureTable = new ArrayList<Double>();
 	}
 	
-	public double[] getSignature(){
+	public ArrayList<Double> getSignature(){
 		
 		//détermination du barycentre
 		int xb = 0;
@@ -46,15 +50,13 @@ public class Symbol {
 		{
 			for (int j=0; j<size1; j++)
 			{
-				xb += xb+j*doubleTab[i][j];
-				yb += yb+i*doubleTab[i][j];
+				xb = xb+j*doubleTab[i][j];
+				yb = yb+i*doubleTab[i][j];
 			}
 		}
-		xb=xb/perimeter;
-		yb=yb/perimeter;
+
 		
-		
-		//remplissage de la table
+		/*remplissage de la table
 		for (int s=0 ; s<perimeter ; s++){
 			int t =0;
 			if (doubleTab[(int) Math.floor(t*Math.cos(s))+xb][(int) Math.floor(t*Math.sin(s))+yb]==0 ){
@@ -62,25 +64,52 @@ public class Symbol {
 			} else {
 				t++;
 			}
+		}*/
+		
+		for (int i=yb+taille ; i<yb-taille ; i++){
+			for (int k = xb-taille; k<xb+taille; k++){
+				if (doubleTab[i][k]==1){
+					double key=Math.atan((i-yb)/(k-xb));
+					double radius=(i-yb)*(i-yb) + (k-xb)*(k-xb);
+					if (signature.containsKey(key)==false){
+						signature.put(key, radius);
+					} else {
+						if (radius > signature.get(key)){
+							signature.put(key, radius);
+						}
+					}
+				}
+			}
+		}
+		
+		Set<Double> set = signature.keySet();
+		Double[] tab = (Double[]) set.toArray();
+		Arrays.sort(tab);
+		
+		for (int i=0 ; i<tab.length ; i++){
+			signatureTable.set(i,signature.get(tab[i]));
 		}
 				
-		return signature;
+		return signatureTable;
 	}
 	
 	
 	
 	public int getCardValue (CornerDatabase baseDonneesCoin){
 			getSignature();
-		
+					
 		  // Calcul de average et sigma 
 			average = 0; double variance = 0;
+			perimeter = signatureTable.size();
+			
 			for (int i =0; i<perimeter; i++){	
-					average += signature[i];
+					average += signatureTable.get(i);
 			}	
+			
 			average = average/(perimeter);	
 			
 			for (int i =0; i<perimeter; i++){
-					variance += Math.pow(signature[i]-average,2);
+					variance += Math.pow(signatureTable.get(i)-average,2);
 				}
 			sigma = Math.sqrt(variance/(perimeter)); //sigma=1; average = 0;
 			
@@ -110,7 +139,7 @@ public class Symbol {
 			for (int j=0 ; j<perimeter ; i++){
 				rep = 0;
 				for (int k =0; k<perimeter; k++){
-					double pixel = (signature[k+j]-average)/sigma;
+					double pixel = (signatureTable.get(k+j)-average)/sigma;
 					rep = rep + pixel*(baseDonnesCoin.getSign(i,k)-baseDonnesCoin.getSignAverage(i))/baseDonnesCoin.getSignSigma(i) ;
 					}
 				translaTable[j] = rep;

@@ -75,7 +75,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		return annonce!=null&&annonce.getTeam()!=-1;
 	}
 
-	public void finpli(ViewControllerInterface vci) 
+	public void finpli(ViewControllerInterface vci,JoueurDistantInterface joueurD) 
 	{
 		 int numTeam = this.numTeamCarte(cardOnTable.getPlusFort());
 		 if (numTeam==0)
@@ -91,6 +91,10 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		 vci.effacerCartes();
 		 vci.joueurEnCours(numJoueur);
 		 this.cardOnTable = new CarteList();
+		 if (numJoueur==StateMachine.numJoueurDistant&&!dernierPli())
+		 {
+			 joueurD.waitCard();
+		 }
 	}
 
 	private int numRemportePli() 
@@ -109,20 +113,21 @@ public class EtatDuJeu implements EtatDuJeuInterface
 
 	public void joueurSuivant(ViewControllerInterface vci,JoueurDistantInterface joueurD,String string,int numJoueurD) 
 	{
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		this.numJoueur = (numJoueur%4) +1;
-		vci.joueurEnCours(numJoueur);
-		if (numJoueur == numJoueurD)
-		{
-			if (string.equals(annonce))
-				joueurD.waitAnnonce();
-			else
-				joueurD.waitCard();
+		if (this.cardOnTable.size()!=4) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			this.numJoueur = (numJoueur % 4) + 1;
+			vci.joueurEnCours(numJoueur);
+			if (numJoueur == numJoueurD) {
+				if (string.equals(annonce))
+					joueurD.waitAnnonce();
+				else
+					joueurD.waitCard();
+			}
 		}
 	}
 

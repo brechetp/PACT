@@ -2,15 +2,15 @@ package iug;
 
 public class ViewController implements ViewControllerInterface
 {
-	
+
 	Fenetre fen = new Fenetre();
-	
+
 	public void effacerCartes(){
 		fen.getPan().setYCarte(0);
 		fen.getPan().setI(0);
 		fen.repaint();
 	}
-	
+
 	public void afficherCarte(String s){
 		int k = 0;
 		if (s.equals("7trefle")){
@@ -122,7 +122,7 @@ public class ViewController implements ViewControllerInterface
 		}
 
 	}
-	
+
 	public void coinche(int k){
 		fen.getPan().setK(k);
 		fen.repaint();
@@ -134,17 +134,17 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setK(0);
 		fen.repaint();
 	}
-	
+
 	public void joueurEnCours(int j){
 		fen.getPan().setJ(j);
 		fen.repaint();
 	}
-	
+
 	public void partieTerminer(){
 		fen.getPan().setK(666);
 		fen.repaint();
 	}
-	
+
 	public void supprimerMessage(){
 		fen.getPan().setK(0);
 		fen.getPan().setJ(0);
@@ -152,15 +152,17 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setY(0);
 		fen.repaint();
 	}
-	
+
 	public void modeAnnonce(){
 		fen.getPan().setH(1);
+		fen.getPan().setK(0);
 		fen.repaint();
 	}
-	
+
 	public void modeJeu(){
 		fen.getPan().setH(0);
-		fen.getPan().setM(1);
+		fen.getPan().setK(11);
+		fen.getPan().setJ(0);
 		fen.repaint();
 		try {
 			Thread.sleep(2000);
@@ -168,10 +170,10 @@ public class ViewController implements ViewControllerInterface
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		fen.getPan().setM(0);
+		fen.getPan().setK(0);
 		fen.repaint();
 	}
-	
+
 	public void contreCoinche(){
 		fen.getPan().setK(5);
 		fen.repaint();
@@ -183,34 +185,34 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setK(0);
 		fen.repaint();
 	}
-	
+
 	public void afficheAnnonce(String valeur, String couleur){
 		fen.getPan().setStrings(valeur, couleur);
 		fen.getPan().setY(1);
 		fen.repaint();
 	}
-	
+
 	public void actualiseAnnonce(String valeur, String couleur){
 		fen.getPan().setStrings(valeur, couleur);
 		fen.repaint();
 	}
-	
+
 	public void valideValeurAnnonce(){
 		if(fen.getPan().getY()==1){
 			fen.getPan().setY(2);
 		}
-		
+
 		if(fen.getPan().getY()==2){
 			fen.getPan().setY(2);
 		}
 		fen.repaint();
 	}
-	
+
 	public void effaceAnnonce(){
 		fen.getPan().setY(0);
 		fen.repaint();
 	}
-	
+
 	public void annonceJoueurDistant(String valeur, String couleur){
 		if(valeur=="" && couleur==""){
 			fen.getPan().setK(7);
@@ -235,16 +237,16 @@ public class ViewController implements ViewControllerInterface
 			fen.getPan().setK(0);
 			fen.repaint();
 		}
-		
+
 	}
-	
+
 	public void init(ImageMenu imageMenuGauche, ImageMenu imageMenuCentre, ImageMenu imageMenuDroite){
 		fen.getPan().setImageMenuCentre(imageMenuCentre);
 		fen.getPan().setImageMenuGauche(imageMenuGauche);
 		fen.getPan().setImageMenuDroite(imageMenuDroite);
 		fen.getPan().repaint();
 	}
-	
+
 	public void gauche(ImageMenu imageMenuNew){
 		fen.getPan().setImageMenuNew(imageMenuNew);
 		fen.getPan().setPlacement(-1);
@@ -271,7 +273,7 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().resetCoords();
 		fen.getPan().setPlacement(0);
 	}
-	
+
 	public void droite(ImageMenu imageMenuNew){
 		fen.getPan().setImageMenuNew(imageMenuNew);
 		fen.getPan().setPlacement(1);
@@ -297,22 +299,22 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().resetCoords();
 		fen.getPan().setPlacement(0);
 	}
-	
+
 	public void modeMenu(){
 		fen.getPan().setModeActuel(0);
 		fen.repaint();
 	}
-	
+
 	public void modePartie(){
 		fen.getPan().setModeActuel(1);
 		fen.repaint();
 	}
-	
+
 	public void modeOption(){
 		fen.getPan().setModeActuel(2);
 		fen.repaint();
 	}
-	
+
 	public void validerMenu(){
 		for (int dxdy=0 ; dxdy<fen.getPan().getHeight()/2 ; dxdy=dxdy+10){
 			fen.getPan().resizeImage(dxdy);
@@ -321,49 +323,48 @@ public class ViewController implements ViewControllerInterface
 			try {
 				Thread.sleep(15);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			fen.repaint();
 		}
 	}
-	
+
 	public void option(int k){
 		fen.getPan().setOptionEnCours(k);
 		fen.repaint();
 	}
-	
+
 	public void modifOption1(){
-		
+
 		if(fen.getPan().getOption1()==0){
 			fen.getPan().setOption1(1);
 			fen.repaint();
 		}
-		
+
 		else if(fen.getPan().getOption1()==1){
 			fen.getPan().setOption1(0);
 			fen.repaint();
 		}
 	}
-	
+
 	public void modifOption2(){
-		
+
 		if(fen.getPan().getOption2()==0){
 			fen.getPan().setOption2(1);
 			fen.repaint();
 		}
-		
+
 		else if(fen.getPan().getOption2()==1){
 			fen.getPan().setOption2(0);
 			fen.repaint();
 		}
 	}
-	
+
 	public void modifOption3(int option3){
 		fen.getPan().setOption3(option3);
 		fen.repaint();
 	}
-	
+
 	public void validerOptions(){
 		fen.getPan().setOptionEnCours(5);
 		fen.repaint();
@@ -373,6 +374,15 @@ public class ViewController implements ViewControllerInterface
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public int optionEnCours(){
+		return fen.getPan().getOptionEnCours();
+	}
+
+	public void distribution(){
+		fen.getPan().setK(10);
+		fen.repaint();
 	}
 
 }
