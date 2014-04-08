@@ -17,7 +17,6 @@ public class MainFinal {
 
 	public static void main(String[] args) {
 		
-		
 		//Classification
 		ClassiFinal[] classilol = BaseApprentissage.main(null);
 		Classification classi = new Classification(classilol);

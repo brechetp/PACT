@@ -19,37 +19,74 @@ public class BeloteCoinche implements GlobalListener
 	{
 		System.out.println(carte.getCarte().getLabelNum());
 		System.out.println(carte.getCarte().getSuit());
-		machine.eventCarte(carte);
+		synchronized (machine) 
+		{
+			machine.eventCarte(carte);
+		}
 	}
 
 	public void nouveauGeste(MouvementEvent mouvement) 
 	{
 		System.out.println("Message Recu !!");
 		if (mouvement.getLabel()=="passer")
-			machine.eventGestePasser();
+		{
+			synchronized(machine)
+			{
+				machine.eventGestePasser();
+			}
+		}
 		else if (mouvement.getLabel()=="retour")
-			machine.eventGesteRetour();
+		{
+			synchronized(machine)
+			{
+				machine.eventGesteRetour();
+			}
+		}
 		else if (mouvement.getLabel()=="coinche")
-			machine.eventGesteCoinche();
+		{
+			synchronized(machine)
+			{
+				machine.eventGesteCoinche();
+			}
+		}
 		else if (mouvement.getLabel()=="accepter")
-			machine.eventGesteAccept();
+		{
+			synchronized(machine)
+			{
+				machine.eventGesteAccept();
+			}
+		}
 		else if (mouvement.getLabel()=="quitter")
-			machine.eventQuit();
+		{
+			synchronized(machine)
+			{
+				machine.eventQuit();
+			}
+		}
 	}
 
 	public void finPli() 
 	{
 		System.out.println("fin de pli");
-		machine.eventFinPli();
+		synchronized (machine) 
+		{
+			machine.eventFinPli();
+		}
 	}
 	
 	public void setAnnonce(AnnonceInterface annonce)
 	{
-		machine.setAnnonce(annonce);
+		synchronized (machine) 
+		{
+			machine.setAnnonce(annonce);
+		}
 	}
 
 	public EtatDuJeuInterface getEtat() 
 	{
-		return machine.getEtat();
+		synchronized (machine) 
+		{
+			return machine.getEtat();
+		}
 	}
 }
