@@ -12,7 +12,7 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 public class CaptureLive implements Runnable {
 
 
-	private static final int DISTANCE_THRESHOLD = 40;
+	private static final int DISTANCE_THRESHOLD = 20;
 	private static final int DIF_NUM = 100; // nombre de pixels qui doivent etre differents
 	private static final int WEBCAM = 1;
 

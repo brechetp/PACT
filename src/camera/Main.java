@@ -4,10 +4,11 @@ import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
-
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+
 
 
 
@@ -175,12 +176,14 @@ public class Main {
 		
 		//Initialisation.setCardSize();
 		
+		Capture.symbolDatabase(0, 3, "data/database/symbols/symbol", "data/database/symbols/text.txt");
+		
 	/*
 	 * Capture de deux cartes
 	 * 
 	 */
 
-		new Thread(new CaptureLive()).start();
+	//	new Thread(new CaptureLive()).start();
 		//Capture.liveCapture();
 		/*Image im1 = new Image(Capture.captureFrame());
 		Thread.sleep(3000);
@@ -202,17 +205,18 @@ public class Main {
 		
 		int[][] coins = bin3.getCornersRansac(3);
 		
-		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
-		carte.save("data/test/cartetest.jpg");
+		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage());*/ 
+		Card carte = new Card(cvLoadImage("data/test/resample/carte1.jpg")); 
+		//carte.save("data/test/cartetest.jpg");
 		
 		
 		
 	//	carte.binaryThreshold(0).getEdge().save("data/test/contour2.jpg");
 	//	carte.binaryThreshold(0).save("data/test/binaire.jpg");
 	
-		new BinaryImage(carte.getFirstSymbol(10000, 50000)).save("data/test/symbol/symbol.jpg");
+
 		
-		//System.out.println(carte.getSignature());
+		afficheListe(carte.getSignature());
 		System.out.println(carte.getType());
 		
 		/*new Database("data/database/database5/carte");
@@ -284,6 +288,13 @@ public class Main {
 	      	
 		}
 		
+	}
+	
+	public static void afficheListe(ArrayList<Double> liste){
+		for(Double current : liste){
+			System.out.println(current);
+			
+		}
 	}
 
 

@@ -19,6 +19,8 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class BinaryImage extends GrayImage {
 	
 	private static final int COMPONENT_THRESHOLD = 3000;
+	private static final int SIZE_MIN = 10000;
+	private static final int SIZE_MAX = 50000;
 	protected int[][] binaryMatrix ;
 	private IplImage binaryImage;
 	private ByteBuffer binaryByteBuffer;
@@ -401,7 +403,7 @@ public class BinaryImage extends GrayImage {
 		return new BinaryComponent (largest, compt);
 	}
 	
-	public int[] componentsNumberAndFirst(int size, int sizeMax){
+	public int[] componentsNumberAndFirst(){
 		
 		int [][] tab = connectedComponents();
 	
@@ -420,9 +422,9 @@ public class BinaryImage extends GrayImage {
 		
 		int[] res = new int[]{0,-1}; // res[0] contient le nombre de composantes connexes, res[1] l'indice de la première
 		for (int i=0; i<nbTags; i++){
-			if (compteur[i] >= size){
+			if (compteur[i] >= SIZE_MIN){
 				res[0]++;
-				if(res[1] == -1 && compteur[i] <= sizeMax){
+				if(res[1] == -1 && compteur[i] <= SIZE_MAX){
 					res[1] = i;
 				}
 				

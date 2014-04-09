@@ -1,6 +1,9 @@
 package camera;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import com.googlecode.javacv.OpenCVFrameGrabber;
 import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
@@ -30,7 +33,7 @@ public class Capture {
 				cvSaveImage(fileName, img);
 			}
 			grabber.stop();
-			
+
 
 
 
@@ -44,9 +47,9 @@ public class Capture {
 
 		}
 	}
-	
+
 	public static IplImage captureFrame(){
-	
+
 		OpenCVFrameGrabber grabber=new OpenCVFrameGrabber(WEBCAM);
 		IplImage res = null ;
 		try
@@ -59,7 +62,7 @@ public class Capture {
 				res = img.clone();
 			}
 			grabber.stop();
-			
+
 
 		}
 		catch(Exception ae)
@@ -70,7 +73,7 @@ public class Capture {
 		}
 		return res;
 	}
-	
+
 	public static void capture(int debut, int compt, String fileName){ //enregistre compt images
 
 		for(int i = debut; i<compt; i++){
@@ -112,7 +115,7 @@ public class Capture {
 				BinaryImage bin = image1.differenceNeighbour(image0);
 
 				BinaryComponent card = bin.largestComponent();
-				cvSaveImage("data/binary/database4/carte"+i+".jpg", bin.getBinaryImage());
+				cvSaveImage("data/binary/symbol_database4/carte"+i+".jpg", bin.getBinaryImage());
 				cvSaveImage("data/binary/database4bis/carte"+i+".jpg", card.getBinaryImage());
 				coins = card.getCornersRansac(3);
 				Image resample = image1.resample(coins, 635, 889);
@@ -125,6 +128,89 @@ public class Capture {
 
 		}
 
+	}
+
+	/*
+	 * 
+	 * Symbols
+	 * 
+	 * 
+	 */
+
+	public static void symbolDatabase(int debut, int fin, String capture, String fileName) throws Exception{
+
+
+
+		for(int i = debut; i <= fin; i++){ 
+
+			Capture.captureFrame(capture+i+".jpg");
+			System.out.println("Photo "+(i+1)+" prise");
+			System.out.println("Vous pouvez poser la carte "+(i+1));
+			if (i==0)
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			if (i!=0){
+
+				Image im1 = new Image(capture+0+".jpg");
+				Image im2= new Image(capture+i+".jpg");
+
+
+
+				BinaryImage bin1 = im2.differenceNeighbour(im1);
+				//bin1.save("data/test/binary/bin1.jpg");
+				BinaryImage bin2 = im2.binaryThreshold(1);
+				//bin2.save("data/test/binary/bin2.jpg");
+				BinaryImage bin = bin1.and(bin2);
+
+
+
+				BinaryComponent bin3 = bin.largeComponents();
+				//bin3.save("data/test/binary/bin.jpg");
+				//bin3.getEdge().save("data/test/contour.jpg");
+
+				int[][] coins = bin3.getCornersRansac(3);
+
+				Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
+				carte.save(capture+"bis"+i+".jpg");
+				BinaryImage binary = (carte.binaryThreshold(2)); 
+			
+				int[] res = binary.componentsNumberAndFirst();
+				new BinaryImage(binary.filter(res[1])).save(capture+"ter"+i+".jpg");
+				write(carte.getSignature(), fileName);
+
+
+
+
+			}
+		}
+
+	}
+
+
+	private static void write(ArrayList<Double> signature, String fileName) {
+
+		try{
+			FileOutputStream fos = new FileOutputStream(fileName);
+			PrintWriter pw = new PrintWriter(fos);
+
+			int j; // parcours en hauteur
+			for(Double current : signature){ 
+
+
+				pw.println(current); // on �crit l'etiquette
+
+			}
+
+			pw.close();
+		}
+		catch (Exception e){
+
+			e.printStackTrace();
+		}
 	}
 
 
