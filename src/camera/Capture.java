@@ -18,7 +18,7 @@ public class Capture {
 
 
 	private static final int DISTANCE_THRESHOLD = 100;
-	private static final int WEBCAM = 1;
+	private static final int WEBCAM = 0;
 
 	public static void captureFrame(String fileName)
 	{
@@ -144,7 +144,7 @@ public class Capture {
 		for(int i = debut; i <= fin; i++){ 
 
 			Capture.captureFrame(capture+i+".jpg");
-			System.out.println("Photo "+(i+1)+" prise");
+			System.out.println("Photo "+(i)+" prise");
 			System.out.println("Vous pouvez poser la carte "+(i+1));
 			if (i==0)
 				try {
@@ -161,9 +161,9 @@ public class Capture {
 
 
 				BinaryImage bin1 = im2.differenceNeighbour(im1);
-				//bin1.save("data/test/binary/bin1.jpg");
+				bin1.save("data/database/symbols/"+2*i+".jpg");
 				BinaryImage bin2 = im2.binaryThreshold(1);
-				//bin2.save("data/test/binary/bin2.jpg");
+				bin2.save("data/database/symbols/"+(2*i+1)+".jpg");
 				BinaryImage bin = bin1.and(bin2);
 
 
@@ -176,11 +176,11 @@ public class Capture {
 
 				Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
 				carte.save(capture+"bis"+i+".jpg");
-				BinaryImage binary = (carte.binaryThreshold(2)); 
+				BinaryImage binary = (carte.binaryThreshold(0)); 
+				binary.save(capture+"threshold"+i+".jpg");
 			
-				int[] res = binary.componentsNumberAndFirst();
-				new BinaryImage(binary.filter(res[1])).save(capture+"ter"+i+".jpg");
-				write(carte.getSignature(), fileName);
+				
+				write(carte.getSignature(), fileName+i+".txt");
 
 
 
@@ -197,7 +197,7 @@ public class Capture {
 			FileOutputStream fos = new FileOutputStream(fileName);
 			PrintWriter pw = new PrintWriter(fos);
 
-			int j; // parcours en hauteur
+	
 			for(Double current : signature){ 
 
 

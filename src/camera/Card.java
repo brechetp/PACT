@@ -227,8 +227,8 @@ public class Card extends Image{
 
 	public int[][] getFirstSymbol(){
 
-		BinaryImage bin = (this.binaryThreshold(2)); 
-		bin.save("data/test/binary/test.jpg");
+		BinaryImage bin = (this.binaryThreshold(0)); 
+		bin.save("data/database/symbols/test.jpg");
 		int[] res = bin.componentsNumberAndFirst();
 		number = res[0];
 		new BinaryImage(bin.filter(res[1])).save("data/test/image/image1.jpg");

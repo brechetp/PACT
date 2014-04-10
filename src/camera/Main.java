@@ -174,9 +174,9 @@ public class Main {
 		 * 
 		 */
 		
-		//Initialisation.setCardSize();
+		// Initialisation.setCardSize();
 		
-		Capture.symbolDatabase(0, 3, "data/database/symbols/symbol", "data/database/symbols/text.txt");
+		Capture.symbolDatabase(0, 4, "data/database/symbols/symbol", "data/database/symbols/text");
 		
 	/*
 	 * Capture de deux cartes
