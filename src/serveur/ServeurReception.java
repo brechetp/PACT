@@ -38,6 +38,8 @@ public class ServeurReception implements Runnable
 					else if (msg.equals("annonce"))
 						this.newAnnonce();
 				}
+				else
+					System.exit(0);
 			}
 		} 
 		catch (IOException e) 
@@ -79,13 +81,32 @@ public class ServeurReception implements Runnable
 	{
 		try 
 		{
-			String valeur =in.readLine();
-			System.out.println(valeur);
-			String couleur =in.readLine();
-			System.out.println(couleur);
-			Carte carte = new Carte(valeur, couleur, (EtatDuJeu)belote.getEtat());
+			String carte =in.readLine();
+			String couleur ="";
+			String valeur ="";
+			if (carte.startsWith("trefle"))
+			{
+				couleur = "trefle";
+				valeur = carte.substring(6);
+			}
+			else if (carte.startsWith("pique"))
+			{
+				couleur = "pique";
+				valeur = carte.substring(5);
+			}
+			else if (carte.startsWith("coeur"))
+			{
+				couleur = "coeur";
+				valeur = carte.substring(5);
+			}
+			else
+			{
+				couleur = "carreau";
+				valeur = carte.substring(7);
+			}
 			
-			belote.nouvelleCarte(new CardEvent(carte));
+			Carte carteb = new Carte(valeur, couleur, (EtatDuJeu)belote.getEtat());
+			belote.nouvelleCarte(new CardEvent(carteb));
 		} 
 		catch (IOException e) 
 		{
