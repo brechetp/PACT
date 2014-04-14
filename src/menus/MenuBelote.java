@@ -1,5 +1,6 @@
 package menus;
 
+import camera.CaptureLive;
 import structure.Carte;
 import logiqueDeJeux.BeloteCoinche;
 import logiqueDeJeux.EtatDuJeu;
@@ -37,7 +38,7 @@ public class MenuBelote extends menu {
 		getVci().modePartie();
 		getVci().distribution();
 		//Start Camera
-		//new Thread(new MainThreadImage(belote)).start();
+		new Thread(new CaptureLive()).start();
 
 
 
@@ -156,7 +157,7 @@ public class MenuBelote extends menu {
 			Thread.sleep(100);
 			belote.nouveauGeste(accepter);
 			Thread.sleep(100);
-			belote.nouveauGeste(accepter);//joueur 3 prend à 100 carreau
+			belote.nouveauGeste(accepter);//joueur 3 prend ï¿½ 100 carreau
 			while(belote.getEtat().getNumJoueur()==4){}
 			belote.nouveauGeste(passer);
 			Thread.sleep(1000);
