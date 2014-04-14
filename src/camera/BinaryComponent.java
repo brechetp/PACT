@@ -17,10 +17,10 @@ public class BinaryComponent extends BinaryImage{
 		return compt;
 	}
 
-	public int[][] getCornersRansac(int type){
+	public int[][] getCornersRansac(int type, double coeff){
 
-		int[][] corners = edgeImage.ransac(type);
-		int[][] res = new int[][]{{0,height},{0,0},{width,0},{0,0}};
+		int[][] corners = edgeImage.ransac(type, coeff);
+		int[][] res = new int[][]{{0,(int)coeff*height},{0,0},{(int)coeff*width,0},{0,0}};
 		for(int i =0; i < 4; i++){
 
 			if (corners[i][0] < res[2][0]) // xMin

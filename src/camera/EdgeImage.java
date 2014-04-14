@@ -17,7 +17,7 @@ public class EdgeImage extends BinaryImage {
 
 	}
 
-	public int[][] ransac( int type){ //donne les coins du contour
+	public int[][] ransac( int type, double coeff){ //donne les coins du contour
 
 		int max = 0;
 		int[][] res = new int[4][2];
@@ -25,7 +25,7 @@ public class EdgeImage extends BinaryImage {
 		int i = 0;
 
 		if (type ==3){
-			while (max < ((double)5/3)*(Card.WIDTH + Card.HEIGHT) && i < 3*size){
+			while (max < ((double)5/3)*(Card.getWIDTH() + Card.getHEIGHT()) && i < 10*size){
 				i++;
 
 				int[][] points = new int[3][2];
@@ -60,8 +60,8 @@ public class EdgeImage extends BinaryImage {
 
 							max = compt;
 							for (int p =0; p<4; p++){
-								res[p][0] =(int)  Math.round(corners[p][0]);
-								res[p][1] =(int)  Math.round(corners[p][1]);
+								res[p][0] =(int)  Math.round(coeff*corners[p][0]);
+								res[p][1] =(int)  Math.round(coeff*corners[p][1]);
 							}
 						}
 					}
@@ -70,7 +70,7 @@ public class EdgeImage extends BinaryImage {
 			}
 		}
 		else{ //type==5
-			while ( i < 10*size){
+			while ( i < 100*size){
 				i++;
 				int[][] points = new int[5][2];
 				double corners[][] = new double[4][2];
@@ -100,8 +100,8 @@ public class EdgeImage extends BinaryImage {
 
 						max = compt;
 						for (int p =0; p<4; p++){
-							res[p][0] =(int)  Math.round(corners[p][0]);
-							res[p][1] =(int)  Math.round(corners[p][1]);
+							res[p][0] =(int)  Math.round(coeff*corners[p][0]);
+							res[p][1] =(int)  Math.round(coeff*corners[p][1]);
 						}
 					}
 				}
@@ -135,14 +135,14 @@ public class EdgeImage extends BinaryImage {
 
 
 
-		coins[1][0] = coins[0][0] + (Card.WIDTH*type + Card.HEIGHT*(1-type))*(gamma)/nNorm;
-		coins[1][1] = coins[0][1] + (Card.WIDTH*type + Card.HEIGHT*(1-type))*(delta)/nNorm;
+		coins[1][0] = coins[0][0] + (Card.getWIDTH()*type + Card.getHEIGHT()*(1-type))*(gamma)/nNorm;
+		coins[1][1] = coins[0][1] + (Card.getWIDTH()*type + Card.getHEIGHT()*(1-type))*(delta)/nNorm;
 
-		coins[2][0] = coins[0][0] + (Card.HEIGHT*type + Card.WIDTH*(1-type))*(alpha)/dNorm;
-		coins[2][1] = coins[0][1] + (Card.HEIGHT*type + Card.WIDTH*(1-type))*(beta)/dNorm;
+		coins[2][0] = coins[0][0] + (Card.getHEIGHT()*type + Card.getWIDTH()*(1-type))*(alpha)/dNorm;
+		coins[2][1] = coins[0][1] + (Card.getHEIGHT()*type + Card.getWIDTH()*(1-type))*(beta)/dNorm;
 
-		coins[3][0] = coins[1][0] + (Card.HEIGHT*type + Card.WIDTH*(1-type))*(alpha)/dNorm;
-		coins[3][1] = coins[1][1] + (Card.HEIGHT*type + Card.WIDTH*(1-type))*(beta)/dNorm;
+		coins[3][0] = coins[1][0] + (Card.getHEIGHT()*type + Card.getWIDTH()*(1-type))*(alpha)/dNorm;
+		coins[3][1] = coins[1][1] + (Card.getHEIGHT()*type + Card.getWIDTH()*(1-type))*(beta)/dNorm;
 
 
 

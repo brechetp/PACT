@@ -4,14 +4,16 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 public class Match implements Runnable {
 	
-	private IplImage imageA, imageB;
+	private static final int COEFF = 10;
+	private IplImage imageA, imageB, largeImage;
 	private int compteur;
 	
-	public Match(IplImage imageA, IplImage imageB, int compteur){
+	public Match(IplImage imageA, IplImage imageB, IplImage largeImage, int compteur){
 		
 		this.imageA = imageA;
 		this.imageB = imageB;
 		this.compteur = compteur%100;
+		this.largeImage = largeImage;
 	}
 
 	@Override
@@ -19,22 +21,23 @@ public class Match implements Runnable {
 
 		Image im1 = new Image(imageA);
 		Image im2 = new Image (imageB);
+		Image largeImg = new Image(largeImage);
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
-		bin1.save("data/test/binary/bin"+(3*compteur)+".jpg");
+		bin1.save("data/courant/binary/bin"+(3*compteur)+".jpg");
 		BinaryImage bin2 = im2.binaryThreshold(1).largeComponents();
-		bin2.save("data/test/binary/bin"+(3*compteur+1)+".jpg");
+		bin2.save("data/courant/binary/bin"+(3*compteur+1)+".jpg");
 		BinaryImage bin = bin1.and(bin2);
 		
 		
 		
 		BinaryComponent bin3 = bin.largestComponent();
-		bin3.save("data/test/binary/bin"+(3*compteur+2)+".jpg");
-		bin3.getEdge().save("data/test/contour/contour"+compteur+".jpg");
+		bin3.save("data/courant/binary/bin"+(3*compteur+2)+".jpg");
+		bin3.getEdge().save("data/courant/contour/contour"+compteur+".jpg");
 		
-		int[][] coins = bin3.getCornersRansac(3);
+		int[][] coins = bin3.getCornersRansac(3, (float)largeImg.getHeight()/im2.getHeight());
 		
-		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
-		carte.save("data/test/resample/carte"+compteur+".jpg");
+		Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
+		carte.save("data/courant/resample/carte"+compteur+".jpg");
 
 	
 		

@@ -4,10 +4,11 @@ import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
-
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+
 
 
 
@@ -172,8 +173,13 @@ public class Main {
 		 * Initialisation
 		 * 
 		 */
-		
 		//Initialisation.setCardSize();
+	//	Capture.symbolDatabase(0, 4, "data/database/symbols/symbol", "data/database/symbols/text");
+
+		Initialisation.setSymbolDatabase("data/database/symbols/text");
+		//Capture.letterDatabase(0, 3, "data/database/letters/letter", "data/database/letters/text");
+		Initialisation.setLetterDatabase("data/database/letters/text");
+		
 		
 	/*
 	 * Capture de deux cartes
@@ -182,37 +188,46 @@ public class Main {
 
 		new Thread(new CaptureLive()).start();
 		//Capture.liveCapture();
-		/*Image im1 = new Image(Capture.captureFrame());
+		/*Thread.sleep(3000);
+		Image im1 = new Image(Capture.captureFrame());
+		//Image im1 = new Image("data/test/im1.jpg");
+		im1.save("data/test/im1.jpg");;
 		Thread.sleep(3000);
 		Image im2 = new Image(Capture.captureFrame());
-
+		//Image im2 = new Image("data/test/im2.jpg");
+		im2.save("data/test/im2.jpg");
+		Capture.setWidth(640); 
+		Capture.setHeight(360);
+		 Image largeImage = new Image(Capture.captureFrame());
+		//Image largeImage = new Image("data/test/largeimage.jpg");
+		largeImage.save("data/test/largeimage.jpg");
 
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
-		//bin1.save("data/test/binary/bin1.jpg");
+		bin1.save("data/test/binary/bin1.jpg");
 		BinaryImage bin2 = im2.binaryThreshold(1);
-		//bin2.save("data/test/binary/bin2.jpg");
+		bin2.save("data/test/binary/bin2.jpg");
 		BinaryImage bin = bin1.and(bin2);
 		
 		
 		
-		BinaryComponent bin3 = bin.largeComponents();
-		//bin3.save("data/test/binary/bin.jpg");
-		//bin3.getEdge().save("data/test/contour.jpg");
+		BinaryComponent bin3 = bin.largestComponent();
+		bin3.save("data/test/binary/bin.jpg");
+		bin3.getEdge().save("data/test/contour.jpg");
 		
-		int[][] coins = bin3.getCornersRansac(3);
+		int[][] coins = bin3.getCornersRansac(3, largeImage.getHeight()/im2.getHeight());
 		
-		Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
+		Card carte = new Card(largeImage.resample(coins, 635, 889).getRgbImage());
 		carte.save("data/test/cartetest.jpg");
 		
 		
 		
 	//	carte.binaryThreshold(0).getEdge().save("data/test/contour2.jpg");
-	//	carte.binaryThreshold(0).save("data/test/binaire.jpg");
+		carte.binaryThreshold(0).save("data/test/binaire.jpg");
 	
-		new BinaryImage(carte.getFirstSymbol(10000, 50000)).save("data/test/symbol/symbol.jpg");
+
 		
-		//System.out.println(carte.getSignature());
+		afficheListe(carte.getSignature());
 		System.out.println(carte.getType());
 		
 		/*new Database("data/database/database5/carte");
@@ -278,12 +293,19 @@ public class Main {
 			BinaryImage bin = new BinaryImage(binSource+i+".jpg");
 			BinaryComponent card = bin.largestComponent();
 			Image img = new Image(rgbSource+i+".jpg");
-			coins = card.getCornersRansac(3);
+			coins = card.getCornersRansac(3, 1);
 			Image resample = img.resample(coins, 635, 889);
 	      	cvSaveImage(destination+i+".jpg", resample.getRgbImage());
 	      	
 		}
 		
+	}
+	
+	public static void afficheListe(ArrayList<Double> liste){
+		for(Double current : liste){
+			System.out.println(current);
+			
+		}
 	}
 
 

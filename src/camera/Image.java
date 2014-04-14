@@ -15,9 +15,13 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class Image {
 	
 
-	public static final int WHITE_THRESHOLD = 220;
-	public static final int DISTANCE_THRESHOLD = 20; // pour la distance entre deux images
+	public static final int WHITE_THRESHOLD = 210;
+	public static final int DISTANCE_THRESHOLD = 40; // pour la distance entre deux images
 	private static final int NEIGHBOUR_NUMBER = 0; // pour l'algorithme de distance
+	private static final int B_RED_THRESHOLD = 120;
+	private static final int G_RED_THRESHOLD = 120;
+	private static final int R_RED_THRESHOLD = 150;
+	private static final int BLACK_THRESHOLD = 80;
 	
 	protected int compt =0; //compte le nombre de pixels non blancs
 	
@@ -251,6 +255,16 @@ public class Image {
 		
 		return (rgbByte[0] > WHITE_THRESHOLD && rgbByte[1] > WHITE_THRESHOLD && rgbByte[2] > WHITE_THRESHOLD);
 	}
+	
+	public boolean isRed(int[] rgbByte){
+		
+		return (rgbByte[0] < B_RED_THRESHOLD && rgbByte[1] < G_RED_THRESHOLD && rgbByte[2] > R_RED_THRESHOLD);
+	}
+	
+	public boolean isBlack(int[] rgbByte){
+		
+		return (rgbByte[0] < BLACK_THRESHOLD && rgbByte[1] < BLACK_THRESHOLD && rgbByte[2] > BLACK_THRESHOLD);
+		}
 	  
 
 	public void save(String fileName){
@@ -386,11 +400,11 @@ public class Image {
 				 int[][] pixels = new int[4][3];
 				 
 				 for (int k = 0; k<4; k++){
-					 pixels[k] = getRgbByte((int)Math.ceil(xValue)+k/2, (int)Math.ceil(yValue)+k%2);
+					 pixels[k] = getRgbByte((int)Math.floor(xValue)+k/2, (int)Math.floor(yValue)+k%2);
 				 }
 				 
 				 for(int k = 0; k<3; k++){
-					 tab[3*i + 3*width*j + k] = (int) Math.round((1-xValue%1)*(1-yValue%1)*pixels[0][k]+
+					 tab[3*i + 3*width*j + k] = (int) Math.round( (1-xValue%1)*(1-yValue%1)*pixels[0][k]+
 								 (xValue%1)*(1-yValue%1)*pixels[1][k]+
 								 (1-xValue%1)*(yValue%1)*pixels[2][k]+
 								 (xValue%1)*(yValue%1)*pixels[3][k]) ;
@@ -431,32 +445,55 @@ public class Image {
 
 	public BinaryImage binaryThreshold(int version){ // on seuille selon le blanc
 		// si version = 1, on garde les blancs , si version = 0 on garde les non blancs
-		
+		// version = 2 on garde les rouges ou les noirs
 		int[] tab = new int[3*width*height];
 
-		for(int i=0; i< width; i++){
-			for(int j=0; j<height; j++ ){
-				
-				int[] rgbByte = getRgbByte(i,j);
+		if (version <=1) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
 
-			
-				if (isWhite(rgbByte)){
+					int[] rgbByte = getRgbByte(i, j);
 
-					
-					for(int p =0; p<3; p++){
-						tab[3*i + 3*width*j+p] = version*255;
+					if (isWhite(rgbByte)) {
+
+						for (int p = 0; p < 3; p++) {
+							tab[3 * i + 3 * width * j + p] = version * 255;
+						}
+					} else {
+						for (int p = 0; p < 3; p++) {
+
+							tab[3 * i + 3 * width * j + p] = 255 - version * 255;
+
+						}
+
 					}
-				}else{
-					for(int p =0; p<3; p++){
-
-						tab[3*i + 3*width*j+p] = 255 - version*255;
-
-					}
-					
-					
+				}
 			}
+		} else if (version == 2){
+			
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+
+					int[] rgbByte = getRgbByte(i, j);
+
+					if (isBlack(rgbByte) || isRed(rgbByte)) {
+
+						for (int p = 0; p < 3; p++) {
+							tab[3 * i + 3 * width * j + p] = 255;
+						}
+					} else {
+						for (int p = 0; p < 3; p++) {
+
+							tab[3 * i + 3 * width * j + p] = 0;
+
+						}
+
+					}
+				}
+			}
+			
 		}
-		}
+			
 		Image res = new Image(tab, width, height);
 		return new BinaryImage(res);
 
