@@ -4,94 +4,105 @@ import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
-
 import com.googlecode.javacv.OpenCVFrameGrabber;
+import com.googlecode.javacv.cpp.opencv_highgui;
 import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
+import com.googlecode.javacv.cpp.opencv_highgui.CvCapture;
 
 public class CaptureLive implements Runnable {
 
 
-	private static final int DISTANCE_THRESHOLD = 20;
-	private static final int DIF_NUM = 100; // nombre de pixels qui doivent etre differents
+	private static final int DISTANCE_THRESHOLD = 60;
+
 	private static final int WEBCAM = 1;
+	private static final int HEIGHT = 360;
+	private static final int WIDTH = 640;
+	private static final int DIF_NUM =  100; // nombre de pixels qui doivent etre differents
+	private static final int NEIGHBOUR_NUMBER = 0;
 
 	public void run(){	
 
 		try{ 
 
 
+			CvCapture capture = opencv_highgui.cvCreateCameraCapture(WEBCAM);
+
+			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
+			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
 
 
-			/*creation de la fenetre principale*/
-			/*JFrame mainframe = new JFrame();
-	mainframe.setLayout(new GridLayout(1, 1));
-	mainframe.setVisible(true);*/
-
-			/*creation de la fenetre utilis�e pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
-l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
-			/*	CanvasFrame rgb_frame = new CanvasFrame("AVI Playback Demo");        
-	mainframe.getContentPane().add(rgb_frame.getCanvas() );
-	rgb_frame.setVisible(false);*/
-
-			/*creation de l'objet d'acquisition de trames video � partir du fichier indiqu� comme param�tre du programme*/
-			OpenCVFrameGrabber grabber = null;
-			//        grabber = new OpenCVFrameGrabber(args[0]);
-
-			grabber = new OpenCVFrameGrabber(WEBCAM);
 
 
-			grabber.start();
-
-			IplImage image2, image1 = null, imageA = null;
+			IplImage image2, image1 = null, imageA = null, largeImage = null;
 			//mainframe.setSize(width/5, height/5);
-	
+
 			int compteur = 0;
 			int comptA = 0;
 			boolean hasMoved = false;
-			
-			
+
+
 
 			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilis�es sont bien lib�r�es de la m�moire
 (en quelque sorte en forcant un appel au "Garbage Collector"*/
 			CvMemStorage storage = CvMemStorage.create();
 
-			while ((image2 = grabber.grab()) != null ) {
-				if (compteur == 30){
-					imageA = image2.clone();
-					image1 = image2.clone();
-					
-				}
-				
-				if ( compteur>30) {
+			while ((image2 = opencv_highgui.cvQueryFrame(capture)) != null ) {
+				cvSaveImage("data/courant/capture/capture"+compteur%1000+".jpg", image2);
+				if (compteur == 10){
+					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, getHeight());
+					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, getWidth());
+					imageA = opencv_highgui.cvQueryFrame(capture);
+					cvSaveImage("data/courant/compare/A.jpg", imageA);			
+					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
+					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
 
-					
+
+
+				}
+
+				if ( compteur>10) {
+
+
 					//cvSaveImage("data/courant/image2.jpg", image2);
 
-					if(areDifferent(image1, image2)){
+					if(areDifferent(image1, image2, compteur)){
 						System.out.println("Les images sont differentes");
-						Thread.sleep(500);
+
 						hasMoved =true;
 					}
-					else{
+					else{ // les images sont identiques
 						if (hasMoved){
 							hasMoved = false;
-							Thread.sleep(10);
-							cvClearMemStorage(storage);
-							image2=grabber.grab();
-							System.out.println("On lance la comparaison "+(++comptA)+".");
-							new Thread(new Match(imageA, image2, comptA)).start();
-							imageA = image2.clone();
 							
+							//cvClearMemStorage(storage);
+							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, getHeight());
+							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, getWidth());
+							IplImage imageB = opencv_highgui.cvQueryFrame(capture).clone();
+							
+							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 1080);
+							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 1920);
+							largeImage = opencv_highgui.cvQueryFrame(capture).clone();
+							//cvClearMemStorage(storage);
+
+							cvSaveImage("data/courant/compare/imageA"+comptA+".jpg",imageA);
+							cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
+							cvSaveImage("data/courant/compare/largeimage"+comptA+".jpg",largeImage);
+							System.out.println("On lance la comparaison "+(++comptA)+".");
+							new Thread(new Match(imageA, imageB, largeImage, comptA)).start();
+							imageA = imageB.clone();
+							
+							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
+							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
+							
+							//cvClearMemStorage(storage);
+
 						}
 					}
-
-					image1 = image2.clone();
-
-
-
-
+					
 				}
+				//Thread.sleep(500);
+				image1 = image2.clone();
 				compteur++;
 
 
@@ -102,35 +113,43 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 				/*deuxi�me ligne magique JavaCV, � appeler r�guli�rement (apr�s chaque capture ou affichage de trame, ...)*/
 				cvClearMemStorage(storage);
 
-				//Thread.sleep(500);
+
 
 			}
 			//nettoyage des ressources        
-			grabber.stop();
+			opencv_highgui.cvReleaseCapture(capture);
 			// rgb_frame.dispose();
 		} catch(Exception e){
 			System.out.println(e.getStackTrace());
 		}       
 	}
 
-	private static boolean areDifferent(IplImage image1, IplImage image2) {
+	private static boolean areDifferent(IplImage image1, IplImage image2, int compteur) {
 		boolean res = false;
 		int compt =0;
 		int i = 0, j =0;
+		int[][]mat =new int[image2.height()][image2.width()];
+		//cvSaveImage("data/courant/a"+2*compteur+".jpg", image1);
+		//cvSaveImage("data/courant/a"+(2*compteur+1)+".jpg", image2);
+		
 
 		while(!res && i < image2.width()){
 			while(!res && j < image2.height()){
 
-				if(different(image1, image2, i, j, 0)) // si les pixels i et j sont differents
+				if(different(image1, image2, i, j, NEIGHBOUR_NUMBER)){ // si les pixels i et j sont differents
 					compt++;
+					mat[j][i] = 1 ;
+				}
 
 				res = (compt > DIF_NUM);
 				j++;
 
 
 			}
+			j=0;
 			i++;
 		}
+		new BinaryImage(mat).save("data/courant/bin/bin"+compteur+".jpg");
 		return res;
 	}
 
@@ -156,12 +175,13 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 				p++;
 
 			}
+			p=0;
 			n++;
 		}
-		
+
 
 		res = (distanceMin > DISTANCE_THRESHOLD);
-			
+
 
 		return res;
 	}
@@ -174,6 +194,14 @@ l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 			res[k] = (image1.getByteBuffer().get(3*n + image1.widthStep()*p+k) + 255) % 255;
 		}
 		return res;
+	}
+
+	public static int getHeight() {
+		return HEIGHT;
+	}
+
+	public static int getWidth() {
+		return WIDTH;
 	}
 
 

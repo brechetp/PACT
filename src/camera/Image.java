@@ -15,8 +15,8 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class Image {
 	
 
-	public static final int WHITE_THRESHOLD = 200;
-	public static final int DISTANCE_THRESHOLD = 20; // pour la distance entre deux images
+	public static final int WHITE_THRESHOLD = 220;
+	public static final int DISTANCE_THRESHOLD = 30; // pour la distance entre deux images
 	private static final int NEIGHBOUR_NUMBER = 0; // pour l'algorithme de distance
 	private static final int B_RED_THRESHOLD = 120;
 	private static final int G_RED_THRESHOLD = 120;
@@ -400,11 +400,11 @@ public class Image {
 				 int[][] pixels = new int[4][3];
 				 
 				 for (int k = 0; k<4; k++){
-					 pixels[k] = getRgbByte((int)Math.ceil(xValue)+k/2, (int)Math.ceil(yValue)+k%2);
+					 pixels[k] = getRgbByte((int)Math.floor(xValue)+k/2, (int)Math.floor(yValue)+k%2);
 				 }
 				 
 				 for(int k = 0; k<3; k++){
-					 tab[3*i + 3*width*j + k] = (int) Math.round((1-xValue%1)*(1-yValue%1)*pixels[0][k]+
+					 tab[3*i + 3*width*j + k] = (int) Math.round( (1-xValue%1)*(1-yValue%1)*pixels[0][k]+
 								 (xValue%1)*(1-yValue%1)*pixels[1][k]+
 								 (1-xValue%1)*(yValue%1)*pixels[2][k]+
 								 (xValue%1)*(yValue%1)*pixels[3][k]) ;

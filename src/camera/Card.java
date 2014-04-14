@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 import comparaison.CardDatabase;
+import comparaison.Letter;
 import comparaison.Symbol;
 
 
@@ -13,8 +14,8 @@ public class Card extends Image{
 
 
 	// double [] matchTable = new double [5];
-	static double WIDTH = 149.41307228929264 ; // taille de la carte sur l'ecran
-	static double HEIGHT = 208.71148550445776;
+	private static double WIDTH = 64.67965703464641; // taille de la carte sur l'ecran
+	private static double HEIGHT = 90.41732060412446;
 
 
 
@@ -22,6 +23,7 @@ public class Card extends Image{
 	private Image corner;
 	private Symbol symbol;
 	private int number=-1;
+	private Letter letter;
 
 
 
@@ -33,10 +35,11 @@ public class Card extends Image{
 		average = new double[3]; // moyenne sur RGB
 		sigma = new double[3]; // ecart type sur RGB
 
-		corner = this.cut(0,0,110, 220);
-		symbol = new Symbol(getFirstSymbol());
+	//	corner = this.cut(0,0,110, 220);
+	//	symbol = new Symbol(getFirstSymbol()); // letter est définie ici
+		
 
-		new BinaryImage(getFirstSymbol()).save("data/test/symbol/symbol.jpg");
+	//new BinaryImage(getFirstSymbol()).save("data/database/symbols/symboltest.jpg");
 
 		computeAverage();
 		computeSigma();
@@ -210,7 +213,7 @@ public class Card extends Image{
 		else
 			string = "0"; // carte noire
 
-
+		string = string+symbol.getCardValue(string);
 
 		if (number ==0)
 			string = null;
@@ -219,7 +222,7 @@ public class Card extends Image{
 		else if (number >= 7 && number <= 10) // 7, 8, 9, 10
 			string =string+ (number-6);
 		else 
-			string = string+5; // V, D, R
+			string = string+(letter.getType()+5); // V=5, D=6, R=7
 		return string;
 
 
@@ -229,6 +232,7 @@ public class Card extends Image{
 
 		BinaryImage bin = (this.binaryThreshold(0)); 
 		bin.save("data/database/symbols/test.jpg");
+		letter = new Letter (bin.cut(7,9, 100, 140).largestComponent().getBinaryMatrix());
 		int[] res = bin.componentsNumberAndFirst();
 		number = res[0];
 		new BinaryImage(bin.filter(res[1])).save("data/test/image/image1.jpg");
@@ -277,6 +281,22 @@ public class Card extends Image{
 	public Image getCorner() {
 		return corner;
 
+	}
+
+	public static double getWIDTH() {
+		return WIDTH;
+	}
+
+	public static void setWIDTH(double wIDTH) {
+		WIDTH = wIDTH;
+	}
+
+	public static double getHEIGHT() {
+		return HEIGHT;
+	}
+
+	public static void setHEIGHT(double hEIGHT) {
+		HEIGHT = hEIGHT;
 	}
 
 
