@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class EdgeImage extends BinaryImage {
 
-	private static final double lineThreshold = 0.5; // distance � laquelle un point est dans une droite
+	private static final double lineThreshold = 2; // distance � laquelle un point est dans une droite
 
 
 

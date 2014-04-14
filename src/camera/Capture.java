@@ -38,7 +38,7 @@ public class Capture {
 
 
 			IplImage img=opencv_highgui.cvQueryFrame(capture);
-			img.align();
+		
 			if(img!=null)
 			{
 				cvSaveImage(fileName, img);
@@ -72,7 +72,7 @@ public class Capture {
 			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, getWidth());
 			
 			IplImage img=opencv_highgui.cvQueryFrame(capture);
-			img.align();
+		
 			if(img!=null)
 			{
 				res = img.clone();

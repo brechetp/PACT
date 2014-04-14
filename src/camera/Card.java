@@ -14,8 +14,8 @@ public class Card extends Image{
 
 
 	// double [] matchTable = new double [5];
-	private static double WIDTH = 64.67965703464641; // taille de la carte sur l'ecran
-	private static double HEIGHT = 90.41732060412446;
+	private static double WIDTH = 64.19501538281614; // taille de la carte sur l'ecran
+	private static double HEIGHT = 89.49301648732151;
 
 
 
@@ -35,8 +35,8 @@ public class Card extends Image{
 		average = new double[3]; // moyenne sur RGB
 		sigma = new double[3]; // ecart type sur RGB
 
-	//	corner = this.cut(0,0,110, 220);
-	//	symbol = new Symbol(getFirstSymbol()); // letter est définie ici
+		corner = this.cut(0,0,110, 220);
+		symbol = new Symbol(getFirstSymbol()); // letter est définie ici
 		
 
 	//new BinaryImage(getFirstSymbol()).save("data/database/symbols/symboltest.jpg");

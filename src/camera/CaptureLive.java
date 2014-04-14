@@ -13,7 +13,7 @@ import com.googlecode.javacv.cpp.opencv_highgui.CvCapture;
 public class CaptureLive implements Runnable {
 
 
-	private static final int DISTANCE_THRESHOLD = 60;
+	private static final int DISTANCE_THRESHOLD = 40;
 
 	private static final int WEBCAM = 1;
 	private static final int HEIGHT = 360;
@@ -34,7 +34,7 @@ public class CaptureLive implements Runnable {
 
 
 
-			IplImage image2, image1 = null, imageA = null, largeImage = null;
+			IplImage image2, image1 = null, imageA = null, imageB = null, largeImage = null;
 			//mainframe.setSize(width/5, height/5);
 
 			int compteur = 0;
@@ -50,9 +50,9 @@ public class CaptureLive implements Runnable {
 			while ((image2 = opencv_highgui.cvQueryFrame(capture)) != null ) {
 				cvSaveImage("data/courant/capture/capture"+compteur%1000+".jpg", image2);
 				if (compteur == 10){
-					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, getHeight());
-					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, getWidth());
-					imageA = opencv_highgui.cvQueryFrame(capture);
+					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
+					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
+					imageA = image2.clone();
 					cvSaveImage("data/courant/compare/A.jpg", imageA);			
 					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
 					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
@@ -75,15 +75,17 @@ public class CaptureLive implements Runnable {
 						if (hasMoved){
 							hasMoved = false;
 							
-							//cvClearMemStorage(storage);
-							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, getHeight());
-							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, getWidth());
-							IplImage imageB = opencv_highgui.cvQueryFrame(capture).clone();
+							cvClearMemStorage(storage);
+							
+							
+							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
+							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
+							imageB = image2.clone();
 							
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 1080);
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 1920);
-							largeImage = opencv_highgui.cvQueryFrame(capture).clone();
-							//cvClearMemStorage(storage);
+							largeImage = image2.clone();
+							cvClearMemStorage(storage);
 
 							cvSaveImage("data/courant/compare/imageA"+comptA+".jpg",imageA);
 							cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
@@ -95,13 +97,16 @@ public class CaptureLive implements Runnable {
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
 							
-							//cvClearMemStorage(storage);
+							cvClearMemStorage(storage);
+							image2 = opencv_highgui.cvQueryFrame(capture);
+							
 
 						}
 					}
+					Thread.sleep(500);
 					
 				}
-				//Thread.sleep(500);
+				
 				image1 = image2.clone();
 				compteur++;
 
