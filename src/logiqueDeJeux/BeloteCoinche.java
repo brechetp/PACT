@@ -12,17 +12,17 @@ public class BeloteCoinche implements GlobalListener
 	public BeloteCoinche(EtatDuJeu etat, ViewControllerInterface vci)
 	{
 		
-		this.machine = new StateMachine(new JoueurDistant(this), etat, vci);
+		//this.machine = new StateMachine(new JoueurDistant(this), etat, vci);
 	}
 	
 	public void nouvelleCarte(CardEvent carte) 
 	{
 		System.out.println(carte.getCarte().getLabelNum());
 		System.out.println(carte.getCarte().getSuit());
-		synchronized (machine) 
+		/*synchronized (machine) 
 		{
 			machine.eventCarte(carte);
-		}
+		}*/
 	}
 
 	public void nouveauGeste(MouvementEvent mouvement) 
