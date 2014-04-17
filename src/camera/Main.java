@@ -186,7 +186,7 @@ public class Main {
 	 * 
 	 */
 
-		new Thread(new CaptureLive()).start();
+		//new Thread(new CaptureLive(), ).start();
 		//Capture.liveCapture();
 		/*Thread.sleep(3000);
 		Image im1 = new Image(Capture.captureFrame());

@@ -33,6 +33,11 @@ public class Match implements Runnable {
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
 		bin1.save("data/courant/binary/bin"+(3*compteur)+".jpg");
 		BinaryImage bin2 = im2.binaryThreshold(1).largeComponents();
+		BinaryImage bin_im1 = im1.binaryThreshold(1).largeComponents();
+		if (bin_im1.getCompt() > bin2.getCompt()){
+			System.out.println("Une carte a été retirée");
+			
+		}
 		bin2.save("data/courant/binary/bin"+(3*compteur+1)+".jpg");
 		BinaryImage bin = bin1.and(bin2);
 		
@@ -50,6 +55,7 @@ public class Match implements Runnable {
 	
 		
 		String type = carte.getType();
+		System.out.println(type);
 		
 		newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
 

@@ -19,11 +19,12 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class BinaryImage extends GrayImage {
 
 	private static final int COMPONENT_THRESHOLD = (int) Math.round(Card.getWIDTH()*Card.getHEIGHT()/5);
-	private static final int SIZE_MIN = 7000;
+	private static final int SIZE_MIN = 10000;
 	private static final int SIZE_MAX = 50000;
 	protected int[][] binaryMatrix ;
 	private IplImage binaryImage;
 	private ByteBuffer binaryByteBuffer;
+	int compt = 0; // compte les pixels présents
 
 	private int maxNbTags=100000;
 	private int[] connectionTable = new int[maxNbTags];
@@ -58,6 +59,7 @@ public class BinaryImage extends GrayImage {
 				if (value>127){
 
 					binaryMatrix[j][i] = 1;
+					compt++;
 					for(int k = 0; k<3; k++){
 						binaryByteBuffer.put(3*i + binaryImage.widthStep()*j+k, (byte) 255);
 					}
@@ -89,6 +91,7 @@ public class BinaryImage extends GrayImage {
 				if (grayImage.get(i, j)>127){
 
 					binaryMatrix[j][i] = 1;
+					compt++;
 					for(int k = 0; k<3; k++){
 						binaryByteBuffer.put(3*i + binaryImage.widthStep()*j+k, (byte) 255);
 					}
@@ -121,6 +124,7 @@ public class BinaryImage extends GrayImage {
 			for (int j=0; j<height; j++){
 
 				if (binaryMatrix[j][i] == 1){
+					compt++;
 					for(int k = 0; k<3; k++){
 						binaryByteBuffer.put(3*i + binaryImage.widthStep()*j+k, (byte) 255);
 					}
@@ -161,6 +165,11 @@ public class BinaryImage extends GrayImage {
 	public int[][] getBinaryMatrix(){
 
 		return binaryMatrix;
+	}
+	
+	public int getCompt(){
+		
+		return compt;
 	}
 
 	@Override

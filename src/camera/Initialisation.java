@@ -13,7 +13,7 @@ public class Initialisation {
 
 	public static void setCardSize(){
 
-		Capture.captureFrame("data/initialisation/fond.jpg");
+		Capture.captureFrame("data/initialisation/fond.jpg", 640, 360, false);
 		System.out.println("Le fond est pris, posez la carte blanche");
 
 		try {
@@ -22,7 +22,7 @@ public class Initialisation {
 
 			e.printStackTrace();
 		}
-		Capture.captureFrame("data/initialisation/carteblanche.jpg");
+		Capture.captureFrame("data/initialisation/carteblanche.jpg", 640, 360, false);
 		System.out.println("La carte blanche a été prise");
 
 

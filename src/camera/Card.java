@@ -14,8 +14,8 @@ public class Card extends Image{
 
 
 	// double [] matchTable = new double [5];
-	private static double WIDTH = 64.19501538281614; // taille de la carte sur l'ecran
-	private static double HEIGHT = 89.49301648732151;
+	private static double WIDTH = 62.80442690779988; // taille de la carte sur l'ecran
+	private static double HEIGHT = 89.75719688630852;
 
 
 
@@ -232,7 +232,7 @@ public class Card extends Image{
 
 		BinaryImage bin = (this.binaryThreshold(0)); 
 		bin.save("data/database/symbols/test.jpg");
-		letter = new Letter (bin.cut(7,9, 100, 140).largestComponent().getBinaryMatrix());
+		letter = new Letter (bin.cut(0,0, 100, 160).largestComponent().getBinaryMatrix());
 		int[] res = bin.componentsNumberAndFirst();
 		number = res[0];
 		new BinaryImage(bin.filter(res[1])).save("data/test/image/image1.jpg");

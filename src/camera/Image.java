@@ -16,7 +16,7 @@ public class Image {
 	
 
 	public static final int WHITE_THRESHOLD = 210;
-	public static final int DISTANCE_THRESHOLD = 40; // pour la distance entre deux images
+	public static final int DISTANCE_THRESHOLD = 30; // pour la distance entre deux images
 	private static final int NEIGHBOUR_NUMBER = 0; // pour l'algorithme de distance
 	private static final int B_RED_THRESHOLD = 120;
 	private static final int G_RED_THRESHOLD = 120;
@@ -251,7 +251,7 @@ public class Image {
 	 * 
 	 */
 
-	public boolean isWhite(int[] rgbByte){
+	public static boolean isWhite(int[] rgbByte){
 		
 		return (rgbByte[0] > WHITE_THRESHOLD && rgbByte[1] > WHITE_THRESHOLD && rgbByte[2] > WHITE_THRESHOLD);
 	}

@@ -84,9 +84,10 @@ public class BeloteCoinche implements GlobalListener
 
 	public EtatDuJeuInterface getEtat() 
 	{
-		synchronized (machine) 
+		/*synchronized (machine) 
 		{
 			return machine.getEtat();
-		}
+		}*/
+		return null;
 	}
 }
