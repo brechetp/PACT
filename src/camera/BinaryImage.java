@@ -22,6 +22,7 @@ public class BinaryImage extends GrayImage {
 	private static final int SIZE_MIN = 10000;
 	private static final int SIZE_MAX = 50000;
 	protected int[][] binaryMatrix ;
+	protected boolean[][] booleanMatrix;
 	private IplImage binaryImage;
 	private ByteBuffer binaryByteBuffer;
 	int compt = 0; // compte les pixels présents
@@ -42,6 +43,7 @@ public class BinaryImage extends GrayImage {
 
 		super(image.getRgbImage());
 		binaryMatrix = new int[height][width];
+		booleanMatrix = new boolean[height][width];
 		binaryImage = cvCreateImage(cvSize(width, height), 8, 3);
 		binaryByteBuffer = binaryImage.getByteBuffer();
 		taggedBinaryImage = new int[height][width];
@@ -59,6 +61,7 @@ public class BinaryImage extends GrayImage {
 				if (value>127){
 
 					binaryMatrix[j][i] = 1;
+					booleanMatrix[j][i] = true;
 					compt++;
 					for(int k = 0; k<3; k++){
 						binaryByteBuffer.put(3*i + binaryImage.widthStep()*j+k, (byte) 255);
@@ -66,6 +69,7 @@ public class BinaryImage extends GrayImage {
 				} else {
 
 					binaryMatrix[j][i] = 0 ;
+					booleanMatrix[j][i] = false;
 					for(int k = 0; k<3; k++){
 						binaryByteBuffer.put(3*i + binaryImage.widthStep()*j+k, (byte) 0);
 					}
@@ -81,6 +85,7 @@ public class BinaryImage extends GrayImage {
 
 		super(grayImage.getRgbImage());
 		binaryMatrix = new int[height][width];
+		booleanMatrix = new boolean[height][width];
 		taggedBinaryImage = new int[height][width];
 		binaryImage = cvCreateImage(cvSize(width, height), 8, 3);
 		binaryByteBuffer = binaryImage.getByteBuffer();
@@ -91,6 +96,7 @@ public class BinaryImage extends GrayImage {
 				if (grayImage.get(i, j)>127){
 
 					binaryMatrix[j][i] = 1;
+					booleanMatrix[j][i] = true;
 					compt++;
 					for(int k = 0; k<3; k++){
 						binaryByteBuffer.put(3*i + binaryImage.widthStep()*j+k, (byte) 255);
@@ -98,6 +104,7 @@ public class BinaryImage extends GrayImage {
 				} else {
 
 					binaryMatrix[j][i] = 0 ;
+					booleanMatrix[j][i] = false;
 					for(int k = 0; k<3; k++){
 						binaryByteBuffer.put(3*i + binaryImage.widthStep()*j+k, (byte) 0);
 					}
@@ -115,6 +122,7 @@ public class BinaryImage extends GrayImage {
 		super(binaryMatrix);
 		this.binaryMatrix = binaryMatrix ;
 		taggedBinaryImage = new int[height][width];
+		booleanMatrix = new boolean[height][width];
 		height = binaryMatrix.length;
 		width = binaryMatrix[0].length;
 		binaryImage = cvCreateImage(cvSize(width, height), 8, 3);
@@ -176,6 +184,11 @@ public class BinaryImage extends GrayImage {
 	public int get(int i, int j){
 
 		return binaryMatrix[j][i];
+	}
+	
+	public boolean getBoolean(int i, int j){
+
+		return booleanMatrix[j][i];
 	}
 
 	@Override
@@ -529,6 +542,11 @@ public class BinaryImage extends GrayImage {
 		}
 		BinaryImage cut = new BinaryImage(matrix);
 		return cut;
+	}
+
+	public boolean[][] getBooleanMatrix() {
+		// TODO Auto-generated method stub
+		return booleanMatrix;
 	}
 
 }

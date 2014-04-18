@@ -16,7 +16,7 @@ public class CaptureLive implements Runnable {
 
 	private static final int DISTANCE_THRESHOLD = 40;
 
-	private static final int WEBCAM = 1;
+	private static final int WEBCAM = 0;
 	private static final int HEIGHT = 360;
 	private static final int WIDTH = 640;
 	private static final int DIF_NUM =  30; // nombre de pixels qui doivent etre differents
@@ -24,7 +24,7 @@ public class CaptureLive implements Runnable {
 	private BeloteCoinche belote;
 
 	public CaptureLive(BeloteCoinche belote){
-		this.belote = belote;
+		this.setBelote(belote);
 	}
 
 	public void run(){	
@@ -32,7 +32,7 @@ public class CaptureLive implements Runnable {
 		try{ 
 
 
-			CvCapture capture = opencv_highgui.cvCreateCameraCapture(WEBCAM);
+			CvCapture capture = opencv_highgui.cvCreateCameraCapture(getWebcam());
 
 			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
 			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
@@ -99,7 +99,7 @@ public class CaptureLive implements Runnable {
 							cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
 							cvSaveImage("data/courant/compare/largeimage"+comptA+".jpg",largeImage);
 							System.out.println("On lance la comparaison "+(++comptA)+".");
-							new Thread(new Match(imageA, imageB, largeImage, comptA, belote)).start();
+							new Thread(new QRCodeMatch(imageA, imageB, largeImage, comptA, getBelote())).start();
 							imageA = imageB.clone();
 
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
@@ -137,7 +137,7 @@ public class CaptureLive implements Runnable {
 		}       
 	}
 
-	private static boolean areDifferent(IplImage image1, IplImage image2, int compteur) {
+	protected static boolean areDifferent(IplImage image1, IplImage image2, int compteur) {
 		boolean res = false;
 		int compt =0;
 		int i = 0, j =0;
@@ -237,6 +237,18 @@ public class CaptureLive implements Runnable {
 
 	public static int getWidth() {
 		return WIDTH;
+	}
+
+	public static int getWebcam() {
+		return WEBCAM;
+	}
+
+	public BeloteCoinche getBelote() {
+		return belote;
+	}
+
+	public void setBelote(BeloteCoinche belote) {
+		this.belote = belote;
 	}
 
 

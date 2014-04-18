@@ -28,7 +28,7 @@ public class Match implements Runnable {
 	public void run() {
 
 		Image im1 = new Image(imageA);
-		Image im2 = new Image (imageB);
+		Image im2 = new Image (getImageB());
 		Image largeImg = new Image(largeImage);
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
 		bin1.save("data/courant/binary/bin"+(3*compteur)+".jpg");
@@ -63,9 +63,49 @@ public class Match implements Runnable {
 	
 	
 	
-	private void newCard(String color, String value){
+	protected void newCard(String color, String value){
 	
 		belote.nouvelleCarte(new CardEvent(new Carte(value,color, belote.getEtat())));
+	}
+
+	public IplImage getImageA() {
+		return imageA;
+	}
+
+	public void setImageA(IplImage imageA) {
+		this.imageA = imageA;
+	}
+
+	public IplImage getImageB() {
+		return imageB;
+	}
+
+	public void setImageB(IplImage imageB) {
+		this.imageB = imageB;
+	}
+
+	public IplImage getLargeImage() {
+		return largeImage;
+	}
+
+	public void setLargeImage(IplImage largeImage) {
+		this.largeImage = largeImage;
+	}
+
+	public int getCompteur() {
+		return compteur;
+	}
+
+	public void setCompteur(int compteur) {
+		this.compteur = compteur;
+	}
+
+	public static String[][] getColorDatabase() {
+		return COLOR_DATABASE;
+	}
+
+	public static String[] getValueDatabase() {
+		return VALUE_DATABASE;
 	}
 
 }
