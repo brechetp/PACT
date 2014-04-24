@@ -19,10 +19,11 @@ public class Symbol {
 
 	private static ArrayList<ArrayList<Double>> SYMBOL_DATABASE =
 			new ArrayList<ArrayList<Double>>();
+	private static int[][][][] SYMBOL_DATABASE2;
 	private static double[][] AVERAGE_DATABASE = new double[2][2];
 	private static double[][] SIGMA_DATABASE = new double[2][2];
 	private int[][] doubleTab; // initialisée avec une image à une composante connexe
-	private int size1;
+	private static int size1;
 	private int size2;
 	private int perimeter;
 	private Hashtable<Double, Double> signature;
@@ -30,6 +31,7 @@ public class Symbol {
 	private double sigma;
 	double [] matchTable = new double [2];
 	double [] translaTable = new double [10];
+	double [] matchTable2 = new double [2];
 	int taille ;
 	private ArrayList<Double> signatureTable;
 	private int redAverage = 0;
@@ -37,6 +39,7 @@ public class Symbol {
 	public Symbol (int[][] binaryMatrix, Card carte){
 		this.size1 = binaryMatrix[0].length;
 		this.size2 = binaryMatrix.length;
+		this.SYMBOL_DATABASE2 = new int[1][1][size2][size1];
 		this.taille = 80; // reussite avant le pan4
 		this.doubleTab = binaryMatrix; // a 17h pile direction odeon 
 		// n'oublie pas
@@ -256,7 +259,73 @@ public class Symbol {
 	}
 
 
+public int getCardValue2 (String color){
+		
+		
+		sigma=1; average = 0; // A enlever si niveaux de gris
 
+		// comparaison avec chaque carte de la base de donnée	
+		for (int i=0 ; i < 2 ; i++)
+		{
+			matchTable[i] = compare2(color, i);
+		}
+
+		// détermination du meilleur match	
+		double min = Integer.MAX_VALUE;
+		int iMin = 0;
+
+		for (int i=0 ; i < 2 ; i++)
+		{
+			if (matchTable2[i]<min) 
+			{
+				iMin = i; min = matchTable[i];
+			}
+		}
+		return iMin;
+	}
+
+private double compare2(String string, int forme) {
+	
+	double rep=0;
+	int color1 = (int) string.charAt(0) - 48; // 0 si noir, 1 si rouge
+
+		rep = 0;
+		
+		for (int k =0; k<size2; k++)
+		{
+			for (int j=0; j<size1; j++)
+			{
+			rep = rep + doubleTab[k][j]*SYMBOL_DATABASE2[color1][forme][k][j];
+			}
+		}
+	
+	return rep;
+}
+
+public static void setSymbolDatabase2(String fileName) throws IOException{
+
+	for(int color =0; color<2; color++){
+		for(int forme =0; forme<2; forme++){
+			FileReader fis = new FileReader(fileName+(color)+(forme)+".txt");
+			BufferedReader bis = new BufferedReader (fis);
+			String line;
+			int j =0; // compte les colonnes
+
+
+			while((line = bis.readLine()) != null){
+					for(int i = 0; i < size1; i++){
+
+						SYMBOL_DATABASE2[color][forme][j][i]= (int) line.charAt(i) - 48;
+						
+					}
+					j++;
+
+			
+			bis.close();
+		}
+		}
+	}
+	}
 
 }
 
