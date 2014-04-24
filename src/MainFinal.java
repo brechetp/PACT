@@ -17,10 +17,13 @@ public class MainFinal {
 
 	public static void main(String[] args) {
 		
+		ViewController vc = new ViewController();
+		
 		//Classification
 		ClassiFinal[] classilol = BaseApprentissage.main(null);
 		Classification classi = new Classification(classilol);
-		ViewController vc = new ViewController();
+		
+		vc.modeMenu();
 		
 		//Creation menus
 		MainMenu mainMenu = new MainMenu(classi, vc);

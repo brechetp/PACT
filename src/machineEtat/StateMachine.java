@@ -300,8 +300,19 @@ public class StateMachine
 			 etat.valideAnnonce(vci);
 			 joueurD.sendAnnonce(etat.getAnnonce(), etat.getNumJoueur());
 			 this.valeurAnnonceMax=etat.valeurAnnonce();
-			 etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
-			 this.state = State.AnnonceFaite;
+			 if (this.valeurAnnonceMax<250)
+			 {
+				 etat.joueurSuivant(vci,joueurD, "annonce", numJoueurDistant);
+				 this.state = State.AnnonceFaite;
+			 }
+			 else
+			 {
+				 vci.modeJeu();
+				 etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
+				 joueurD.sendFinAnnonce();
+				 vci.joueurEnCours(premierAJouer);
+				 this.state = State.DebutTour;
+			 }
 			 break;
 		 
 /************************ Second Tour/Montre Carte **********************/
@@ -406,7 +417,14 @@ public class StateMachine
 		 
 		 case DebutTour:
 			 etat.coinche();
-			 vci.contreCoinche();
+			 if (etat.getCoinche()==4)
+			 {
+				 vci.contreCoinche();
+			 }
+			 else
+			 {
+				 vci.coinche(1);
+			 }
 			 this.state = State.DebutTour;
 			 break;
 		 

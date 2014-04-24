@@ -4,6 +4,21 @@ public class ViewController implements ViewControllerInterface
 {
 
 	Fenetre fen = new Fenetre();
+	
+	public ViewController(){
+		for (int intro = 0 ; intro < 75 ; intro=intro+2){
+			fen.getPan().setModeActuel(1548);
+			fen.getPan().setIntro(intro);
+			fen.repaint();
+			try {
+				Thread.sleep(15);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		fen.getPan().repaint();
+	}
 
 	public void effacerCartes(){
 		fen.getPan().setYCarte(0);

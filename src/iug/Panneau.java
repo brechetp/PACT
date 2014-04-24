@@ -60,7 +60,7 @@ public class Panneau extends JPanel {
 	ImageMenu imageMenuDroite = new ImageMenu(3);
 	ImageMenu imageMenuNew = new ImageMenu(4);
 
-	
+	int intro = 0;
 	int modeActuel = 0;
 	
 	
@@ -110,6 +110,24 @@ public class Panneau extends JPanel {
 		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN2.png"));
 		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    
+		    
+		    /******************************************************************************************************/
+		    /**                                          MODE INTRO                                              **/
+		    /******************************************************************************************************/
+		    
+		    
+		    if (modeActuel == 1548){
+		    	g.setColor(new Color(51, 0, 204));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, intro));
+				FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("Bienvenue dans CARDS", (this.getWidth()/2)-(metrics.stringWidth("Bienvenue dans CARDS")/2), (this.getHeight()/2));
+		    	if (intro > 73){
+		    		g.setColor(new Color(51, 0, 153));
+		    		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+					FontMetrics metrics2 = g.getFontMetrics();
+			    	g.drawString("Chargement des données...", (this.getWidth()/2)-(metrics2.stringWidth("Chargement des données...")/2), (int) ((this.getHeight()/2)*1.1));
+		    	}
+		    }
 		    
 		    /******************************************************************************************************/
 		    /**                                          MODE PARTIE                                             **/
@@ -991,6 +1009,10 @@ public class Panneau extends JPanel {
 	
 	public void setAnnonce(String annonce){
 		this.annonce=annonce;
+	}
+	
+	public void setIntro(int intro){
+		this.intro = intro;
 	}
 
 }

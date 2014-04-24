@@ -460,4 +460,9 @@ public class EtatDuJeu implements EtatDuJeuInterface
 				break;
 		}
 	}
+
+	public int getCoinche() 
+	{
+		return this.coefCoinche;
+	}
 }

@@ -72,4 +72,7 @@ public interface EtatDuJeuInterface
 
 	//Vérifie les annonce de type tierce, carré ... et rajoute les point a la team qui les posent.
 	public void verifieAnnonceCartes(JoueurDistantInterface joueurD, CarteListInterface carteAnnonce,ViewControllerInterface vci);
+
+	//renvoi le coinche actuelle
+	public int getCoinche();
 }
