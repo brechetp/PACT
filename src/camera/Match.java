@@ -33,6 +33,11 @@ public class Match implements Runnable {
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
 		bin1.save("data/courant/binary/bin"+(3*compteur)+".jpg");
 		BinaryImage bin2 = im2.binaryThreshold(1).largeComponents();
+		BinaryImage bin_im1 = im1.binaryThreshold(1).largeComponents();
+		if (bin_im1.getCompt() > bin2.getCompt()){
+			System.out.println("Une carte a été retirée");
+			
+		}
 		bin2.save("data/courant/binary/bin"+(3*compteur+1)+".jpg");
 		BinaryImage bin = bin1.and(bin2);
 		
@@ -46,10 +51,12 @@ public class Match implements Runnable {
 		
 		Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/courant/resample/carte"+compteur+".jpg");
-
+		//carte.getCorner().binaryThreshold(0).save("data/courant/resample/coins"+compteur+".jpg");
+		new BinaryImage(carte.getSymbol().getMatrix()).save("data/courant/resample/symbol"+compteur+".jpg");
 	
 		
 		String type = carte.getType();
+		System.out.println(type);
 		
 		newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
 
@@ -57,9 +64,49 @@ public class Match implements Runnable {
 	
 	
 	
-	private void newCard(String color, String value){
+	protected void newCard(String color, String value){
 	
 		belote.nouvelleCarte(new CardEvent(new Carte(value,color, belote.getEtat())));
+	}
+
+	public IplImage getImageA() {
+		return imageA;
+	}
+
+	public void setImageA(IplImage imageA) {
+		this.imageA = imageA;
+	}
+
+	public IplImage getImageB() {
+		return imageB;
+	}
+
+	public void setImageB(IplImage imageB) {
+		this.imageB = imageB;
+	}
+
+	public IplImage getLargeImage() {
+		return largeImage;
+	}
+
+	public void setLargeImage(IplImage largeImage) {
+		this.largeImage = largeImage;
+	}
+
+	public int getCompteur() {
+		return compteur;
+	}
+
+	public void setCompteur(int compteur) {
+		this.compteur = compteur;
+	}
+
+	public static String[][] getColorDatabase() {
+		return COLOR_DATABASE;
+	}
+
+	public static String[] getValueDatabase() {
+		return VALUE_DATABASE;
 	}
 
 }

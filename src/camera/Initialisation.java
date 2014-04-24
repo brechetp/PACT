@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.googlecode.javacv.cpp.opencv_highgui;
+
 import comparaison.Letter;
 import comparaison.Symbol;
 
@@ -12,8 +14,10 @@ import comparaison.Symbol;
 public class Initialisation {
 
 	public static void setCardSize(){
+		
+	
 
-		Capture.captureFrame("data/initialisation/fond.jpg");
+		Capture.captureFrame("data/initialisation/fond.jpg", 640, 360, false);
 		System.out.println("Le fond est pris, posez la carte blanche");
 
 		try {
@@ -22,7 +26,7 @@ public class Initialisation {
 
 			e.printStackTrace();
 		}
-		Capture.captureFrame("data/initialisation/carteblanche.jpg");
+		Capture.captureFrame("data/initialisation/carteblanche.jpg", 640, 360, false);
 		System.out.println("La carte blanche a été prise");
 
 

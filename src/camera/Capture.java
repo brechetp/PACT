@@ -21,27 +21,36 @@ public class Capture {
 
 
 	private static final int DISTANCE_THRESHOLD = 100;
-	private static final int WEBCAM = 1;
-	private static final double GAMMA = 0.2;
+	private static final int WEBCAM = 0;
+	//	private static final double GAMMA = 0.2;
 	private static double HEIGHT = CaptureLive.getHeight();
 	private static double WIDTH = CaptureLive.getWidth();
 
-	public static void captureFrame(String fileName)
+	public static void captureFrame(String fileName, int width, int height, boolean large)
 	{
-	
+
 		try
 		{
 			CvCapture capture = opencv_highgui.cvCreateCameraCapture(WEBCAM);
 
-			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, getHeight());
-			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, getWidth());
+			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, height);
+			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, width);
+			IplImage img = null;
+			for(int i = 0; i <10; i++){
 
+			img=opencv_highgui.cvQueryFrame(capture);
+			}
 
-			IplImage img=opencv_highgui.cvQueryFrame(capture);
-		
 			if(img!=null)
 			{
 				cvSaveImage(fileName, img);
+				if (large){
+					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 1080);
+					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 1920);
+					cvSaveImage(fileName.substring(0, fileName.length()-4)+"large.jpg", img);
+				}
+
+
 			}
 			opencv_highgui.cvReleaseCapture(capture);
 
@@ -61,7 +70,7 @@ public class Capture {
 
 	public static IplImage captureFrame(){
 
-	
+
 		IplImage res = null ;
 		try
 		{
@@ -70,9 +79,9 @@ public class Capture {
 
 			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, getHeight());
 			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, getWidth());
-			
+
 			IplImage img=opencv_highgui.cvQueryFrame(capture);
-		
+
 			if(img!=null)
 			{
 				res = img.clone();
@@ -93,7 +102,7 @@ public class Capture {
 	public static void capture(int debut, int compt, String fileName){ //enregistre compt images
 
 		for(int i = debut; i<compt; i++){
-			Capture.captureFrame(fileName+i+".jpg");
+			//Capture.captureFrame(fileName+i+".jpg");
 			System.out.println("Photo "+(i+1)+" prise");
 
 
@@ -114,7 +123,7 @@ public class Capture {
 
 		for(int i = debut; i <= fin; i++){ 
 
-			Capture.captureFrame(capture+i+".jpg");
+			//Capture.captureFrame(capture+i+".jpg");
 			System.out.println("Photo "+(i+1)+" prise");
 			System.out.println("Vous pouvez poser la carte "+(i+1));
 			if (i==0)
@@ -155,11 +164,13 @@ public class Capture {
 
 	public static void symbolDatabase(int debut, int fin, String capture, String fileName) throws Exception{
 
+		
 
 
 		for(int i = debut; i <= fin; i++){ 
 
-			Capture.captureFrame(capture+i+".jpg");
+
+			Capture.captureFrame(capture+i+".jpg", 640, 360, true);
 			System.out.println("Photo "+(i)+" prise");
 			System.out.println("Vous pouvez poser la carte "+(i+1));
 			if (i==0)
@@ -173,6 +184,7 @@ public class Capture {
 
 				Image im1 = new Image(capture+0+".jpg");
 				Image im2= new Image(capture+i+".jpg");
+				Image largeImg = new Image(capture+i+"large.jpg");
 
 
 
@@ -184,21 +196,50 @@ public class Capture {
 				bin.save("data/database/symbols/"+(4*i+2)+".jpg");
 
 
-				BinaryComponent bin3 = bin.largeComponents();
+				BinaryComponent bin3 = bin.largestComponent();
 				bin3.save("data/database/symbols/"+(4*i+3)+".jpg");
 				//bin3.getEdge().save("data/test/contour.jpg");
 
-				int[][] coins = bin3.getCornersRansac(3, 1);
-
-				Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
+				int[][] coins = bin3.getCornersRansac(3, largeImg.getHeight()/(float)bin3.getHeight());
+				
+				Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
 				carte.save(capture+"bis"+i+".jpg");
-				BinaryImage binary = (carte.binaryThreshold(0)); 
+				BinaryImage binary = new BinaryImage(carte.getFirstSymbol()); 
 				binary.save(capture+"threshold"+i+".jpg");
+				
 
 
 				write(carte.getSignature(), fileName+((i-1)/2)+((i-1)%2)+".txt");
 
+				/*Image im1 = new Image(imageA);
+		Image im2 = new Image (imageB);
+		Image largeImg = new Image(largeImage);
+		BinaryImage bin1 = im2.differenceNeighbour(im1);
+		bin1.save("data/courant/binary/bin"+(3*compteur)+".jpg");
+		BinaryImage bin2 = im2.binaryThreshold(1).largeComponents();
+		BinaryImage bin_im1 = im1.binaryThreshold(1).largeComponents();
+		if (bin_im1.getCompt() > bin2.getCompt()){
+			System.out.println("Une carte a été retirée");
 
+		}
+		bin2.save("data/courant/binary/bin"+(3*compteur+1)+".jpg");
+		BinaryImage bin = bin1.and(bin2);
+
+
+
+		BinaryComponent bin3 = bin.largestComponent();
+		bin3.save("data/courant/binary/bin"+(3*compteur+2)+".jpg");
+		bin3.getEdge().save("data/courant/contour/contour"+compteur+".jpg");
+
+		int[][] coins = bin3.getCornersRansac(3, (float)largeImg.getHeight()/im2.getHeight());
+
+		Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
+		carte.save("data/courant/resample/carte"+compteur+".jpg");
+
+
+
+		String type = carte.getType();
+		System.out.println(type);*/
 
 
 			}
@@ -231,11 +272,12 @@ public class Capture {
 
 	public static void letterDatabase(int debut, int fin, String capture, String fileName) throws Exception{
 
+	
 
 
 		for(int i = debut; i <= fin; i++){ 
 
-			Capture.captureFrame(capture+i+".jpg");
+			Capture.captureFrame(capture+i+".jpg", 640, 360, true);
 			System.out.println("Photo "+(i)+" prise");
 			System.out.println("Vous pouvez poser la carte "+(i+1));
 			if (i==0)
@@ -249,6 +291,7 @@ public class Capture {
 
 				Image im1 = new Image(capture+0+".jpg");
 				Image im2= new Image(capture+i+".jpg");
+				Image largeImg = new Image(capture+i+"large.jpg");
 
 
 
@@ -264,15 +307,15 @@ public class Capture {
 				bin3.save("data/database/letters/"+(4*i+3)+".jpg");
 				//bin3.getEdge().save("data/test/contour.jpg");
 
-				int[][] coins = bin3.getCornersRansac(3, 1);
+				int[][] coins = bin3.getCornersRansac(3, (float)largeImg.getHeight()/bin3.getHeight());
 
-				Card carte = new Card(im2.resample(coins, 635, 889).getRgbImage()); 
+				Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
 				carte.save(capture+"bis"+i+".jpg");
 				BinaryImage binary = (carte.binaryThreshold(0)); 
 				binary.save(capture+"threshold"+i+".jpg");
 
-				carte.cut(7, 9, 100, 140).binaryThreshold(0).largestComponent().save(capture+"ter"+i+".jpg");
-				Letter letter = new Letter (carte.cut(7,9, 100, 140).binaryThreshold(0).largestComponent().getBinaryMatrix());
+				carte.cut(0, 0, 100, 160).binaryThreshold(0).largestComponent().save(capture+"ter"+i+".jpg");
+				Letter letter = new Letter (carte.cut(0,0, 100, 160).binaryThreshold(0).largestComponent().getBinaryMatrix());
 				write(letter.getCenteredLetter(), fileName+(i-1)+".txt");
 
 
@@ -469,7 +512,7 @@ public class Capture {
 
 	public static void setHeight(int i) {
 		HEIGHT = i;
-		
+
 	}
 
 	public static void setWidth(int i) {

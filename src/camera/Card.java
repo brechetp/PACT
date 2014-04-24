@@ -14,16 +14,17 @@ public class Card extends Image{
 
 
 	// double [] matchTable = new double [5];
-	private static double WIDTH = 64.19501538281614; // taille de la carte sur l'ecran
-	private static double HEIGHT = 89.49301648732151;
+	private static double WIDTH = 85.0 /*67.8627318771778*/; // taille de la carte sur l'ecran
+	private static double HEIGHT = 119.36498649101419 /*96.99174958400414*/;
 
 
 
 
-	private Image corner;
+	//private Image corner;
 	private Symbol symbol;
 	private int number=-1;
 	private Letter letter;
+	private int[] colorAverage = new int[3];
 
 
 
@@ -35,11 +36,11 @@ public class Card extends Image{
 		average = new double[3]; // moyenne sur RGB
 		sigma = new double[3]; // ecart type sur RGB
 
-		corner = this.cut(0,0,110, 220);
-		symbol = new Symbol(getFirstSymbol()); // letter est définie ici
-		
+		//corner = this.cut(0,0,110, 220);
+		symbol = new Symbol(getFirstSymbol(), this); // letter est définie ici
 
-	//new BinaryImage(getFirstSymbol()).save("data/database/symbols/symboltest.jpg");
+
+		//new BinaryImage(getFirstSymbol()).save("data/database/symbols/symboltest.jpg");
 
 		computeAverage();
 		computeSigma();
@@ -54,8 +55,8 @@ public class Card extends Image{
 		sigma = new double[3]; // ecart type sur RGB
 
 
-		corner = this.cut(0,0, 110,  220);
-		symbol = new Symbol(getFirstSymbol());
+		//corner = this.cut(0,0, 110,  220);
+		symbol = new Symbol(getFirstSymbol(), this);
 
 
 
@@ -207,9 +208,9 @@ public class Card extends Image{
 	public String getType(){
 
 		String string;
-		double[] average = corner.getThresholdedAverage();
-		if (average[2] > 180 ) // carte rouge
-		string = "1";
+
+		if (isRed(colorAverage)) // carte rouge
+			string = "1";
 		else
 			string = "0"; // carte noire
 
@@ -229,14 +230,39 @@ public class Card extends Image{
 	}
 
 	public int[][] getFirstSymbol(){
-
-		BinaryImage bin = (this.binaryThreshold(0)); 
+		
+		
+		BinaryImage bin = (this.binaryThreshold(0)); // ce qui n'est pas blanc	
 		bin.save("data/database/symbols/test.jpg");
-		letter = new Letter (bin.cut(7,9, 100, 140).largestComponent().getBinaryMatrix());
+		letter = new Letter (bin.cut(0,0, 100, 160).largestComponent().getBinaryMatrix());
 		int[] res = bin.componentsNumberAndFirst();
 		number = res[0];
 		new BinaryImage(bin.filter(res[1])).save("data/test/image/image1.jpg");
-		return bin.filter(res[1]);
+		int[][] mat = bin.filter(res[1]);
+		int somme = 0;
+		
+		for(int i =0; i < mat[0].length; i++){
+			for(int j=0; j< mat.length; j++){
+				int[] rgbByte = getRgbByte(i,j);
+				for(int p =0; p<3; p++){
+					colorAverage[p] += rgbByte[p]*mat[j][i];
+					
+					
+				}
+				somme += mat[j][i];
+			}
+		}
+		
+		for(int p =0; p<3; p++){
+			colorAverage[p] = (int) Math.round((float)colorAverage[p]/somme);
+		}
+		
+		return mat;
+
+	}
+
+	public void computeAverageColor(){
+
 
 	}
 
@@ -278,10 +304,10 @@ public class Card extends Image{
 	}
 
 
-	public Image getCorner() {
-		return corner;
+	//public Image getCorner() {
+	//	return corner;
 
-	}
+	//}
 
 	public static double getWIDTH() {
 		return WIDTH;
@@ -297,6 +323,11 @@ public class Card extends Image{
 
 	public static void setHEIGHT(double hEIGHT) {
 		HEIGHT = hEIGHT;
+	}
+
+	public Symbol getSymbol() {
+		// TODO Auto-generated method stub
+		return symbol;
 	}
 
 

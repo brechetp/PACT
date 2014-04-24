@@ -59,7 +59,7 @@ public class ServeurReception implements Runnable
 				belote.setAnnonce(null);
 				else
 			{
-				System.out.println("recuption annonce (ou plutot reception annonce ou encore recuperation annonce !!!!!!!!!!!!)");
+				System.out.println("recuption annonce");
 				String couleur =in.readLine();
 				Annonce annonce = new Annonce(couleur, Integer.parseInt(valeur), -1);
 				belote.setAnnonce(annonce);

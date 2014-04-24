@@ -8,6 +8,11 @@ import java.util.Hashtable;
 import java.util.ArrayList;
 import java.util.Set;
 
+import com.googlecode.javacv.cpp.opencv_core.IplImage;
+
+import camera.Card;
+import camera.Image;
+
 
 
 public class Symbol {
@@ -24,17 +29,28 @@ public class Symbol {
 	private double average;
 	private double sigma;
 	double [] matchTable = new double [2];
-	double [] translaTable = new double [perimeter];
+	double [] translaTable = new double [10];
 	int taille ;
 	private ArrayList<Double> signatureTable;
+	private int redAverage = 0;
 
-	public Symbol (int[][] binaryMatrix){
+	public Symbol (int[][] binaryMatrix, Card carte){
 		this.size1 = binaryMatrix[0].length;
 		this.size2 = binaryMatrix.length;
 		this.taille = 80; // reussite avant le pan4
 		this.doubleTab = binaryMatrix; // a 17h pile direction odeon 
 		// n'oublie pas
 		// <3  <3  <3
+/*		int somme =0;
+		
+		for(int i = 0; i< size2; i++)
+		{
+			for (int j =0; j < size1; j++){
+				redAverage += binaryMatrix[i][j] * carte.getRgbByte(i, j)[2];
+				somme += binaryMatrix[i][j];
+			}
+		}
+		redAverage = redAverage/somme;*/
 
 
 
@@ -50,21 +66,25 @@ public class Symbol {
 		signature = new Hashtable<Double, Double>();
 		signatureTable = new ArrayList<Double>();
 	}
+	
+/*	public int getRedAverage(){
+		return redAverage;
+	}*/
 
 	public static void setSymbolsDatabase(String fileName) throws NumberFormatException, IOException{
 
-		
-		
+
+
 		for(int type =0; type<4; type++){
 			FileReader fis = new FileReader(fileName+(type/2)+(type%2)+".txt");
 			BufferedReader bis = new BufferedReader (fis);
 			String value;
 			ArrayList<Double> res = new ArrayList<Double>();
-			
+
 			while((value = bis.readLine()) != null){
 				res.add(Double.parseDouble(value));
 				// Calcul de average et sigma 
-			
+
 			}
 			bis.close();
 			double average = 0;
@@ -87,30 +107,30 @@ public class Symbol {
 			SIGMA_DATABASE[type/2][type%2] = sigma;
 			SYMBOL_DATABASE.add(type,res);
 		}
-		
+
 
 	}
 
 	public void computeSignature(){
 
-		//détermination du barycentre
-		int xb = 0;
-		int yb =0;
-		int sum = 0;
+		try{//détermination du barycentre
+			int xb = 0;
+			int yb =0;
+			int sum = 0;
 
-		for (int i =0; i<size2; i++)
-		{
-			for (int j=0; j<size1; j++)
+			for (int i =0; i<size2; i++)
 			{
-				xb = xb+j*doubleTab[i][j];
-				sum = sum + doubleTab[i][j];
-				yb = yb+i*doubleTab[i][j];;
+				for (int j=0; j<size1; j++)
+				{
+					xb = xb+j*doubleTab[i][j];
+					sum = sum + doubleTab[i][j];
+					yb = yb+i*doubleTab[i][j];;
+				}
 			}
-		}
-		xb=xb/sum;
-		yb=yb/sum;
+			xb=xb/sum;
+			yb=yb/sum;
 
-		/*remplissage de la table
+			/*remplissage de la table
 		for (int s=0 ; s<perimeter ; s++){
 			int t =0;
 			if (doubleTab[(int) Math.floor(t*Math.cos(s))+xb][(int) Math.floor(t*Math.sin(s))+yb]==0 ){
@@ -119,47 +139,52 @@ public class Symbol {
 				t++;
 			}
 		}*/
-		double key =0;
-		for (int i=yb-taille ; i<yb+taille ; i++){
-			for (int k = xb-taille; k<xb+taille; k++){
-				if (doubleTab[i][k]==1){
-					if(k-xb != 0)
-						key=Math.atan((i-yb)/(k-xb));
+			double key =0;
+			for (int i=yb-taille ; i<yb+taille ; i++){
+				for (int k = xb-taille; k<xb+taille; k++){
+					if (doubleTab[i][k]==1){
+						if(k-xb != 0)
+							key=Math.atan((i-yb)/(k-xb));
 
-					double radius=(i-yb)*(i-yb) + (k-xb)*(k-xb);
-					if (signature.containsKey(key)==false){
-						signature.put(key, radius);
-					} else {
-						if (radius > signature.get(key)){
+						double radius=(i-yb)*(i-yb) + (k-xb)*(k-xb);
+						if (signature.containsKey(key)==false){
 							signature.put(key, radius);
+						} else {
+							if (radius > signature.get(key)){
+								signature.put(key, radius);
+							}
 						}
 					}
 				}
 			}
+
+			Set<Double> set = signature.keySet(); //hashtable
+			Object[] tab = set.toArray();
+			Arrays.sort(tab);
+
+			for (int i=0 ; i<tab.length ; i++){
+				signatureTable.add(i,signature.get(tab[i]));
+			}
+		}
+		catch(Exception e){
+			System.out.println("Pas de symbol trouvé");
+			e.printStackTrace();
 		}
 
-		Set<Double> set = signature.keySet(); //hashtable
-		Object[] tab = set.toArray();
-		Arrays.sort(tab);
 
-		for (int i=0 ; i<tab.length ; i++){
-			signatureTable.add(i,signature.get(tab[i]));
-		}
-
-		
 	}
-	
+
 	public ArrayList<Double> getSignature(){
-		
+
 		if (signatureTable.size() == 0)
-				computeSignature();
+			computeSignature();
 		return signatureTable;
 	}
 
 
 
 	public int getCardValue (String color){
-		
+
 		if (signatureTable.size() == 0)
 			computeSignature();
 
@@ -185,17 +210,17 @@ public class Symbol {
 		}
 
 		// détermination du meilleur match	
-		double min = Integer.MAX_VALUE;
-		int iMin = 0;
+		double max = 0;
+		int iMax = 0;
 
 		for (int i=0 ; i < 2 ; i++)
 		{
-			if (matchTable[i]<min) 
+			if (max < matchTable[i]) 
 			{
-				iMin = i; min = matchTable[i];
+				iMax = i; max = matchTable[i];
 			}
 		}
-		return iMin;
+		return iMax;
 	}
 
 	public double compare(String string, int forme ){
@@ -204,25 +229,30 @@ public class Symbol {
 		int color = (int) string.charAt(0) - 48; // 0 si noir, 1 si rouge
 		int minsize = Math.min(perimeter,Math.min(SYMBOL_DATABASE.get(2*color+forme).size(), SYMBOL_DATABASE.get(2*color+(1-forme)).size()));
 
-		for (int j=0 ; j<1 ; j++){//translation désactivée, réactiver avec minsize
+		for (int j=0 ; j<10 ; j++){//translation désactivée, réactiver avec minsize
 			rep = 0;
 			for (int k =0; k<minsize; k++){
 				double pixel = (signatureTable.get((k+j)%minsize)-average)/sigma;
 				rep = rep + pixel*(SYMBOL_DATABASE.get(2*color+forme).get(k)-AVERAGE_DATABASE[color][forme]/SIGMA_DATABASE[color][forme]) ;
 			}
-			//translaTable[j] = rep;
+			translaTable[j] = rep;
 		}
-		/* détermination de la translation la plus proche
+		// détermination de la translation la plus proche
 		rep = 0;
-		int formeMax = 0;
-		for (int k=0 ; k < minsize ; k++)
+		//int formeMax = 0;
+		for (int k=0 ; k < 10 ; k++)
 		{
 			if (rep<translaTable[k]) 
 			{
-				formeMax = forme; rep = translaTable[k];
+				 rep = translaTable[k];
 			}
-		}*/
+		}
 		return rep;
+	}
+
+	public int[][] getMatrix() {
+		// TODO Auto-generated method stub
+		return doubleTab;
 	}
 
 
