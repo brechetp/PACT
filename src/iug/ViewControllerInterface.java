@@ -91,4 +91,7 @@ public interface ViewControllerInterface
 	
 	//affichage annonce carte
 	public void annonceCarte(String string);
+	
+	//mode quitter
+	public void modeQuitter();
 }

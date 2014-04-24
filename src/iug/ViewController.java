@@ -329,6 +329,11 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setModeActuel(2);
 		fen.repaint();
 	}
+	
+	public void modeQuitter(){
+		fen.getPan().setModeActuel(666);
+		fen.repaint();
+	}
 
 	public void validerMenu(){
 		for (int dxdy=0 ; dxdy<fen.getPan().getHeight()/2 ; dxdy=dxdy+10){
@@ -417,5 +422,4 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setK(0);
 		fen.repaint();
 	}
-
 }

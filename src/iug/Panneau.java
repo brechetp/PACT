@@ -79,6 +79,8 @@ public class Panneau extends JPanel {
 	int option3 = EtatDuJeu.valeurFinPartie;
 	int optionEnCours = 0;
 	
+	int quitterEnCours = 0;
+	
 	int xMenuCentre = 0;
 	int yMenuCentre = 0;
 	int xMenuGauche = 0;
@@ -110,6 +112,17 @@ public class Panneau extends JPanel {
 		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN2.png"));
 		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    
+		    /******************************************************************************************************/
+		    /**                                         MODE QUITTER                                             **/
+		    /******************************************************************************************************/
+		    
+		    if(modeActuel == 666){
+		    	g.setColor(new Color(255,153,51));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+		    	FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("Voulez-vous vraiment quitter la partie ?", (this.getWidth()/2)-(metrics.stringWidth("Voulez-vous vraiment quitter la partie ?")/2) , (int) ((this.getHeight())*0.4));
+		    	g.drawString("Accepter (Accepter) - Refuser (Coinche)", (this.getWidth()/2)-(metrics.stringWidth("Accepter (Accepter) - Refuser (Coinche)")/2) , (int) ((this.getHeight())*0.6));
+		    }
 		    
 		    /******************************************************************************************************/
 		    /**                                          MODE INTRO                                              **/
