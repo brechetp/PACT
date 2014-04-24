@@ -26,10 +26,10 @@ public class StateMachine
 	public static int numJoueurDistant=4;
 	private CarteListInterface carteAnnonce = new CarteList();
 	
-	public StateMachine(JoueurDistantInterface joueurD, EtatDuJeu etat,ViewControllerInterface vci) 
+	public StateMachine(JoueurDistantInterface joueurD,ViewControllerInterface vci) 
 	{
 		this.state = State.Distribution;
-		this.etat = etat;
+		this.etat = new EtatDuJeu(this);
 		this.joueurD = joueurD;
 		this.vci = vci;
 	}

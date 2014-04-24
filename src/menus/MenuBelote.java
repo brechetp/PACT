@@ -34,8 +34,7 @@ public class MenuBelote extends menu {
 	{
 		getClassi().removeListener(menuOptions);
 		//Cration logique de jeu
-		EtatDuJeu etat = new EtatDuJeu();
-		BeloteCoinche belote = new BeloteCoinche(etat, getVci());
+		BeloteCoinche belote = new BeloteCoinche(getVci());
 		getClassi().addListener(belote);
 		getVci().modePartie();
 		getVci().distribution();
@@ -45,7 +44,7 @@ public class MenuBelote extends menu {
 			String[] tabcarte = s.split(" ");
 			String valeur = tabcarte[0];
 			String couleur = tabcarte[1];
-			Carte card = new Carte(valeur,couleur,etat);
+			Carte card = new Carte(valeur,couleur,belote.getEtat());
 			CardEvent event = new CardEvent(card);
 			belote.nouvelleCarte(event);
 		}

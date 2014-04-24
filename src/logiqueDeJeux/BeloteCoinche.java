@@ -9,10 +9,10 @@ public class BeloteCoinche implements GlobalListener
 	private StateMachine machine;
 	
 	
-	public BeloteCoinche(EtatDuJeu etat, ViewControllerInterface vci)
+	public BeloteCoinche(ViewControllerInterface vci)
 	{
 		
-		this.machine = new StateMachine(new JoueurDistant(this), etat, vci);
+		this.machine = new StateMachine(new JoueurDistant(this), vci);
 	}
 	
 	public void nouvelleCarte(CardEvent carte) 

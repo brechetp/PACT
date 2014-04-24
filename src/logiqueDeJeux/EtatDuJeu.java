@@ -24,9 +24,11 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	public static int valeurFinPartie = 2000;
 	private int pointAnnonceTeamPair;
 	private int pointAnnonceTeamImpair;
+	private StateMachine machine;
 	
-	public EtatDuJeu ()
+	public EtatDuJeu (StateMachine machine)
 	{
+		this.machine=machine;
 		this.annonce = null;
 		this.playedCard = new CarteList();
 		this.cardOnTable = new CarteList();
@@ -55,6 +57,11 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		else
 			TeamImpair.ajoute(carte, numJoueur);
 		this.joueurSuivant(vci, joueurD, "jeu", numJoueurDistant);
+		
+		if (playedCard.size()==4)
+		{
+			new Thread(new AlarmFinDePli(machine)).start();
+		}
 	}
 
 	public boolean valide(CarteInterface carte,JoueurDistantInterface joueurD,int numJoueurDistant) 
@@ -303,7 +310,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 				if (valeur == 250)
 					val = "capot";
 				else if (valeur == 500)
-					val = "générale";
+					val = "gï¿½nï¿½rale";
 				else
 					val = "" + valeur;
 				String couleur = this.getAtout();
@@ -396,7 +403,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 
 	private void annonceCent(ViewControllerInterface vci) 
 	{
-		vci.annonceCarte("Cent validé");
+		vci.annonceCarte("Cent validï¿½");
 		if (numJoueur%2==0)
 			pointAnnonceTeamPair +=100;
 		else
@@ -404,7 +411,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	}
 
 	private void annonceCinquante(ViewControllerInterface vci) {
-		vci.annonceCarte("Cinquante validé");
+		vci.annonceCarte("Cinquante validï¿½");
 		if (numJoueur%2==0)
 			pointAnnonceTeamPair +=50;
 		else
@@ -413,7 +420,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	}
 
 	private void annonceTierce(ViewControllerInterface vci) {
-		vci.annonceCarte("Tierce validée");
+		vci.annonceCarte("Tierce validï¿½e");
 		if (numJoueur%2==0)
 			pointAnnonceTeamPair +=20;
 		else
@@ -423,7 +430,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 
 	private void annonceSquare(String value,ViewControllerInterface vci) 
 	{
-		vci.annonceCarte("Carré de "+value+" validé");
+		vci.annonceCarte("Carrï¿½ de "+value+" validï¿½");
 		switch(value)
 		{
 		case "valet":
