@@ -265,7 +265,7 @@ public class ViewController implements ViewControllerInterface
 	public void gauche(ImageMenu imageMenuNew){
 		fen.getPan().setImageMenuNew(imageMenuNew);
 		fen.getPan().setPlacement(-1);
-		for (int menu = 0 ; menu > -fen.getPan().getWidth()/2 ; menu = menu - 10){
+		for (int menu = 0 ; menu > (-fen.getPan().getWidth()/2)*0.7 ; menu = menu - 10){
 			fen.getPan().setXMenuCentre(menu);
 			fen.getPan().setYMenuCentre(menu);
 			fen.getPan().setXMenuGauche(2*menu);
@@ -292,7 +292,7 @@ public class ViewController implements ViewControllerInterface
 	public void droite(ImageMenu imageMenuNew){
 		fen.getPan().setImageMenuNew(imageMenuNew);
 		fen.getPan().setPlacement(1);
-		for (int menu = 0 ; menu < fen.getPan().getWidth()/2 ; menu = menu + 10){
+		for (int menu = 0 ; menu < (fen.getPan().getWidth()/2)*0.7 ; menu = menu + 10){
 			fen.getPan().setXMenuCentre(menu);
 			fen.getPan().setYMenuCentre(-menu);
 			fen.getPan().setXMenuGauche(menu);
