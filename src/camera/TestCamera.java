@@ -18,7 +18,7 @@ public class TestCamera {
 
 			
 		try {
-		//	Capture.letterDatabase(0, 3, "data/database/letters/letter", "data/database/letters/text");
+		//Capture.letterDatabase(0, 3, "data/database/letters/letter", "data/database/letters/text");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

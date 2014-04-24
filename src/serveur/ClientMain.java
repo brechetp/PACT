@@ -16,7 +16,7 @@ public class ClientMain {
 			PrintWriter outToServer = new PrintWriter(clientSocket.getOutputStream());
 			BufferedReader inFromServer = new BufferedReader(new InputStreamReader((clientSocket.getInputStream())));
 			String msg;
-			Thread.sleep(100000);
+			Thread.sleep(1000000);
 //			System.out.println("envoi carte");
 //			outToServer.println("carte");
 //			outToServer.println("10");

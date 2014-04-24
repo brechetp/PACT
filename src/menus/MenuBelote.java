@@ -41,7 +41,7 @@ public class MenuBelote extends menu {
 		getVci().distribution();
 		
 		for (int i = 0 ; i < 8 ; i++){
-			String s = (String)JOptionPane.showInputDialog(null, "Carte à distribuer :", "Distribution", JOptionPane.PLAIN_MESSAGE, null, null, null);
+			String s = (String)JOptionPane.showInputDialog(null, "Carte ï¿½ distribuer :", "Distribution", JOptionPane.PLAIN_MESSAGE, null, null, null);
 			String[] tabcarte = s.split(" ");
 			String valeur = tabcarte[0];
 			String couleur = tabcarte[1];
@@ -51,7 +51,7 @@ public class MenuBelote extends menu {
 		}
 
 //		//Start Camera
-//		new Thread(new CaptureLive()).start();
+		new Thread(new CaptureLive(belote)).start();
 	}
 	
 	public void stopBelote(BeloteCoinche belote){

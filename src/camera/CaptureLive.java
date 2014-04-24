@@ -16,7 +16,7 @@ public class CaptureLive implements Runnable {
 
 	private static final int DISTANCE_THRESHOLD = 40;
 
-	private static final int WEBCAM = 0;
+	private static final int WEBCAM = 1;
 	private static final int HEIGHT = 360;
 	private static final int WIDTH = 640;
 	private static final int DIF_NUM =  20; // nombre de pixels qui doivent etre differents
