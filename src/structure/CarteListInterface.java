@@ -4,10 +4,10 @@ import java.util.Iterator;
 
 public interface CarteListInterface 
 {
-	//Rajoute une carte à l'ensemble
+	//Rajoute une carte ï¿½ l'ensemble
 	public void ajoute(CarteInterface carte); 
 	
-	//Vérifie si la carte est dans l'ensemble
+	//Vï¿½rifie si la carte est dans l'ensemble
 	public boolean contain(CarteInterface carte);
 	
 	//Renvoi les point de l'ensemble
@@ -23,4 +23,5 @@ public interface CarteListInterface
 	public String getFirstCardSuit();
 
 	public Iterator<CarteInterface> iterator();
+	
 }

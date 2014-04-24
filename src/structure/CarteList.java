@@ -1,9 +1,10 @@
 package structure;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class CarteList extends HashSet<CarteInterface>
+public class CarteList extends ArrayList<CarteInterface>
 implements CarteListInterface 
 {
 
@@ -63,6 +64,6 @@ implements CarteListInterface
 		return firstCard.getSuit();
 	}
 	
-
+	
 
 }
