@@ -1,34 +1,13 @@
 package camera;
 
-import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
-import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
+import static com.googlecode.javacv.cpp.opencv_imgproc.*;
+import static com.googlecode.javacv.cpp.opencv_legacy.cvQueryHistValue_1D;
 
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+import com.googlecode.javacv.cpp.opencv_core.CvArr;
 
-
-
-
-
-
-
-
-
-
-
-
-
-import com.googlecode.javacv.CanvasFrame;
-import com.googlecode.javacv.cpp.opencv_core.IplImage;
-import com.googlecode.javacv.cpp.opencv_highgui.*;
-import com.googlecode.javacv.cpp.opencv_core.CvMat;
-
-import comparaison.CardDatabase;
-import comparaison.Comparaison;
-import static com.googlecode.javacv.cpp.opencv_highgui.*;
 
 
 
@@ -173,7 +152,7 @@ public class Main {
 		 * Initialisation
 		 * 
 		 */
-		//Initialisation.setCardSize();
+	//	Initialisation.setCardSize();
 	//	Capture.symbolDatabase(0, 4, "data/database/symbols/symbol", "data/database/symbols/text");
 
 		Initialisation.setSymbolDatabase("data/database/symbols/text");
@@ -188,7 +167,7 @@ public class Main {
 
 		//new Thread(new CaptureLive(), ).start();
 		//Capture.liveCapture();
-		/*Thread.sleep(3000);
+		Thread.sleep(3000);
 		Image im1 = new Image(Capture.captureFrame());
 		//Image im1 = new Image("data/test/im1.jpg");
 		im1.save("data/test/im1.jpg");;
@@ -196,12 +175,32 @@ public class Main {
 		Image im2 = new Image(Capture.captureFrame());
 		//Image im2 = new Image("data/test/im2.jpg");
 		im2.save("data/test/im2.jpg");
-		Capture.setWidth(640); 
-		Capture.setHeight(360);
+		Capture.setWidth(1920); 
+		Capture.setHeight(1080);
 		 Image largeImage = new Image(Capture.captureFrame());
 		//Image largeImage = new Image("data/test/largeimage.jpg");
 		largeImage.save("data/test/largeimage.jpg");
-
+		
+		cvSaveImage("data/test/hist.jpg", largeImage.DrawHistogram());
+		
+		CvHistogram hist = largeImage.getHueHistogram();
+		float[][] tab = null;
+	
+		int accumulate = 0;
+		CvArr[] arr = new CvArr[256];
+		CvArr mask = null;
+		double[] histTab = new double[255];
+		cvNormalizeHist(hist, 1000 );
+		for(int i =0; i<255; i++){
+		histTab[i] = (cvQueryHistValue_1D(hist, i));
+		}
+		
+		
+		int maxId = maxId(histTab, 0, 255);
+		int threshold = minId(histTab, maxId, 255);
+	
+		System.out.println(maxId+" "+threshold);
+		afficheTab(histTab);
 		
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
 		bin1.save("data/test/binary/bin1.jpg");
@@ -284,6 +283,20 @@ public class Main {
 	
 	
 	
+	private static int minId(double[] histTab, int maxId, int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	private static int maxId(double[] histTab, int i, int j) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
 	public static void resample(int debut, int fin, String binSource, String rgbSource, String destination) throws Exception{
 		
 		int[][] coins ;
@@ -304,6 +317,13 @@ public class Main {
 	public static void afficheListe(ArrayList<Double> liste){
 		for(Double current : liste){
 			System.out.println(current);
+			
+		}
+	}
+	
+	public static void afficheTab(double tab[]){
+		for(int i =0; i<tab.length; i++){
+			System.out.println(tab[i]);
 			
 		}
 	}

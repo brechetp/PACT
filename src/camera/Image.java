@@ -7,19 +7,18 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
 import java.nio.ByteBuffer;
 
+import com.googlecode.javacv.cpp.opencv_legacy;
+
 import static com.googlecode.javacv.cpp.opencv_core.*;
-
 import static com.googlecode.javacv.cpp.opencv_imgproc.*;
 import static com.googlecode.javacv.cpp.opencv_imgproc.*;
-
-
 import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 
 
 public class Image {
 
 
-	public static final int WHITE_THRESHOLD = 220;
+	public static int WHITE_THRESHOLD = 210;
 	public static final int DISTANCE_THRESHOLD = 30; // pour la distance entre deux images
 	private static final int NEIGHBOUR_NUMBER = 0; // pour l'algorithme de distance
 	private static final int B_RED_THRESHOLD = 120;
@@ -552,10 +551,11 @@ public class Image {
 		return bin2.and(bin1);
 
 	}
-	private CvHistogram getHueHistogram(IplImage image){
-	    if(image==null || image.nChannels()<3) new Exception("Error!");
-	    IplImage hsvImage= cvCreateImage(image.cvSize(), image.depth(), 3);
-	    cvCvtColor(image, hsvImage, CV_BGR2HSV);
+	public CvHistogram getHueHistogram(){
+
+	    if(rgbImage==null || rgbImage.nChannels()<3) new Exception("Error!");
+	    IplImage hsvImage= cvCreateImage(rgbImage.cvSize(), rgbImage.depth(), 3);
+	    cvCvtColor(rgbImage, hsvImage, CV_BGR2HSV);
 	    // Split the 3 channels into 3 images
 	    IplImageArray hsvChannels = splitChannels(hsvImage);
 	    //bins and value-range
@@ -571,6 +571,7 @@ public class Image {
 	    int uniform = 1;
 	    CvHistogram hist = cvCreateHist(dims, sizes, histType, ranges, uniform);
 	    // Compute histogram
+	
 	    int accumulate = 1;
 	    IplImage mask = null;
 	    cvCalcHist(hsvChannels.position(0),hist, accumulate, null);
@@ -585,6 +586,41 @@ public class Image {
 	    IplImage channel2 = cvCreateImage(size, depth, 1);
 	    cvSplit(hsvImage, channel0, channel1, channel2, null);
 	    return new IplImageArray(channel0, channel1, channel2);
+	}
+	
+	public IplImage DrawHistogram() {//draw histogram
+		
+		CvHistogram hist = getHueHistogram();
+		IplImage image= rgbImage;
+	    int scaleX = 1;
+	    int scaleY = 1;
+	    int i;
+	    float[] max_value = {0};
+	    int[] int_value = {0};
+	    cvGetMinMaxHistValue(hist, max_value, max_value, int_value, int_value);//get min and max value for histogram
+
+	    IplImage imgHist = cvCreateImage(cvSize(256, image.height() ),IPL_DEPTH_8U,1);//create image to store histogram
+	    cvZero(imgHist);
+	    CvPoint pts = new CvPoint(5);
+
+	    for (i = 0; i < 254; i++) {//draw the histogram 
+	        float value = opencv_legacy.cvQueryHistValue_1D(hist, i);
+	        float nextValue = opencv_legacy.cvQueryHistValue_1D(hist, i + 1);
+
+	        pts.position(0).x(i * scaleX).y(image.height() * scaleY);
+	        pts.position(1).x(i * scaleX + scaleX).y(image.height() * scaleY);
+	        pts.position(2).x(i * scaleX + scaleX).y((int)((image.height() - nextValue * image.height() /max_value[0]) * scaleY));
+	        pts.position(3).x(i * scaleX).y((int)((image.height() - value * image.height() / max_value[0]) * scaleY));
+	        pts.position(4).x(i * scaleX).y(image.height() * scaleY);
+	        cvFillConvexPoly(imgHist, pts.position(0), 5, CvScalar.RED, CV_AA, 0);
+	    }
+	    return imgHist;
+	}
+
+	
+	public void setWhiteThreshold(int whiteThreshold){
+		
+		WHITE_THRESHOLD = whiteThreshold;
 	}
 
 }

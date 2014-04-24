@@ -8,7 +8,7 @@ public class TestCamera {
 
 	public static void main(String[] args) {
 		
-		//Initialisation.setCardSize();
+		Initialisation.setCardSize();
 		try {
 		//Capture.symbolDatabase(0, 4, "data/database/symbols/symbol", "data/database/symbols/text");
 		} catch (Exception e) {
