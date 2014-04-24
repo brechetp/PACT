@@ -3,8 +3,11 @@ package camera;
 import logiqueDeJeux.BeloteCoinche;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
+import com.google.zxing.Binarizer;
+import com.google.zxing.BinaryBitmap;
 import com.google.zxing.ChecksumException;
 import com.google.zxing.FormatException;
+import com.google.zxing.LuminanceSource;
 import com.google.zxing.qrcode.decoder.Decoder;
 
 public class QRCodeMatch extends Match implements Runnable {
@@ -41,9 +44,12 @@ public class QRCodeMatch extends Match implements Runnable {
 		
 		Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
 		BinaryImage binCard = new BinaryImage(carte);
-		carte.save("data/courant/resample/carte"+getCompteur()+".jpg");
-
-		
+		carte.save("data/courant/resample/cartee"+getCompteur()+".jpg");
+		String type = null;
+		/*
+		LuminanceSource luminanceSource = new LuminanceSource();
+		Binarizer binarizer = Binarizer.createBinarizer(luminanceSource);
+		BinaryBitmap binaryBitmap = new BinaryBitmap(binarizer);
 		Decoder decoder = new Decoder();
 		String type = null;
 		try {
@@ -57,7 +63,7 @@ public class QRCodeMatch extends Match implements Runnable {
 		}
 	
 	
-		
+		*/
 		System.out.println(type);
 		
 		newCard(getColorDatabase()[(int)type.charAt(0)-48][(int)type.charAt(1)-48], getValueDatabase()[(int) type.charAt(2)-48]);

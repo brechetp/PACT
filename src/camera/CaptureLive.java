@@ -16,10 +16,10 @@ public class CaptureLive implements Runnable {
 
 	private static final int DISTANCE_THRESHOLD = 40;
 
-	private static final int WEBCAM = 0;
+	private static final int WEBCAM = 1;
 	private static final int HEIGHT = 360;
 	private static final int WIDTH = 640;
-	private static final int DIF_NUM =  30; // nombre de pixels qui doivent etre differents
+	private static final int DIF_NUM =  20; // nombre de pixels qui doivent etre differents
 	private static final int NEIGHBOUR_NUMBER = 0;
 	private BeloteCoinche belote;
 
@@ -99,7 +99,7 @@ public class CaptureLive implements Runnable {
 							cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
 							cvSaveImage("data/courant/compare/largeimage"+comptA+".jpg",largeImage);
 							System.out.println("On lance la comparaison "+(++comptA)+".");
-							new Thread(new QRCodeMatch(imageA, imageB, largeImage, comptA, getBelote())).start();
+							new Thread(new Match(imageA, imageB, largeImage, comptA, getBelote())).start();
 							imageA = imageB.clone();
 
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);

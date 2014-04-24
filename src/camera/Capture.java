@@ -35,9 +35,11 @@ public class Capture {
 
 			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, height);
 			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, width);
+			IplImage img = null;
+			for(int i = 0; i <10; i++){
 
-
-			IplImage img=opencv_highgui.cvQueryFrame(capture);
+			img=opencv_highgui.cvQueryFrame(capture);
+			}
 
 			if(img!=null)
 			{
@@ -199,7 +201,7 @@ public class Capture {
 				//bin3.getEdge().save("data/test/contour.jpg");
 
 				int[][] coins = bin3.getCornersRansac(3, largeImg.getHeight()/(float)bin3.getHeight());
-
+				
 				Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
 				carte.save(capture+"bis"+i+".jpg");
 				BinaryImage binary = new BinaryImage(carte.getFirstSymbol()); 

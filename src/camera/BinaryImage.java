@@ -20,7 +20,7 @@ public class BinaryImage extends GrayImage {
 
 	private static final int COMPONENT_THRESHOLD = (int) Math.round(Card.getWIDTH()*Card.getHEIGHT()/5);
 	private static final int SIZE_MIN = 10000;
-	private static final int SIZE_MAX = 50000;
+	private static final int SIZE_MAX = 20000;
 	protected int[][] binaryMatrix ;
 	protected boolean[][] booleanMatrix;
 	private IplImage binaryImage;

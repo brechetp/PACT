@@ -28,7 +28,7 @@ public class Match implements Runnable {
 	public void run() {
 
 		Image im1 = new Image(imageA);
-		Image im2 = new Image (getImageB());
+		Image im2 = new Image (imageB);
 		Image largeImg = new Image(largeImage);
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
 		bin1.save("data/courant/binary/bin"+(3*compteur)+".jpg");
@@ -51,7 +51,8 @@ public class Match implements Runnable {
 		
 		Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/courant/resample/carte"+compteur+".jpg");
-
+		//carte.getCorner().binaryThreshold(0).save("data/courant/resample/coins"+compteur+".jpg");
+		new BinaryImage(carte.getSymbol().getMatrix()).save("data/courant/resample/symbol"+compteur+".jpg");
 	
 		
 		String type = carte.getType();

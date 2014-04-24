@@ -8,6 +8,11 @@ import java.util.Hashtable;
 import java.util.ArrayList;
 import java.util.Set;
 
+import com.googlecode.javacv.cpp.opencv_core.IplImage;
+
+import camera.Card;
+import camera.Image;
+
 
 
 public class Symbol {
@@ -24,17 +29,28 @@ public class Symbol {
 	private double average;
 	private double sigma;
 	double [] matchTable = new double [2];
-	double [] translaTable = new double [perimeter];
+	double [] translaTable = new double [10];
 	int taille ;
 	private ArrayList<Double> signatureTable;
+	private int redAverage = 0;
 
-	public Symbol (int[][] binaryMatrix){
+	public Symbol (int[][] binaryMatrix, Card carte){
 		this.size1 = binaryMatrix[0].length;
 		this.size2 = binaryMatrix.length;
 		this.taille = 80; // reussite avant le pan4
 		this.doubleTab = binaryMatrix; // a 17h pile direction odeon 
 		// n'oublie pas
 		// <3  <3  <3
+/*		int somme =0;
+		
+		for(int i = 0; i< size2; i++)
+		{
+			for (int j =0; j < size1; j++){
+				redAverage += binaryMatrix[i][j] * carte.getRgbByte(i, j)[2];
+				somme += binaryMatrix[i][j];
+			}
+		}
+		redAverage = redAverage/somme;*/
 
 
 
@@ -50,6 +66,10 @@ public class Symbol {
 		signature = new Hashtable<Double, Double>();
 		signatureTable = new ArrayList<Double>();
 	}
+	
+/*	public int getRedAverage(){
+		return redAverage;
+	}*/
 
 	public static void setSymbolsDatabase(String fileName) throws NumberFormatException, IOException{
 
@@ -209,25 +229,30 @@ public class Symbol {
 		int color = (int) string.charAt(0) - 48; // 0 si noir, 1 si rouge
 		int minsize = Math.min(perimeter,Math.min(SYMBOL_DATABASE.get(2*color+forme).size(), SYMBOL_DATABASE.get(2*color+(1-forme)).size()));
 
-		for (int j=0 ; j<1 ; j++){//translation désactivée, réactiver avec minsize
+		for (int j=0 ; j<10 ; j++){//translation désactivée, réactiver avec minsize
 			rep = 0;
 			for (int k =0; k<minsize; k++){
 				double pixel = (signatureTable.get((k+j)%minsize)-average)/sigma;
 				rep = rep + pixel*(SYMBOL_DATABASE.get(2*color+forme).get(k)-AVERAGE_DATABASE[color][forme]/SIGMA_DATABASE[color][forme]) ;
 			}
-			//translaTable[j] = rep;
+			translaTable[j] = rep;
 		}
-		/* détermination de la translation la plus proche
+		// détermination de la translation la plus proche
 		rep = 0;
-		int formeMax = 0;
-		for (int k=0 ; k < minsize ; k++)
+		//int formeMax = 0;
+		for (int k=0 ; k < 10 ; k++)
 		{
 			if (rep<translaTable[k]) 
 			{
-				formeMax = forme; rep = translaTable[k];
+				 rep = translaTable[k];
 			}
-		}*/
+		}
 		return rep;
+	}
+
+	public int[][] getMatrix() {
+		// TODO Auto-generated method stub
+		return doubleTab;
 	}
 
 
