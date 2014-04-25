@@ -57,7 +57,7 @@ public class ServeurReception implements Runnable
 			String valeur =in.readLine();
 			if (valeur.equals("passe"))
 				belote.setAnnonce(null);
-				else
+			else
 			{
 				System.out.println("recuption annonce");
 				String couleur =in.readLine();
@@ -74,6 +74,7 @@ public class ServeurReception implements Runnable
 
 	private void newCoinche() 
 	{
+		System.out.println("JD coinche");
 		MouvementEvent mouvement = new MouvementEvent("coinche");
 		belote.nouveauGeste(mouvement);
 	}
