@@ -1,5 +1,7 @@
 package logiqueDeJeux;
 
+import javax.swing.JOptionPane;
+
 import iug.ViewControllerInterface;
 import structure.AnnonceInterface;
 import machineEtat.*;
@@ -17,50 +19,59 @@ public class BeloteCoinche implements GlobalListener
 	
 	public void nouvelleCarte(CardEvent carte) 
 	{
-		System.out.println(carte.getCarte().getLabelNum());
-		System.out.println(carte.getCarte().getSuit());
-		synchronized (machine) 
+		String label = carte.getCarte().getLabelNum();
+		System.out.println(label);
+		String suit = carte.getCarte().getSuit();
+		System.out.println(suit);
+		
+		int n = JOptionPane.showConfirmDialog(
+			    null,
+			    "Carte: "+label+" "+suit,
+			    "New Card",
+			    JOptionPane.YES_NO_OPTION);
+		
+		
+		if (n==0) 
 		{
-			machine.eventCarte(carte);
+			synchronized (machine) {
+				machine.eventCarte(carte);
+			}
 		}
 	}
 
 	public void nouveauGeste(MouvementEvent mouvement) 
 	{
 		System.out.println("Message Recu !!");
-		if (mouvement.getLabel()=="passer")
+		String label = mouvement.getLabel();
+		
+		int n = JOptionPane.showConfirmDialog(
+			    null,
+			    "Geste : "+label,
+			    "New movement",
+			    JOptionPane.YES_NO_OPTION);
+		
+		if (n==0) 
 		{
-			synchronized(machine)
-			{
-				machine.eventGestePasser();
-			}
-		}
-		else if (mouvement.getLabel()=="retour")
-		{
-			synchronized(machine)
-			{
-				machine.eventGesteRetour();
-			}
-		}
-		else if (mouvement.getLabel()=="coinche")
-		{
-			synchronized(machine)
-			{
-				machine.eventGesteCoinche();
-			}
-		}
-		else if (mouvement.getLabel()=="accepter")
-		{
-			synchronized(machine)
-			{
-				machine.eventGesteAccept();
-			}
-		}
-		else if (mouvement.getLabel()=="quitter")
-		{
-			synchronized(machine)
-			{
-				machine.eventQuit();
+			if (mouvement.getLabel() == "passer") {
+				synchronized (machine) {
+					machine.eventGestePasser();
+				}
+			} else if (mouvement.getLabel() == "retour") {
+				synchronized (machine) {
+					machine.eventGesteRetour();
+				}
+			} else if (mouvement.getLabel() == "coinche") {
+				synchronized (machine) {
+					machine.eventGesteCoinche();
+				}
+			} else if (mouvement.getLabel() == "accepter") {
+				synchronized (machine) {
+					machine.eventGesteAccept();
+				}
+			} else if (mouvement.getLabel() == "quitter") {
+				synchronized (machine) {
+					machine.eventQuit();
+				}
 			}
 		}
 	}

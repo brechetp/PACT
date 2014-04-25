@@ -1,3 +1,4 @@
+import iug.ViewController;
 import structure.*;
 import logiqueDeJeux.*;
 import machineEtat.*;
@@ -7,9 +8,9 @@ public class PremierTest {
 
 	public static void main(String[] args) 
 	{
-		
-		EtatDuJeu etat = new EtatDuJeu();
-		BeloteCoinche belote = new BeloteCoinche(etat);
+		ViewController vci = new ViewController();
+		BeloteCoinche belote = new BeloteCoinche(vci);
+		EtatDuJeuInterface etat = belote.getEtat();
 		
 /******************************* Mouvement ***********************************************/
 		MouvementEvent passer = new MouvementEvent("passer");
