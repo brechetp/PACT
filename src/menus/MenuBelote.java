@@ -40,7 +40,7 @@ public class MenuBelote extends menu {
 		getVci().modePartie();
 		getVci().distribution();
 
-		for (int i = 0 ; i < 8 ; i++){
+		while(belote.isStateDistrib()){
 			String s = (String)JOptionPane.showInputDialog(null, "Carte � distribuer :", "Distribution", JOptionPane.PLAIN_MESSAGE, null, null, null);
 			String[] tabcarte = s.split(" ");
 			String valeur = tabcarte[0];

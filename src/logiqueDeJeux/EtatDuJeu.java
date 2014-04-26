@@ -69,7 +69,6 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		//pas deja jouer et pas dans la main du joueur si il ne joue pas
 		//	not played && (si numjoueur != numjouer distant) alors 
 		return !playedCard.contain(carte)&&(numJoueurDistant==numJoueur||!joueurD.aLaCarte(carte));
-		
 	}
 
 	public int getNumJoueur() 

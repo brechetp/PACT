@@ -45,7 +45,6 @@ public class Team implements TeamInterface
 		return CarteJoueur1.contain(carte)||CarteJoueur2.contain(carte);
 	}
 
-	@Override
 	public int jouerParJoueur(CarteInterface carte) 
 	{
 		if(CarteJoueur1.contain(carte))
@@ -55,14 +54,12 @@ public class Team implements TeamInterface
 		else return 0;
 	}
 
-	@Override
 	public void dernierPli() 
 	{
 		this.dixDeDer=10;
 		
 	}
 
-	@Override
 	public CarteInterface getCartes(int numJoueur) 
 	{
 		if (numJoueur<3)

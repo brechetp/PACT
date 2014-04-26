@@ -16,6 +16,8 @@ public class StateMachine
 						MontreCarte1,MontreCarte2,MontreCarte3,MontreCarte4,
 						ResteDesTours;
 						};
+						
+	private int nbPasse=0;
 	private State state;
 	private EtatDuJeuInterface etat;
 	private JoueurDistantInterface joueurD;
@@ -185,6 +187,7 @@ public class StateMachine
 		 
 	public void eventGestePasser()
 	{
+		nbPasse++;
 		switch(this.state) 
 		{
 		
@@ -226,6 +229,7 @@ public class StateMachine
 			break;
 			
 		case AnnoncePasse3:
+			nbPasse=0;
 			if (etat.annonceFaite())
 			{
 				if (numJoueurDistant != etat.getNumJoueur())
@@ -265,6 +269,7 @@ public class StateMachine
 	 
 	public void eventGesteAccept()
 	{
+		nbPasse=0;
 		 switch(this.state) 
 		 {
 		 
@@ -386,19 +391,6 @@ public class StateMachine
 			this.state = State.AnnonceAFaire; //je supose que l'on arrive pas ici pour anuler ensuite
 			break;
 			
-		case MontreCarte1:
-			this.state = State.SecondTour1;
-			break;
-		case MontreCarte2:
-			this.state = State.SecondTour2;
-			break;
-		case MontreCarte3:
-			this.state = State.SecondTour3;
-			break;
-		case MontreCarte4:
-			this.state = State.SecondTour4;
-			break;
-			
 		default:
 			break;
 		}
@@ -407,6 +399,7 @@ public class StateMachine
 	
 	public void eventGesteCoinche()
 	{
+		nbPasse=0;
 		 switch(this.state) 
 		 {
 		 case AnnonceFaite:
@@ -512,7 +505,24 @@ public class StateMachine
 	
 	public void eventQuit() 
 	 {
-		 System.exit(0);
+		switch(this.state)
+		{
+		case AnnonceAFaire:
+			if (nbPasse==0&&getEtat().annonceFaite())
+				this.state=State.AnnonceFaite;
+			else if (nbPasse==0)
+				this.state=State.Annonce;
+			else if (nbPasse==1)
+				this.state=State.AnnoncePasse1;
+			else if (nbPasse==2)
+				this.state=State.AnnoncePasse2;
+			else if (nbPasse==3)
+				this.state=State.AnnoncePasse3;
+			break;
+		default:
+			
+			break;			
+		}
 	 }
 
 	public void setAnnonce(AnnonceInterface annonce) 
@@ -621,5 +631,11 @@ public class StateMachine
 	public EtatDuJeuInterface getEtat() 
 	{
 		return this.etat;
+	}
+
+	
+	public boolean isStateDistrib() {
+		return this.state==State.Distribution;
+		
 	} 
 }

@@ -75,4 +75,6 @@ public interface EtatDuJeuInterface
 
 	//renvoi le coinche actuelle
 	public int getCoinche();
+
+	
 }

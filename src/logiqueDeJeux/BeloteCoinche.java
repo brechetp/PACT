@@ -114,4 +114,10 @@ public class BeloteCoinche implements GlobalListener
 			return machine.getEtat();
 		}
 	}
+
+	public boolean isStateDistrib() 
+	{
+		return machine.isStateDistrib();
+		
+	}
 }
