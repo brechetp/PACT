@@ -54,11 +54,11 @@ public class Match implements Runnable {
 		//carte.getCorner().binaryThreshold(0).save("data/courant/resample/coins"+compteur+".jpg");
 		new BinaryImage(carte.getSymbol().getMatrix()).save("data/courant/resample/symbol"+compteur+".jpg");
 	
-		
+		String type = carte.getType();
 		carte.printInfos("data/test/info.txt");
 		
 		
-		//newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
+		newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
 
 	}
 	

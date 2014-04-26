@@ -21,7 +21,7 @@ public class Capture {
 
 
 	private static final int DISTANCE_THRESHOLD = 100;
-	private static final int WEBCAM = 1;
+	private static final int WEBCAM = 0;
 	//	private static final double GAMMA = 0.2;
 	private static double HEIGHT = CaptureLive.getHeight();
 	private static double WIDTH = CaptureLive.getWidth();

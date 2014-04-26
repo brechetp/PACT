@@ -20,8 +20,8 @@ public class MainMenu implements GlobalListener
 		menu[] tab = new menu[3];
 		CircularArray<menu> menus = new CircularArray<menu>(tab);
 		
-		tab[0] = new MenuBelote(new ImageMenu(1), vci, classi,this);
-		tab[1] = new MenuTest(new ImageMenu(2), vci, classi);
+		tab[1] = new MenuBelote(new ImageMenu(1), vci, classi,this);
+		tab[0] = new MenuTest(new ImageMenu(2), vci, classi);
 		tab[2] = new MenuTest(new ImageMenu(3), vci, classi);
 		
 		this.liste = menus;
