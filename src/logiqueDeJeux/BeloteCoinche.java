@@ -33,13 +33,17 @@ public class BeloteCoinche implements GlobalListener
 			    null,
 			    label+" "+suit );
 		
-		carte.setLabel(label);
-		carte.setSuit(suit);
+		if (!newCarte.equals(""))
+		{
+			String[] card =newCarte.split(" ");
 		
-		synchronized (machine) {
-			machine.eventCarte(carte);
+			carte.setLabel(card[0]);
+			carte.setSuit(card[1]);
+		
+			synchronized (machine) {
+				machine.eventCarte(carte);
+			}
 		}
-		
 	}
 	
 	public void nouvelleCarteJoueurDistant(CardEvent carte)
