@@ -119,7 +119,12 @@ public class Panneau extends JPanel {
 		    /******************************************************************************************************/
 		    
 		    if (modeActuel == 777){
-		    	
+		    	g.setColor(new Color(255,153,51));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+		    	FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("RA'PACT", (this.getWidth()/2)-(metrics.stringWidth("RA'PACT")/2) , (int) ((this.getHeight())*0.3));
+		    	g.drawString("Insérer le texte descriptif et la photo ici", (this.getWidth()/2)-(metrics.stringWidth("Insérer le texte descriptif et la photo ici")/2) , (int) ((this.getHeight())*0.6));
+		    
 		    }
 		    
 		    

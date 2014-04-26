@@ -429,7 +429,7 @@ public class ViewController implements ViewControllerInterface
 	}
 	
 	public void modeAPropos(){
-		fen.getPan().setK(777);
+		fen.getPan().setModeActuel(777);
 		fen.repaint();
 	}
 }
