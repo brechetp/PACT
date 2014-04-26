@@ -14,10 +14,14 @@ public class StateMachine
 						DebutTour,DebutTour1,DebutTour2,DebutTour3,DebutTour4,
 						SecondTour,SecondTour1, SecondTour2, SecondTour3, SecondTour4,
 						MontreCarte1,MontreCarte2,MontreCarte3,MontreCarte4,
-						ResteDesTours;
+						ResteDesTours,
+						Quit;
 						};
 						
 	private int nbPasse=0;
+	//Alarm pour quitter
+	private AlarmQuit alarmQuit;
+	private State previousState;
 	private State state;
 	private EtatDuJeuInterface etat;
 	private JoueurDistantInterface joueurD;
@@ -26,9 +30,11 @@ public class StateMachine
 	private ViewControllerInterface vci;
 	public static int numJoueurDistant=4;
 	private CarteListInterface carteAnnonce = new CarteList();
+	private BeloteCoinche belote;
 	
-	public StateMachine(JoueurDistantInterface joueurD,ViewControllerInterface vci) 
+	public StateMachine(JoueurDistantInterface joueurD,ViewControllerInterface vci, BeloteCoinche beloteCoinche) 
 	{
+		this.belote = beloteCoinche;
 		this.state = State.Distribution;
 		this.etat = new EtatDuJeu(this);
 		this.joueurD = joueurD;
@@ -367,7 +373,12 @@ public class StateMachine
 					this.state = State.SecondTour4;
 				}
 			 break;
-		 
+/******************************* Quitter *****************************/
+		 case Quit:
+			 this.state=previousState;
+			 alarmQuit.stop();
+			 vci.modeJeu();
+			
 		 default:
 			break;
 		 }
@@ -509,18 +520,36 @@ public class StateMachine
 		{
 		case AnnonceAFaire:
 			if (nbPasse==0&&getEtat().annonceFaite())
+			{
 				this.state=State.AnnonceFaite;
+				vci.effaceAnnonce();
+				getEtat().actualiseAnnonce(vci);
+			}	
 			else if (nbPasse==0)
-				this.state=State.Annonce;
+			{
+				vci.effaceAnnonce();
+				vci.actualiseAnnonce(null, null);
+			}
 			else if (nbPasse==1)
-				this.state=State.AnnoncePasse1;
+			{
+				vci.effaceAnnonce();
+				getEtat().actualiseAnnonce(vci);
+			}
 			else if (nbPasse==2)
-				this.state=State.AnnoncePasse2;
+			{
+				vci.effaceAnnonce();
+				getEtat().actualiseAnnonce(vci);
+			}
 			else if (nbPasse==3)
-				this.state=State.AnnoncePasse3;
+			{
+				vci.effaceAnnonce();
+				getEtat().actualiseAnnonce(vci);
+			}
 			break;
 		default:
-			
+			vci.modeQuitter(5);
+			alarmQuit = new AlarmQuit(vci,belote);
+			new Thread(alarmQuit).start();
 			break;			
 		}
 	 }

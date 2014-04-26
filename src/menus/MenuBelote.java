@@ -35,7 +35,7 @@ public class MenuBelote extends menu {
 	{
 		getClassi().removeListener(menuOptions);
 		//Cration logique de jeu
-		BeloteCoinche belote = new BeloteCoinche(getVci());
+		BeloteCoinche belote = new BeloteCoinche(getVci(),this);
 		getClassi().addListener(belote);
 		getVci().modePartie();
 		getVci().distribution();

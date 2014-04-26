@@ -243,6 +243,21 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		vci.actualiseAnnonce(val,couleur);
 		
 	}
+	
+	public void actualiseAnnonce(ViewControllerInterface vci)
+	{
+		int valeur = this.valeurAnnonce();
+		String val;
+		if (valeur==250)
+			val="capot";
+		else if (valeur==500)
+			val="générale";
+		else
+			val =""+valeur;
+		String couleur = this.getAtout();
+		vci.actualiseAnnonce(val, couleur);
+	}
+	
 
 	public void initAnnonce(ViewControllerInterface vci) 
 	{

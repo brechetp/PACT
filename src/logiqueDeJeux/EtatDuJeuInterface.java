@@ -75,6 +75,9 @@ public interface EtatDuJeuInterface
 
 	//renvoi le coinche actuelle
 	public int getCoinche();
+	
+	//actualise l'annonce
+	public void actualiseAnnonce(ViewControllerInterface vci);
 
 	
 }

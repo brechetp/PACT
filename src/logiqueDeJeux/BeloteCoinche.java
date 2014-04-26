@@ -5,16 +5,17 @@ import javax.swing.JOptionPane;
 import iug.ViewControllerInterface;
 import structure.AnnonceInterface;
 import machineEtat.*;
+import menus.MenuBelote;
 
 public class BeloteCoinche implements GlobalListener
 {
 	private StateMachine machine;
+	private MenuBelote menu;
 	
-	
-	public BeloteCoinche(ViewControllerInterface vci)
+	public BeloteCoinche(ViewControllerInterface vci, MenuBelote menuBelote)
 	{
 		
-		this.machine = new StateMachine(new JoueurDistant(this), vci);
+		this.machine = new StateMachine(new JoueurDistant(this), vci,this);
 	}
 	
 	public void nouvelleCarte(CardEvent carte) 
@@ -119,5 +120,10 @@ public class BeloteCoinche implements GlobalListener
 	{
 		return machine.isStateDistrib();
 		
+	}
+
+	public void quit() 
+	{
+		menu.stopBelote(this);
 	}
 }
