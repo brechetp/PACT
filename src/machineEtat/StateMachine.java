@@ -48,17 +48,19 @@ public class StateMachine
 /*********************** Distribution *******************/		 
 		case Distribution:
 			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
-			joueurD.addCard(carte.getCarte());
-			if (joueurD.aHuitCarte())
 			{
-				this.state = State.Annonce;
-				vci.modeAnnonce();
-				vci.joueurEnCours(premierAJouer);
-				if (premierAJouer == 4)
-					joueurD.waitAnnonce();
+				joueurD.addCard(carte.getCarte());
+				if (joueurD.aHuitCarte())
+				{
+					this.state = State.Annonce;
+					vci.modeAnnonce();
+					vci.joueurEnCours(premierAJouer);
+					if (premierAJouer == 4)
+						joueurD.waitAnnonce();
+				}
+				else
+					this.state = State.Distribution;
 			}
-			else
-				this.state = State.Distribution;
 			break;
 			 
 /*********************** Premier Tour **********************/			 
@@ -376,9 +378,7 @@ public class StateMachine
 /******************************* Quitter *****************************/
 		 case Quit:
 			 this.state=previousState;
-			 alarmQuit.stop();
-			 vci.modeJeu();
-			
+			 alarmQuit.quit();	
 		 default:
 			break;
 		 }
@@ -528,6 +528,7 @@ public class StateMachine
 			else if (nbPasse==0)
 			{
 				vci.effaceAnnonce();
+				getEtat().setAnnonceNull();
 				vci.actualiseAnnonce(null, null);
 			}
 			else if (nbPasse==1)
@@ -546,11 +547,45 @@ public class StateMachine
 				getEtat().actualiseAnnonce(vci);
 			}
 			break;
+		case AnnonceAFaire2:
+			if (nbPasse==0&&getEtat().annonceFaite())
+			{
+				this.state=State.AnnonceFaite;
+				vci.effaceAnnonce();
+				getEtat().actualiseAnnonce(vci);
+			}	
+			else if (nbPasse==0)
+			{
+				vci.effaceAnnonce();
+				getEtat().setAnnonceNull();
+				vci.actualiseAnnonce(null, null);
+			}
+			else if (nbPasse==1)
+			{
+				vci.effaceAnnonce();
+				getEtat().actualiseAnnonce(vci);
+			}
+			else if (nbPasse==2)
+			{
+				vci.effaceAnnonce();
+				getEtat().actualiseAnnonce(vci);
+			}
+			else if (nbPasse==3)
+			{
+				vci.effaceAnnonce();
+				getEtat().actualiseAnnonce(vci);
+			}
+			break;
+		case Distribution:
+			vci.modeQuitter(5);
+			alarmQuit = new AlarmQuit(vci,belote,true);
+			new Thread(alarmQuit).start();
+			break;
 		default:
 			vci.modeQuitter(5);
-			alarmQuit = new AlarmQuit(vci,belote);
+			alarmQuit = new AlarmQuit(vci,belote,false);
 			new Thread(alarmQuit).start();
-			break;			
+			break;
 		}
 	 }
 

@@ -23,4 +23,7 @@ public interface CarteInterface
 	public void setLabelNum(String label);
 	
 	public void setSuit(String suit);
+
+	//renvoi true si c'est une carte du jeu de belote
+	public boolean estUneCarte();
 }

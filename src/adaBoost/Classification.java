@@ -122,7 +122,7 @@ public class Classification
 			System.out.println("Accepter");
 			break;
 		case 4:
-			//envoiMouvement(new MouvementEvent("quitter"));
+			envoiMouvement(new MouvementEvent("quitter"));
 			System.out.println("Quitter");
 			break;
 		}

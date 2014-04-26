@@ -79,5 +79,8 @@ public interface EtatDuJeuInterface
 	//actualise l'annonce
 	public void actualiseAnnonce(ViewControllerInterface vci);
 
+	// mettre a null l'annonce
+	public void setAnnonceNull();
+
 	
 }

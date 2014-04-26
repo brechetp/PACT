@@ -14,7 +14,7 @@ public class BeloteCoinche implements GlobalListener
 	
 	public BeloteCoinche(ViewControllerInterface vci, MenuBelote menuBelote)
 	{
-		
+		this.menu=menuBelote;
 		this.machine = new StateMachine(new JoueurDistant(this), vci,this);
 	}
 	
@@ -34,13 +34,14 @@ public class BeloteCoinche implements GlobalListener
 			    null,
 			    label+" "+suit );
 		
-		if (!newCarte.equals(""))
+		if (!newCarte.equals("")&&newCarte!=null&&!newCarte.equals(" "))
 		{
 			String[] card =newCarte.split(" ");
-		
+			
 			carte.setLabel(card[0]);
-			carte.setSuit(card[1]);
-		
+			if (card.length>1) {
+				carte.setSuit(card[1]);
+			}
 			synchronized (machine) {
 				machine.eventCarte(carte);
 			}
@@ -58,12 +59,12 @@ public class BeloteCoinche implements GlobalListener
 	{
 		System.out.println("Message Recu !!");
 		String label = mouvement.getLabel();
-		
-		int n = JOptionPane.showConfirmDialog(
-			    null,
-			    "Geste : "+label,
-			    "New movement",
-			    JOptionPane.YES_NO_OPTION);
+		int n=0;
+//		int n = JOptionPane.showConfirmDialog(
+//			    null,
+//			    "Geste : "+label,
+//			    "New movement",
+//			    JOptionPane.YES_NO_OPTION);
 		
 		if (n==0) 
 		{

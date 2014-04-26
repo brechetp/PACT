@@ -42,12 +42,19 @@ public class MenuBelote extends menu {
 
 		while(belote.isStateDistrib()){
 			String s = (String)JOptionPane.showInputDialog(null, "Carte � distribuer :", "Distribution", JOptionPane.PLAIN_MESSAGE, null, null, null);
-			String[] tabcarte = s.split(" ");
-			String valeur = tabcarte[0];
-			String couleur = tabcarte[1];
-			Carte card = new Carte(valeur,couleur,belote.getEtat());
-			CardEvent event = new CardEvent(card);
-			belote.nouvelleCarte(event);
+			if (s!="") 
+			{
+				String[] tabcarte = s.split(" ");
+				String valeur = tabcarte[0];
+				
+				String couleur="";
+				if (tabcarte.length>1) {
+					couleur = tabcarte[1];
+				}
+				Carte card = new Carte(valeur, couleur, belote.getEtat());
+				CardEvent event = new CardEvent(card);
+				belote.nouvelleCarte(event);
+			}
 		}
 
 		//		//Start Camera

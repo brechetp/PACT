@@ -94,5 +94,22 @@ public class Carte implements CarteInterface
 		this.suit = suit;
 	}
 
+	public boolean estUneCarte() 
+	{
+		if (!suit.equals("trefle") && !suit.equals("coeur") 
+				&& !suit.equals("carreau") && !suit.equals("pique"))
+		{
+			return false;
+		}
+		else if (!labelNum.equals("7")&&!labelNum.equals("8")&&!labelNum.equals("9")
+				&&!labelNum.equals("10")&&!labelNum.equals("valet")&&!labelNum.equals("reine")&&!labelNum.equals("roi")
+				&&!labelNum.equals("as"))
+		{
+			return false;
+		}
+		else return true;
+			
+	}
+
 
 }

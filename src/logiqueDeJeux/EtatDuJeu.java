@@ -11,7 +11,7 @@ import structure.*;
 
 public class EtatDuJeu implements EtatDuJeuInterface
 {
-
+	private AnnonceInterface previousAnnonce;
 	private AnnonceInterface annonce;
 	private CarteListInterface playedCard;
 	private CarteListInterface cardOnTable;
@@ -66,9 +66,14 @@ public class EtatDuJeu implements EtatDuJeuInterface
 
 	public boolean valide(CarteInterface carte,JoueurDistantInterface joueurD,int numJoueurDistant) 
 	{
-		//pas deja jouer et pas dans la main du joueur si il ne joue pas
-		//	not played && (si numjoueur != numjouer distant) alors 
-		return !playedCard.contain(carte)&&(numJoueurDistant==numJoueur||!joueurD.aLaCarte(carte));
+		if (carte.estUneCarte()) {
+			//pas deja jouer et pas dans la main du joueur si il ne joue pas
+			//	not played && (si numjoueur != numjouer distant) alors 
+			return !playedCard.contain(carte)
+					&& (numJoueurDistant == numJoueur || !joueurD
+							.aLaCarte(carte));
+		}
+		return false;
 	}
 
 	public int getNumJoueur() 
@@ -246,6 +251,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	
 	public void actualiseAnnonce(ViewControllerInterface vci)
 	{
+		annonce = previousAnnonce;
 		int valeur = this.valeurAnnonce();
 		String val;
 		if (valeur==250)
@@ -282,6 +288,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	public void valideAnnonce(ViewControllerInterface vci) 
 	{
 		annonce.setTeam(numJoueur%2);
+		previousAnnonce=annonce;
 		vci.effaceAnnonce();
 		
 	}
@@ -485,5 +492,11 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	public int getCoinche() 
 	{
 		return this.coefCoinche;
+	}
+
+	public void setAnnonceNull() 
+	{
+		annonce=null;
+		
 	}
 }
