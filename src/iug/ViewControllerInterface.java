@@ -93,5 +93,5 @@ public interface ViewControllerInterface
 	public void annonceCarte(String string);
 	
 	//mode quitter
-	public void modeQuitter();
+	public void modeQuitter(int sec);
 }

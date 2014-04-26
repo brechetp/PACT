@@ -330,8 +330,9 @@ public class ViewController implements ViewControllerInterface
 		fen.repaint();
 	}
 	
-	public void modeQuitter(){
+	public void modeQuitter(int sec){
 		fen.getPan().setModeActuel(666);
+		fen.getPan().setSec(sec);
 		fen.repaint();
 	}
 
@@ -347,6 +348,10 @@ public class ViewController implements ViewControllerInterface
 			}
 			fen.repaint();
 		}
+		fen.getPan().resizeImage(0);
+		fen.getPan().setXMenuDroite(0);
+		fen.getPan().setXMenuGauche(0);
+		fen.repaint();
 	}
 
 	public void option(int k){
@@ -420,6 +425,11 @@ public class ViewController implements ViewControllerInterface
 			e.printStackTrace();
 		}
 		fen.getPan().setK(0);
+		fen.repaint();
+	}
+	
+	public void modeAPropos(){
+		fen.getPan().setK(777);
 		fen.repaint();
 	}
 }
