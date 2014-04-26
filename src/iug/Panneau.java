@@ -351,7 +351,15 @@ public class Panneau extends JPanel {
 			    if (y==0){
 			    	
 			    }
-			    
+			    if (s1 != null && s2 != null){
+			    	g.setColor(new Color(255,153,51));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+			    	FontMetrics metricsX = g.getFontMetrics();
+			    	g.drawString("Annonce actuelle : " + s1 + " - " + s2, (this.getWidth()/2)-(metricsX.stringWidth("Annonce actuelle : " + s1 + " - " + s2)/2) , (int) ((this.getHeight()*0.1)));
+			    }
+			    else {
+			    	
+			    }
 		    }
 		    
 		    
