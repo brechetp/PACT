@@ -6,10 +6,12 @@ public class AlarmQuit implements Runnable
 {
 	private ViewControllerInterface vci;
 	private BeloteCoinche belote;
-	private boolean stop = false;
+	private volatile boolean quit = false;
+	private boolean distrib;
 	
-	public AlarmQuit(ViewControllerInterface vci, BeloteCoinche belote) 
+	public AlarmQuit(ViewControllerInterface vci, BeloteCoinche belote, boolean distrib) 
 	{
+		this.distrib = distrib;
 		this.belote=belote;
 		this.vci=vci;
 	}
@@ -20,20 +22,25 @@ public class AlarmQuit implements Runnable
 			
 			for (int i = 4; i >= 0; i--) 
 			{
-				if (i==0)
-				{
-					Thread.sleep(100);
-					belote.quit();
-				}
-				else 
-				{
-					Thread.sleep(1000);
-					synchronized(this) {
-						if (stop)
-							break;
+				synchronized (this) {
+					if (i == 0 && quit) {
+						vci.modeQuitter(i);
+						belote.quit();
+					} else if (i == 0) {
+						if (distrib) {
+							vci.distribution();
+						} else {
+							vci.modeJeu();
+						}
+					} else {
+						if (!quit) {
+							vci.modeQuitter(i);
+						} else {
+							belote.quit();
+						}
 					}
-					vci.modeQuitter(i);
 				}
+				Thread.sleep(1000);
 			}
 			
 		} catch (InterruptedException e) {
@@ -41,10 +48,10 @@ public class AlarmQuit implements Runnable
 			e.printStackTrace();
 		}
 	}
-	
-	public synchronized void stop()
+
+	public synchronized	 void quit() 
 	{
-		stop=true;
+		quit=true;
 	}
 
 }

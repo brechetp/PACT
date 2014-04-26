@@ -51,7 +51,7 @@ public class Match implements Runnable {
 		
 		Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
 		carte.save("data/courant/resample/carte"+compteur+".jpg");
-		//carte.getCorner().binaryThreshold(0).save("data/courant/resample/coins"+compteur+".jpg");
+	
 		new BinaryImage(carte.getSymbol().getMatrix()).save("data/courant/resample/symbol"+compteur+".jpg");
 	
 		String type = carte.getType();

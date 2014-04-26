@@ -25,7 +25,7 @@ public class Image {
 	private static final int G_RED_THRESHOLD = 120;
 	private static final int R_RED_THRESHOLD = 150;
 	private static final int BLACK_THRESHOLD = 100;
-	private static int[] WHITE_VECTOR = new int[]{230, 230, 230};
+	private static int[] WHITE_VECTOR = new int[]{210, 210, 210};
 	private static final int COLOR_THRESHOLD = 40;
 	private static final int[] RED_VECTOR = new int[]{170,170, 180};
 	private static final int[] BLACK_VECTOR = new int[]{60, 60, 60};
