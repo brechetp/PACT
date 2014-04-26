@@ -18,14 +18,14 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class Image {
 
 
-	public static int WHITE_THRESHOLD = 210;
+	
 	public static final int DISTANCE_THRESHOLD = 30; // pour la distance entre deux images
 	private static final int NEIGHBOUR_NUMBER = 0; // pour l'algorithme de distance
 	private static final int B_RED_THRESHOLD = 120;
 	private static final int G_RED_THRESHOLD = 120;
 	private static final int R_RED_THRESHOLD = 150;
 	private static final int BLACK_THRESHOLD = 100;
-	private static final int[] WHITE_VECTOR = new int[]{230, 230, 230};
+	private static int[] WHITE_VECTOR = new int[]{230, 230, 230};
 	private static final int COLOR_THRESHOLD = 40;
 	private static final int[] RED_VECTOR = new int[]{170,170, 180};
 	private static final int[] BLACK_VECTOR = new int[]{60, 60, 60};
@@ -618,9 +618,10 @@ public class Image {
 	}
 
 	
-	public void setWhiteThreshold(int whiteThreshold){
+
+	public void setWhiteVector(int[] whiteVector){
 		
-		WHITE_THRESHOLD = whiteThreshold;
+		WHITE_VECTOR = whiteVector;
 	}
 
 }

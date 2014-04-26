@@ -1,5 +1,7 @@
 package camera;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
@@ -227,6 +229,25 @@ public class Card extends Image{
 		return string;
 
 
+	}
+	
+	public void printInfos(String fileName){
+		try {
+			FileWriter fw = new FileWriter(fileName,true);
+			String infos = colorAverage[0] +" "+ colorAverage[1] +" "+ colorAverage[2]+" ";
+			infos += number +" ";
+			if(isRed(colorAverage))
+				infos += symbol.getMatchTable("1")[0]+" " +symbol.getMatchTable("1")[1]+" ";
+			else
+				infos+=  symbol.getMatchTable("0")[0]+" " +symbol.getMatchTable("0")[1]+" ";
+			infos += letter.getDistanceTable()[0]+" "+letter.getDistanceTable()[1]+" "+letter.getDistanceTable()[2]+" ";
+			fw.write(infos+"\n");
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public int[][] getFirstSymbol(){

@@ -23,7 +23,7 @@ public class Symbol {
 	private static double[][] AVERAGE_DATABASE = new double[2][2];
 	private static double[][] SIGMA_DATABASE = new double[2][2];
 	private int[][] doubleTab; // initialisée avec une image à une composante connexe
-	private static int size1;
+	private int size1;
 	private int size2;
 	private int perimeter;
 	private Hashtable<Double, Double> signature;
@@ -39,7 +39,7 @@ public class Symbol {
 	public Symbol (int[][] binaryMatrix, Card carte){
 		this.size1 = binaryMatrix[0].length;
 		this.size2 = binaryMatrix.length;
-		this.SYMBOL_DATABASE2 = new int[1][1][size2][size1];
+
 		this.taille = 80; // reussite avant le pan4
 		this.doubleTab = binaryMatrix; // a 17h pile direction odeon 
 		// n'oublie pas
@@ -225,6 +225,12 @@ public class Symbol {
 		}
 		return iMax;
 	}
+	
+	public double[] getMatchTable(String color){
+		if (matchTable == null)
+			getCardValue(color);
+		return matchTable;
+	}
 
 	public double compare(String string, int forme ){
 
@@ -313,7 +319,7 @@ public static void setSymbolDatabase2(String fileName) throws IOException{
 
 
 			while((line = bis.readLine()) != null){
-					for(int i = 0; i < size1; i++){
+					for(int i = 0; i < line.length(); i++){
 
 						SYMBOL_DATABASE2[color][forme][j][i]= (int) line.charAt(i) - 48;
 						

@@ -16,6 +16,7 @@ public class Letter extends BinaryImage{
 	private static int[][][] LETTER_DATABASE = new int[3][getCenteredHeight()][getCenteredWidth()];
 	private int type = -1;
 	private int[][] centeredLetter = null;
+	private int[] distanceTable = new int[3]; // distances aux lettres de la DB
 
 	public Letter(int[][] binaryMatrix){
 
@@ -41,6 +42,7 @@ public class Letter extends BinaryImage{
 		int d =0;
 		for (int index =0; index <3; index++){
 			d = distance(index);
+			distanceTable[index] = d;
 
 			if (d  < minDistance){
 				res = index;
@@ -53,6 +55,13 @@ public class Letter extends BinaryImage{
 
 
 
+	}
+	
+	public int[] getDistanceTable(){
+		
+		if (distanceTable == null)
+			computeType();
+		return distanceTable;
 	}
 
 	public int getType(){

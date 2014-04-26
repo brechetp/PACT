@@ -8,7 +8,7 @@ public class TestCamera {
 
 	public static void main(String[] args) {
 		
-		//Initialisation.setCardSize();
+		Initialisation.setCardSize();
 		try {
 		//Capture.symbolDatabase(0, 4, "data/database/symbols/symbol", "data/database/symbols/text");
 		} catch (Exception e) {
@@ -30,9 +30,9 @@ public class TestCamera {
 		Initialisation.setSymbolDatabase("data/database/symbols/text");
 		
 		Initialisation.setLetterDatabase("data/database/letters/text");
-		EtatDuJeu etat = new EtatDuJeu();
+	
 		ViewController controller = new ViewController();
-		BeloteCoinche coiche = new BeloteCoinche(etat, controller);
+		BeloteCoinche coiche = new BeloteCoinche(controller);
 		
 		new Thread(new CaptureLive(coiche)).start();
 		

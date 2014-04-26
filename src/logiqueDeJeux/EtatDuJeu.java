@@ -303,14 +303,14 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		}
 		else
 		{
-			if (annonce.getValue()>this.annonce.getValue()) {
+			if (this.annonce==null || annonce.getValue()>this.annonce.getValue()) {
 				this.annonce = annonce;
 				int valeur = this.valeurAnnonce();
 				String val;
 				if (valeur == 250)
 					val = "capot";
 				else if (valeur == 500)
-					val = "g�n�rale";
+					val = "générale";
 				else
 					val = "" + valeur;
 				String couleur = this.getAtout();

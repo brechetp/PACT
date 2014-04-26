@@ -40,13 +40,14 @@ public class Annonce implements AnnonceInterface
 
 	public void nextSuit() 
 	{
-		if (suit=="carreau")
+		System.out.println(suit=="coeur"+"boo");
+		if (suit.equals("carreau"))
 			suit="coeur";
-		else if (suit=="coeur")
+		else if (suit.equals("coeur"))
 			suit="pique";
-		else if (suit=="pique")
+		else if (suit.equals("pique"))
 			suit="trefle";
-		else if (suit=="trefle")
+		else if (suit.equals("trefle"))
 			suit="carreau";
 	}
 

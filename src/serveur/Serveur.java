@@ -30,7 +30,7 @@ public class Serveur
 	    	System.out.println("connexion etablie");
 	    	BufferedReader
 	    	in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	    	Thread t1 = new Thread(new ServeurReception(in, belote));
+	    	Thread t1 = new Thread(new ServeurReception(in, belote, this));
 	    	t1.start();
 	    } 
 	    catch (IOException e) 

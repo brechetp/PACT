@@ -13,19 +13,22 @@ public class ServeurReception implements Runnable
 {
 	private BufferedReader in;
 	private BeloteCoinche belote;
+private Serveur serveur;
 	
-	public ServeurReception(BufferedReader in, BeloteCoinche belote)
+	public ServeurReception(BufferedReader in, BeloteCoinche belote, Serveur serveur)
 	{
 		this.in = in;
 		this.belote = belote;
+		this.serveur = serveur;
 	}
 	
 	public void run() 
 	{
 		try 
 		{
-			String msg = null;;
-			while (true) 
+			String msg = null;
+			boolean test=true;
+			while (test) 
 			{
 				msg = in.readLine();
 				System.out.println(msg);
@@ -39,7 +42,10 @@ public class ServeurReception implements Runnable
 						this.newAnnonce();
 				}
 				else
-					System.exit(0);
+				{
+					serveur.start();
+					test=false;
+				}
 			}
 		} 
 		catch (IOException e) 
@@ -49,6 +55,7 @@ public class ServeurReception implements Runnable
 
 		
 	}
+
 
 	private void newAnnonce() 
 	{
