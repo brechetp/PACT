@@ -87,6 +87,12 @@ public class MenuOptions implements GlobalListener
 		vci.modeOption();
 		vci.option(1);
 	}
+
+	@Override
+	public void nouvelleCarteJoueurDistant(CardEvent carte) 
+	{
+		//nothing
+	}
 	
 	
 	

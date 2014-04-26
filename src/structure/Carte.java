@@ -86,5 +86,13 @@ public class Carte implements CarteInterface
 		}
 	}
 
+	public void setLabelNum(String labelNum) {
+		this.labelNum = labelNum;
+	}
+
+	public void setSuit(String suit) {
+		this.suit = suit;
+	}
+
 
 }

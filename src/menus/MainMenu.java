@@ -66,6 +66,13 @@ public class MainMenu implements GlobalListener
 	{
 		vci.init(liste.get(0).getImage(), liste.get(1).getImage(), liste.get(2).getImage());
 	}
+
+	@Override
+	public void nouvelleCarteJoueurDistant(CardEvent carte) 
+	{
+		//nothing
+		
+	}
 	
 	
 	

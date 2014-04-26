@@ -19,4 +19,8 @@ public interface CarteInterface
 
 	//donne le rang de la carte en fonction de sa valeur
 	public int getRang();
+	
+	public void setLabelNum(String label);
+	
+	public void setSuit(String suit);
 }

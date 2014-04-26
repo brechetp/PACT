@@ -108,7 +108,7 @@ public class ServeurReception implements Runnable
 			}
 			
 			Carte carteb = new Carte(valeur, couleur, (EtatDuJeu)belote.getEtat());
-			belote.nouvelleCarte(new CardEvent(carteb));
+			belote.nouvelleCarteJoueurDistant(new CardEvent(carteb));
 		} 
 		catch (IOException e) 
 		{

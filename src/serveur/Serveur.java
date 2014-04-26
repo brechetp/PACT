@@ -25,9 +25,9 @@ public class Serveur
 	    try 
 	    {
 	    	ServerSocket socketserver = new ServerSocket(6665);
-	    	System.out.println("attente de conection");
+	    	System.out.println("attente de connexion");
 	    	this.socket = socketserver.accept();
-	    	System.out.println("connection etablie");
+	    	System.out.println("connexion etablie");
 	    	BufferedReader
 	    	in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	    	Thread t1 = new Thread(new ServeurReception(in, belote));

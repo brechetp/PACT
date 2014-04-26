@@ -24,18 +24,28 @@ public class BeloteCoinche implements GlobalListener
 		String suit = carte.getCarte().getSuit();
 		System.out.println(suit);
 		
-		int n = JOptionPane.showConfirmDialog(
+		String newCarte =(String) JOptionPane.showInputDialog(
 			    null,
-			    "Carte: "+label+" "+suit,
+			    "Carte: ",
 			    "New Card",
-			    JOptionPane.YES_NO_OPTION);
+			    JOptionPane.PLAIN_MESSAGE,
+			    null,
+			    null,
+			    label+" "+suit );
 		
+		carte.setLabel(label);
+		carte.setSuit(suit);
 		
-		if (n==0) 
-		{
-			synchronized (machine) {
-				machine.eventCarte(carte);
-			}
+		synchronized (machine) {
+			machine.eventCarte(carte);
+		}
+		
+	}
+	
+	public void nouvelleCarteJoueurDistant(CardEvent carte)
+	{
+		synchronized (machine) {
+			machine.eventCarte(carte);
 		}
 	}
 

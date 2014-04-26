@@ -1,18 +1,30 @@
 package machineEtat;
 
 import structure.Carte;
+import structure.CarteInterface;
 
 public class CardEvent 
 {
-	private Carte carte;
+	private CarteInterface carte;
 	
-	public CardEvent(Carte carte)
+	public CardEvent(CarteInterface carte)
 	{
 		this.carte= carte;
 	}
 
-	public Carte getCarte() {
+	public CarteInterface getCarte() {
 		return carte;
+	}
+
+	public void setLabel(String label) 
+	{
+		carte.setLabelNum(label);
+		
+	}
+
+	public void setSuit(String suit) 
+	{
+		carte.setSuit(suit);
 	}
 	
 }

@@ -1,6 +1,5 @@
 package machineEtat;
 
-import iug.ViewController;
 import iug.ViewControllerInterface;
 import structure.AnnonceInterface;
 import structure.CarteList;
@@ -280,6 +279,11 @@ public class StateMachine
 			 this.state = State.AnnonceAFaire;
 			 break;
 		 
+		 case AnnoncePasse1:
+			 etat.initAnnonce(vci);
+			 this.state = State.AnnonceAFaire;
+			 break;
+			 
 		 case AnnoncePasse2:
 			 etat.initAnnonce(vci);
 			 this.state = State.AnnonceAFaire;
