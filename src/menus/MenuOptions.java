@@ -1,6 +1,7 @@
 package menus;
 
 import iug.ViewControllerInterface;
+import logiqueDeJeux.AlertJoueurDistant;
 import logiqueDeJeux.EtatDuJeu;
 import logiqueDeJeux.GlobalListener;
 import machineEtat.CardEvent;
@@ -70,6 +71,7 @@ public class MenuOptions implements GlobalListener
 			else{
 				System.out.println("StartBelote from: MenuOptions");
 				vci.validerOptions();
+				new Thread(new AlertJoueurDistant(vci)).start();
 				menuBelote.startBelote(this);
 			}
 		}

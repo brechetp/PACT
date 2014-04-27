@@ -48,7 +48,7 @@ public class CircularArray<E>
 	 */
 	public void moveRight()
 	{
-		E premier = get(array.length);
+		E premier = get(array.length-1);
 		for (int i = array.length-1;i>0;i--)
 		{
 			array[i]=array[i-1];

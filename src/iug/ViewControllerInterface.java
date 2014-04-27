@@ -94,4 +94,7 @@ public interface ViewControllerInterface
 	
 	//mode quitter
 	public void modeQuitter(int sec);
+	
+	//marque la seconde pour l'attente du joueur distant
+	public void timeOutJD(int sec);
 }

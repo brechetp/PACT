@@ -343,7 +343,7 @@ public class ViewController implements ViewControllerInterface
 			fen.getPan().setXMenuDroite(2*dxdy);
 			fen.getPan().setXMenuGauche(-2*dxdy);
 			try {
-				Thread.sleep(15);
+				Thread.sleep(30);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

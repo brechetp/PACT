@@ -413,7 +413,7 @@ public class Panneau extends JPanel {
 		    	}
 		    	
 		    	if (placement == 2){
-		    		g.drawImage(imageMenuCentre.getImage(), posXMenuCentre+xMenuCentre-dxdy/2, posYMenuCentre+yMenuCentre-dxdy, imageMenuCentre.getImage().getWidth(null)+dxdy, imageMenuCentre.getImage().getHeight(null)+dxdy, this);
+		    		g.drawImage(imageMenuCentre.getImage(), (int) (posXMenuCentre+xMenuCentre-dxdy/1.5), posYMenuCentre+yMenuCentre-dxdy, (int) (imageMenuCentre.getImage().getWidth(null)+1.5*dxdy), imageMenuCentre.getImage().getHeight(null)+dxdy, this);
 			    	g.drawImage(imageMenuGauche.getImage(), posXMenuGauche+xMenuGauche, posYMenuGauche+yMenuGauche, this);
 			    	g.drawImage(imageMenuDroite.getImage(), posXMenuDroite+xMenuDroite, posYMenuDroite+yMenuDroite, this);
 		    	}
@@ -432,76 +432,76 @@ public class Panneau extends JPanel {
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    		if (option1 == 0 && option2 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    		if (option1 == 1 && option2 == 0){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    		if (option1 == 1 && option2 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    	}
@@ -511,76 +511,76 @@ public class Panneau extends JPanel {
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    		if (option2 == 0 && option1 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    		if (option2 == 1 && option1 == 0){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    		if (option2 == 1 && option1 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 		    		}
 		    	}
 		    	
@@ -589,76 +589,76 @@ public class Panneau extends JPanel {
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    		if (option1 == 0 && option2 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    		if (option1 == 1 && option2 == 0){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    		if (option1 == 1 && option2 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 		    		}
 		    		
 		    	}
@@ -668,76 +668,76 @@ public class Panneau extends JPanel {
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 				    }
 		    		
 		    		if (option1 == 0 && option2 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 				    }
 		    		
 		    		if (option1 == 1 && option2 == 0){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 				    }
 		    		
 		    		if (option1 == 1 && option2 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString(">", (this.getWidth()/2)-(metrics.stringWidth(">   Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
 				    	g.setColor(new Color(255, 0, 0));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 				    }
 		    		
 		    	}
@@ -747,88 +747,88 @@ public class Panneau extends JPanel {
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(51, 51, 255));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.8));
-				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.85));
+				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.75));
 				    	g.setColor(new Color(255, 0, 0));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 				    }
 		    		
 		    		if (option1 == 0 && option2 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(51, 51, 255));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.8));
-				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.85));
+				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.75));
 				    	g.setColor(new Color(255, 0, 0));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI"), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 				    }
 		    		
 		    		if (option1 == 1 && option2 == 0){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(51, 51, 255));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.8));
-				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.85));
+				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.75));
 				    	g.setColor(new Color(255, 0, 0));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString(" - NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI"), (int) ((this.getHeight())*0.3));
 				    }
 		    		
 		    		if (option1 == 1 && option2 == 1){
 		    			g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metrics = g.getFontMetrics();
-				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
-				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.5));
+				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
+				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
+				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(51, 51, 255));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.8));
-				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.85));
+				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
+				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.75));
 				    	g.setColor(new Color(255, 0, 0));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
-				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.4));
-				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.5));
+				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.6));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : OUI - "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("NON", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : OUI - "), (int) ((this.getHeight())*0.3));
+				    	g.drawString("" + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Nombre de points maximum : ") , (int) ((this.getHeight())*0.4));
 				    	g.setColor(new Color(255,153,51));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.3));
-				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.4));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Tout Atout / Sans Atout : "), (int) ((this.getHeight())*0.2));
+				    	g.drawString("OUI - ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2)+metrics.stringWidth("Annonces : "), (int) ((this.getHeight())*0.3));
 				    }
 		    		
 		    	}

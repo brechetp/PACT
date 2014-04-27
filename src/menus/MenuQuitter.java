@@ -11,7 +11,8 @@ public class MenuQuitter extends menu
 		super(image, vci, classi);
 	}
 
-	public void run() {
+	public void run() 
+	{
 		System.exit(0);
 	}
 
