@@ -139,7 +139,7 @@ public class Classification
 
 	public void lancerClassi() 
 	{
-		if (compteur>20)
+		if (compteur>15)
 		{
 			determineClasse(this.moyenneVecteur);
 			this.moyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES];

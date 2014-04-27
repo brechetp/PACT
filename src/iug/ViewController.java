@@ -165,6 +165,7 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setJ(0);
 		fen.getPan().setI(0);
 		fen.getPan().setY(0);
+		fen.getPan().setStrings(null, null);
 		fen.repaint();
 	}
 
@@ -407,6 +408,7 @@ public class ViewController implements ViewControllerInterface
 
 	public void distribution(){
 		fen.getPan().setK(10);
+		fen.getPan().setModeActuel(1);
 		fen.repaint();
 	}
 	
@@ -430,6 +432,11 @@ public class ViewController implements ViewControllerInterface
 	
 	public void modeAPropos(){
 		fen.getPan().setModeActuel(777);
+		fen.repaint();
+	}
+	
+	public void timeOutJD(int sec){
+		fen.getPan().setSecJD(sec);
 		fen.repaint();
 	}
 }

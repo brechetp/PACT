@@ -31,7 +31,7 @@ public class MenuOptions implements GlobalListener
 		
 		int optionEnCours = vci.optionEnCours();
 		
-		if (mouvement.getLabel()=="passer")
+		if (mouvement.getLabel().equals("passer"))
 		{
 
 			if (optionEnCours == 1){
@@ -49,31 +49,30 @@ public class MenuOptions implements GlobalListener
 				vci.modifOption3(EtatDuJeu.valeurFinPartie);
 			}
 		}
-		else if (mouvement.getLabel()=="retour")
+		else if (mouvement.getLabel().equals("quitter")) /*retour*/
 		{
 			if (optionEnCours == 3){
 				EtatDuJeu.valeurFinPartie=EtatDuJeu.valeurFinPartie-100;
-				vci.modifOption3(EtatDuJeu.valeurFinPartie-100);
+				vci.modifOption3(EtatDuJeu.valeurFinPartie);
 			}
 		}
-		else if (mouvement.getLabel()=="coinche")
+		else if (mouvement.getLabel().equals("coinche"))
 		{
 			if (optionEnCours != 1){
 				vci.option(optionEnCours-1);
 			}
 		}
-		else if (mouvement.getLabel()=="accepter")
+		else if (mouvement.getLabel().equals("accepter"))
 		{
 			if (optionEnCours != 4){
 				vci.option(optionEnCours+1);
 			}
 			else{
+				System.out.println("StartBelote from: MenuOptions");
 				vci.validerOptions();
 				menuBelote.startBelote(this);
 			}
 		}
-		else if (mouvement.getLabel()=="quitter")
-			System.exit(0);
 
 	}
 

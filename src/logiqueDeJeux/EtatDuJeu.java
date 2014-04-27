@@ -251,7 +251,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	
 	public void actualiseAnnonce(ViewControllerInterface vci)
 	{
-		annonce = previousAnnonce;
+		annonce = new Annonce(previousAnnonce);
 		int valeur = this.valeurAnnonce();
 		String val;
 		if (valeur==250)
@@ -288,7 +288,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	public void valideAnnonce(ViewControllerInterface vci) 
 	{
 		annonce.setTeam(numJoueur%2);
-		previousAnnonce=annonce;
+		previousAnnonce=new Annonce(annonce);
 		vci.effaceAnnonce();
 		
 	}

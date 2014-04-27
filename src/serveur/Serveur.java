@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketOptions;
+import java.net.SocketTimeoutException;
+
 import structure.AnnonceInterface;
 import structure.CarteInterface;
 import logiqueDeJeux.BeloteCoinche;
@@ -20,23 +23,21 @@ public class Serveur
 		this.belote=belote;
 	}
 	
-	public void start() 
+	public void start() throws IOException
 	{
-	    try 
-	    {
-	    	ServerSocket socketserver = new ServerSocket(6665);
-	    	System.out.println("attente de connexion");
-	    	this.socket = socketserver.accept();
-	    	System.out.println("connexion etablie");
-	    	BufferedReader
-	    	in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	    	Thread t1 = new Thread(new ServeurReception(in, belote, this));
-	    	t1.start();
-	    } 
-	    catch (IOException e) 
-	    {         
-	    	System.err.println("Erreur serveur");
-	    }
+
+		ServerSocket socketserver = new ServerSocket(6665);
+		System.out.println("attente de connexion");
+		socketserver.setSoTimeout(10000);
+		socket = socketserver.accept();
+		socket.setSoTimeout(0);
+		socketserver.setSoTimeout(0);
+		System.out.println("connexion etablie");
+		BufferedReader
+		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		Thread t1 = new Thread(new ServeurReception(in, belote, this));
+		t1.start();
+	    
 	        
 	}
 	
@@ -170,6 +171,16 @@ public class Serveur
 		} 
 		catch (IOException e) 
 		{
+			e.printStackTrace();
+		}
+	}
+
+	public void stop() 
+	{
+		try {
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,16 +1,20 @@
 package logiqueDeJeux;
 
+import machineEtat.StateMachine;
 import iug.ViewControllerInterface;
 
 public class AlarmQuit implements Runnable 
 {
 	private ViewControllerInterface vci;
 	private BeloteCoinche belote;
-	private volatile boolean quit = false;
 	private boolean distrib;
+	private JoueurDistantInterface joueurD;
+	private StateMachine machine;
 	
-	public AlarmQuit(ViewControllerInterface vci, BeloteCoinche belote, boolean distrib) 
+	public AlarmQuit(ViewControllerInterface vci, BeloteCoinche belote, boolean distrib, JoueurDistantInterface joueurD, StateMachine stateMachine) 
 	{
+		this.machine = stateMachine;
+		this.joueurD=joueurD;
 		this.distrib = distrib;
 		this.belote=belote;
 		this.vci=vci;
@@ -22,36 +26,27 @@ public class AlarmQuit implements Runnable
 			
 			for (int i = 4; i >= 0; i--) 
 			{
-				synchronized (this) {
-					if (i == 0 && quit) {
-						vci.modeQuitter(i);
-						belote.quit();
-					} else if (i == 0) {
-						if (distrib) {
-							vci.distribution();
-						} else {
-							vci.modeJeu();
-						}
-					} else {
-						if (!quit) {
-							vci.modeQuitter(i);
-						} else {
-							belote.quit();
-						}
-					}
-				}
 				Thread.sleep(1000);
+				vci.modeQuitter(i);
 			}
 			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (distrib)
+			{
+				vci.distribution();
+				machine.previousState();
+			}
+			else
+			{
+				vci.modePartie();
+				machine.previousState();
+			}
+			
+			
+		} catch (InterruptedException e) 
+		{
+			joueurD.quit();
+			belote.quit();
 		}
-	}
-
-	public synchronized	 void quit() 
-	{
-		quit=true;
 	}
 
 }

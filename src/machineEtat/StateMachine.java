@@ -19,8 +19,8 @@ public class StateMachine
 						};
 						
 	private int nbPasse=0;
-	//Alarm pour quitter
-	private AlarmQuit alarmQuit;
+	//Thread pour quitter
+	private Thread t1;
 	private State previousState;
 	private State state;
 	private EtatDuJeuInterface etat;
@@ -377,8 +377,7 @@ public class StateMachine
 			 break;
 /******************************* Quitter *****************************/
 		 case Quit:
-			 this.state=previousState;
-			 alarmQuit.quit();	
+			 t1.interrupt();	
 		 default:
 			break;
 		 }
@@ -530,61 +529,87 @@ public class StateMachine
 				vci.effaceAnnonce();
 				getEtat().setAnnonceNull();
 				vci.actualiseAnnonce(null, null);
+				this.state=State.Annonce;
 			}
 			else if (nbPasse==1)
 			{
 				vci.effaceAnnonce();
 				getEtat().actualiseAnnonce(vci);
+				this.state=State.AnnoncePasse1;
 			}
 			else if (nbPasse==2)
 			{
 				vci.effaceAnnonce();
 				getEtat().actualiseAnnonce(vci);
+				this.state=State.AnnoncePasse2;
 			}
 			else if (nbPasse==3)
 			{
 				vci.effaceAnnonce();
 				getEtat().actualiseAnnonce(vci);
+				this.state=State.AnnoncePasse3;
 			}
 			break;
 		case AnnonceAFaire2:
 			if (nbPasse==0&&getEtat().annonceFaite())
 			{
-				this.state=State.AnnonceFaite;
 				vci.effaceAnnonce();
 				getEtat().actualiseAnnonce(vci);
+				this.state=State.AnnonceFaite;
 			}	
 			else if (nbPasse==0)
 			{
 				vci.effaceAnnonce();
 				getEtat().setAnnonceNull();
 				vci.actualiseAnnonce(null, null);
+				this.state=State.Annonce;
 			}
 			else if (nbPasse==1)
 			{
 				vci.effaceAnnonce();
 				getEtat().actualiseAnnonce(vci);
+				this.state=State.AnnoncePasse1;
 			}
 			else if (nbPasse==2)
 			{
 				vci.effaceAnnonce();
 				getEtat().actualiseAnnonce(vci);
+				this.state=State.AnnoncePasse2;
 			}
 			else if (nbPasse==3)
 			{
 				vci.effaceAnnonce();
 				getEtat().actualiseAnnonce(vci);
+				this.state=State.AnnoncePasse3;
 			}
 			break;
+		case Annonce:
+			break;
+		case AnnonceFaite:
+			break;
+		case AnnoncePasse1:
+			break;
+		case AnnoncePasse2:
+			break;
+		case AnnoncePasse3:
+			break;
+			
+		case Quit:
+			break;
+/*********************************** reste du jeu ************************************/			
 		case Distribution:
+			this.previousState=this.state;
+			this.state=State.Quit;
 			vci.modeQuitter(5);
-			alarmQuit = new AlarmQuit(vci,belote,true);
-			new Thread(alarmQuit).start();
+			t1 = new Thread(new AlarmQuit(vci,belote,true,joueurD, this));
+			t1.start();
 			break;
 		default:
+			this.previousState=this.state;
+			this.state=State.Quit;
 			vci.modeQuitter(5);
-			alarmQuit = new AlarmQuit(vci,belote,false);
-			new Thread(alarmQuit).start();
+			t1 = new Thread(new AlarmQuit(vci,belote,false, joueurD, this));
+			t1.start();
 			break;
 		}
 	 }
@@ -700,6 +725,12 @@ public class StateMachine
 	
 	public boolean isStateDistrib() {
 		return this.state==State.Distribution;
+		
+	}
+
+	public void previousState() 
+	{
+		this.state=this.previousState;
 		
 	} 
 }

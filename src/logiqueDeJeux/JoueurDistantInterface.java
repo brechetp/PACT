@@ -30,5 +30,8 @@ public interface JoueurDistantInterface
 
 	//envoi vrai si le joueur a la carte en sa possession
 	public boolean aLaCarte(CarteInterface carte);
+
+	//ferme la connexion
+	public void quit();
 	
 }

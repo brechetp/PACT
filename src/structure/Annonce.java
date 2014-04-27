@@ -6,6 +6,14 @@ public class Annonce implements AnnonceInterface
 	private int value;
 	private int team; 
 	
+	//pour les copys
+	public Annonce(AnnonceInterface annonce)
+	{
+		this.suit=annonce.getAtout();
+		this.value=annonce.getValue();
+		this.team=annonce.getTeam();
+	}
+	
 	public Annonce(String suit,int value,int team)
 	{
 		this.suit=suit;

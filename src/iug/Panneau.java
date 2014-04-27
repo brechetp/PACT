@@ -98,6 +98,7 @@ public class Panneau extends JPanel {
 	
 	int dxdy=0;
 	int sec = 5;
+	int secJD = 10;
 	
 	String annonce;
 	
@@ -123,7 +124,7 @@ public class Panneau extends JPanel {
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 		    	FontMetrics metrics = g.getFontMetrics();
 		    	g.drawString("RA'PACT", (this.getWidth()/2)-(metrics.stringWidth("RA'PACT")/2) , (int) ((this.getHeight())*0.3));
-		    	g.drawString("Insérer le texte descriptif et la photo ici", (this.getWidth()/2)-(metrics.stringWidth("Insérer le texte descriptif et la photo ici")/2) , (int) ((this.getHeight())*0.6));
+		    	g.drawString("Insï¿½rer le texte descriptif et la photo ici", (this.getWidth()/2)-(metrics.stringWidth("Insï¿½rer le texte descriptif et la photo ici")/2) , (int) ((this.getHeight())*0.6));
 		    
 		    }
 		    
@@ -156,7 +157,7 @@ public class Panneau extends JPanel {
 		    		g.setColor(new Color(51, 0, 153));
 		    		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 					FontMetrics metrics2 = g.getFontMetrics();
-			    	g.drawString("Chargement des données...", (this.getWidth()/2)-(metrics2.stringWidth("Chargement des données...")/2), (int) ((this.getHeight()/2)*1.1));
+			    	g.drawString("Chargement des donnï¿½es...", (this.getWidth()/2)-(metrics2.stringWidth("Chargement des donnï¿½es...")/2), (int) ((this.getHeight()/2)*1.1));
 		    	}
 		    }
 		    
@@ -317,7 +318,7 @@ public class Panneau extends JPanel {
 			    	g.setColor(new Color(204, 0, 51));
 					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 					FontMetrics metrics = g.getFontMetrics();
-			    	g.drawString("Le joueur distant a passé", (this.getWidth()/2)-(metrics.stringWidth("Le joueur distant a passé")/2), (this.getHeight()/2));
+			    	g.drawString("Le joueur distant a passï¿½", (this.getWidth()/2)-(metrics.stringWidth("Le joueur distant a passï¿½")/2), (this.getHeight()/2));
 			    }
 			    else if (k==666){
 			    	j=0;
@@ -752,6 +753,7 @@ public class Panneau extends JPanel {
 				    	g.setColor(new Color(51, 51, 255));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.8));
+				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.85));
 				    	g.setColor(new Color(255, 0, 0));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
@@ -773,6 +775,7 @@ public class Panneau extends JPanel {
 				    	g.setColor(new Color(51, 51, 255));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.8));
+				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.85));
 				    	g.setColor(new Color(255, 0, 0));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
@@ -794,6 +797,7 @@ public class Panneau extends JPanel {
 				    	g.setColor(new Color(51, 51, 255));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.8));
+				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.85));
 				    	g.setColor(new Color(255, 0, 0));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
@@ -815,6 +819,7 @@ public class Panneau extends JPanel {
 				    	g.setColor(new Color(51, 51, 255));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.8));
+				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.85));
 				    	g.setColor(new Color(255, 0, 0));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	g.drawString("Valider les options", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
@@ -1056,6 +1061,10 @@ public class Panneau extends JPanel {
 	
 	public void setSec(int sec){
 		this.sec = sec;
+	}
+	
+	public void setSecJD(int secJD){
+		this.secJD = secJD;
 	}
 
 }

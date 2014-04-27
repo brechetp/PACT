@@ -1,5 +1,7 @@
 package logiqueDeJeux;
 
+import java.io.IOException;
+
 import serveur.Serveur;
 import structure.*;
 
@@ -9,7 +11,7 @@ public class JoueurDistant implements JoueurDistantInterface
 	private CarteListInterface cardList;
 	private Serveur serveur;
 	
-	public JoueurDistant(BeloteCoinche belote)
+	public JoueurDistant(BeloteCoinche belote) throws IOException
 	{
 		this.cardList=new CarteList();
 		this.serveur= new Serveur(belote);
@@ -61,6 +63,13 @@ public class JoueurDistant implements JoueurDistantInterface
 	public boolean aLaCarte(CarteInterface carte)
 	{
 		return cardList.contain(carte);
+	}
+
+	@Override
+	public void quit() 
+	{
+		//previen le joueurDistant
+		serveur.stop();
 	}
 
 }

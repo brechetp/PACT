@@ -1,5 +1,7 @@
 package logiqueDeJeux;
 
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 import iug.ViewControllerInterface;
@@ -12,7 +14,7 @@ public class BeloteCoinche implements GlobalListener
 	private StateMachine machine;
 	private MenuBelote menu;
 	
-	public BeloteCoinche(ViewControllerInterface vci, MenuBelote menuBelote)
+	public BeloteCoinche(ViewControllerInterface vci, MenuBelote menuBelote) throws IOException
 	{
 		this.menu=menuBelote;
 		this.machine = new StateMachine(new JoueurDistant(this), vci,this);
