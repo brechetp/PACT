@@ -17,12 +17,13 @@ public class MainMenu implements GlobalListener
 	{
 		this.vci=vci;
 		
-		menu[] tab = new menu[3];
+		menu[] tab = new menu[4];
 		CircularArray<menu> menus = new CircularArray<menu>(tab);
 		
 		tab[1] = new MenuBelote(new ImageMenu(1), vci, classi,this);
 		tab[0] = new MenuTest(new ImageMenu(2), vci, classi);
 		tab[2] = new MenuTest(new ImageMenu(3), vci, classi);
+		tab[3] = new MenuTest(new ImageMenu(4), vci, classi);
 		
 		this.liste = menus;
 	}
@@ -46,14 +47,18 @@ public class MainMenu implements GlobalListener
 			vci.droite(liste.get(0).getImage());
 		}
 		else if (mouvement.getLabel()=="coinche")
-			;//nothing pour l'instant
+		{
+			liste.moveLeft();
+			vci.gauche(liste.get(2).getImage());
+		}
 		else if (mouvement.getLabel()=="accepter")
 		{
 			vci.validerMenu();
 			liste.get(1).run(); //gere le fait que l'on as accepter
 		}
 		else if (mouvement.getLabel()=="quitter")
-			System.exit(0);
+			;//nothing
+		
 
 	}
 

@@ -10,10 +10,10 @@ public class IUGMain {
 		vc.modeMenu();
 		vc.init(new ImageMenu(2), new ImageMenu(1), new ImageMenu(3));
 		Thread.sleep(100);
-		vc.droite(new ImageMenu(3));
-		vc.gauche(new ImageMenu(3));
+		vc.droite(new ImageMenu(4));
 		vc.gauche(new ImageMenu(2));
-		vc.gauche(new ImageMenu(1));
+		vc.gauche(new ImageMenu(4));
+		vc.gauche(new ImageMenu(3));
 		vc.validerMenu();
 		vc.modeAPropos();
 		Thread.sleep(10000);
