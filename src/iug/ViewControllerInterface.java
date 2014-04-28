@@ -97,4 +97,7 @@ public interface ViewControllerInterface
 	
 	//marque la seconde pour l'attente du joueur distant
 	public void timeOutJD(int sec);
+	
+	//affiche les points à la fin de la manche
+	public void finManche(int points1, int points2, int pointsAnnonce1, int pointsAnnonce2, int pointsPartie1, int pointsPartie2, int pointsTotal1, int pointsTotal2, String annoncelol);
 }
