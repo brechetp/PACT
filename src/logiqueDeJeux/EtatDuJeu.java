@@ -142,7 +142,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		}
 	}
 
-	public void mancheTerminer() 
+	public void mancheTerminer(ViewControllerInterface vci) 
 	{
 		if(this.numJoueur%2==0)
 			this.TeamPair.dernierPli();
@@ -163,10 +163,18 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			{
 				this.pointsTeamPair = pointsTeamPair + coefCoinche*(teamPairPoint + annonce.getValue()) +pointAnnonceTeamPair;
 				this.pointsTeamImpair = pointsTeamImpair + teamImpairPoint + pointAnnonceTeamImpair;
+				vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, 
+						teamImpairPoint+pointAnnonceTeamImpair, teamPairPoint+pointAnnonceTeamPair+valeurAnnonce(), pointsTeamImpair, 
+						pointsTeamPair, ""+valeurAnnonce());
 			}
 			else
 			{
+				pointAnnonceTeamImpair+=pointAnnonceTeamPair;
+				pointAnnonceTeamPair=0;
 				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(162 + annonce.getValue())+pointAnnonceTeamImpair+pointAnnonceTeamPair;
+				vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, 
+						teamImpairPoint+pointAnnonceTeamImpair+valeurAnnonce(), 0, pointsTeamImpair, 
+						pointsTeamPair, ""+valeurAnnonce());
 			}
 		}
 		else
@@ -175,15 +183,26 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			{
 				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(teamImpairPoint + annonce.getValue()) + pointAnnonceTeamImpair;
 				this.pointsTeamPair = pointsTeamPair + teamPairPoint + pointAnnonceTeamPair;
+				vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, 
+						teamImpairPoint+pointAnnonceTeamImpair+valeurAnnonce(), teamPairPoint+pointAnnonceTeamPair, pointsTeamImpair, 
+						pointsTeamPair, ""+valeurAnnonce());
 			}
 			else
 			{
+				pointAnnonceTeamPair+=pointAnnonceTeamImpair;
+				pointAnnonceTeamImpair=0;
 				this.pointsTeamPair = pointsTeamPair + coefCoinche*(162 + annonce.getValue())+pointAnnonceTeamImpair+pointAnnonceTeamPair;
+				vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, 
+						0, teamPairPoint+pointAnnonceTeamPair+valeurAnnonce(), pointsTeamImpair, 
+						pointsTeamPair, ""+valeurAnnonce());
 			}
 		}
 		//pour les tests
 		System.out.println("Point team 1-3 = "+this.pointsTeamImpair);
 		System.out.println("Point team 2-4 = "+this.pointsTeamPair);
+		
+		vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, teamImpairPoint+pointAnnonceTeamImpair+valeurAnnonce(), teamPairPoint, pointsTeamImpair, pointsTeamPair, ""+valeurAnnonce());
+		
 		//reinitialisation des variable de manche
 		this.playedCard = new CarteList();
 		this.annonce=null;

@@ -14,9 +14,9 @@ public class AlertJoueurDistant implements Runnable
 	@Override
 	public void run() {
 		try {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 15; i++) {
 				Thread.sleep(1000);
-				vci.timeOutJD(9-i);
+				vci.timeOutJD(14-i);
 			}
 		} catch (InterruptedException e) {
 			// TODO: handle exception

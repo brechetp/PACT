@@ -108,7 +108,7 @@ public class Panneau extends JPanel {
 	
 	int dxdy=0;
 	int sec = 5;
-	int secJD = 10;
+	int secJD = 15;
 	
 	String annonce;
 	

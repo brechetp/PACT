@@ -28,7 +28,7 @@ public class Serveur
 
 		ServerSocket socketserver = new ServerSocket(6665);
 		System.out.println("attente de connexion");
-		socketserver.setSoTimeout(10000);
+		socketserver.setSoTimeout(15000);
 		socket = socketserver.accept();
 		socket.setSoTimeout(0);
 		socketserver.setSoTimeout(0);

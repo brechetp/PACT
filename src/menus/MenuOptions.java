@@ -68,8 +68,8 @@ public class MenuOptions implements GlobalListener
 			if (optionEnCours != 4){
 				vci.option(optionEnCours+1);
 			}
-			else{
-				System.out.println("StartBelote from: MenuOptions");
+			else
+			{
 				vci.validerOptions();
 				new Thread(new AlertJoueurDistant(vci)).start();
 				menuBelote.startBelote(this);

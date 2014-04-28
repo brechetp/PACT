@@ -17,7 +17,6 @@ public class testServeur
 		BeloteCoinche belote = null;
 		Serveur serveur = new Serveur(belote);
 		serveur.start();
-		System.out.println("Boo2 !!");
 		Carte RoiCa = new Carte("roi","carreau",etat);
 		CardEvent RoiCaEvent = new CardEvent(RoiCa);
 		Carte RoiCo = new Carte("roi","coeur",etat);
@@ -109,19 +108,19 @@ public class testServeur
 			serveur.envoiCarteDistribution(AsTr);
 			Thread.sleep(1000);
 			System.out.println("Envoi terminer");
-			serveur.envoiAnnonce(null, 1);
-			Thread.sleep(2000);
-			serveur.envoiAnnonce(new Annonce("trefle", 100, 1), 2);
-			Thread.sleep(2000);
-			serveur.envoiAnnonce(new Annonce("trefle", 100, 1), 3);
-			Thread.sleep(1000);
-			serveur.envoiTourAnnonce();
-			Thread.sleep(10000);
-			serveur.envoiCoinche(1);
-			Thread.sleep(3000);
-			serveur.envoiFinAnnonce();
+//			serveur.envoiAnnonce(null, 1);
+//			Thread.sleep(2000);
+//			serveur.envoiAnnonce(new Annonce("trefle", 100, 1), 2);
+//			Thread.sleep(2000);
+//			serveur.envoiAnnonce(new Annonce("trefle", 100, 1), 3);
+//			Thread.sleep(1000);
+//			serveur.envoiTourAnnonce();
+//			Thread.sleep(10000);
+//			serveur.envoiCoinche(1);
+//			Thread.sleep(3000);
+//			serveur.envoiFinAnnonce();
 			System.out.println("fin des annonces");
-			Thread.sleep(2000);
+			Thread.sleep(100);
 			serveur.envoiCarte(DixTr, 1);
 			Thread.sleep(100);
 			serveur.envoiCarte(DixPi, 2);
@@ -133,11 +132,11 @@ public class testServeur
 			Thread.sleep(10000);
 			serveur.envoiFinDeTour();
 			System.out.println("Fin de tour");
-			Thread.sleep(2000);
+			Thread.sleep(10000);
 			serveur.envoiCarte(HuiTr, 3);
 			Thread.sleep(2000);
 			serveur.waitCarte();
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			serveur.envoiCarte(HuiCa, 1);
 			Thread.sleep(2000);
 			serveur.envoiCarte(HuiCo, 2);
@@ -145,7 +144,7 @@ public class testServeur
 			
 			
 			
-			System.in.read();
+			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -15,6 +15,7 @@ public class StateMachine
 						SecondTour,SecondTour1, SecondTour2, SecondTour3, SecondTour4,
 						MontreCarte1,MontreCarte2,MontreCarte3,MontreCarte4,
 						ResteDesTours,
+						MancheTermine,
 						Quit;
 						};
 						
@@ -375,6 +376,13 @@ public class StateMachine
 					this.state = State.SecondTour4;
 				}
 			 break;
+			 
+			 
+		 case MancheTermine:
+			 etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
+			 vci.distribution();
+			 this.state=State.Distribution;
+			 break;
 /******************************* Quitter *****************************/
 		 case Quit:
 			 t1.interrupt();	
@@ -489,11 +497,9 @@ public class StateMachine
 		switch (this.state)
 		{
 		case ResteDesTours:
-			etat.mancheTerminer();
+			etat.mancheTerminer(vci);
 			this.premierAJouer++;
-			etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
-			vci.distribution();
-			this.state = State.Distribution;
+			this.state = State.MancheTermine;
 		default:
 			break;
 		}
