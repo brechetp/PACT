@@ -7,6 +7,9 @@ public class IUGMain {
 		int k = 0;
 		
 		ViewController vc = new ViewController();
+		vc.finManche(100, 200, 300, 400, 500, 600, 700, 800, "900");
+		vc.modePartie();
+		Thread.sleep(1000000);
 		vc.modeMenu();
 		vc.init(new ImageMenu(2), new ImageMenu(1), new ImageMenu(3));
 		Thread.sleep(100);
@@ -14,7 +17,7 @@ public class IUGMain {
 		vc.validerMenu();
 		vc.validerMenu();
 		vc.modeAPropos();
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 		vc.modeOption();
 		vc.option(1);
 		Thread.sleep(100);
@@ -44,17 +47,17 @@ public class IUGMain {
 		Thread.sleep(3000);
 		vc.modeAnnonce();
 		vc.joueurEnCours(1);
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		vc.joueurEnCours(2);
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		vc.afficheAnnonce("80", "coeur");
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		vc.actualiseAnnonce("100", "coeur");
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		vc.valideValeurAnnonce();
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		vc.actualiseAnnonce("100", "carreau");
-		Thread.sleep(1000);
+		Thread.sleep(100);
 		vc.valideValeurAnnonce();
 		vc.effaceAnnonce();
 		vc.joueurEnCours(3);
@@ -123,6 +126,8 @@ public class IUGMain {
 		Thread.sleep(100);
 		vc.joueurEnCours(1);
 		Thread.sleep(100);
+		vc.finManche(100, 200, 300, 400, 500, 600, 700, 800, "900");
+		Thread.sleep(10000);
 		vc.modeQuitter(5);
 		Thread.sleep(100);
 		vc.modeQuitter(4);

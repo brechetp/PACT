@@ -307,26 +307,29 @@ public class Panneau extends JPanel {
 			    	g.drawString(annonce, (this.getWidth()/2)-(metrics.stringWidth(annonce)/2), (this.getHeight()/2));
 			    }
 			    if (k==40){
-			    	g.setColor(new Color(51,0,153));
+			    	g.setColor(new Color(204,255,0));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 			    	FontMetrics metrics = g.getFontMetrics();
 			    	g.drawString("Annonce : " + annoncelol, (this.getWidth()/2)-(metrics.stringWidth("Annonce : " + annoncelol)/2),  (int) (this.getHeight()*0.2));
-			    	g.drawString("Equipe 1", (int)(this.getWidth()*0.3)-(metrics.stringWidth("Equipe 1")/2), (int) (this.getHeight()*0.3));
-			    	g.drawString("" + points1, (int)(this.getWidth()*0.3)-(metrics.stringWidth("Equipe 1")/2), (int) (this.getHeight()*0.5));
-			    	g.drawString("" + pointsAnnonce1, (int)(this.getWidth()*0.3)-(metrics.stringWidth("Equipe 1")/2), (int) (this.getHeight()*0.6));
-			    	g.drawString("" + pointsPartie1, (int)(this.getWidth()*0.3)-(metrics.stringWidth("Equipe 1")/2), (int) (this.getHeight()*0.7));
-			    	g.drawString("" + pointsTotal1, (int)(this.getWidth()*0.3)-(metrics.stringWidth("Equipe 1")/2), (int) (this.getHeight()*0.8));
+			    	g.setColor(new Color(51,0,153));
+			    	g.drawString("Equipe 1", (int)(this.getWidth()*0.5)-(metrics.stringWidth("Equipe 1")/2), (int) (this.getHeight()*0.3));
+			    	g.setColor(new Color(51,153,255));
+			    	g.drawString("" + points1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + points1)/2), (int) (this.getHeight()*0.5));
+			    	g.drawString("" + pointsAnnonce1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + pointsAnnonce1)/2), (int) (this.getHeight()*0.6));
+			    	g.drawString("" + pointsPartie1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + pointsPartie1)/2), (int) (this.getHeight()*0.7));
+			    	g.drawString("" + pointsTotal1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + pointsTotal1)/2), (int) (this.getHeight()*0.8));
+			    	g.setColor(new Color(51,0,153));
 			    	g.drawString("Equipe 2", (int)(this.getWidth()*0.7)-(metrics.stringWidth("Equipe 2")/2), (int) (this.getHeight()*0.3));
-			    	g.drawString("" + points2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("Equipe 2")/2), (int) (this.getHeight()*0.5));
-			    	g.drawString("" + pointsAnnonce2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("Equipe 2")/2), (int) (this.getHeight()*0.6));
-			    	g.drawString("" + pointsPartie2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("Equipe 2")/2), (int) (this.getHeight()*0.7));
-			    	g.drawString("" + pointsTotal2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("Equipe 2")/2), (int) (this.getHeight()*0.8));
+			    	g.setColor(new Color(51,153,255));
+			    	g.drawString("" + points2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("" + points2)/2), (int) (this.getHeight()*0.5));
+			    	g.drawString("" + pointsAnnonce2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("" + pointsAnnonce2)/2), (int) (this.getHeight()*0.6));
+			    	g.drawString("" + pointsPartie2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("" + pointsPartie2)/2), (int) (this.getHeight()*0.7));
+			    	g.drawString("" + pointsTotal2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("" + pointsTotal2)/2), (int) (this.getHeight()*0.8));
+			    	g.setColor(new Color(51,0,153));
 			    	g.drawString("Points :", (int)(this.getWidth()*0.2)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.5));
 			    	g.drawString("Annonces :", (int)(this.getWidth()*0.2)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.6));
 			    	g.drawString("Points manche :", (int)(this.getWidth()*0.2)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.7));
 			    	g.drawString("Points total :", (int)(this.getWidth()*0.2)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.8));
-			    	
-			    	
 			    }
 			    else if (k>0 && k<5){
 			    	g.setColor(new Color(204, 0, 51));

@@ -443,6 +443,10 @@ public class ViewController implements ViewControllerInterface
 	public void finManche(int points1, int points2, int pointsAnnonce1, int pointsAnnonce2, int pointsPartie1, int pointsPartie2, int pointsTotal1, int pointsTotal2, String annoncelol) {
 		fen.getPan().setPoints(points1, points2, pointsAnnonce1, pointsAnnonce2, pointsPartie1, pointsPartie2, pointsTotal1, pointsTotal2, annoncelol);
 		fen.getPan().setK(40);
+		fen.getPan().setJ(0);
+		fen.getPan().setI(0);
+		fen.getPan().setY(0);
+		fen.getPan().setStrings(null, null);
 		fen.repaint();
 	}
 }
