@@ -295,7 +295,7 @@ public class Panneau extends JPanel {
 			    	g.drawString("Distribution des cartes", (this.getWidth()/2)-(metrics.stringWidth("Distribution des cartes")/2), (this.getHeight()/2));
 			    }
 			    if (k==11){
-			    	g.setColor(new Color(51,0,153));
+			    	g.setColor(new Color(51, 102, 204));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 			    	FontMetrics metrics = g.getFontMetrics();
 			    	g.drawString("Le jeu commence !", (this.getWidth()/2)-(metrics.stringWidth("Le jeu commence !")/2), this.getHeight()/2);
@@ -311,25 +311,35 @@ public class Panneau extends JPanel {
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 			    	FontMetrics metrics = g.getFontMetrics();
 			    	g.drawString("Annonce : " + annoncelol, (this.getWidth()/2)-(metrics.stringWidth("Annonce : " + annoncelol)/2),  (int) (this.getHeight()*0.2));
-			    	g.setColor(new Color(51,0,153));
-			    	g.drawString("Equipe 1", (int)(this.getWidth()*0.5)-(metrics.stringWidth("Equipe 1")/2), (int) (this.getHeight()*0.3));
-			    	g.setColor(new Color(51,153,255));
+			    	g.setColor(new Color(51, 102, 204));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+			    	FontMetrics metrics3 = g.getFontMetrics();
+			    	g.drawString("Equipe N/S", (int)(this.getWidth()*0.5)-(metrics3.stringWidth("Equipe N/S")/2), (int) (this.getHeight()*0.3));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+			    	FontMetrics metrics2 = g.getFontMetrics();
+			    	g.drawString("(Joueurs Présents)", (int)(this.getWidth()*0.5)-(metrics2.stringWidth("(Joueurs Présents)")/2), (int) (this.getHeight()*0.34));
+			    	g.setColor(new Color(51,255,255));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 			    	g.drawString("" + points1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + points1)/2), (int) (this.getHeight()*0.5));
 			    	g.drawString("" + pointsAnnonce1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + pointsAnnonce1)/2), (int) (this.getHeight()*0.6));
 			    	g.drawString("" + pointsPartie1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + pointsPartie1)/2), (int) (this.getHeight()*0.7));
-			    	g.drawString("" + pointsTotal1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + pointsTotal1)/2), (int) (this.getHeight()*0.8));
-			    	g.setColor(new Color(51,0,153));
-			    	g.drawString("Equipe 2", (int)(this.getWidth()*0.7)-(metrics.stringWidth("Equipe 2")/2), (int) (this.getHeight()*0.3));
-			    	g.setColor(new Color(51,153,255));
-			    	g.drawString("" + points2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("" + points2)/2), (int) (this.getHeight()*0.5));
-			    	g.drawString("" + pointsAnnonce2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("" + pointsAnnonce2)/2), (int) (this.getHeight()*0.6));
-			    	g.drawString("" + pointsPartie2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("" + pointsPartie2)/2), (int) (this.getHeight()*0.7));
-			    	g.drawString("" + pointsTotal2, (int)(this.getWidth()*0.7)-(metrics.stringWidth("" + pointsTotal2)/2), (int) (this.getHeight()*0.8));
-			    	g.setColor(new Color(51,0,153));
-			    	g.drawString("Points :", (int)(this.getWidth()*0.2)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.5));
-			    	g.drawString("Annonces :", (int)(this.getWidth()*0.2)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.6));
-			    	g.drawString("Points manche :", (int)(this.getWidth()*0.2)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.7));
-			    	g.drawString("Points total :", (int)(this.getWidth()*0.2)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.8));
+			    	g.drawString("" + pointsTotal1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + pointsTotal1)/2), (int) (this.getHeight()*0.9));
+			    	g.setColor(new Color(51, 102, 204));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+			    	g.drawString("Equipe E/O", (int)(this.getWidth()*0.8)-(metrics3.stringWidth("Equipe E/O")/2), (int) (this.getHeight()*0.3));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+			    	g.drawString("(Joueur Présent + Distant)", (int)(this.getWidth()*0.8)-(metrics2.stringWidth("(Joueur Présent + Distant)")/2), (int) (this.getHeight()*0.34));
+			    	g.setColor(new Color(51,255,255));
+			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+			    	g.drawString("" + points2, (int)(this.getWidth()*0.8)-(metrics.stringWidth("" + points2)/2), (int) (this.getHeight()*0.5));
+			    	g.drawString("" + pointsAnnonce2, (int)(this.getWidth()*0.8)-(metrics.stringWidth("" + pointsAnnonce2)/2), (int) (this.getHeight()*0.6));
+			    	g.drawString("" + pointsPartie2, (int)(this.getWidth()*0.8)-(metrics.stringWidth("" + pointsPartie2)/2), (int) (this.getHeight()*0.7));
+			    	g.drawString("" + pointsTotal2, (int)(this.getWidth()*0.8)-(metrics.stringWidth("" + pointsTotal2)/2), (int) (this.getHeight()*0.9));
+			    	g.setColor(new Color(51, 102, 204));
+			    	g.drawString("Points :", (int)(this.getWidth()*0.1)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.5));
+			    	g.drawString("Annonces :", (int)(this.getWidth()*0.1)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.6));
+			    	g.drawString("Points manche :", (int)(this.getWidth()*0.1)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.7));
+			    	g.drawString("Points total :", (int)(this.getWidth()*0.1)-(metrics.stringWidth("Points :")/2), (int) (this.getHeight()*0.9));
 			    }
 			    else if (k>0 && k<5){
 			    	g.setColor(new Color(204, 0, 51));
@@ -366,7 +376,7 @@ public class Panneau extends JPanel {
 			    	g.drawString("PARTIE TERMINEE", (this.getWidth()/2)-(metrics.stringWidth("PARTIE TERMINEE")/2), (this.getHeight()/2));
 			    }
 			    if (j!=0 && h==0){
-			    	g.setColor(new Color(0,51,153));
+			    	g.setColor(new Color(204, 255, 102));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 			    	FontMetrics metrics = g.getFontMetrics();
 			    	g.drawString("C'est au joueur " + j + " de jouer !", (this.getWidth()/2)-(metrics.stringWidth("C'est au joueur " + j + " de jouer !")/2) , (int) ((this.getHeight()*0.7)));
@@ -785,7 +795,7 @@ public class Panneau extends JPanel {
 				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
 				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
 				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.setColor(new Color(51, 51, 255));
+				    	g.setColor(new Color(102, 255, 153));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
 				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.75));
@@ -807,7 +817,7 @@ public class Panneau extends JPanel {
 				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
 				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
 				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.setColor(new Color(51, 51, 255));
+				    	g.setColor(new Color(102, 255, 153));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
 				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.75));
@@ -829,7 +839,7 @@ public class Panneau extends JPanel {
 				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
 				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
 				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.setColor(new Color(51, 51, 255));
+				    	g.setColor(new Color(102, 255, 153));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
 				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.75));
@@ -851,7 +861,7 @@ public class Panneau extends JPanel {
 				    	g.drawString("Tout Atout / Sans Atout : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.2));
 				    	g.drawString("Annonces : ", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.3));
 				    	g.drawString("Nombre de points maximum : " + option3, (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.4));
-				    	g.setColor(new Color(51, 51, 255));
+				    	g.setColor(new Color(102, 255, 153));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 				    	g.drawString("Attente de connexion du joueur distant...", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.7));
 				    	g.drawString(secJD + " secondes restantes", (this.getWidth()/2)-(metrics.stringWidth("Tout Atout / Sans Atout : OUI - NON")/2) , (int) ((this.getHeight())*0.75));
