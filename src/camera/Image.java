@@ -21,14 +21,12 @@ public class Image {
 	
 	public static final int DISTANCE_THRESHOLD = 30; // pour la distance entre deux images
 	private static final int NEIGHBOUR_NUMBER = 0; // pour l'algorithme de distance
-	private static final int B_RED_THRESHOLD = 120;
-	private static final int G_RED_THRESHOLD = 120;
-	private static final int R_RED_THRESHOLD = 150;
-	private static final int BLACK_THRESHOLD = 100;
-	private static int[] WHITE_VECTOR = new int[]{210, 210, 210};
-	private static final int COLOR_THRESHOLD = 40;
-	private static final int[] RED_VECTOR = new int[]{170,170, 180};
-	private static final int[] BLACK_VECTOR = new int[]{60, 60, 60};
+
+	private static int[] WHITE_VECTOR = new int[]{220, 220, 220};
+	private static int[] GRAY_VECTOR = new int[]{180, 180, 180};
+	private static final int COLOR_THRESHOLD = 10;
+	private static final int[] RED_VECTOR = new int[]{87,88, 200};
+	private static final int[] BLACK_VECTOR = new int[]{70, 64, 67};
 
 	protected int compt =0; //compte le nombre de pixels non blancs
 
@@ -260,7 +258,12 @@ public class Image {
 
 	public static boolean isWhite(int[] rgbByte){
 
-		return (colorDistance(rgbByte, WHITE_VECTOR)<COLOR_THRESHOLD || (rgbByte[0] > WHITE_VECTOR[0] && rgbByte[1] > WHITE_VECTOR[1] && rgbByte[2] > WHITE_VECTOR[2] ));
+		return (/*colorDistance(rgbByte, WHITE_VECTOR)<COLOR_THRESHOLD || */(rgbByte[0] > WHITE_VECTOR[0] && rgbByte[1] > WHITE_VECTOR[1] && rgbByte[2] > WHITE_VECTOR[2] ));
+	}
+	
+	public static boolean isGray(int[] rgbByte){
+
+		return (/*colorDistance(rgbByte, WHITE_VECTOR)<COLOR_THRESHOLD || */(rgbByte[0] > GRAY_VECTOR[0] && rgbByte[1] > GRAY_VECTOR[1] && rgbByte[2] > GRAY_VECTOR[2] ));
 	}
 
 	private static int colorDistance(int[] rgbByte, int[] reference) {
@@ -271,8 +274,7 @@ public class Image {
 
 	public static boolean isRed(int[] rgbByte){
 
-		return /*(colorDistance(rgbByte, RED_VECTOR)<COLOR_THRESHOLD);
-				rgbByte[0] < RED_VECTOR[0] && rgbByte[1] < RED_VECTOR[1] && */rgbByte[2] > RED_VECTOR[2];
+		return ((float) 2*rgbByte[2]/(rgbByte[0]+rgbByte[1])) > 1.3;
 	}
 
 	public static boolean isBlack(int[] rgbByte){
@@ -359,7 +361,7 @@ public class Image {
 		return bin ;
 	}
 
-	public Image resample(int[][] coin, int width, int height){ // reechantillonnage on donne les coins et les dimensions de la nouvelle image
+	public Image resample(int[][] coin, int width, int height) throws Exception{ // reechantillonnage on donne les coins et les dimensions de la nouvelle image
 
 		int [][][] coins = new int[2][4][2];
 		coins[0] = coin;
@@ -383,7 +385,8 @@ public class Image {
 
 		}
 		Matrice X = new Matrice(x);
-		System.out.println(X.isInversible());
+		if (! X.isInversible())
+			throw new Exception("Le rééchantillonnage n'a pas foncitonné");
 		Matrice Y = new Matrice(y);
 		Matrice Xinv = X.getMatriceInverse();
 		Matrice A = Xinv.multiply(Y);
@@ -482,7 +485,7 @@ public class Image {
 					}
 				}
 			}
-		} else if (version == 2){
+		} else if (version == 2){ // rouge ou noir
 
 			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < height; j++) {
@@ -490,6 +493,29 @@ public class Image {
 					int[] rgbByte = getRgbByte(i, j);
 
 					if (isBlack(rgbByte) || isRed(rgbByte)) {
+
+						for (int p = 0; p < 3; p++) {
+							tab[3 * i + 3 * width * j + p] = 255;
+						}
+					} else {
+						for (int p = 0; p < 3; p++) {
+
+							tab[3 * i + 3 * width * j + p] = 0;
+
+						}
+
+					}
+				}
+			}
+
+		}else if (version == 3){ // rouge ou noir
+
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+
+					int[] rgbByte = getRgbByte(i, j);
+
+					if (!isGray(rgbByte)) {
 
 						for (int p = 0; p < 3; p++) {
 							tab[3 * i + 3 * width * j + p] = 255;
@@ -622,6 +648,22 @@ public class Image {
 	public void setWhiteVector(int[] whiteVector){
 		
 		WHITE_VECTOR = whiteVector;
+	}
+	
+	public int[] getARGBArray(){
+		
+		int[] res = new int[height*width*4];
+		for (int i = 0; i < height*width; i++){
+			int[] rgbByte = getRgbByte(i);
+			res[4*i] = 255;
+			for(int p =1; p<4; p++){
+				res[4*i+p] = rgbByte[4*i+p-1];
+			}
+		}
+		
+	
+		return res;
+	
 	}
 
 }

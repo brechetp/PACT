@@ -1,5 +1,6 @@
 package camera;
 
+import patternmatching.Matrice;
 import structure.Carte;
 import logiqueDeJeux.BeloteCoinche;
 import machineEtat.CardEvent;
@@ -49,17 +50,24 @@ public class Match implements Runnable {
 		
 		int[][] coins = bin3.getCornersRansac(3, (float)largeImg.getHeight()/im2.getHeight());
 		
-		Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
-		carte.save("data/courant/resample/carte"+compteur+".jpg");
+		Card carte;
+		try {
+			carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage());
+			carte.save("data/courant/resample/carte"+compteur+".jpg");
+			Capture.write(carte.getLetter().getCenteredLetter(), "data/courant/letters/letter"+compteur+".txt");
+			new BinaryImage(carte.getSymbol().getMatrix()).save("data/courant/resample/symbol"+compteur+".jpg");
 	
-		new BinaryImage(carte.getSymbol().getMatrix()).save("data/courant/resample/symbol"+compteur+".jpg");
-	
-		String type = carte.getType();
-		carte.printInfos("data/test/info.txt");
-		
-		
-		newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
+			String type = carte.getType();
+			carte.printInfos("data/test/info.txt");
+			
+			
+			newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 	}
 	
 	

@@ -16,12 +16,14 @@ public class CaptureLive implements Runnable {
 
 	private static final int DISTANCE_THRESHOLD = 40;
 
-	private static final int WEBCAM = 0;
+	private static final int WEBCAM = 1;
 	private static final int HEIGHT = 360;
 	private static final int WIDTH = 640;
 	private static final int DIF_NUM =  20; // nombre de pixels qui doivent etre differents
 	private static final int NEIGHBOUR_NUMBER = 0;
 	private BeloteCoinche belote;
+
+	private boolean run;
 
 	public CaptureLive(BeloteCoinche belote){
 		this.setBelote(belote);
@@ -53,7 +55,7 @@ public class CaptureLive implements Runnable {
 (en quelque sorte en forcant un appel au "Garbage Collector"*/
 			CvMemStorage storage = CvMemStorage.create();
 
-			while ((image2 = opencv_highgui.cvQueryFrame(capture)) != null ) {
+			while ((image2 = opencv_highgui.cvQueryFrame(capture)) != null && run) {
 				cvSaveImage("data/courant/capture/capture"+compteur%1000+".jpg", image2);
 				if (compteur == 10){
 					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
@@ -81,12 +83,12 @@ public class CaptureLive implements Runnable {
 						if (hasMoved){
 							hasMoved = false;
 
-						
+
 
 
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 1080);
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 1920);
-			
+
 							largeImage =	opencv_highgui.cvQueryFrame(capture).clone();
 							//cvClearMemStorage(storage);
 
@@ -169,9 +171,6 @@ public class CaptureLive implements Runnable {
 	private static boolean binDifferent(IplImage image1, IplImage image2,
 			int i, int j) {
 
-		boolean res = false;
-
-		int distance = 0 ;
 		int binValue = getBinValue(image1, i, j);
 		int binValue2 = getBinValue(image2, i,j); // pixel de l'image1
 
@@ -180,11 +179,11 @@ public class CaptureLive implements Runnable {
 
 
 	private static int getBinValue(IplImage image1, int i, int j) {
-		
+
 		int res = 0;
 		if (Image.isWhite(getRgbByte(image1,i,j)))
 			res = 1;
-		
+
 		return res;
 	}
 
@@ -249,6 +248,11 @@ public class CaptureLive implements Runnable {
 
 	public void setBelote(BeloteCoinche belote) {
 		this.belote = belote;
+	}
+	
+	public void stop(){
+		
+		run = false;
 	}
 
 

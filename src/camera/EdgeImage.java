@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class EdgeImage extends BinaryImage {
 
-	private static final double lineThreshold = 0.5; // distance � laquelle un point est dans une droite
+	private static final double lineThreshold = 1; // distance � laquelle un point est dans une droite
 
 
 
@@ -70,7 +70,7 @@ public class EdgeImage extends BinaryImage {
 			}
 		}
 		else{ //type==5
-			while ( i < 100*size){
+			while ( i < 30*size){
 				i++;
 				int[][] points = new int[5][2];
 				double corners[][] = new double[4][2];

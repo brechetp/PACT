@@ -36,7 +36,7 @@ public class Letter extends BinaryImage{
 		int res = 0;
 		int[] barycentre = barycentre();
 		center(barycentre); // centre l'image autour de son barycentre
-		Capture.write(centeredLetter, "data/test/lettre.txt");
+		
 
 		int minDistance = Integer.MAX_VALUE;
 		int d =0;

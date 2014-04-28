@@ -21,7 +21,7 @@ public class Capture {
 
 
 	private static final int DISTANCE_THRESHOLD = 100;
-	private static final int WEBCAM = 0;
+	private static final int WEBCAM = 1;
 	//	private static final double GAMMA = 0.2;
 	private static double HEIGHT = CaptureLive.getHeight();
 	private static double WIDTH = CaptureLive.getWidth();
@@ -99,6 +99,36 @@ public class Capture {
 		return res;
 	}
 
+	public static IplImage captureFrame(int width, int height){
+
+
+		IplImage res = null ;
+		try
+		{
+
+			CvCapture capture = opencv_highgui.cvCreateCameraCapture(WEBCAM);
+
+			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, height);
+			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, width);
+
+			IplImage img=opencv_highgui.cvQueryFrame(capture);
+
+			if(img!=null)
+			{
+				res = img.clone();
+			}
+			opencv_highgui.cvReleaseCapture(capture);
+
+
+		}
+		catch(Exception ae)
+		{
+			ae.printStackTrace();
+
+
+		}
+		return res;
+	}
 	public static void capture(int debut, int compt, String fileName){ //enregistre compt images
 
 		for(int i = debut; i<compt; i++){
@@ -311,12 +341,12 @@ public class Capture {
 
 				Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
 				carte.save(capture+"bis"+i+".jpg");
-				BinaryImage binary = (carte.binaryThreshold(0)); 
+				BinaryImage binary = (carte.binaryThreshold(3)); 
 				binary.save(capture+"threshold"+i+".jpg");
 
-				carte.cut(0, 0, 100, 160).binaryThreshold(0).largestComponent().save(capture+"ter"+i+".jpg");
-				Letter letter = new Letter (carte.cut(0,0, 100, 160).binaryThreshold(0).largestComponent().getBinaryMatrix());
-				write(letter.getCenteredLetter(), fileName+(i-1)+".txt");
+				carte.cut(0, 0, 100, 160).binaryThreshold(3).largestComponent().save(capture+"ter"+i+".jpg");
+				Letter letter = new Letter (carte.cut(0,0, 100, 160).binaryThreshold(3).largestComponent().getBinaryMatrix());
+				write(carte.getLetter().getCenteredLetter(), fileName+(i-1)+".txt");
 
 
 

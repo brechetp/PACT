@@ -16,8 +16,8 @@ public class Card extends Image{
 
 
 	// double [] matchTable = new double [5];
-	private static double WIDTH = 84.2868767364347 /*67.8627318771778*/; // taille de la carte sur l'ecran
-	private static double HEIGHT = 119.70577587988592 /*96.99174958400414*/;
+	private static double WIDTH = 67.95586803212802 /*67.8627318771778*/; // taille de la carte sur l'ecran
+	private static double HEIGHT =  96.79876032264049 /*96.99174958400414*/;
 
 
 
@@ -207,20 +207,26 @@ public class Card extends Image{
 
 
 
-	public String getType(){
+	public String getType() throws Exception{
 
 		String string;
 
 		if (isRed(colorAverage)) // carte rouge
 			string = "1";
-		else
+		else{
 			string = "0"; // carte noire
+			if (number ==1 && compt > 50000)
+				return string+"10"; // As de pique
+			else if (number == 1)
+				return string+"00";
+		}
+		
 
 		string = string+symbol.getCardValue(string);
 
 		if (number ==0)
-			string = null;
-		else if (number ==1 && compt < 100000) // as
+			throw new Exception("Pas de composantes sur la carte");
+		else if (number ==1 && compt < 100000) // as autre que pique
 			string = string+0;
 		else if (number >= 7 && number <= 10) // 7, 8, 9, 10
 			string =string+ (number-6);
@@ -231,11 +237,11 @@ public class Card extends Image{
 
 	}
 	
-	public void printInfos(String fileName){
+	public void printInfos(String fileName) throws Exception{
 		try {
 			FileWriter fw = new FileWriter(fileName,true);
 			String infos = colorAverage[0] +" "+ colorAverage[1] +" "+ colorAverage[2]+" ";
-			infos += number +" ";
+			infos += number +" "+compt+" ";
 			if(isRed(colorAverage))
 				infos += symbol.getMatchTable("1")[0]+" " +symbol.getMatchTable("1")[1]+" ";
 			else
@@ -253,9 +259,10 @@ public class Card extends Image{
 	public int[][] getFirstSymbol(){
 		
 		
-		BinaryImage bin = (this.binaryThreshold(0)); // ce qui n'est pas blanc	
+		BinaryImage bin = (this.binaryThreshold(3)); // Ce qui n'est pas gris
 		bin.save("data/database/symbols/test.jpg");
 		letter = new Letter (bin.cut(0,0, 100, 160).largestComponent().getBinaryMatrix());
+		
 		int[] res = bin.componentsNumberAndFirst();
 		number = res[0];
 		new BinaryImage(bin.filter(res[1])).save("data/test/image/image1.jpg");
@@ -288,7 +295,7 @@ public class Card extends Image{
 	}
 
 
-
+/*
 	public String find(CardDatabase[][] tab){
 
 		String res;
@@ -305,7 +312,7 @@ public class Card extends Image{
 
 
 	}
-	/*public String find(CardDatabase[] tab){
+	/public String find(CardDatabase[] tab){
 
 			String res;
 			int nbr = getType();
@@ -320,7 +327,7 @@ public class Card extends Image{
 
 
 
-	public ArrayList<Double> getSignature(){
+	public ArrayList<Double> getSignature() throws Exception{
 		return symbol.getSignature();
 	}
 
@@ -349,6 +356,11 @@ public class Card extends Image{
 	public Symbol getSymbol() {
 		// TODO Auto-generated method stub
 		return symbol;
+	}
+
+	public Letter getLetter() {
+		// TODO Auto-generated method stub
+		return letter;
 	}
 
 

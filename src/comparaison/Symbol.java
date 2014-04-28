@@ -17,6 +17,7 @@ import camera.Image;
 
 public class Symbol {
 
+	private static final double[][] MOYENNE = new double[][]{{241647.08, 222249.297},{172131.1308, 181666.8602}}; 
 	private static ArrayList<ArrayList<Double>> SYMBOL_DATABASE =
 			new ArrayList<ArrayList<Double>>();
 	private static int[][][][] SYMBOL_DATABASE2;
@@ -44,8 +45,8 @@ public class Symbol {
 		this.doubleTab = binaryMatrix; // a 17h pile direction odeon 
 		// n'oublie pas
 		// <3  <3  <3
-/*		int somme =0;
-		
+		/*		int somme =0;
+
 		for(int i = 0; i< size2; i++)
 		{
 			for (int j =0; j < size1; j++){
@@ -69,8 +70,8 @@ public class Symbol {
 		signature = new Hashtable<Double, Double>();
 		signatureTable = new ArrayList<Double>();
 	}
-	
-/*	public int getRedAverage(){
+
+	/*	public int getRedAverage(){
 		return redAverage;
 	}*/
 
@@ -114,26 +115,30 @@ public class Symbol {
 
 	}
 
-	public void computeSignature(){
+	public void computeSignature() throws Exception{
 
-		try{//détermination du barycentre
-			int xb = 0;
-			int yb =0;
-			int sum = 0;
+		//détermination du barycentre
+		int xb = 0;
+		int yb =0;
+		int sum = 0;
 
-			for (int i =0; i<size2; i++)
+		for (int i =0; i<size2; i++)
+		{
+			for (int j=0; j<size1; j++)
 			{
-				for (int j=0; j<size1; j++)
-				{
-					xb = xb+j*doubleTab[i][j];
-					sum = sum + doubleTab[i][j];
-					yb = yb+i*doubleTab[i][j];;
-				}
+				xb = xb+j*doubleTab[i][j];
+				sum = sum + doubleTab[i][j];
+				yb = yb+i*doubleTab[i][j];;
 			}
+		}
+		if (sum !=0){
 			xb=xb/sum;
 			yb=yb/sum;
+		}
+		else
+			throw new Exception("Pas de symbol trouvé");
 
-			/*remplissage de la table
+		/*remplissage de la table
 		for (int s=0 ; s<perimeter ; s++){
 			int t =0;
 			if (doubleTab[(int) Math.floor(t*Math.cos(s))+xb][(int) Math.floor(t*Math.sin(s))+yb]==0 ){
@@ -142,42 +147,38 @@ public class Symbol {
 				t++;
 			}
 		}*/
-			double key =0;
-			for (int i=yb-taille ; i<yb+taille ; i++){
-				for (int k = xb-taille; k<xb+taille; k++){
-					if (doubleTab[i][k]==1){
-						if(k-xb != 0)
-							key=Math.atan((i-yb)/(k-xb));
+		double key =0;
+		for (int i=yb-taille ; i<yb+taille ; i++){
+			for (int k = xb-taille; k<xb+taille; k++){
+				if (doubleTab[i][k]==1){
+					if(k-xb != 0)
+						key=Math.atan((i-yb)/(k-xb));
 
-						double radius=(i-yb)*(i-yb) + (k-xb)*(k-xb);
-						if (signature.containsKey(key)==false){
+					double radius=(i-yb)*(i-yb) + (k-xb)*(k-xb);
+					if (signature.containsKey(key)==false){
+						signature.put(key, radius);
+					} else {
+						if (radius > signature.get(key)){
 							signature.put(key, radius);
-						} else {
-							if (radius > signature.get(key)){
-								signature.put(key, radius);
-							}
 						}
 					}
 				}
 			}
-
-			Set<Double> set = signature.keySet(); //hashtable
-			Object[] tab = set.toArray();
-			Arrays.sort(tab);
-
-			for (int i=0 ; i<tab.length ; i++){
-				signatureTable.add(i,signature.get(tab[i]));
-			}
 		}
-		catch(Exception e){
-			System.out.println("Pas de symbol trouvé");
-			e.printStackTrace();
+
+		Set<Double> set = signature.keySet(); //hashtable
+		Object[] tab = set.toArray();
+		Arrays.sort(tab);
+
+		for (int i=0 ; i<tab.length ; i++){
+			signatureTable.add(i,signature.get(tab[i]));
 		}
+
 
 
 	}
 
-	public ArrayList<Double> getSignature(){
+	public ArrayList<Double> getSignature() throws Exception{
 
 		if (signatureTable.size() == 0)
 			computeSignature();
@@ -186,7 +187,7 @@ public class Symbol {
 
 
 
-	public int getCardValue (String color){
+	public int getCardValue (String color) throws Exception{
 
 		if (signatureTable.size() == 0)
 			computeSignature();
@@ -209,7 +210,7 @@ public class Symbol {
 		// comparaison avec chaque carte de la base de donnée	
 		for (int i=0 ; i < 2 ; i++)
 		{
-			matchTable[i] = compare(color, i);
+			matchTable[i] = compare(color, i) ;//-MOYENNE[(int) color.charAt(0) - 48][i];
 		}
 
 		// détermination du meilleur match	
@@ -225,8 +226,8 @@ public class Symbol {
 		}
 		return iMax;
 	}
-	
-	public double[] getMatchTable(String color){
+
+	public double[] getMatchTable(String color) throws Exception{
 		if (matchTable == null)
 			getCardValue(color);
 		return matchTable;
@@ -238,7 +239,7 @@ public class Symbol {
 		int color = (int) string.charAt(0) - 48; // 0 si noir, 1 si rouge
 		int minsize = Math.min(perimeter,Math.min(SYMBOL_DATABASE.get(2*color+forme).size(), SYMBOL_DATABASE.get(2*color+(1-forme)).size()));
 
-		for (int j=0 ; j<10 ; j++){//translation désactivée, réactiver avec minsize
+		for (int j=0 ; j<1 ; j++){//translation désactivée, réactiver avec minsize
 			rep = 0;
 			for (int k =0; k<minsize; k++){
 				double pixel = (signatureTable.get((k+j)%minsize)-average)/sigma;
@@ -249,11 +250,11 @@ public class Symbol {
 		// détermination de la translation la plus proche
 		rep = 0;
 		//int formeMax = 0;
-		for (int k=0 ; k < 10 ; k++)
+		for (int k=0 ; k < 1 ; k++)
 		{
 			if (rep<translaTable[k]) 
 			{
-				 rep = translaTable[k];
+				rep = translaTable[k];
 			}
 		}
 		return rep;
@@ -265,9 +266,9 @@ public class Symbol {
 	}
 
 
-public int getCardValue2 (String color){
-		
-		
+	public int getCardValue2 (String color){
+
+
 		sigma=1; average = 0; // A enlever si niveaux de gris
 
 		// comparaison avec chaque carte de la base de donnée	
@@ -290,47 +291,47 @@ public int getCardValue2 (String color){
 		return iMin;
 	}
 
-private double compare2(String string, int forme) {
-	
-	double rep=0;
-	int color1 = (int) string.charAt(0) - 48; // 0 si noir, 1 si rouge
+	private double compare2(String string, int forme) {
+
+		double rep=0;
+		int color1 = (int) string.charAt(0) - 48; // 0 si noir, 1 si rouge
 
 		rep = 0;
-		
+
 		for (int k =0; k<size2; k++)
 		{
 			for (int j=0; j<size1; j++)
 			{
-			rep = rep + doubleTab[k][j]*SYMBOL_DATABASE2[color1][forme][k][j];
+				rep = rep + doubleTab[k][j]*SYMBOL_DATABASE2[color1][forme][k][j];
 			}
 		}
-	
-	return rep;
-}
 
-public static void setSymbolDatabase2(String fileName) throws IOException{
+		return rep;
+	}
 
-	for(int color =0; color<2; color++){
-		for(int forme =0; forme<2; forme++){
-			FileReader fis = new FileReader(fileName+(color)+(forme)+".txt");
-			BufferedReader bis = new BufferedReader (fis);
-			String line;
-			int j =0; // compte les colonnes
+	public static void setSymbolDatabase2(String fileName) throws IOException{
+
+		for(int color =0; color<2; color++){
+			for(int forme =0; forme<2; forme++){
+				FileReader fis = new FileReader(fileName+(color)+(forme)+".txt");
+				BufferedReader bis = new BufferedReader (fis);
+				String line;
+				int j =0; // compte les colonnes
 
 
-			while((line = bis.readLine()) != null){
+				while((line = bis.readLine()) != null){
 					for(int i = 0; i < line.length(); i++){
 
 						SYMBOL_DATABASE2[color][forme][j][i]= (int) line.charAt(i) - 48;
-						
+
 					}
 					j++;
 
-			
-			bis.close();
+
+					bis.close();
+				}
+			}
 		}
-		}
-	}
 	}
 
 }

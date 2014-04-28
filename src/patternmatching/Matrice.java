@@ -1,11 +1,11 @@
 package patternmatching;
 
-/** Dfinition de la classe Matrice (Matrix) dans lequel nous trouvons beaucoup
-  * de mthodes, d'oprations sur les matrices
+/** Dï¿½finition de la classe Matrice (Matrix) dans lequel nous trouvons beaucoup
+  * de mï¿½thodes, d'opï¿½rations sur les matrices
   * 
   * Remarque : 
   * Cette classe est seulement un outils dans le but d'effectuer des calculs sur
-  * les graphes. Ceci n'est pas une classe complte pour la manipulation de  
+  * les graphes. Ceci n'est pas une classe complï¿½te pour la manipulation de  
   * matrice.
   * 
   * @author ASLAN Hikmet
@@ -41,16 +41,17 @@ public class Matrice
 		this.coeff = mat;
 	}
 
+
 	//----------------------------------------------//
 	//					  		 SETTER					   	//
 	//----------------------------------------------//	
-	// dfinit une matrice de type double[][]
+	// dï¿½finit une matrice de type double[][]
 	public void setMatrice(double[][] mat)
 	{
 		this.coeff = mat;
 	}
 	
-	// dfinit une valeur ˆ la position i et j
+	// dï¿½finit une valeur ï¿½ la position i et j
 	// i - ligne
 	// j - col
 	public void setValue(int i, int j, double value)
@@ -59,7 +60,7 @@ public class Matrice
 	}
 	
 	
-	// on dfinit la taille de la mtrice
+	// on dï¿½finit la taille de la mtrice
 	public void setLength(int i, int j)
 	{
 		this.coeff = new double[i][j];
@@ -87,13 +88,13 @@ public class Matrice
 		return this.coeff[0].length;
 	}
 	
-	// retourne la valeur ˆ la position i et j
+	// retourne la valeur ï¿½ la position i et j
 	public double getValue(int i, int j)
 	{
 		return this.coeff[i][j];
 	}
 	
-	// retourne le dterminant d'une matrice
+	// retourne le dï¿½terminant d'une matrice
 	public double getDeterminant()
 	{
 		Matrice a = null;
@@ -127,7 +128,7 @@ public class Matrice
 				a.setValue(i,j,(int)Math.pow(-1,i+j)*(tmp.getDeterminant()/det));
 			}
 			
-		// on transpose la matrice les coeffcients seront positionn de faon incorrect
+		// on transpose la matrice les coeffcients seront positionnï¿½ de faï¿½on incorrect
 		return a.getMatriceTranspose();
 	}
 	
@@ -174,7 +175,7 @@ public class Matrice
 	
 	/**
 	  * Retourne le nombre de combinaison a partir d'une matrice
-	  * dfinit a partir d'un graphe.
+	  * dï¿½finit a partir d'un graphe.
 	  * @param 
 	  * 	sA - sommet A
 	  *	sB - sommet B
@@ -235,7 +236,7 @@ public class Matrice
 	
 	/** Retourne la distance (nombre d'arrete) entre 
 	  * entre deux sommets sA et sB, tel que sA <= sB
-	  * si sA > sB, mthode renvoi -1 pour erreur
+	  * si sA > sB, mï¿½thode renvoi -1 pour erreur
 	  */
 	public double getDistanceGraphe(int sA, int sB)
 	{
@@ -326,7 +327,7 @@ public class Matrice
 	}
 	
 	// GRAPHE
-	// retourne les deux sommets les plus loigns
+	// retourne les deux sommets les plus ï¿½loignï¿½s
 	public int[] getSommetPLusDistant()
 	{
 		int[] sommets = new int[2];
@@ -448,7 +449,7 @@ public class Matrice
 	}
 	
 	
-	// definit si deux matrices sont quivalentes
+	// definit si deux matrices sont ï¿½quivalentes
 	public boolean equals(Matrice matrice)
 	{
 		for(int i=0; i<this.getRows(); i++)
@@ -462,7 +463,7 @@ public class Matrice
 	//----------------------------------------------//
 	//	   		  		 METHODS IS...					   //
 	//----------------------------------------------//	
-	// dtermine si la matrice est symetrique
+	// dï¿½termine si la matrice est symetrique
 	public boolean isSymetric()
 	{
 		if (this.getRows() == this.getColumns())
@@ -476,7 +477,7 @@ public class Matrice
 		return true;				
 	}
 	
-	// dtermine si la matrice est triangulaire
+	// dï¿½termine si la matrice est triangulaire
 	public boolean isTriangularMatrix()
 	{
 		for(int i=0; i<this.getRows(); i++)
@@ -487,13 +488,13 @@ public class Matrice
 		return true;
 	}
 	
-	// dtermine si la matrice est une matrice unit
+	// dï¿½termine si la matrice est une matrice unitï¿½
 	public boolean isUnitMatrix()
 	{		
 		return (this.equals(this.getMatriceIdentity()));
 	}
 	
-	// dtermine si la matrice est inversible
+	// dï¿½termine si la matrice est inversible
 	public boolean isInversible()
 	{
 		return (this.getDeterminant() != 0);
