@@ -23,7 +23,7 @@ public class CaptureLiveDistribution implements Runnable {
 	private static final int NEIGHBOUR_NUMBER = 0;
 	private BeloteCoinche belote;
 
-	private boolean run ;
+	private boolean run = true ;
 	public CaptureLiveDistribution(BeloteCoinche belote){
 		this.setBelote(belote);
 	}

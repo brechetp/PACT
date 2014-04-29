@@ -498,6 +498,25 @@ public class BinaryImage extends GrayImage {
 
 
 	}
+	
+	public BinaryImage xor(BinaryImage image){
+
+		int[][] res = new int[height][width];
+
+		for(int j = 0; j<height; j++){
+			for(int i =0; i< width; i++){
+
+				res[j][i] = ((this.get(i,j) + image.get(i, j)) % 2);
+			}
+		}
+
+
+		return new BinaryImage(res);
+
+
+	}
+	
+	
 
 	/*
 	 * Detection de contours

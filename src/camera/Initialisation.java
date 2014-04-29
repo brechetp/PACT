@@ -1,11 +1,5 @@
 package camera;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
-import com.googlecode.javacv.cpp.opencv_highgui;
-
 import comparaison.Letter;
 import comparaison.Symbol;
 

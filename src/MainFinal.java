@@ -3,6 +3,7 @@ import java.io.IOException;
 import adaBoost.BaseApprentissage;
 import adaBoost.ClassiFinal;
 import adaBoost.Classification;
+import camera.Initialisation;
 
 import com.leapmotion.leap.Controller;
 
@@ -22,6 +23,9 @@ public class MainFinal {
 		//Classification
 		ClassiFinal[] classilol = BaseApprentissage.main(null);
 		Classification classi = new Classification(classilol);
+		
+		Initialisation.setSymbolDatabase("data/database/symbols/text");
+		Initialisation.setLetterDatabase("data/database/letters/text");
 		
 		vc.modeMenu();
 		

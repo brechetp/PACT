@@ -1,23 +1,26 @@
 package comparaison;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.ArrayList;
 import java.util.Set;
 
-import com.googlecode.javacv.cpp.opencv_core.IplImage;
-
 import camera.Card;
-import camera.Image;
 
 
 
 public class Symbol {
 
-	private static final double[][] MOYENNE = new double[][]{{241647.08, 222249.297},{172131.1308, 181666.8602}}; 
+	
+	private static final double RED_OO = 36000;//37790;
+	private static final double BLACK_OO = -4910.2;
+	private static final double RED_COEFF =0.7009;
+	private static final double BLACK_COEFF = 0.9831; 
 	private static ArrayList<ArrayList<Double>> SYMBOL_DATABASE =
 			new ArrayList<ArrayList<Double>>();
 	private static int[][][][] SYMBOL_DATABASE2;
@@ -35,7 +38,7 @@ public class Symbol {
 	double [] matchTable2 = new double [2];
 	int taille ;
 	private ArrayList<Double> signatureTable;
-	private int redAverage = 0;
+
 
 	public Symbol (int[][] binaryMatrix, Card carte){
 		this.size1 = binaryMatrix[0].length;
@@ -187,7 +190,7 @@ public class Symbol {
 
 
 
-	public int getCardValue (String color) throws Exception{
+	public int getCardValue (String string) throws Exception{
 
 		if (signatureTable.size() == 0)
 			computeSignature();
@@ -206,6 +209,7 @@ public class Symbol {
 			variance += Math.pow(signatureTable.get(i)-average,2);
 		}
 		sigma = Math.sqrt(variance/(perimeter)); //sigma=1; average = 0;
+		int color = (int) string.charAt(0) - 48; // 0 si noir, 1 si rouge
 
 		// comparaison avec chaque carte de la base de donnée	
 		for (int i=0 ; i < 2 ; i++)
@@ -214,18 +218,16 @@ public class Symbol {
 		}
 
 		// détermination du meilleur match	
-		double max = 0;
-		int iMax = 0;
 
-		for (int i=0 ; i < 2 ; i++)
-		{
-			if (max < matchTable[i]) 
-			{
-				iMax = i; max = matchTable[i];
-			}
-		}
-		return iMax;
+
+		if (matchTable[1] > ((1-color)*BLACK_COEFF+color*RED_COEFF)*matchTable[0]+((1-color)*BLACK_OO+color*RED_OO))
+			return 1;
+		else
+			return 0;
+
 	}
+
+
 
 	public double[] getMatchTable(String color) throws Exception{
 		if (matchTable == null)
@@ -233,10 +235,10 @@ public class Symbol {
 		return matchTable;
 	}
 
-	public double compare(String string, int forme ){
+	public double compare(int color, int forme ){
 
 		double rep=0;
-		int color = (int) string.charAt(0) - 48; // 0 si noir, 1 si rouge
+
 		int minsize = Math.min(perimeter,Math.min(SYMBOL_DATABASE.get(2*color+forme).size(), SYMBOL_DATABASE.get(2*color+(1-forme)).size()));
 
 		for (int j=0 ; j<1 ; j++){//translation désactivée, réactiver avec minsize
@@ -331,6 +333,35 @@ public class Symbol {
 					bis.close();
 				}
 			}
+		}
+	}
+	
+	public void writeSignature(String fileName) {
+
+		if (signatureTable.size() == 0)
+			try {
+				computeSignature();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		try{
+			FileOutputStream fos = new FileOutputStream(fileName);
+			PrintWriter pw = new PrintWriter(fos);
+
+
+			for(Double current : signatureTable){ 
+
+
+				pw.println(current); // on �crit l'etiquette
+
+			}
+
+			pw.close();
+		}
+		catch (Exception e){
+
+			e.printStackTrace();
 		}
 	}
 

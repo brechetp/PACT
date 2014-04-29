@@ -21,7 +21,7 @@ public class Capture {
 
 
 	private static final int DISTANCE_THRESHOLD = 100;
-	private static final int WEBCAM = 1;
+	private static final int WEBCAM = 0;
 	//	private static final double GAMMA = 0.2;
 	private static double HEIGHT = CaptureLive.getHeight();
 	private static double WIDTH = CaptureLive.getWidth();
@@ -38,7 +38,7 @@ public class Capture {
 			IplImage img = null;
 			for(int i = 0; i <10; i++){
 
-			img=opencv_highgui.cvQueryFrame(capture);
+				img=opencv_highgui.cvQueryFrame(capture);
 			}
 
 			if(img!=null)
@@ -194,7 +194,7 @@ public class Capture {
 
 	public static void symbolDatabase(int debut, int fin, String capture, String fileName) throws Exception{
 
-		
+
 
 
 		for(int i = debut; i <= fin; i++){ 
@@ -231,15 +231,15 @@ public class Capture {
 				//bin3.getEdge().save("data/test/contour.jpg");
 
 				int[][] coins = bin3.getCornersRansac(3, largeImg.getHeight()/(float)bin3.getHeight());
-				
+
 				Card carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage()); 
 				carte.save(capture+"bis"+i+".jpg");
 				BinaryImage binary = new BinaryImage(carte.getFirstSymbol()); 
 				binary.save(capture+"threshold"+i+".jpg");
-				
 
 
-				write(carte.getSignature(), fileName+((i-1)/2)+((i-1)%2)+".txt");
+
+				carte.getSymbol().writeSignature(fileName+((i-1)/2)+((i-1)%2)+".txt");
 
 				/*Image im1 = new Image(imageA);
 		Image im2 = new Image (imageB);
@@ -278,31 +278,11 @@ public class Capture {
 	}
 
 
-	private static void write(ArrayList<Double> signature, String fileName) {
 
-		try{
-			FileOutputStream fos = new FileOutputStream(fileName);
-			PrintWriter pw = new PrintWriter(fos);
-
-
-			for(Double current : signature){ 
-
-
-				pw.println(current); // on �crit l'etiquette
-
-			}
-
-			pw.close();
-		}
-		catch (Exception e){
-
-			e.printStackTrace();
-		}
-	}
 
 	public static void letterDatabase(int debut, int fin, String capture, String fileName) throws Exception{
 
-	
+
 
 
 		for(int i = debut; i <= fin; i++){ 
@@ -345,8 +325,8 @@ public class Capture {
 				binary.save(capture+"threshold"+i+".jpg");
 
 				carte.cut(0, 0, 100, 160).binaryThreshold(3).largestComponent().save(capture+"ter"+i+".jpg");
-				Letter letter = new Letter (carte.cut(0,0, 100, 160).binaryThreshold(3).largestComponent().getBinaryMatrix());
-				write(carte.getLetter().getCenteredLetter(), fileName+(i-1)+".txt");
+				//Letter letter = new Letter (carte.cut(0,0, 100, 160).binaryThreshold(3).largestComponent().getBinaryMatrix());
+				carte.getLetter().write(fileName+(i-1)+".txt");
 
 
 
@@ -358,36 +338,7 @@ public class Capture {
 
 
 
-	public static void write(int[][] centeredLetter, String fileName) {
-		try{
-			FileOutputStream fos = new FileOutputStream(fileName);
-			PrintWriter pw = new PrintWriter(fos);
-			String line;
 
-			for(int j = 0; j< centeredLetter.length;j++ ){
-				line = ""+centeredLetter[j][0];
-				for(int i = 1; i < centeredLetter[0].length; i++){
-
-					line += centeredLetter[j][i]; // on buff la ligne
-
-				}
-
-
-				if (j != (centeredLetter.length -1))
-					pw.println(line); // on �crit l'etiquette et on saute une ligne
-				else 
-					pw.print(line);
-
-			}
-
-			pw.close();
-		}
-		catch (Exception e){
-
-			e.printStackTrace();
-		}
-
-	}
 
 	public static void liveCapture() throws Exception {
 

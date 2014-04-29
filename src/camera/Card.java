@@ -16,8 +16,8 @@ public class Card extends Image{
 
 
 	// double [] matchTable = new double [5];
-	private static double WIDTH = 67.95586803212802 /*67.8627318771778*/; // taille de la carte sur l'ecran
-	private static double HEIGHT =  96.79876032264049 /*96.99174958400414*/;
+	private static double WIDTH = 82.49242389456137 /*67.8627318771778*/; // taille de la carte sur l'ecran
+	private static double HEIGHT =  116.9700816448377 /*96.99174958400414*/;
 
 
 
@@ -27,6 +27,8 @@ public class Card extends Image{
 	private int number=-1;
 	private Letter letter;
 	private int[] colorAverage = new int[3];
+	
+	private int compt = 0;
 
 
 
@@ -35,8 +37,6 @@ public class Card extends Image{
 	public Card(IplImage image) {
 
 		super(image);
-		average = new double[3]; // moyenne sur RGB
-		sigma = new double[3]; // ecart type sur RGB
 
 		//corner = this.cut(0,0,110, 220);
 		symbol = new Symbol(getFirstSymbol(), this); // letter est définie ici
@@ -44,28 +44,19 @@ public class Card extends Image{
 
 		//new BinaryImage(getFirstSymbol()).save("data/database/symbols/symboltest.jpg");
 
-		computeAverage();
-		computeSigma();
-
 	}
 
 	public Card(String fileName) {
 
 		super(fileName);
 		name = fileName;
-		average = new double[3]; // moyenne sur RGB
-		sigma = new double[3]; // ecart type sur RGB
-
+	
 
 		//corner = this.cut(0,0, 110,  220);
 		symbol = new Symbol(getFirstSymbol(), this);
 
 
 
-
-
-		computeAverage();
-		computeSigma();
 
 	}
 
@@ -92,10 +83,10 @@ public class Card extends Image{
 		return name;
 	}
 
-	public int getCompt(){
+	//public int getCompt(){
 
-		return compt;
-	}
+//		return compt;
+//	}
 
 
 
@@ -241,7 +232,7 @@ public class Card extends Image{
 		try {
 			FileWriter fw = new FileWriter(fileName,true);
 			String infos = colorAverage[0] +" "+ colorAverage[1] +" "+ colorAverage[2]+" ";
-			infos += number +" "+compt+" ";
+			infos += number +" "+compt+" "+ letter.momentum(2)+" ";
 			if(isRed(colorAverage))
 				infos += symbol.getMatchTable("1")[0]+" " +symbol.getMatchTable("1")[1]+" ";
 			else
@@ -259,10 +250,11 @@ public class Card extends Image{
 	public int[][] getFirstSymbol(){
 		
 		
-		BinaryImage bin = (this.binaryThreshold(3)); // Ce qui n'est pas gris
+		BinaryImage bin = (this.binaryThreshold(3)); // Ce qui n'est pas blanc
+		compt = bin.getCompt();
 		bin.save("data/database/symbols/test.jpg");
 		letter = new Letter (bin.cut(0,0, 100, 160).largestComponent().getBinaryMatrix());
-		
+		 bin = (this.binaryThreshold(3)); 
 		int[] res = bin.componentsNumberAndFirst();
 		number = res[0];
 		new BinaryImage(bin.filter(res[1])).save("data/test/image/image1.jpg");

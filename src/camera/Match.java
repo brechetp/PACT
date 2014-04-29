@@ -16,13 +16,13 @@ public class Match implements Runnable {
 	private int compteur;
 	private BeloteCoinche belote;
 	
-	public Match(IplImage imageA, IplImage imageB, IplImage largeImage, int compteur, BeloteCoinche belote){
+	public Match(IplImage imageA, IplImage imageB, IplImage largeImage, int compteur /*BeloteCoinche belote*/){
 		
 		this.imageA = imageA;
 		this.imageB = imageB;
 		this.compteur = compteur%100;
 		this.largeImage = largeImage;
-		this.belote = belote;
+		//this.belote = belote;
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class Match implements Runnable {
 		Image largeImg = new Image(largeImage);
 		BinaryImage bin1 = im2.differenceNeighbour(im1);
 		bin1.save("data/courant/binary/bin"+(3*compteur)+".jpg");
-		BinaryImage bin2 = im2.binaryThreshold(1).largeComponents();
+		BinaryImage bin2 = im2.binaryThreshold(1)/*.largeComponents()*/;
 		BinaryImage bin_im1 = im1.binaryThreshold(1).largeComponents();
 		if (bin_im1.getCompt() > bin2.getCompt()){
 			System.out.println("Une carte a été retirée");
@@ -54,14 +54,15 @@ public class Match implements Runnable {
 		try {
 			carte = new Card(largeImg.resample(coins, 635, 889).getRgbImage());
 			carte.save("data/courant/resample/carte"+compteur+".jpg");
-			Capture.write(carte.getLetter().getCenteredLetter(), "data/courant/letters/letter"+compteur+".txt");
+			carte.getLetter().write("data/courant/letters/letter"+compteur+".txt");
 			new BinaryImage(carte.getSymbol().getMatrix()).save("data/courant/resample/symbol"+compteur+".jpg");
 	
 			String type = carte.getType();
+			carte.getLetter().test(compteur);
 			carte.printInfos("data/test/info.txt");
+			System.out.println(VALUE_DATABASE[(int) type.charAt(2)-48]+" de "+COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48]);
 			
-			
-			newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
+			//newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

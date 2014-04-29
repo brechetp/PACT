@@ -44,28 +44,22 @@ public class MenuBelote extends menu {
 			getVci().distribution();
 			getClassi().addListener(belote);
 
-			while(belote.isStateDistrib()){
-				String s = (String)JOptionPane.showInputDialog(null, "Carte � distribuer :", "Distribution", JOptionPane.PLAIN_MESSAGE, null, null, null);
-				if (s!="") 
-				{
-					String[] tabcarte = s.split(" ");
-					String valeur = tabcarte[0];
-					
-					String couleur="";
-					if (tabcarte.length>1) {
-						couleur = tabcarte[1];
-					}
-					Carte card = new Carte(valeur, couleur, belote.getEtat());
-					CardEvent event = new CardEvent(card);
-					belote.nouvelleCarte(event);
-				}
-			}
-
-			//		//Start Camera
-//			Initialisation.setSymbolDatabase("data/database/symbols/text");
-//
-//			Initialisation.setLetterDatabase("data/database/letters/text");
-			//new Thread(new CaptureLive(belote)).start();
+//			while(belote.isStateDistrib()){
+//				String s = (String)JOptionPane.showInputDialog(null, "Carte � distribuer :", "Distribution", JOptionPane.PLAIN_MESSAGE, null, null, null);
+//				if (s!="") 
+//				{
+//					String[] tabcarte = s.split(" ");
+//					String valeur = tabcarte[0];
+//					
+//					String couleur="";
+//					if (tabcarte.length>1) {
+//						couleur = tabcarte[1];
+//					}
+//					Carte card = new Carte(valeur, couleur, belote.getEtat());
+//					CardEvent event = new CardEvent(card);
+//					belote.nouvelleCarte(event);
+//				}
+//			}
 			
 			belote.nouveauGeste(new MouvementEvent("quitter"));
 			

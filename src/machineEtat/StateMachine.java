@@ -1,5 +1,7 @@
 package machineEtat;
 
+import camera.CaptureLive;
+import camera.CaptureLiveDistribution;
 import iug.ViewControllerInterface;
 import structure.AnnonceInterface;
 import structure.CarteList;
@@ -32,9 +34,13 @@ public class StateMachine
 	public static int numJoueurDistant=4;
 	private CarteListInterface carteAnnonce = new CarteList();
 	private BeloteCoinche belote;
+	private CaptureLiveDistribution captureQrCode;
+	private CaptureLive captureCarte;
 	
 	public StateMachine(JoueurDistantInterface joueurD,ViewControllerInterface vci, BeloteCoinche beloteCoinche) 
 	{
+		this.captureQrCode = new CaptureLiveDistribution(belote);
+		new Thread(captureQrCode).start();
 		this.belote = beloteCoinche;
 		this.state = State.Distribution;
 		this.etat = new EtatDuJeu(this);
@@ -53,6 +59,8 @@ public class StateMachine
 				joueurD.addCard(carte.getCarte());
 				if (joueurD.aHuitCarte())
 				{
+					captureQrCode.stop();
+					new Thread(captureCarte).start();
 					this.state = State.Annonce;
 					vci.modeAnnonce();
 					vci.joueurEnCours(premierAJouer);
@@ -381,6 +389,8 @@ public class StateMachine
 		 case MancheTermine:
 			 etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
 			 vci.distribution();
+			 captureQrCode = new CaptureLiveDistribution(belote);
+			 new Thread(captureQrCode).start();
 			 this.state=State.Distribution;
 			 break;
 /******************************* Quitter *****************************/
@@ -497,6 +507,7 @@ public class StateMachine
 		switch (this.state)
 		{
 		case ResteDesTours:
+			captureCarte.stop();
 			etat.mancheTerminer(vci);
 			this.premierAJouer++;
 			this.state = State.MancheTermine;

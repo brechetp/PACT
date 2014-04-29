@@ -22,13 +22,13 @@ public class Image {
 	public static final int DISTANCE_THRESHOLD = 30; // pour la distance entre deux images
 	private static final int NEIGHBOUR_NUMBER = 0; // pour l'algorithme de distance
 
-	private static int[] WHITE_VECTOR = new int[]{220, 220, 220};
-	private static int[] GRAY_VECTOR = new int[]{180, 180, 180};
+	private static int[] WHITE_VECTOR = new int[]{210, 210, 210};
+	private static int[] GRAY_VECTOR = new int[]{100, 180, 180};
 	private static final int COLOR_THRESHOLD = 10;
 	private static final int[] RED_VECTOR = new int[]{87,88, 200};
 	private static final int[] BLACK_VECTOR = new int[]{70, 64, 67};
 
-	protected int compt =0; //compte le nombre de pixels non blancs
+	//protected int compt =0; //compte le nombre de pixels non blancs
 
 
 	protected int width;
@@ -163,7 +163,7 @@ public class Image {
 			{
 				int[] rgbByte = getRgbByte(i,j);
 				if (! isWhite(rgbByte))
-					compt++;
+				//	compt++;
 
 				for(int k =0; k<3; k++){
 					average[k] += rgbByte[k];
@@ -176,75 +176,75 @@ public class Image {
 		}
 	}
 
-	public void computeThresholdedAverage(){
-
-		thresholdedAverage = new double[3];
-		compt = 0;
-		for (int j =0; j<height; j++)
-		{
-			for (int i=0; i<width; i++)
-			{
-				int[] rgbByte = getRgbByte(i,j);
-				if(! isWhite(rgbByte)){
-					for(int k =0; k<3; k++){
-						thresholdedAverage[k] += rgbByte[k];
-					}
-					compt++;
-
-				}
-			}
-		}	
-		for(int k =0; k<3; k++){
-			thresholdedAverage[k] = thresholdedAverage[k]/( compt);
-
-		}
-	}
-	public void computeSigma(){
-
-
-
-		for (int j =0; j<height; j++)
-		{
-			for (int i=0; i<width; i++)
-			{
-				int[] rgbByte = getRgbByte(i,j);
-				if (true){
-					for(int k =0; k<3; k++){
-						sigma[k] += Math.pow(rgbByte[k]-average[k],2);
-					}
-				}
-			}
-		}
-		for(int k =0; k<3; k++){
-			sigma[k] = Math.sqrt(sigma[k]/(height*width));
-		} 
-	}
-
-	public double[] getAverage(){
-
-
-		if (average == null)
-			computeAverage();
-		return average;
-	}
-
-	public double[] getThresholdedAverage(){
-
-
-		if (thresholdedAverage == null)
-			computeThresholdedAverage();
-		return thresholdedAverage;
-	}
-
-
-	public double[] getSigma() {
-
-		if (sigma == null)
-			computeSigma();
-		return sigma;
-	}
-
-
+//	public void computeThresholdedAverage(){
+//
+//		thresholdedAverage = new double[3];
+//		//compt = 0;
+//		for (int j =0; j<height; j++)
+//		{
+//			for (int i=0; i<width; i++)
+//			{
+//				int[] rgbByte = getRgbByte(i,j);
+//				if(! isWhite(rgbByte)){
+//					for(int k =0; k<3; k++){
+//						thresholdedAverage[k] += rgbByte[k];
+//					}
+//				//	compt++;
+//
+//				}
+//			}
+//		}	
+//		for(int k =0; k<3; k++){
+//			thresholdedAverage[k] = thresholdedAverage[k]/( compt);
+//
+//		}
+//	}
+//	public void computeSigma(){
+//
+//
+//
+//		for (int j =0; j<height; j++)
+//		{
+//			for (int i=0; i<width; i++)
+//			{
+//				int[] rgbByte = getRgbByte(i,j);
+//				if (true){
+//					for(int k =0; k<3; k++){
+//						sigma[k] += Math.pow(rgbByte[k]-average[k],2);
+//					}
+//				}
+//			}
+//		}
+//		for(int k =0; k<3; k++){
+//			sigma[k] = Math.sqrt(sigma[k]/(height*width));
+//		} 
+//	}
+//
+//	public double[] getAverage(){
+//
+//
+//		if (average == null)
+//			computeAverage();
+//		return average;
+//	}
+//
+//	public double[] getThresholdedAverage(){
+//
+//
+//		if (thresholdedAverage == null)
+//			computeThresholdedAverage();
+//		return thresholdedAverage;
+//	}
+//
+//
+//	public double[] getSigma() {
+//
+//		if (sigma == null)
+//			computeSigma();
+//		return sigma;
+//	}
+//
+//
 
 
 
