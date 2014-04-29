@@ -21,6 +21,8 @@ public class Panneau extends JPanel {
 	int height = (int)dimension.getHeight();
 	int width  = (int)dimension.getWidth();
 	
+	int pos = 0;
+	
 	Carte carte1 = new Carte(1);
 	Carte carte2 = new Carte(2);
 	Carte carte3 = new Carte(3);
@@ -283,7 +285,7 @@ public class Panneau extends JPanel {
 			    	
 			    }
 			    if (k==12){
-			    	g.setColor(new Color(204, 0, 51));
+			    	g.setColor(new Color(51, 102, 204));
 					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 					FontMetrics metrics = g.getFontMetrics();
 			    	g.drawString("Faites vos annonces !", (this.getWidth()/2)-(metrics.stringWidth("Faites vos annonces !")/2), (this.getHeight()/2));
@@ -310,7 +312,7 @@ public class Panneau extends JPanel {
 			    	g.setColor(new Color(204,255,0));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 			    	FontMetrics metrics = g.getFontMetrics();
-			    	g.drawString("Annonce : " + annoncelol, (this.getWidth()/2)-(metrics.stringWidth("Annonce : " + annoncelol)/2),  (int) (this.getHeight()*0.2));
+			    	g.drawString("Annonce : " + annoncelol, (this.getWidth()/2)-(metrics.stringWidth("Annonce : " + annoncelol)/2),  (int) (this.getHeight()*0.1));
 			    	g.setColor(new Color(51, 102, 204));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 			    	FontMetrics metrics3 = g.getFontMetrics();
@@ -416,10 +418,18 @@ public class Panneau extends JPanel {
 			    	
 			    }
 			    if (s1 != null && s2 != null){
-			    	g.setColor(new Color(255,153,51));
-			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
-			    	FontMetrics metricsX = g.getFontMetrics();
-			    	g.drawString("Annonce actuelle : " + s1 + " - " + s2, (this.getWidth()/2)-(metricsX.stringWidth("Annonce actuelle : " + s1 + " - " + s2)/2) , (int) ((this.getHeight()*0.1)));
+			    	if(pos == 0){
+			    		g.setColor(new Color(255,153,51));
+				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+				    	FontMetrics metricsX = g.getFontMetrics();
+				    	g.drawString("Annonce actuelle : " + s1 + " - " + s2, (this.getWidth()/2)-(metricsX.stringWidth("Annonce actuelle : " + s1 + " - " + s2)/2) , (int) ((this.getHeight()*0.1)));
+			    	}
+			    	else if(pos == 1){
+			    		g.setColor(new Color(255,153,51));
+				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+				    	FontMetrics metricsX = g.getFontMetrics();
+				    	g.drawString("Annonce actuelle : " + s1 + " - " + s2, (this.getWidth()/2)-(metricsX.stringWidth("Annonce actuelle : " + s1 + " - " + s2)/2) , (int) ((this.getHeight()*0.8)));
+			    	}
 			    }
 			    else {
 			    	
@@ -1122,6 +1132,10 @@ public class Panneau extends JPanel {
 		this.pointsTotal1 = pointsTotal1;
 		this.pointsTotal2 = pointsTotal2;
 		this.annoncelol = annoncelol;
+	}
+	
+	public void setPos(int pos){
+		this.pos = pos;
 	}
 
 }

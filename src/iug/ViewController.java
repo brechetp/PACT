@@ -124,7 +124,7 @@ public class ViewController implements ViewControllerInterface
 		if (s.equals("ascarreau")){
 			k = 32;
 		}
-		for (int yCarte = -fen.getPan().getCarte1().getImage().getHeight(null) ; yCarte<fen.getPan().getHeight()*0.1 ; yCarte = yCarte + 5){
+		for (int yCarte = -fen.getPan().getCarte1().getImage().getHeight(null) ; yCarte<fen.getPan().getHeight()*0.2 ; yCarte = yCarte + 5){
 			fen.getPan().setYCarte(yCarte);
 			fen.getPan().setI(k);
 			fen.repaint();
@@ -171,7 +171,17 @@ public class ViewController implements ViewControllerInterface
 
 	public void modeAnnonce(){
 		fen.getPan().setH(1);
+		fen.getPan().setK(12);
+		fen.getPan().setJ(0);
+		fen.repaint();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		fen.getPan().setK(0);
+		fen.getPan().setPos(0);
 		fen.repaint();
 	}
 
@@ -187,6 +197,7 @@ public class ViewController implements ViewControllerInterface
 			e.printStackTrace();
 		}
 		fen.getPan().setK(0);
+		fen.getPan().setPos(1);
 		fen.repaint();
 	}
 
