@@ -124,7 +124,7 @@ public class ViewController implements ViewControllerInterface
 		if (s.equals("ascarreau")){
 			k = 32;
 		}
-		for (int yCarte = -fen.getPan().getCarte1().getImage().getHeight(null) ; yCarte<fen.getPan().getHeight()*0.2 ; yCarte = yCarte + 5){
+		for (int yCarte = -fen.getPan().getCarte1().getImage().getHeight(null) ; yCarte<fen.getPan().getHeight()*0.2 ; yCarte = yCarte + 8){
 			fen.getPan().setYCarte(yCarte);
 			fen.getPan().setI(k);
 			fen.repaint();
@@ -405,12 +405,6 @@ public class ViewController implements ViewControllerInterface
 	public void validerOptions(){
 		fen.getPan().setOptionEnCours(5);
 		fen.repaint();
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public int optionEnCours(){
