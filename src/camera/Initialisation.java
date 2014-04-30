@@ -16,55 +16,47 @@ import comparaison.Symbol;
 public class Initialisation {
 
 	public static void setCardSize(String fileName) throws NumberFormatException, IOException{
-		
+
 		double[] res = new double[2];
-	
-		for(int i=0; i<2; i++){
-			FileReader fis = new FileReader(fileName);
-			BufferedReader bis = new BufferedReader (fis);
-			String value;
-			
 
-			while((value = bis.readLine()) != null){
-				res[i]=(Double.parseDouble(value));
-				// Calcul de average et sigma 
+		FileReader fis = new FileReader(fileName);
+		BufferedReader bis = new BufferedReader (fis);
+		String value;
+		int i=0;
 
-			}
-			bis.close();
-		
-			
-		}
+		while((value = bis.readLine()) != null){
+			res[i]=(Double.parseDouble(value));
+			i++;
+		}// 
+
+
+		bis.close();
+
+
+
 
 
 		Card.setWIDTH(res[0]);
 		Card.setHEIGHT(res[1]);
 		System.out.println("Taille initialisée à "+ Card.getWIDTH()+", "+Card.getHEIGHT()+".");
-		
 
 	}
 
-	public static void setSymbolDatabase(String fileName){
+	public static void setSymbolDatabase(String fileName) throws NumberFormatException, IOException{
 
-		try{
 
-			Symbol.setSymbolsDatabase(fileName);
-		}
-		catch(Exception e){ // probleme general
 
-			e.printStackTrace();
-		}
+		Symbol.setSymbolsDatabase(fileName);
+
 	}
-	
-	public static void setLetterDatabase(String fileName){
 
-		try{
+	public static void setLetterDatabase(String fileName) throws IOException{
 
-			Letter.setLetterDatabase(fileName);
-		}
-		catch(Exception e){ // probleme general
 
-			e.printStackTrace();
-		}
+
+		Letter.setLetterDatabase(fileName);
+
+
 	}
 
 }

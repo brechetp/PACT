@@ -13,7 +13,7 @@ import logiqueDeJeux.BeloteCoinche;
 public class CaptureQRCodes extends CaptureLive implements Runnable{
 
 	public CaptureQRCodes(BeloteCoinche belote) {
-		super(belote);
+		/*super(belote);*/
 			}
 	
 	public void run(){	
@@ -88,7 +88,7 @@ public class CaptureQRCodes extends CaptureLive implements Runnable{
 							cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
 							cvSaveImage("data/courant/compare/largeimage"+comptA+".jpg",largeImage);
 							System.out.println("On lance la comparaison "+(++comptA)+".");
-							new Thread(new Match(imageA, imageB, largeImage, comptA, getBelote())).start();
+							new Thread(new Match(imageA, imageB, largeImage, comptA/*, getBelote()*/)).start();
 							imageA = imageB.clone();
 
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);

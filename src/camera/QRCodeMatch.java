@@ -25,7 +25,7 @@ public class QRCodeMatch implements Runnable {
 	
 
 	public QRCodeMatch(IplImage largeImage,
-			int compteur, BeloteCoinche belote) {
+			int compteur /*,BeloteCoinche belote)*/) {
 		this.largeImage = largeImage;
 		this.compteur = compteur;
 		this.belote = belote;

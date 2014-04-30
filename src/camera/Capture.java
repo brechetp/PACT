@@ -13,6 +13,7 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.CvCapture;
 
 import comparaison.Letter;
+
 import static com.googlecode.javacv.cpp.opencv_core.cvClearMemStorage;
 import static com.googlecode.javacv.cpp.opencv_highgui.*;
 
@@ -24,8 +25,8 @@ public class Capture {
 	private static final int DISTANCE_THRESHOLD = 100;
 	private static final int WEBCAM = 0;
 	//	private static final double GAMMA = 0.2;
-	private static double HEIGHT = CaptureLive.getHeight();
-	private static double WIDTH = CaptureLive.getWidth();
+	private static double HEIGHT = 640; ;
+	private static double WIDTH =360 ;
 
 	public static void captureFrame(String fileName, int width, int height, boolean large)
 	{
@@ -337,8 +338,8 @@ public class Capture {
 
 	}
 
-	public void cardSize() throws FileNotFoundException{
-		captureFrame("data/initialisation/fond.jpg", 640, 360, false);
+	public static void cardSize(String fileName) throws FileNotFoundException{
+		captureFrame(fileName+"fond.jpg", 640, 360, false);
 		System.out.println("Le fond est pris, posez la carte blanche");
 
 		try {
@@ -347,24 +348,24 @@ public class Capture {
 
 			e.printStackTrace();
 		}
-		captureFrame("data/initialisation/carteblanche.jpg", 640, 360, false);
+		captureFrame(fileName+"carteblanche.jpg", 640, 360, false);
 		System.out.println("La carte blanche a été prise");
 
 
-		Image im1 = new Image("data/initialisation/fond.jpg");
-		Image im2 = new Image ("data/initialisation/carteblanche.jpg");
+		Image im1 = new Image(fileName+"fond.jpg");
+		Image im2 = new Image (fileName+"carteblanche.jpg");
 
 		BinaryImage bin1 = im2.difference(im1);
-		bin1.save("data/initialisation/bin1.jpg");
+		bin1.save(fileName+"bin1.jpg");
 		BinaryImage bin2 = im2.binaryThreshold(1);
-		bin2.save("data/initialisation/bin2.jpg");
+		bin2.save(fileName+"/bin2.jpg");
 		BinaryImage bin = bin1.and(bin2);
 
-		bin.save("data/initialisation/bin.jpg");
+		bin.save(fileName+"/bin.jpg");
 
 		BinaryComponent bin3 = bin.largestComponent();
 
-		bin3.save("data/initialisation/binaire.jpg");
+		bin3.save(fileName+"/binaire.jpg");
 
 
 
@@ -373,11 +374,10 @@ public class Capture {
 		double[] size = new double[2];
 		size[0] = (Math.sqrt(Math.pow(coins[0][0]-coins[1][0], 2)+ Math.pow(coins[0][1]-coins[1][1],  2))+Math.sqrt(Math.pow(coins[2][0]-coins[3][0], 2)+ Math.pow(coins[2][1]-coins[3][1],  2)))/2;
 		size[1] = (Math.sqrt(Math.pow(coins[0][0]-coins[2][0], 2)+ Math.pow(coins[0][1]-coins[2][1],  2))+Math.sqrt(Math.pow(coins[1][0]-coins[3][0], 2)+ Math.pow(coins[1][1]-coins[3][1],  2)))/2;
-		write(size, "data/database/size/size.txt");
+		write(size, fileName+"size.txt");
 
 		/*Card.setWIDTH((Math.sqrt(Math.pow(coins[0][0]-coins[1][0], 2)+ Math.pow(coins[0][1]-coins[1][1],  2))+Math.sqrt(Math.pow(coins[2][0]-coins[3][0], 2)+ Math.pow(coins[2][1]-coins[3][1],  2)))/2);
 		Card.setHEIGHT((Math.sqrt(Math.pow(coins[0][0]-coins[2][0], 2)+ Math.pow(coins[0][1]-coins[2][1],  2))+Math.sqrt(Math.pow(coins[1][0]-coins[3][0], 2)+ Math.pow(coins[1][1]-coins[3][1],  2)))/2);*/
-		System.out.println("Taille initialisée à "+ Card.getWIDTH()+", "+Card.getHEIGHT()+".");
 		Card whiteCard = null;
 		try {
 			whiteCard = new Card(im2.resample(coins, 635,889).getRgbImage());
@@ -385,7 +385,7 @@ public class Capture {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		whiteCard.save("data/initialisation/cartetest.jpg");
+		whiteCard.save(fileName+"cartetest.jpg");
 	}
 
 
@@ -564,6 +564,10 @@ public class Capture {
 		public static void setHeight(int i) {
 			HEIGHT = i;
 
+		}
+	
+		public static int getWebcam() {
+			return WEBCAM;
 		}
 
 		public static void setWidth(int i) {

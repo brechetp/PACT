@@ -8,22 +8,16 @@ import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.CvCapture;
 
-public class CaptureLiveDistribution implements Runnable {
+public class CaptureLiveDistribution extends CaptureLive implements Runnable {
 
 
-	private static final int DISTANCE_THRESHOLD = 40;
-
-	private static final int WEBCAM = 0;
-	private static final int HEIGHT = 360;
-	private static final int WIDTH = 640;
-	private static final int DIF_NUM =  30; // nombre de pixels qui doivent etre differents
-	private BeloteCoinche belote;
 
 	private boolean run = true ;
 	public CaptureLiveDistribution(BeloteCoinche belote){
-		this.setBelote(belote);
+		//		this.setBelote(belote);
 	}
 
+	@Override
 	public void run(){	
 
 		try{ 
@@ -51,18 +45,18 @@ public class CaptureLiveDistribution implements Runnable {
 			CvMemStorage storage = CvMemStorage.create();
 
 			while ((image2 = opencv_highgui.cvQueryFrame(capture)) != null && run) {
-//				cvSaveImage("data/courant/capture/capture"+compteur%1000+".jpg", image2);
-//				if (compteur == 10){
-//					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
-//					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
-////					imageA = image2.clone();
-////					cvSaveImage("data/courant/compare/A.jpg", imageA);			
-//					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
-//					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
-//
-//
-//
-//				}
+				//				cvSaveImage("data/courant/capture/capture"+compteur%1000+".jpg", image2);
+				//				if (compteur == 10){
+				//					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
+				//					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
+				////					imageA = image2.clone();
+				////					cvSaveImage("data/courant/compare/A.jpg", imageA);			
+				//					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
+				//					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
+				//
+				//
+				//
+				//				}
 
 				if ( compteur>10) {
 
@@ -87,17 +81,17 @@ public class CaptureLiveDistribution implements Runnable {
 							largeImage =	opencv_highgui.cvQueryFrame(capture).clone();
 							//cvClearMemStorage(storage);
 
-//							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
-//							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
-//							imageB = opencv_highgui.cvQueryFrame(capture).clone();
+							//							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
+							//							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
+							//							imageB = opencv_highgui.cvQueryFrame(capture).clone();
 							//cvClearMemStorage(storage);
 
-//							cvSaveImage("data/courant/compare/imageA"+comptA+".jpg",imageA);
-//							cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
-//							cvSaveImage("data/courant/compare/largeimage"+comptA+".jpg",largeImage);
+							//							cvSaveImage("data/courant/compare/imageA"+comptA+".jpg",imageA);
+							//							cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
+							//							cvSaveImage("data/courant/compare/largeimage"+comptA+".jpg",largeImage);
 							System.out.println("On lance la comparaison "+(++comptA)+".");
-							new Thread(new QRCodeMatch(largeImage, comptA, getBelote())).start();
-//							imageA = imageB.clone();
+							new Thread(new QRCodeMatch(largeImage, comptA /*,getBelote()*/)).start();
+							//							imageA = imageB.clone();
 
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
@@ -151,7 +145,7 @@ public class CaptureLiveDistribution implements Runnable {
 					mat[j][i] = 1 ;
 				}
 
-				res = (compt > DIF_NUM);
+				res = (compt > getDifNum());
 				j++;
 
 
@@ -163,90 +157,49 @@ public class CaptureLiveDistribution implements Runnable {
 		return res;
 	}
 
-	private static boolean binDifferent(IplImage image1, IplImage image2,
-			int i, int j) {
-
-		int binValue = getBinValue(image1, i, j);
-		int binValue2 = getBinValue(image2, i,j); // pixel de l'image1
-
-		return Math.abs(binValue - binValue2) == 1;
-	}
-
-
-	private static int getBinValue(IplImage image1, int i, int j) {
-
-		int res = 0;
-		if (Image.isWhite(getRgbByte(image1,i,j)))
-			res = 1;
-
-		return res;
-	}
-
-//	private static boolean different(IplImage image1, IplImage image2,
-//			int i, int j, int k) {
-//
-//		boolean res = false;
-//
-//		int distance = 0 , distanceMin = Integer.MAX_VALUE;
-//		int n = Math.max(0, i-k), p = Math.max(0, j-k);
-//		int[] pixel = getRgbByte(image1, i, j);
-//		while(n <= Math.min(image1.width()-1, i+k)){
-//			while( p <= Math.min(image1.height()-1,  j+k)){
-//				int[] rgbByte = getRgbByte(image2, n, p); // pixel de l'image1
-//				distance = 0;
-//				for (int q = 0; q < 3; q++){
-//					distance = distance + Math.abs(rgbByte[q] - pixel[q]);
-//				}
-//				if (distance < distanceMin){
-//					distanceMin = distance;
-//
-//				}
-//				p++;
-//
-//			}
-//			p=0;
-//			n++;
-//		}
-//
-//
-//		res = (distanceMin > DISTANCE_THRESHOLD);
-//
-//
-//		return res;
-//	}
-
-	private static int[] getRgbByte(IplImage image1, int n, int p) {
-
-
-		int[] res = new int[3];
-		for(int k = 0; k <3; k++){
-			res[k] = (image1.getByteBuffer().get(3*n + image1.widthStep()*p+k) + 255) % 255;
-		}
-		return res;
-	}
-
-	public static int getHeight() {
-		return HEIGHT;
-	}
-
-	public static int getWidth() {
-		return WIDTH;
-	}
-
-	public static int getWebcam() {
-		return WEBCAM;
-	}
-
-	public BeloteCoinche getBelote() {
-		return belote;
-	}
-
-	public void setBelote(BeloteCoinche belote) {
-		this.belote = belote;
-	}
 	
+
+
+	
+
+	//	private static boolean different(IplImage image1, IplImage image2,
+	//			int i, int j, int k) {
+	//
+	//		boolean res = false;
+	//
+	//		int distance = 0 , distanceMin = Integer.MAX_VALUE;
+	//		int n = Math.max(0, i-k), p = Math.max(0, j-k);
+	//		int[] pixel = getRgbByte(image1, i, j);
+	//		while(n <= Math.min(image1.width()-1, i+k)){
+	//			while( p <= Math.min(image1.height()-1,  j+k)){
+	//				int[] rgbByte = getRgbByte(image2, n, p); // pixel de l'image1
+	//				distance = 0;
+	//				for (int q = 0; q < 3; q++){
+	//					distance = distance + Math.abs(rgbByte[q] - pixel[q]);
+	//				}
+	//				if (distance < distanceMin){
+	//					distanceMin = distance;
+	//
+	//				}
+	//				p++;
+	//
+	//			}
+	//			p=0;
+	//			n++;
+	//		}
+	//
+	//
+	//		res = (distanceMin > DISTANCE_THRESHOLD);
+	//
+	//
+	//		return res;
+	//	}
+
+	
+
+@Override
 	public void stop(){
-		
+
 		run = false;
 	}
 

@@ -11,22 +11,19 @@ import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.googlecode.javacv.cpp.opencv_highgui.CvCapture;
 
-public class CaptureLive implements Runnable {
+public class CaptureLive extends Capture implements Runnable  {
 
 
-	private static final int DISTANCE_THRESHOLD = 40;
 
-	private static final int WEBCAM = 0;
-	private static final int HEIGHT = 360;
-	private static final int WIDTH = 640;
-	private static final int DIF_NUM =  20; // nombre de pixels qui doivent etre differents
-	private static final int NEIGHBOUR_NUMBER = 0;
-	private BeloteCoinche belote;
+
+	private static final int DIF_NUM =  30; // nombre de pixels qui doivent etre differents
+
+	/*private BeloteCoinche belote;*/
 
 	private boolean run = true;
 
-	public CaptureLive(BeloteCoinche belote){
-		this.setBelote(belote);
+	public CaptureLive(/*BeloteCoinche belote*/){
+		/*this.setBelote(belote);*/
 	}
 
 	public void run(){	
@@ -101,7 +98,7 @@ public class CaptureLive implements Runnable {
 						//	cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
 						//	cvSaveImage("data/courant/compare/largeimage"+comptA+".jpg",largeImage);
 							System.out.println("On lance la comparaison "+(++comptA)+".");
-							new Thread(new Match(imageA, imageB, largeImage, comptA ,getBelote())).start();
+							new Thread(new Match(imageA, imageB, largeImage, comptA /*,getBelote()*/)).start();
 							imageA = imageB.clone();
 
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
@@ -156,7 +153,7 @@ public class CaptureLive implements Runnable {
 					mat[j][i] = 1 ;
 				}
 
-				res = (compt > DIF_NUM);
+				res = (compt > getDifNum());
 				j++;
 
 
@@ -168,7 +165,7 @@ public class CaptureLive implements Runnable {
 		return res;
 	}
 
-	private static boolean binDifferent(IplImage image1, IplImage image2,
+	protected static boolean binDifferent(IplImage image1, IplImage image2,
 			int i, int j) {
 
 		int binValue = getBinValue(image1, i, j);
@@ -220,7 +217,7 @@ public class CaptureLive implements Runnable {
 //		return res;
 //	}
 
-	private static int[] getRgbByte(IplImage image1, int n, int p) {
+	protected static int[] getRgbByte(IplImage image1, int n, int p) {
 
 
 		int[] res = new int[3];
@@ -230,29 +227,23 @@ public class CaptureLive implements Runnable {
 		return res;
 	}
 
-	public static int getHeight() {
-		return HEIGHT;
-	}
 
-	public static int getWidth() {
-		return WIDTH;
-	}
 
-	public static int getWebcam() {
-		return WEBCAM;
-	}
-
-	public BeloteCoinche getBelote() {
-		return belote;
-	}
-
-	public void setBelote(BeloteCoinche belote) {
-		this.belote = belote;
-	}
+//	public BeloteCoinche getBelote() {
+//		return belote;
+////	}
+//
+//	public void setBelote(BeloteCoinche belote) {
+//		this.belote = belote;
+//	}
 	
 	public void stop(){
 		
 		run = false;
+	}
+
+	public static int getDifNum() {
+		return DIF_NUM;
 	}
 
 
