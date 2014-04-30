@@ -57,6 +57,7 @@ public class StateMachine
 			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
 			{
 				joueurD.addCard(carte.getCarte());
+				vci.distribution(joueurD.nbCard());
 				if (joueurD.aHuitCarte())
 				{
 					captureQrCode.stop();
@@ -388,7 +389,7 @@ public class StateMachine
 			 
 		 case MancheTermine:
 			 etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
-			 vci.distribution();
+			 vci.distribution(0);
 			 captureQrCode = new CaptureLiveDistribution(belote);
 			 new Thread(captureQrCode).start();
 			 this.state=State.Distribution;

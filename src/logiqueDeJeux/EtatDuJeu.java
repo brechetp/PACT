@@ -213,9 +213,13 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		this.pointAnnonceTeamImpair=0;
 		
 		if (this.pointsTeamPair>this.valeurFinPartie)
-			;
+			{
+				vci.partieTerminer();
+			}
 		else if (this.pointsTeamImpair>this.valeurFinPartie)
-			;
+			{
+				vci.partieTerminer();
+			}
 			
 			
 	}

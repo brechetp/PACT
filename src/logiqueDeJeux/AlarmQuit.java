@@ -32,7 +32,7 @@ public class AlarmQuit implements Runnable
 			
 			if (distrib)
 			{
-				vci.distribution();
+				vci.modePartie();
 				machine.previousState();
 			}
 			else

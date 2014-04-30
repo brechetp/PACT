@@ -41,7 +41,7 @@ public class MenuBelote extends menu {
 		try {
 			BeloteCoinche belote = new BeloteCoinche(getVci(),this);
 			getVci().modePartie();
-			getVci().distribution();
+			getVci().distribution(0);
 			getClassi().addListener(belote);
 
 //			while(belote.isStateDistrib()){

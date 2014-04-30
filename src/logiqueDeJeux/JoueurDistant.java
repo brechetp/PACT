@@ -72,4 +72,9 @@ public class JoueurDistant implements JoueurDistantInterface
 		serveur.stop();
 	}
 
+	@Override
+	public int nbCard() {
+		return cardList.size();
+	}
+
 }

@@ -33,5 +33,8 @@ public interface JoueurDistantInterface
 
 	//ferme la connexion
 	public void quit();
+
+	//renvoi le nombre de carte actuelement dans la main du joueur distant
+	public int nbCard();
 	
 }

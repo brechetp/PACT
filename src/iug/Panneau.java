@@ -111,6 +111,7 @@ public class Panneau extends JPanel {
 	int dxdy=0;
 	int sec = 5;
 	int secJD = 15;
+	int cartesDistribuees = 0;
 	
 	String annonce;
 	
@@ -295,6 +296,9 @@ public class Panneau extends JPanel {
 					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 					FontMetrics metrics = g.getFontMetrics();
 			    	g.drawString("Distribution des cartes", (this.getWidth()/2)-(metrics.stringWidth("Distribution des cartes")/2), (this.getHeight()/2));
+			    	if (cartesDistribuees != 0){
+			    		g.drawString(cartesDistribuees + " cartes distribuées", (this.getWidth()/2)-(metrics.stringWidth(cartesDistribuees + " cartes distribuées")/2), (int) (this.getHeight()*0.6));
+			    	}
 			    }
 			    if (k==11){
 			    	g.setColor(new Color(51, 102, 204));
@@ -1136,6 +1140,10 @@ public class Panneau extends JPanel {
 	
 	public void setPos(int pos){
 		this.pos = pos;
+	}
+
+	public void setCartesDistribuees(int cartesDistribuees) {
+		this.cartesDistribuees = cartesDistribuees;
 	}
 
 }

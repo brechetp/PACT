@@ -84,7 +84,7 @@ public interface ViewControllerInterface
 	public void validerOptions();
 	
 	//début distribution
-	public void distribution();
+	public void distribution(int k);
 	
 	//message faites vos annonces
 	public void faireAnnonce();

@@ -37,8 +37,14 @@ public class IUGMain {
 		vc.timeOutJD(11);
 		*/
 		vc.modePartie();
-		vc.distribution();
-		Thread.sleep(3000);
+		vc.distribution(0);
+		Thread.sleep(1000);
+		vc.distribution(3);
+		Thread.sleep(1000);
+		vc.distribution(6);
+		Thread.sleep(1000);
+		vc.distribution(8);
+		Thread.sleep(1000);
 		vc.modeAnnonce();
 		vc.joueurEnCours(1);
 		Thread.sleep((100));

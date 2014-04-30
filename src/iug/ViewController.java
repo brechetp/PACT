@@ -411,8 +411,9 @@ public class ViewController implements ViewControllerInterface
 		return fen.getPan().getOptionEnCours();
 	}
 
-	public void distribution(){
+	public void distribution(int k){
 		fen.getPan().setK(10);
+		fen.getPan().setCartesDistribuees(k);
 		fen.getPan().setModeActuel(1);
 		fen.repaint();
 	}

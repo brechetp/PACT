@@ -28,10 +28,10 @@ public class Classification
 		//System.out.println(compteur);
 		this.ajoute(frame);
 		
-		if (compteur>=30)
-		{
-			this.ajouteNext(frame);
-		}
+//		if (compteur>=30)
+//		{
+//			//this.ajouteNext(frame);
+//		}
 		
 		if (compteur == 60)
 		{
@@ -44,26 +44,34 @@ public class Classification
 	
 	public void determineClasse (double[] mvment)
 	{
-		ArrayList<Integer> classesRetour= new ArrayList<Integer>();
-		double resultMax = 0;
-		int indice =0;
-		for(int k=0;k<classi.length;k++)
+		if (mvment[1]<1) 
 		{
-			double result = classi[k].result(mvment);
-			if (result>0)
-			{
-				classesRetour.add(new Integer(k));
-			}
-			if (result>resultMax)
-			{
-				resultMax=result;
-				indice = k;
-			}
+			envoiMouvement(4);
 		}
-		if (classesRetour.size()==1)
-			this.envoiMouvement(classesRetour.get(0));
-		else if (classesRetour.size()>1)
-			envoiMouvement(indice);
+		else if (mvment[0]>1.8&&mvment[1]>5) 
+		{
+			envoiMouvement(4);
+		}
+		else 
+		{
+			ArrayList<Integer> classesRetour = new ArrayList<Integer>();
+			double resultMax = 0;
+			int indice = 0;
+			for (int k = 0; k < classi.length; k++) {
+				double result = classi[k].result(mvment);
+				if (result > 0) {
+					classesRetour.add(new Integer(k));
+				}
+				if (result > resultMax) {
+					resultMax = result;
+					indice = k;
+				}
+			}
+			if (classesRetour.size() == 1)
+				this.envoiMouvement(classesRetour.get(0));
+			else if (classesRetour.size() > 1)
+				envoiMouvement(indice);
+		}
 	}
 	
 	public void ajoute(double[] frame)
@@ -141,6 +149,7 @@ public class Classification
 	{
 		if (compteur>15)
 		{
+			normaliser();
 			determineClasse(this.moyenneVecteur);
 			this.moyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES];
 			this.nextMoyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES];
@@ -149,5 +158,14 @@ public class Classification
 		else if (compteur>0)
 			compteur = 0;
 		
+	}
+	
+	public void normaliser()
+	{
+		for (int j=0;j<this.moyenneVecteur.length;j++)
+		{
+			this.moyenneVecteur[j]=this.moyenneVecteur[j]/(double)compteur;
+		
+		}
 	}
 }
