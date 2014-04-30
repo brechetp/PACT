@@ -1,6 +1,7 @@
 package comparaison;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -174,11 +175,11 @@ public class Letter extends BinaryImage{
 		return CENTERED_HEIGHT;
 	}
 
-	public void write(String fileName) {
+	public void write(String fileName) throws FileNotFoundException {
 
 		if (centeredLetter == null)
 			center(getBarycentre());
-		try{
+		
 			FileOutputStream fos = new FileOutputStream(fileName);
 			PrintWriter pw = new PrintWriter(fos);
 			String line;
@@ -200,11 +201,7 @@ public class Letter extends BinaryImage{
 			}
 
 			pw.close();
-		}
-		catch (Exception e){
-
-			e.printStackTrace();
-		}
+		
 
 	}
 

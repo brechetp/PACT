@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
-import comparaison.CardDatabase;
+
 import comparaison.Letter;
 import comparaison.Symbol;
 
@@ -95,35 +95,7 @@ public class Card extends Image{
 
 
 
-	public String findIn(CardDatabase database){
-
-		int size = database.getSize();
-		double[][] matchTable = new double[size][3];
-
-		// comparaison avec chaque carte de la base de donn�e	
-		for (int i=0 ; i < size ; i++)
-		{
-			matchTable[i] = compare(database.getCard(i), 0);
-		}
-
-		// d�termination du meilleur match	
-
-		double maxDistance = 0;
-		int imax = 0;
-
-		for (int i=0 ; i < size ; i++)
-		{
-			double norme = 0;
-			for(int compt = 0; compt <3; compt++){
-				norme += Math.pow(matchTable[i][compt], 2);
-			}
-			if (maxDistance<norme) 
-			{
-				imax = i; maxDistance = norme;
-			}
-		}
-		return database.getCard(imax).getName();
-	}
+	
 
 	public double[] compare(Card card, int nbr){ // (2*nbr+1)^2 est le nombre de voisins 
 

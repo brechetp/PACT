@@ -1,5 +1,13 @@
 package camera;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import comparaison.Letter;
 import comparaison.Symbol;
 
@@ -7,55 +15,31 @@ import comparaison.Symbol;
 
 public class Initialisation {
 
-	public static void setCardSize(){
+	public static void setCardSize(String fileName) throws NumberFormatException, IOException{
 		
+		double[] res = new double[2];
 	
+		for(int i=0; i<2; i++){
+			FileReader fis = new FileReader(fileName);
+			BufferedReader bis = new BufferedReader (fis);
+			String value;
+			
 
-		Capture.captureFrame("data/initialisation/fond.jpg", 640, 360, false);
-		System.out.println("Le fond est pris, posez la carte blanche");
+			while((value = bis.readLine()) != null){
+				res[i]=(Double.parseDouble(value));
+				// Calcul de average et sigma 
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
+			}
+			bis.close();
+		
+			
 		}
-		Capture.captureFrame("data/initialisation/carteblanche.jpg", 640, 360, false);
-		System.out.println("La carte blanche a été prise");
 
 
-		Image im1 = new Image("data/initialisation/fond.jpg");
-		Image im2 = new Image ("data/initialisation/carteblanche.jpg");
-
-		BinaryImage bin1 = im2.difference(im1);
-		bin1.save("data/initialisation/bin1.jpg");
-		BinaryImage bin2 = im2.binaryThreshold(1);
-		bin2.save("data/initialisation/bin2.jpg");
-		BinaryImage bin = bin1.and(bin2);
-
-		bin.save("data/initialisation/bin.jpg");
-
-		BinaryComponent bin3 = bin.largestComponent();
-
-		bin3.save("data/initialisation/binaire.jpg");
-
-
-
-		int[][] coins = bin3.getCornersRansac(5, 1);
-		
-		
-
-		Card.setWIDTH((Math.sqrt(Math.pow(coins[0][0]-coins[1][0], 2)+ Math.pow(coins[0][1]-coins[1][1],  2))+Math.sqrt(Math.pow(coins[2][0]-coins[3][0], 2)+ Math.pow(coins[2][1]-coins[3][1],  2)))/2);
-		Card.setHEIGHT((Math.sqrt(Math.pow(coins[0][0]-coins[2][0], 2)+ Math.pow(coins[0][1]-coins[2][1],  2))+Math.sqrt(Math.pow(coins[1][0]-coins[3][0], 2)+ Math.pow(coins[1][1]-coins[3][1],  2)))/2);
+		Card.setWIDTH(res[0]);
+		Card.setHEIGHT(res[1]);
 		System.out.println("Taille initialisée à "+ Card.getWIDTH()+", "+Card.getHEIGHT()+".");
-		Card whiteCard = null;
-		try {
-			whiteCard = new Card(im2.resample(coins, 635,889).getRgbImage());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		whiteCard.save("data/initialisation/cartetest.jpg");;
+		
 
 	}
 

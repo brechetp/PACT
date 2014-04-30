@@ -136,7 +136,7 @@ public class Panneau extends JPanel {
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 		    	FontMetrics metrics = g.getFontMetrics();
 		    	g.drawString("RA'PACT", (this.getWidth()/2)-(metrics.stringWidth("RA'PACT")/2) , (int) ((this.getHeight())*0.3));
-		    	g.drawString("Insï¿½rer le texte descriptif et la photo ici", (this.getWidth()/2)-(metrics.stringWidth("Insï¿½rer le texte descriptif et la photo ici")/2) , (int) ((this.getHeight())*0.6));
+		    	g.drawString("InsÃ©rer le texte descriptif et la photo ici", (this.getWidth()/2)-(metrics.stringWidth("Insï¿½rer le texte descriptif et la photo ici")/2) , (int) ((this.getHeight())*0.6));
 		    
 		    }
 		    
@@ -169,7 +169,7 @@ public class Panneau extends JPanel {
 		    		g.setColor(new Color(51, 0, 153));
 		    		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 					FontMetrics metrics2 = g.getFontMetrics();
-			    	g.drawString("Chargement des donnï¿½es...", (this.getWidth()/2)-(metrics2.stringWidth("Chargement des donnï¿½es...")/2), (int) ((this.getHeight()/2)*1.1));
+			    	g.drawString("Chargement des donnÃ©es...", (this.getWidth()/2)-(metrics2.stringWidth("Chargement des donnï¿½es...")/2), (int) ((this.getHeight()/2)*1.1));
 		    	}
 		    }
 		    
@@ -319,7 +319,7 @@ public class Panneau extends JPanel {
 			    	g.drawString("Equipe N/S", (int)(this.getWidth()*0.5)-(metrics3.stringWidth("Equipe N/S")/2), (int) (this.getHeight()*0.3));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
 			    	FontMetrics metrics2 = g.getFontMetrics();
-			    	g.drawString("(Joueurs Présents)", (int)(this.getWidth()*0.5)-(metrics2.stringWidth("(Joueurs Présents)")/2), (int) (this.getHeight()*0.34));
+			    	g.drawString("(Joueurs PrÃ©sents)", (int)(this.getWidth()*0.5)-(metrics2.stringWidth("(Joueurs Prï¿½sents)")/2), (int) (this.getHeight()*0.34));
 			    	g.setColor(new Color(51,255,255));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 			    	g.drawString("" + points1, (int)(this.getWidth()*0.5)-(metrics.stringWidth("" + points1)/2), (int) (this.getHeight()*0.5));
@@ -330,7 +330,7 @@ public class Panneau extends JPanel {
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 			    	g.drawString("Equipe E/O", (int)(this.getWidth()*0.8)-(metrics3.stringWidth("Equipe E/O")/2), (int) (this.getHeight()*0.3));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-			    	g.drawString("(Joueur Présent + Distant)", (int)(this.getWidth()*0.8)-(metrics2.stringWidth("(Joueur Présent + Distant)")/2), (int) (this.getHeight()*0.34));
+			    	g.drawString("(Joueur PrÃ©sent + Distant)", (int)(this.getWidth()*0.8)-(metrics2.stringWidth("(Joueur Prï¿½sent + Distant)")/2), (int) (this.getHeight()*0.34));
 			    	g.setColor(new Color(51,255,255));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 			    	g.drawString("" + points2, (int)(this.getWidth()*0.8)-(metrics.stringWidth("" + points2)/2), (int) (this.getHeight()*0.5));
@@ -365,7 +365,7 @@ public class Panneau extends JPanel {
 			    	g.setColor(new Color(204, 0, 51));
 					g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
 					FontMetrics metrics = g.getFontMetrics();
-			    	g.drawString("Le joueur distant a passï¿½", (this.getWidth()/2)-(metrics.stringWidth("Le joueur distant a passï¿½")/2), (this.getHeight()/2));
+			    	g.drawString("Le joueur distant a passÃ©", (this.getWidth()/2)-(metrics.stringWidth("Le joueur distant a passï¿½")/2), (this.getHeight()/2));
 			    }
 			    else if (k==666){
 			    	j=0;

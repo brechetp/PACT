@@ -60,8 +60,8 @@ public class MenuBelote extends menu {
 //					belote.nouvelleCarte(event);
 //				}
 //			}
-			
-			belote.nouveauGeste(new MouvementEvent("quitter"));
+//			
+//			belote.nouveauGeste(new MouvementEvent("quitter"));
 			
 		} catch (IOException e) {
 			this.stopBelote(null);

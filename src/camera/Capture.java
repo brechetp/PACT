@@ -1,6 +1,7 @@
 package camera;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -336,171 +337,240 @@ public class Capture {
 
 	}
 
+	public void cardSize() throws FileNotFoundException{
+		captureFrame("data/initialisation/fond.jpg", 640, 360, false);
+		System.out.println("Le fond est pris, posez la carte blanche");
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+		captureFrame("data/initialisation/carteblanche.jpg", 640, 360, false);
+		System.out.println("La carte blanche a été prise");
+
+
+		Image im1 = new Image("data/initialisation/fond.jpg");
+		Image im2 = new Image ("data/initialisation/carteblanche.jpg");
+
+		BinaryImage bin1 = im2.difference(im1);
+		bin1.save("data/initialisation/bin1.jpg");
+		BinaryImage bin2 = im2.binaryThreshold(1);
+		bin2.save("data/initialisation/bin2.jpg");
+		BinaryImage bin = bin1.and(bin2);
+
+		bin.save("data/initialisation/bin.jpg");
+
+		BinaryComponent bin3 = bin.largestComponent();
+
+		bin3.save("data/initialisation/binaire.jpg");
+
+
+
+		int[][] coins = bin3.getCornersRansac(5, 1);
+
+		double[] size = new double[2];
+		size[0] = (Math.sqrt(Math.pow(coins[0][0]-coins[1][0], 2)+ Math.pow(coins[0][1]-coins[1][1],  2))+Math.sqrt(Math.pow(coins[2][0]-coins[3][0], 2)+ Math.pow(coins[2][1]-coins[3][1],  2)))/2;
+		size[1] = (Math.sqrt(Math.pow(coins[0][0]-coins[2][0], 2)+ Math.pow(coins[0][1]-coins[2][1],  2))+Math.sqrt(Math.pow(coins[1][0]-coins[3][0], 2)+ Math.pow(coins[1][1]-coins[3][1],  2)))/2;
+		write(size, "data/database/size/size.txt");
+
+		/*Card.setWIDTH((Math.sqrt(Math.pow(coins[0][0]-coins[1][0], 2)+ Math.pow(coins[0][1]-coins[1][1],  2))+Math.sqrt(Math.pow(coins[2][0]-coins[3][0], 2)+ Math.pow(coins[2][1]-coins[3][1],  2)))/2);
+		Card.setHEIGHT((Math.sqrt(Math.pow(coins[0][0]-coins[2][0], 2)+ Math.pow(coins[0][1]-coins[2][1],  2))+Math.sqrt(Math.pow(coins[1][0]-coins[3][0], 2)+ Math.pow(coins[1][1]-coins[3][1],  2)))/2);*/
+		System.out.println("Taille initialisée à "+ Card.getWIDTH()+", "+Card.getHEIGHT()+".");
+		Card whiteCard = null;
+		try {
+			whiteCard = new Card(im2.resample(coins, 635,889).getRgbImage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		whiteCard.save("data/initialisation/cartetest.jpg");
+	}
 
 
 
 
-	public static void liveCapture() throws Exception {
-
-		try{ 
 
 
+		private static void write(double[] size, String fileName) throws FileNotFoundException {
+			FileOutputStream fos = new FileOutputStream(fileName);
+			PrintWriter pw = new PrintWriter(fos);
 
 
-			/*creation de la fenetre principale*/
-			/*JFrame mainframe = new JFrame();
+			for(Double current : size){ 
+
+
+				pw.println(current); // on �crit l'etiquette
+
+			}
+
+			pw.close();
+		
+
+	}
+
+		public static void liveCapture() throws Exception {
+
+			try{ 
+
+
+
+
+				/*creation de la fenetre principale*/
+				/*JFrame mainframe = new JFrame();
 		mainframe.setLayout(new GridLayout(1, 1));
 		mainframe.setVisible(true);*/
 
 
-			/*creation de la fenetre utilis�e pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
+				/*creation de la fenetre utilis�e pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
     l'acc�l�ration materielle pour afficher les vid�os, profitons-en ! */
 
-			/*creation de la fenetre utilisÈe pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
+				/*creation de la fenetre utilisÈe pour l'affichage de la video. L'objet CanvasFrame en JavaCV peut utiliser
     l'accÈlÈration materielle pour afficher les vidÈos, profitons-en ! */
 
-			/*	CanvasFrame rgb_frame = new CanvasFrame("AVI Playback Demo");        
+				/*	CanvasFrame rgb_frame = new CanvasFrame("AVI Playback Demo");        
 		mainframe.getContentPane().add(rgb_frame.getCanvas() );
 		rgb_frame.setVisible(false);*/
 
 
-			/*creation de l'objet d'acquisition de trames video � partir du fichier indiqu� comme param�tre du programme*/
-			OpenCVFrameGrabber grabber = null;
-			//        grabber = new OpenCVFrameGrabber(args[0]);
-			grabber = new OpenCVFrameGrabber(WEBCAM);
+				/*creation de l'objet d'acquisition de trames video � partir du fichier indiqu� comme param�tre du programme*/
+				OpenCVFrameGrabber grabber = null;
+				//        grabber = new OpenCVFrameGrabber(args[0]);
+				grabber = new OpenCVFrameGrabber(WEBCAM);
 
 
-			grabber.start();
+				grabber.start();
 
-			IplImage rgb_image = grabber.grab();
+				IplImage rgb_image = grabber.grab();
 
-			//mainframe.setSize(width/5, height/5);
-			cvSaveImage("data/courant/image1.jpg", rgb_image);
-			int compteur = 0;
+				//mainframe.setSize(width/5, height/5);
+				cvSaveImage("data/courant/image1.jpg", rgb_image);
+				int compteur = 0;
 
-			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilis�es sont bien lib�r�es de la m�moire
+				/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilis�es sont bien lib�r�es de la m�moire
     (en quelque sorte en forcant un appel au "Garbage Collector"*/
-			CvMemStorage storage = CvMemStorage.create();
+				CvMemStorage storage = CvMemStorage.create();
 
-			while ((rgb_image = grabber.grab()) != null ) {
-				if ( compteur>=30) {
-
-
-
-					IplImage image1 = cvLoadImage("data/courant/image1.jpg");
-					if(areDifferent(image1, rgb_image))
-						System.out.println("Les images sont differentes "+compteur);
-
-					cvSaveImage("data/courant/image1.jpg", rgb_image);
+				while ((rgb_image = grabber.grab()) != null ) {
+					if ( compteur>=30) {
 
 
+
+						IplImage image1 = cvLoadImage("data/courant/image1.jpg");
+						if(areDifferent(image1, rgb_image))
+							System.out.println("Les images sont differentes "+compteur);
+
+						cvSaveImage("data/courant/image1.jpg", rgb_image);
+
+
+
+
+					}
+					compteur++;
+
+
+					/*deuxiËme ligne magique JavaCV, ‡ appeler rÈguliËrement (aprËs chaque capture ou affichage de trame, ...)*/
+
+					cvClearMemStorage(storage);
+				}
+				//nettoyage des ressources        
+				grabber.stop();
+				// rgb_frame.dispose();
+			} catch(Exception e){
+				System.out.println(e.getStackTrace());
+			}       
+
+		}
+
+		private static boolean areDifferent(IplImage image1, IplImage rgb_image) {
+			boolean res = false;
+			int compt =0;
+			int i = 0, j =0;
+
+			while(!res && i < rgb_image.width()){
+				while(!res && j < rgb_image.height()){
+
+					if(different(image1, rgb_image, i, j, 6)) // si les pixels i et j sont differents
+						compt++;
+
+					res = (compt > 50);
+					j++;
 
 
 				}
-				compteur++;
-
-
-				/*deuxiËme ligne magique JavaCV, ‡ appeler rÈguliËrement (aprËs chaque capture ou affichage de trame, ...)*/
-
-				cvClearMemStorage(storage);
+				i++;
 			}
-			//nettoyage des ressources        
-			grabber.stop();
-			// rgb_frame.dispose();
-		} catch(Exception e){
-			System.out.println(e.getStackTrace());
-		}       
-
-	}
-
-	private static boolean areDifferent(IplImage image1, IplImage rgb_image) {
-		boolean res = false;
-		int compt =0;
-		int i = 0, j =0;
-
-		while(!res && i < rgb_image.width()){
-			while(!res && j < rgb_image.height()){
-
-				if(different(image1, rgb_image, i, j, 6)) // si les pixels i et j sont differents
-					compt++;
-
-				res = (compt > 50);
-				j++;
-
-
-			}
-			i++;
+			return res;
 		}
-		return res;
-	}
 
 
-	private static boolean different(IplImage image1, IplImage rgb_image,
-			int i, int j, int k) {
+		private static boolean different(IplImage image1, IplImage rgb_image,
+				int i, int j, int k) {
 
-		boolean res = false;
-		int[] vector = new int[3];
-		int distance = 0 , distanceMin = Integer.MAX_VALUE;
-		int n = Math.max(0, i-k), p = Math.max(0, j-k);
-		int[] pixel = getRgbByte(rgb_image, i, j);
-		while(n <= Math.min(image1.width()-1, i+k)&& !res){
-			while( p <= Math.min(image1.height()-1,  j+k)&& !res){
-				int[] rgbByte = getRgbByte(image1, n, p); // pixel de l'image1
-				distance = 0;
+			boolean res = false;
+			int[] vector = new int[3];
+			int distance = 0 , distanceMin = Integer.MAX_VALUE;
+			int n = Math.max(0, i-k), p = Math.max(0, j-k);
+			int[] pixel = getRgbByte(rgb_image, i, j);
+			while(n <= Math.min(image1.width()-1, i+k)&& !res){
+				while( p <= Math.min(image1.height()-1,  j+k)&& !res){
+					int[] rgbByte = getRgbByte(image1, n, p); // pixel de l'image1
+					distance = 0;
 
-				for (int q = 0; q < 3; q++){
+					for (int q = 0; q < 3; q++){
 
-					distance = distance + Math.abs(rgbByte[q] - pixel[q]);
+						distance = distance + Math.abs(rgbByte[q] - pixel[q]);
+					}
+					if (distance < distanceMin){
+						distanceMin = distance;
+						vector = rgbByte;
+					}
+					p++;
+
+
 				}
-				if (distance < distanceMin){
-					distanceMin = distance;
-					vector = rgbByte;
-				}
-				p++;
-
-
+				n++;
 			}
-			n++;
+			distance = 0;
+			for (int q = 0; q < 3; q++){
+				distance = distance + Math.abs(vector[q] - pixel[q]);	
+			}	
+
+			if (distance > DISTANCE_THRESHOLD)
+				res = true;
+
+			return res;
 		}
-		distance = 0;
-		for (int q = 0; q < 3; q++){
-			distance = distance + Math.abs(vector[q] - pixel[q]);	
-		}	
 
-		if (distance > DISTANCE_THRESHOLD)
-			res = true;
-
-		return res;
-	}
-
-	private static int[] getRgbByte(IplImage image1, int n, int p) {
+		private static int[] getRgbByte(IplImage image1, int n, int p) {
 
 
-		int[] res = new int[3];
-		for(int k = 0; k <3; k++){
-			res[k] = (image1.getByteBuffer().get(3*n + image1.widthStep()*p+k) + 255) % 255;
+			int[] res = new int[3];
+			for(int k = 0; k <3; k++){
+				res[k] = (image1.getByteBuffer().get(3*n + image1.widthStep()*p+k) + 255) % 255;
+			}
+			return res;
 		}
-		return res;
+
+		public static double getHeight() {
+			return HEIGHT;
+		}
+
+		public static double getWidth() {
+			return WIDTH;
+		}
+
+		public static void setHeight(int i) {
+			HEIGHT = i;
+
+		}
+
+		public static void setWidth(int i) {
+
+			WIDTH = i;
+		}
 	}
-
-	public static double getHeight() {
-		return HEIGHT;
-	}
-
-	public static double getWidth() {
-		return WIDTH;
-	}
-
-	public static void setHeight(int i) {
-		HEIGHT = i;
-
-	}
-
-	public static void setWidth(int i) {
-
-		WIDTH = i;
-	}
-}
 
 
 

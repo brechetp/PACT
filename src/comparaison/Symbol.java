@@ -1,6 +1,7 @@
 package comparaison;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -336,7 +337,7 @@ public class Symbol {
 		}
 	}
 	
-	public void writeSignature(String fileName) {
+	public void writeSignature(String fileName) throws FileNotFoundException {
 
 		if (signatureTable.size() == 0)
 			try {
@@ -345,7 +346,7 @@ public class Symbol {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		try{
+	
 			FileOutputStream fos = new FileOutputStream(fileName);
 			PrintWriter pw = new PrintWriter(fos);
 
@@ -358,11 +359,7 @@ public class Symbol {
 			}
 
 			pw.close();
-		}
-		catch (Exception e){
-
-			e.printStackTrace();
-		}
+		
 	}
 
 }

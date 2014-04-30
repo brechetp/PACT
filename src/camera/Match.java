@@ -9,20 +9,20 @@ import com.googlecode.javacv.cpp.opencv_core.IplImage;
 
 public class Match implements Runnable {
 	
-	private static final int COEFF = 10;
+	
 	private static final String[][] COLOR_DATABASE = new String[][]{{"trefle", "pique"},{"carreau", "coeur"}};
 	private static final String[] VALUE_DATABASE = {"as", "7", "8", "9", "10", "valet", "reine", "roi"};
 	private IplImage imageA, imageB, largeImage;
 	private int compteur;
 	private BeloteCoinche belote;
 	
-	public Match(IplImage imageA, IplImage imageB, IplImage largeImage, int compteur /*BeloteCoinche belote*/){
+	public Match(IplImage imageA, IplImage imageB, IplImage largeImage, int compteur, BeloteCoinche belote){
 		
 		this.imageA = imageA;
 		this.imageB = imageB;
 		this.compteur = compteur%100;
 		this.largeImage = largeImage;
-		//this.belote = belote;
+		this.belote = belote;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class Match implements Runnable {
 			carte.printInfos("data/test/info.txt");
 			System.out.println(VALUE_DATABASE[(int) type.charAt(2)-48]+" de "+COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48]);
 			
-			//newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
+			newCard(COLOR_DATABASE[(int)type.charAt(0)-48][(int)type.charAt(1)-48], VALUE_DATABASE[(int) type.charAt(2)-48]);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
