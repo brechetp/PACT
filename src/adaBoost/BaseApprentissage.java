@@ -70,7 +70,7 @@ public class BaseApprentissage {
 					
 					double[] descripteurs = new double[Classification.NOMBRE_DE_FEATURES] ;
     			
-					for (int j = 5 ; j < nb_frames ; j++) //On enlève les 5 premières frames pour l'entrée du geste dans la zone
+					for (int j = 5 ; j < nb_frames ; j++) //On enlï¿½ve les 5 premiï¿½res frames pour l'entrï¿½e du geste dans la zone
 					{
 						
 						descripteurs[0] =+ hyk.get(i).get(j).get(0) ; //nombre de mains
@@ -93,7 +93,7 @@ public class BaseApprentissage {
 						descripteurs[9] =+ Y_translation1/Norme_translation1; //translation Y de la main 1
 						descripteurs[10] =+ Z_translation1/Norme_translation1; //translation Z de la main 1
 						
-						// On récupère la normale lors de la frame précédente pour calculer la rotation
+						// On rï¿½cupï¿½re la normale lors de la frame prï¿½cï¿½dente pour calculer la rotation
     					double X_normalePrecedente1 = hyk.get(i).get(j-1).get(38) ;
     					double Y_normalePrecedente1 = hyk.get(i).get(j-1).get(39) ;
     					double Z_normalePrecedente1 = hyk.get(i).get(j-1).get(40) ;
@@ -163,7 +163,7 @@ public class BaseApprentissage {
 						
 					double[] descripteurs_test = new double[Classification.NOMBRE_DE_FEATURES] ;
 	    		
-					for (int j = 5 ; j < nb_frames_test ; j++) //On enlève les 5 premières frames pour l'entrée du geste dans la zone
+					for (int j = 5 ; j < nb_frames_test ; j++) //On enlï¿½ve les 5 premiï¿½res frames pour l'entrï¿½e du geste dans la zone
 					{
 						descripteurs_test[0] =+ hyk_test.get(i).get(j).get(0) ; //nombre de mains test
 						descripteurs_test[1] =+ hyk_test.get(i).get(j).get(7) ; //nombre de doigts test
@@ -265,9 +265,9 @@ public class BaseApprentissage {
 		
 		/******************************** Classi passer vs accepter ************************************/
 		
+		double[][] basevs = new double[62+78][14];
 		try {
 			compteur = 0 ;
-			double[][] basevs = new double[62+78][14];
 			for (int k = 5; k<5+6;k++)
 			{
 				ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(tableau_fichiers.get(k))) ;
@@ -282,7 +282,7 @@ public class BaseApprentissage {
 					
 					double[] descripteurs = new double[Classification.NOMBRE_DE_FEATURES] ;
     			
-					for (int j = 5 ; j < nb_frames ; j++) //On enlève les 5 premières frames pour l'entrée du geste dans la zone
+					for (int j = 5 ; j < nb_frames ; j++) //On enlï¿½ve les 5 premiï¿½res frames pour l'entrï¿½e du geste dans la zone
 					{
 						
 						descripteurs[0] =+ hyk.get(i).get(j).get(0) ; //nombre de mains
@@ -305,7 +305,7 @@ public class BaseApprentissage {
 						descripteurs[9] =+ Y_translation1/Norme_translation1; //translation Y de la main 1
 						descripteurs[10] =+ Z_translation1/Norme_translation1; //translation Z de la main 1
 						
-						// On récupère la normale lors de la frame précédente pour calculer la rotation
+						// On rï¿½cupï¿½re la normale lors de la frame prï¿½cï¿½dente pour calculer la rotation
     					double X_normalePrecedente1 = hyk.get(i).get(j-1).get(38) ;
     					double Y_normalePrecedente1 = hyk.get(i).get(j-1).get(39) ;
     					double Z_normalePrecedente1 = hyk.get(i).get(j-1).get(40) ;
@@ -364,7 +364,7 @@ public class BaseApprentissage {
 					
 					double[] descripteurs = new double[Classification.NOMBRE_DE_FEATURES] ;
     			
-					for (int j = 5 ; j < nb_frames ; j++) //On enlève les 5 premières frames pour l'entrée du geste dans la zone
+					for (int j = 5 ; j < nb_frames ; j++) //On enlï¿½ve les 5 premiï¿½res frames pour l'entrï¿½e du geste dans la zone
 					{
 						
 						descripteurs[0] =+ hyk.get(i).get(j).get(0) ; //nombre de mains
@@ -387,7 +387,7 @@ public class BaseApprentissage {
 						descripteurs[9] =+ Y_translation1/Norme_translation1; //translation Y de la main 1
 						descripteurs[10] =+ Z_translation1/Norme_translation1; //translation Z de la main 1
 						
-						// On récupère la normale lors de la frame précédente pour calculer la rotation
+						// On rï¿½cupï¿½re la normale lors de la frame prï¿½cï¿½dente pour calculer la rotation
     					double X_normalePrecedente1 = hyk.get(i).get(j-1).get(38) ;
     					double Y_normalePrecedente1 = hyk.get(i).get(j-1).get(39) ;
     					double Z_normalePrecedente1 = hyk.get(i).get(j-1).get(40) ;
@@ -431,6 +431,8 @@ public class BaseApprentissage {
     			}
 				ois.close() ;
 			}
+			
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -441,6 +443,7 @@ public class BaseApprentissage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ClassiFinal[] classi2 = test.main(basevs, basevs);
 		
 		return classi;
 	}
