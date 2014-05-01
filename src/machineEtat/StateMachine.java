@@ -402,7 +402,11 @@ public class StateMachine
 			 break;
 /******************************* Quitter *****************************/
 		 case Quit:
-			 t1.interrupt();	
+			 if (captureCarte!=null)
+				 captureCarte.stop();
+			 if(captureQrCode!=null)
+				 captureQrCode.stop();
+			 t1.interrupt();
 		 default:
 			break;
 		 }
@@ -535,7 +539,6 @@ public class StateMachine
 		{
 		case ResteDesTours:
 			vci.partieTerminer();
-			joueurD.partieTerminer();
 			break;
 		default:
 			//Nothing
