@@ -21,6 +21,7 @@ public class BinaryImage extends GrayImage {
 	private static final int COMPONENT_THRESHOLD = (int) Math.round(Card.getWIDTH()*Card.getHEIGHT()/5);
 	private static final int SIZE_MIN = 8000;
 	private static final int SIZE_MAX = 20000;
+	private static final int SYMBOL_LIMIT = 150;
 	protected int[][] binaryMatrix ;
 	protected boolean[][] booleanMatrix;
 	private IplImage binaryImage;
@@ -429,24 +430,28 @@ public class BinaryImage extends GrayImage {
 
 		int [][] tab = connectedComponents();
 
-		int[] compteur = new int[nbTags];
+		int[][] compteur = new int[nbTags][2];
 		for (int i=0; i<nbTags; i++){
-			compteur[i]=0;
+			compteur[i][0]=0;
+			compteur[i][1]=0;
 		}
 
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (tab[i][j] !=0) {
-					compteur[tab[i][j]]++ ;
+					compteur[tab[i][j]][0]++ ;
+					if (j < SYMBOL_LIMIT || i > SYMBOL_LIMIT){
+						compteur[tab[i][j]][1] = 1;
+					}
 				}
 			}
 		}
 
 		int[] res = new int[]{0,-1}; // res[0] contient le nombre de composantes connexes, res[1] l'indice de la première
 		for (int i=0; i<nbTags; i++){
-			if (compteur[i] >= SIZE_MIN){
+			if (compteur[i][0] >= SIZE_MIN){
 				res[0]++;
-				if(res[1] == -1 && compteur[i] <= SIZE_MAX){
+				if(res[1] == -1 && compteur[i][0] <= SIZE_MAX && compteur[i][1]==1){
 					res[1] = i;
 				}
 

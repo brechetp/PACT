@@ -173,7 +173,8 @@ public class Card extends Image{
 	public String getType() throws Exception{
 
 		String string;
-
+		if (isNul(colorAverage))
+			throw new Exception("Pas de symbol trouvé");
 		if (isRed(colorAverage)) // carte rouge
 			string = "1";
 		else{
@@ -200,6 +201,11 @@ public class Card extends Image{
 
 	}
 	
+	private boolean isNul(int[] colorAverage) {
+		// TODO Auto-generated method stub
+		return colorAverage[0] == 0 && colorAverage[1] == 0 && colorAverage[2] == 2;
+	}
+
 	public void printInfos(String fileName) throws Exception{
 		try {
 			FileWriter fw = new FileWriter(fileName,true);

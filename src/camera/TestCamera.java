@@ -1,11 +1,10 @@
 package camera;
 
-import java.io.FileNotFoundException;
+import iug.ViewController;
+
 import java.io.IOException;
 
-import iug.ViewController;
 import logiqueDeJeux.BeloteCoinche;
-import logiqueDeJeux.EtatDuJeu;
 
 public class TestCamera {
 
@@ -46,16 +45,16 @@ public class TestCamera {
 
 	
 
-//		ViewController controller = new ViewController();
-//		BeloteCoinche coiche = null;
-//		try {
-//			coiche = new BeloteCoinche(controller, null);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		ViewController controller = new ViewController();
+		BeloteCoinche coiche = null;
+		try {
+			coiche = new BeloteCoinche(controller, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		new Thread(new CaptureLive(/*coiche*/)).start();
+		new Thread(new CaptureLiveDistribution(coiche)).start();
 
 
 	}

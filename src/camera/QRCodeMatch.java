@@ -18,14 +18,14 @@ import com.google.zxing.qrcode.QRCodeReader;
 import com.google.zxing.qrcode.decoder.Decoder;
 
 public class QRCodeMatch implements Runnable {
-	
+
 	private IplImage largeImage;
 	private int compteur;
 	private BeloteCoinche belote;
-	
+
 
 	public QRCodeMatch(IplImage largeImage,
-			int compteur /*,BeloteCoinche belote)*/) {
+			int compteur ,BeloteCoinche belote) {
 		this.largeImage = largeImage;
 		this.compteur = compteur;
 		this.belote = belote;
@@ -44,9 +44,12 @@ public class QRCodeMatch implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		for(Result res : result){
-			System.out.println(res.getText());
+		if(result != null){
+			for(Result res : result){
+				System.out.println(res.getText());
+			}
+		}else{
+			System.out.println("Pas de QRCode trouvé");
 		}
 	}
 

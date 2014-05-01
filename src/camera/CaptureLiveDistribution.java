@@ -14,7 +14,7 @@ public class CaptureLiveDistribution extends CaptureLive implements Runnable {
 
 	private boolean run = true ;
 	public CaptureLiveDistribution(BeloteCoinche belote){
-		//		this.setBelote(belote);
+				super(belote);
 	}
 
 	@Override
@@ -62,15 +62,15 @@ public class CaptureLiveDistribution extends CaptureLive implements Runnable {
 
 
 					//cvSaveImage("data/courant/image2.jpg", image2);
-
-					if(areDifferent(image1, image2, compteur)){
-						System.out.println("Les images sont differentes");
-
-						hasMoved =true;
-					}
-					else{ // les images sont identiques
-						if (hasMoved){
-							hasMoved = false;
+//
+//					if(areDifferent(image1, image2, compteur)){
+//						System.out.println("Les images sont differentes");
+//
+//						hasMoved =true;
+//					}
+//					else{ // les images sont identiques
+//						if (hasMoved){
+//							hasMoved = false;
 
 
 
@@ -90,7 +90,7 @@ public class CaptureLiveDistribution extends CaptureLive implements Runnable {
 							//							cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
 							//							cvSaveImage("data/courant/compare/largeimage"+comptA+".jpg",largeImage);
 							System.out.println("On lance la comparaison "+(++comptA)+".");
-							new Thread(new QRCodeMatch(largeImage, comptA /*,getBelote()*/)).start();
+							new Thread(new QRCodeMatch(largeImage, comptA ,getBelote())).start();
 							//							imageA = imageB.clone();
 
 							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
@@ -100,11 +100,11 @@ public class CaptureLiveDistribution extends CaptureLive implements Runnable {
 							image2 = opencv_highgui.cvQueryFrame(capture);
 
 
-						}
+					//	}
 					}
 					Thread.sleep(500);
 
-				}
+				//}
 
 				image1 = image2.clone();
 				compteur++;
