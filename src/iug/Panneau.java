@@ -150,8 +150,8 @@ public class Panneau extends JPanel {
 		    /******************************************************************************************************/
 		    
 		    Image rapact = ImageIO.read(new File("./Cartes/rapact.png"));
-		    g.drawImage(rapact, (this.getWidth()/2)-(rapact.getWidth(null)/2), (int) ((this.getHeight())*0.15), this);
 		    if (modeActuel == 777){
+			    g.drawImage(rapact, (this.getWidth()/2)-(rapact.getWidth(null)/2), (int) ((this.getHeight())*0.15), this);
 		    	g.setColor(new Color(255,153,51));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		    	FontMetrics metrics = g.getFontMetrics();
