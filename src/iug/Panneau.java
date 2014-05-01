@@ -297,7 +297,7 @@ public class Panneau extends JPanel {
 					FontMetrics metrics = g.getFontMetrics();
 			    	g.drawString("Distribution des cartes", (this.getWidth()/2)-(metrics.stringWidth("Distribution des cartes")/2), (this.getHeight()/2));
 			    	if (cartesDistribuees != 0){
-			    		g.drawString(cartesDistribuees + " cartes distribuées", (this.getWidth()/2)-(metrics.stringWidth(cartesDistribuees + " cartes distribuées")/2), (int) (this.getHeight()*0.6));
+			    		g.drawString(cartesDistribuees + " cartes distribuï¿½es", (this.getWidth()/2)-(metrics.stringWidth(cartesDistribuees + " cartes distribuï¿½es")/2), (int) (this.getHeight()*0.6));
 			    	}
 			    }
 			    if (k==11){
@@ -435,9 +435,7 @@ public class Panneau extends JPanel {
 				    	g.drawString("Annonce actuelle : " + s1 + " - " + s2, (this.getWidth()/2)-(metricsX.stringWidth("Annonce actuelle : " + s1 + " - " + s2)/2) , (int) ((this.getHeight()*0.8)));
 			    	}
 			    }
-			    else {
-			    	
-			    }
+			    
 		    }
 		    
 		    

@@ -37,9 +37,17 @@ implements CarteListInterface
 		else this.add(carte);
 	}
 
+	@Override
 	public boolean contain(CarteInterface carte) 
 	{
-		return this.contains(carte);
+		boolean retour= false;
+		for(int i=0;i<size();i++)
+		{
+			if (get(i).getLabelNum().equals(carte.getLabelNum())&&get(i).getSuit().equals(carte.getSuit()))
+				retour = true;
+		}
+		
+		return retour;
 	}
 
 	public int getPoint() 

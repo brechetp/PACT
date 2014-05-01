@@ -254,6 +254,7 @@ public class ViewController implements ViewControllerInterface
 		}
 		else{
 			fen.getPan().setValeurCouleur(valeur, couleur);
+			fen.getPan().setStrings(valeur, couleur);
 			fen.getPan().setK(6);
 			fen.repaint();
 			try{

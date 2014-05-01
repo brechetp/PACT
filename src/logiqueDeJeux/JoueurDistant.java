@@ -88,4 +88,11 @@ public class JoueurDistant implements JoueurDistantInterface
 		serveur.envoiFinManche(premierAJouer);
 	}
 
+	@Override
+	public void sendCoinche(int i) 
+	{
+		serveur.envoiCoinche(i);
+		
+	}
+
 }

@@ -51,6 +51,7 @@ public class CaptureLive extends Capture implements Runnable  {
 			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilis�es sont bien lib�r�es de la m�moire
 (en quelque sorte en forcant un appel au "Garbage Collector"*/
 			CvMemStorage storage = CvMemStorage.create();
+			System.out.println("Début de capture");
 
 			while ((image2 = opencv_highgui.cvQueryFrame(capture)) != null && run) {
 				cvSaveImage("data/courant/capture/capture"+compteur%1000+".jpg", image2);

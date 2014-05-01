@@ -17,7 +17,7 @@ public interface EtatDuJeuInterface
 	public void joue(CarteInterface carte, ViewControllerInterface vci, JoueurDistantInterface joueurD, int i);
 	
 	//non jouer et valide. Renvoi true si c'est le cas
-	public boolean valide(CarteInterface carte, JoueurDistantInterface joueurD, int numJoueurDistant);
+	public boolean valide(CarteInterface carte, JoueurDistantInterface joueurD, int numJoueurDistant, boolean distrib);
 	
 	//donne le num�ro du joueur actuel
 	public int getNumJoueur();

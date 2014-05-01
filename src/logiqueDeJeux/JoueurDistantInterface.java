@@ -43,4 +43,5 @@ public interface JoueurDistantInterface
 	//manche terminet, numéro du joueur qui va joué apès.
 	public void mancheTerminer(int premierAJouer);
 	
+	public void sendCoinche(int i);
 }

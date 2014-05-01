@@ -43,6 +43,7 @@ public class CaptureLiveDistribution extends CaptureLive implements Runnable {
 			/* Ligne magique de JavaCV - elle permet de faire en sorte que les trames videos non utilis�es sont bien lib�r�es de la m�moire
 (en quelque sorte en forcant un appel au "Garbage Collector"*/
 			CvMemStorage storage = CvMemStorage.create();
+			System.out.println("Début des QRCodes");
 
 			while ((image2 = opencv_highgui.cvQueryFrame(capture)) != null && run) {
 				//				cvSaveImage("data/courant/capture/capture"+compteur%1000+".jpg", image2);
@@ -89,7 +90,7 @@ public class CaptureLiveDistribution extends CaptureLive implements Runnable {
 							//							cvSaveImage("data/courant/compare/imageA"+comptA+".jpg",imageA);
 							//							cvSaveImage("data/courant/compare/imageB"+comptA+".jpg",imageB);
 							//							cvSaveImage("data/courant/compare/largeimage"+comptA+".jpg",largeImage);
-							System.out.println("On lance la comparaison "+(++comptA)+".");
+							//System.out.println("On lance la comparaison "+(++comptA)+".");
 							new Thread(new QRCodeMatch(largeImage, comptA ,getBelote())).start();
 							//							imageA = imageB.clone();
 

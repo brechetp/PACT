@@ -64,14 +64,19 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		}
 	}
 
-	public boolean valide(CarteInterface carte,JoueurDistantInterface joueurD,int numJoueurDistant) 
+	public boolean valide(CarteInterface carte,JoueurDistantInterface joueurD,int numJoueurDistant,boolean distrib) 
 	{
 		if (carte.estUneCarte()) {
 			//pas deja jouer et pas dans la main du joueur si il ne joue pas
 			//	not played && (si numjoueur != numjouer distant) alors 
-			return !playedCard.contain(carte)
-					&& (numJoueurDistant == numJoueur || !joueurD
-							.aLaCarte(carte));
+			if (playedCard.contain(carte))
+				return false;
+			
+			if (numJoueurDistant== numJoueur&&!distrib)
+				return joueurD.aLaCarte(carte);
+			
+			else 
+				return !joueurD.aLaCarte(carte);
 		}
 		return false;
 	}
@@ -125,13 +130,8 @@ public class EtatDuJeu implements EtatDuJeuInterface
 
 	public void joueurSuivant(ViewControllerInterface vci,JoueurDistantInterface joueurD,String string,int numJoueurD) 
 	{
-		if (this.cardOnTable.size()!=4) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		if (this.cardOnTable.size()!=4) 
+		{
 			this.numJoueur = (numJoueur % 4) + 1;
 			vci.joueurEnCours(numJoueur);
 			if (numJoueur == numJoueurD) {

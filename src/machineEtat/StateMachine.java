@@ -39,9 +39,9 @@ public class StateMachine
 	
 	public StateMachine(JoueurDistantInterface joueurD,ViewControllerInterface vci, BeloteCoinche beloteCoinche) 
 	{
+		this.belote = beloteCoinche;
 		this.captureQrCode = new CaptureLiveDistribution(belote);
 		new Thread(captureQrCode).start();
-		this.belote = beloteCoinche;
 		this.state = State.Distribution;
 		this.etat = new EtatDuJeu(this);
 		this.joueurD = joueurD;
@@ -54,13 +54,14 @@ public class StateMachine
 		 
 /*********************** Distribution *******************/		 
 		case Distribution:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,true))
 			{
 				joueurD.addCard(carte.getCarte());
 				vci.distribution(joueurD.nbCard());
 				if (joueurD.aHuitCarte())
 				{
 					captureQrCode.stop();
+					captureCarte = new CaptureLive(belote);
 					new Thread(captureCarte).start();
 					this.state = State.Annonce;
 					vci.modeAnnonce();
@@ -75,7 +76,7 @@ public class StateMachine
 			 
 /*********************** Premier Tour **********************/			 
 		case DebutTour:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,false))
 			{
 				if (StateMachine.numJoueurDistant==etat.getNumJoueur())
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
@@ -86,7 +87,7 @@ public class StateMachine
 			}
 			break;
 		case DebutTour1:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,false))
 			{
 				if (StateMachine.numJoueurDistant==etat.getNumJoueur())
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
@@ -97,7 +98,7 @@ public class StateMachine
 			}
 			break;
 		case DebutTour2:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,false))
 			{
 				if (StateMachine.numJoueurDistant==etat.getNumJoueur())
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
@@ -108,7 +109,7 @@ public class StateMachine
 			}
 			break;
 		case DebutTour3:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,false))
 			{
 				if (StateMachine.numJoueurDistant==etat.getNumJoueur())
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
@@ -121,7 +122,7 @@ public class StateMachine
 			
 /************************ Second Tour ************************/			 
 		case SecondTour:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,false))
 			{
 				if (StateMachine.numJoueurDistant==etat.getNumJoueur())
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
@@ -132,7 +133,7 @@ public class StateMachine
 			}
 			break;
 		case SecondTour1:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,false))
 			{
 				if (StateMachine.numJoueurDistant==etat.getNumJoueur())
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
@@ -143,7 +144,7 @@ public class StateMachine
 			}
 			break;
 		case SecondTour2:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,false))
 			{
 				if (StateMachine.numJoueurDistant==etat.getNumJoueur())
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
@@ -154,7 +155,7 @@ public class StateMachine
 			}
 			break;
 		case SecondTour3:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,false))
 			{
 				if (StateMachine.numJoueurDistant==etat.getNumJoueur())
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
@@ -186,7 +187,7 @@ public class StateMachine
 			 
 /********************* Reste Des Tours **********************/			 
 		case ResteDesTours:
-			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant))
+			if (etat.valide(carte.getCarte(),joueurD,numJoueurDistant,false))
 			{
 				if (StateMachine.numJoueurDistant==etat.getNumJoueur())
 					vci.afficherCarte(carte.getCarte().getLabelNum()+carte.getCarte().getSuit());
@@ -211,6 +212,7 @@ public class StateMachine
 		
 		/********************* Annnonce ********************/
 		case Annonce:
+			nbPasse++;
 			if (numJoueurDistant != etat.getNumJoueur())
 			{
 				joueurD.sendAnnonce(null, etat.getNumJoueur());
@@ -220,6 +222,7 @@ public class StateMachine
 			break;
 			
 		case AnnoncePasse1:
+			nbPasse++;
 			if (numJoueurDistant != etat.getNumJoueur())
 			{
 				joueurD.sendAnnonce(null, etat.getNumJoueur());
@@ -229,6 +232,7 @@ public class StateMachine
 			break;
 			
 		case AnnonceFaite:
+			nbPasse++;
 			if (numJoueurDistant != etat.getNumJoueur())
 			{
 				joueurD.sendAnnonce(null, etat.getNumJoueur());
@@ -238,6 +242,7 @@ public class StateMachine
 			break;
 			
 		case AnnoncePasse2:
+			nbPasse++;
 			if (numJoueurDistant != etat.getNumJoueur())
 			{
 				joueurD.sendAnnonce(null, etat.getNumJoueur());
@@ -324,6 +329,7 @@ public class StateMachine
 			 break;
 		 
 		 case AnnonceAFaire2:
+			 nbPasse=0;
 			 etat.valideAnnonce(vci);
 			 joueurD.sendAnnonce(etat.getAnnonce(), etat.getNumJoueur());
 			 this.valeurAnnonceMax=etat.valeurAnnonce();
@@ -434,21 +440,27 @@ public class StateMachine
 		 case AnnonceFaite:
 			 etat.coinche();
 			 vci.coinche(etat.getNumJoueur());
+			 if (etat.getNumJoueur()!=numJoueurDistant)
+				 joueurD.sendCoinche(etat.getNumJoueur());
 			 etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
 			 vci.modeJeu();
 			 vci.joueurEnCours(premierAJouer);
 			 joueurD.sendFinAnnonce();
 			 this.state = State.DebutTour;
 			 break;
-		 
+
 		 case DebutTour:
 			 etat.coinche();
 			 if (etat.getCoinche()==4)
 			 {
+				 if (etat.getNumJoueur()!=numJoueurDistant)
+					 joueurD.sendCoinche(etat.getNumJoueur());
 				 vci.contreCoinche();
 			 }
 			 else
 			 {
+				 if (etat.getNumJoueur()!=numJoueurDistant)
+					 joueurD.sendCoinche(etat.getNumJoueur());
 				 vci.coinche(1);
 			 }
 			 this.state = State.DebutTour;
@@ -645,9 +657,11 @@ public class StateMachine
 				etat.joueurSuivant(vci, joueurD, "annonce", numJoueurDistant);
 				if (retour == 1) 
 				{
+					nbPasse=0;
 					this.state = State.AnnonceFaite;
 				} else if (retour == 0) 
 				{
+					nbPasse++;
 					this.state = State.AnnoncePasse1;
 				}
 			}	
@@ -661,9 +675,11 @@ public class StateMachine
 				etat.joueurSuivant(vci, joueurD, "annonce", numJoueurDistant);
 				if (retour == 1) 
 				{
+					nbPasse=0;
 					this.state = State.AnnonceFaite;
 				} else if (retour == 0) 
 				{
+					nbPasse++;
 					this.state = State.AnnoncePasse2;
 				}
 			}
@@ -677,9 +693,11 @@ public class StateMachine
 				etat.joueurSuivant(vci, joueurD, "annonce", numJoueurDistant);
 				if (retour == 1) 
 				{
+					nbPasse=0;
 					this.state = State.AnnonceFaite;
 				} else if (retour == 0) 
 				{
+					nbPasse++;
 					this.state = State.AnnoncePasse2;
 				}
 			}
@@ -693,9 +711,11 @@ public class StateMachine
 				etat.joueurSuivant(vci, joueurD, "annonce", numJoueurDistant);
 				if (retour == 1) 
 				{
+					nbPasse=0;
 					this.state = State.AnnonceFaite;
 				} else if (retour == 0) 
 				{
+					nbPasse++;
 					this.state = State.AnnoncePasse3;
 				}
 			}
@@ -707,11 +727,14 @@ public class StateMachine
 			{
 				this.valeurAnnonceMax = etat.valeurAnnonce();
 				etat.joueurSuivant(vci, joueurD, "annonce", numJoueurDistant);
-				if (retour == 1) {
+				if (retour == 1) 
+				{
+					nbPasse=0;
 					this.state = State.AnnonceFaite;
 				} else if (retour == 0) {
 					if (etat.annonceFaite()) 
 					{
+						nbPasse=0;
 						vci.modeJeu();
 						joueurD.sendFinAnnonce();
 						etat.setNumJoueur(premierAJouer, joueurD,

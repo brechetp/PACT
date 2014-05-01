@@ -122,19 +122,15 @@ public class Classification
 		case 1:
 			//envoiMouvement(new MouvementEvent("retour"));
 			envoiMouvement(new MouvementEvent("passer"));
-			System.out.println("Passer");
 			break;
 		case 2:
 			envoiMouvement(new MouvementEvent("coinche"));
-			System.out.println("Coinche");
 			break;
 		case 3:
 			envoiMouvement(new MouvementEvent("accepter"));
-			System.out.println("Accepter");
 			break;
 		case 4:
 			envoiMouvement(new MouvementEvent("quitter"));
-			System.out.println("Quitter");
 			break;
 		}
 	}

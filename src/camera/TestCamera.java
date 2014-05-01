@@ -2,6 +2,7 @@ package camera;
 
 import iug.ViewController;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import logiqueDeJeux.BeloteCoinche;
@@ -54,7 +55,14 @@ public class TestCamera {
 			e.printStackTrace();
 		}
 
-		new Thread(new CaptureLiveDistribution(coiche)).start();
+		new Thread(new CaptureLive(coiche)).start();
+		
+//		try {
+//			Capture.cardSize("data/database/size/");
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 
 	}

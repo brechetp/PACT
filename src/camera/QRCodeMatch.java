@@ -1,6 +1,8 @@
 package camera;
 
+import structure.Carte;
 import logiqueDeJeux.BeloteCoinche;
+import machineEtat.CardEvent;
 
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import com.google.zxing.Binarizer;
@@ -46,7 +48,9 @@ public class QRCodeMatch implements Runnable {
 		}
 		if(result != null){
 			for(Result res : result){
-				System.out.println(res.getText());
+				//System.out.println(res.getText());
+				String[] card = res.getText().split(" ");
+				belote.nouvelleCarte(new CardEvent(new Carte(card[0],card[1], belote.getEtat())));
 			}
 		}else{
 			System.out.println("Pas de QRCode trouvé");
