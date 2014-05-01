@@ -131,6 +131,7 @@ public class Classification
 			break;
 		case 1:
 			//envoiMouvement(new MouvementEvent("retour"));
+			System.out.println("passer");
 			envoiMouvement(new MouvementEvent("passer"));
 			break;
 		case 2:
@@ -156,7 +157,7 @@ public class Classification
 
 	public void lancerClassi() 
 	{
-		if (compteur>15)
+		if (compteur>20)
 		{
 			normaliser();
 			determineClasse(this.moyenneVecteur);

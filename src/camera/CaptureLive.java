@@ -27,11 +27,11 @@ public class CaptureLive extends Capture implements Runnable  {
 	}
 
 	public void run(){	
-
+		CvCapture capture=null;
 		try{ 
 
 
-			CvCapture capture = opencv_highgui.cvCreateCameraCapture(getWebcam());
+			capture = opencv_highgui.cvCreateCameraCapture(getWebcam());
 
 			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
 			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
@@ -127,12 +127,14 @@ public class CaptureLive extends Capture implements Runnable  {
 				cvClearMemStorage(storage);
 
 
-
+				Thread.sleep(1);
 			}
 			//nettoyage des ressources        
 			opencv_highgui.cvReleaseCapture(capture);
 			// rgb_frame.dispose();
 		} catch(Exception e){
+			//nettoyage des ressources        
+			opencv_highgui.cvReleaseCapture(capture);
 			System.out.println(e.getStackTrace());
 		}       
 	}

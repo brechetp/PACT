@@ -34,14 +34,14 @@ public class StateMachine
 	public static int numJoueurDistant=4;
 	private CarteListInterface carteAnnonce = new CarteList();
 	private BeloteCoinche belote;
-	private CaptureLiveDistribution captureQrCode;
-	private CaptureLive captureCarte;
+	private Thread threadCaptureQrCode;
+	private Thread threadCaptureCarte;
 	
 	public StateMachine(JoueurDistantInterface joueurD,ViewControllerInterface vci, BeloteCoinche beloteCoinche) 
 	{
 		this.belote = beloteCoinche;
-		this.captureQrCode = new CaptureLiveDistribution(belote);
-		new Thread(captureQrCode).start();
+		this.threadCaptureQrCode = new Thread(new CaptureLiveDistribution(belote));
+		this.threadCaptureQrCode.start();
 		this.state = State.Distribution;
 		this.etat = new EtatDuJeu(this);
 		this.joueurD = joueurD;
@@ -60,9 +60,9 @@ public class StateMachine
 				vci.distribution(joueurD.nbCard());
 				if (joueurD.aHuitCarte())
 				{
-					captureQrCode.stop();
-					captureCarte = new CaptureLive(belote);
-					new Thread(captureCarte).start();
+					threadCaptureQrCode.interrupt();
+					threadCaptureCarte = new Thread(new CaptureLive(belote));
+					threadCaptureCarte.start();
 					this.state = State.Annonce;
 					vci.modeAnnonce();
 					vci.joueurEnCours(premierAJouer);
@@ -396,16 +396,16 @@ public class StateMachine
 		 case MancheTermine:
 			 etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
 			 vci.distribution(0);
-			 captureQrCode = new CaptureLiveDistribution(belote);
-			 new Thread(captureQrCode).start();
+			 threadCaptureQrCode = new Thread(new CaptureLiveDistribution(belote));
+			 threadCaptureQrCode.start();
 			 this.state=State.Distribution;
 			 break;
 /******************************* Quitter *****************************/
 		 case Quit:
-			 if (captureCarte!=null)
-				 captureCarte.stop();
-			 if(captureQrCode!=null)
-				 captureQrCode.stop();
+			 if (threadCaptureCarte!=null)
+				 threadCaptureCarte.interrupt();
+			 if(threadCaptureQrCode!=null)
+				 threadCaptureQrCode.interrupt();
 			 t1.interrupt();
 		 default:
 			break;
@@ -524,7 +524,7 @@ public class StateMachine
 		switch (this.state)
 		{
 		case ResteDesTours:
-			captureCarte.stop();
+			threadCaptureCarte.interrupt();
 			this.premierAJouer++;
 			etat.mancheTerminer(vci,joueurD,premierAJouer);
 			this.state = State.MancheTermine;
