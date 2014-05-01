@@ -1,5 +1,7 @@
 package camera;
 
+import iug.ViewControllerInterface;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,7 +17,7 @@ import comparaison.Symbol;
 
 public class Initialisation {
 
-	public static void setCardSize(String fileName) throws NumberFormatException, IOException{
+	public static void setCardSize(String fileName, ViewControllerInterface vci) throws NumberFormatException, IOException{
 
 		double[] res = new double[2];
 
@@ -38,7 +40,7 @@ public class Initialisation {
 
 		Card.setWIDTH(res[0]);
 		Card.setHEIGHT(res[1]);
-		System.out.println("Taille initialisée à "+ Card.getWIDTH()+", "+Card.getHEIGHT()+".");
+		vci.messageSettings("Taille initialisée à "+ Card.getWIDTH()+", "+Card.getHEIGHT()+".");
 
 	}
 

@@ -26,7 +26,7 @@ public class MainFinal {
 		
 		try {
 			//Capture.cardSize("data/database/size/");
-			Initialisation.setCardSize("data/database/size/size.txt");
+			Initialisation.setCardSize("data/database/size/size.txt", vc);
 		
 		} catch (NumberFormatException | IOException e1) {
 			// TODO Auto-generated catch block

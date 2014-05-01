@@ -21,22 +21,22 @@ public class MenuSettings extends menu {
 		
 		getVci().modeSettings();
 		try {
-			Capture.cardSize("data/database/size/");
-			Initialisation.setCardSize("data/database/size/size.txt");
+			Capture.cardSize("data/database/size/", getVci());
+			Initialisation.setCardSize("data/database/size/size.txt", getVci());
 		
 		} catch (NumberFormatException | IOException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			getVci().messageSettings("Erreur lors de l'initialisation de la taille");
 		}
 
 
 		try {
-			Capture.symbolDatabase(0, 4, "data/database/symbols/symbol", "data/database/symbols/text");
-			Capture.letterDatabase(0, 3, "data/database/letters/letter", "data/database/letters/text");
+			Capture.symbolDatabase(0, 4, "data/database/symbols/symbol", "data/database/symbols/text", getVci());
+			Capture.letterDatabase(0, 3, "data/database/letters/letter", "data/database/letters/text", getVci());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			getVci().messageSettings("Erreur lors de la capture des bases de données");
 		}
 		
 	}
