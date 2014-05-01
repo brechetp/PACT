@@ -33,13 +33,13 @@ public class LeapMotionMain {
 		fenetre.setResizable(false);
 		
 		
-		/*try {
+		try {
 			File fichier = new File("./adaboost/Classificateurs Finaux.ser");
 			ObjectInputStream ois;
 			ois = new ObjectInputStream(new FileInputStream(fichier));
 			ClassiFinauxListe classilol = (ClassiFinauxListe)ois.readObject();
-			EtatDuJeu etat = new EtatDuJeu();
-			BeloteCoinche belote = new BeloteCoinche(etat);
+			
+			BeloteCoinche belote = new BeloteCoinche(null, null);
 			Classification classi = new Classification(classilol.get());
 			classi.addListener(belote);
 	        MyListener listener = new MyListener(classi);
@@ -55,7 +55,7 @@ public class LeapMotionMain {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}*/
+		}
 		
 		/*ClassiFinal[] classilol = BaseApprentissage.main(null);
 		EtatDuJeu etat = new EtatDuJeu();
