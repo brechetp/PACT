@@ -55,7 +55,7 @@ public class TestCamera {
 			e.printStackTrace();
 		}
 
-		new Thread(new CaptureLive(coiche)).start();
+		new Thread(new CaptureLiveDistribution(coiche)).start();
 		
 //		try {
 //			Capture.cardSize("data/database/size/");
