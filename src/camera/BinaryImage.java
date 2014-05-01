@@ -429,7 +429,11 @@ public class BinaryImage extends GrayImage {
 	public int[] componentsNumberAndFirst(){
 
 		int [][] tab = connectedComponents();
-		int tag = Math.min(tab[150][150], tab[450][317]);
+		int tag;
+		if (tab[150][150] != 0){
+		tag = Math.min(tab[160][170], tab[450][317]);
+		} else 
+			tag = tab[450][317];
 		int[][] compteur = new int[nbTags][2];
 		for (int i=0; i<nbTags; i++){
 			compteur[i][0]=0;
