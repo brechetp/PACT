@@ -272,8 +272,8 @@ public class BaseApprentissage {
 			{
 				ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(tableau_fichiers.get(k))) ;
 				ListeDeMouvements hyk = (ListeDeMouvements)ois.readObject();
-			
 				int nb_exemples = hyk.size() ;
+				System.out.println("geste k: "+hyk.size()+" exemples");
 				
 				for (int i = 0 ; i < nb_exemples ; i++)
 				{					
