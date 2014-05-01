@@ -37,4 +37,10 @@ public interface JoueurDistantInterface
 	//renvoi le nombre de carte actuelement dans la main du joueur distant
 	public int nbCard();
 	
+	//pli terminé, numéro du joueur gagnant le pli.
+	public void finDePli(int numJoueur);
+
+	//manche terminet, numéro du joueur qui va joué apès.
+	public void mancheTerminer(int premierAJouer);
+	
 }

@@ -68,13 +68,23 @@ public class JoueurDistant implements JoueurDistantInterface
 	@Override
 	public void quit() 
 	{
-		//previen le joueurDistant
+		//previent le joueurDistant
 		serveur.stop();
 	}
 
 	@Override
 	public int nbCard() {
 		return cardList.size();
+
+	public void finDePli(int numJoueur) 
+	{
+		serveur.envoiFinDeTour(numJoueur);
+	}
+
+	@Override
+	public void mancheTerminer(int premierAJouer) 
+	{
+		serveur.envoiFinManche(premierAJouer);
 	}
 
 }

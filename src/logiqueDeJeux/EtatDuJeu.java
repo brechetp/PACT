@@ -102,6 +102,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		 vci.effacerCartes();
 		 vci.joueurEnCours(numJoueur);
 		 this.cardOnTable = new CarteList();
+		 joueurD.finDePli(numJoueur);
 		 if (numJoueur==StateMachine.numJoueurDistant&&!dernierPli())
 		 {
 			 joueurD.waitCard();

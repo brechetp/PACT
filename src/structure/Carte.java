@@ -63,27 +63,23 @@ public class Carte implements CarteInterface
 	@Override
 	public int getRang() 
 	{
-		switch(labelNum)
-		{
-		case "7":
+		if (labelNum.equals("7"))
 			return 0;
-		case "8":
+		else if (labelNum.equals("8"))
 			return 1;
-		case "9":
+		else if (labelNum.equals("9"))
 			return 2;
-		case "10":
+		else if (labelNum.equals("10"))
 			return 3;
-		case "valet":
+		else if (labelNum.equals("valet"))
 			return 4;
-		case "reine":
+		else if (labelNum.equals("reine"))
 			return 5;
-		case "roi":
+		else if (labelNum.equals("roi"))
 			return 6;
-		case "as":
+		else if (labelNum.equals("as"))
 			return 7;
-		default:
-			return 0;// n'est jamais attein
-		}
+		else return 0;
 	}
 
 	public void setLabelNum(String labelNum) {

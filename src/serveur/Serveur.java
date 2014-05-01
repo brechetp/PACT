@@ -152,12 +152,24 @@ public class Serveur
 		}
 	}
 	
-	public void envoiFinDeTour()
+	public void envoiFinManche(int joueurSuivant)
+	{
+		try {
+			PrintWriter out =new PrintWriter(socket.getOutputStream());
+			Thread t2 = new Thread(new ServeurEmission(out,"fin_de_manche "+joueurSuivant));
+			t2.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void envoiFinDeTour(int joueurGagne)
 	{
 		try 
 		{
 			PrintWriter out =new PrintWriter(socket.getOutputStream());
-			Thread t2 = new Thread(new ServeurEmission(out,"fin_de_tour"));
+			Thread t2 = new Thread(new ServeurEmission(out,"fin_de_pli "+joueurGagne));
 			t2.start();
 		} 
 		catch (IOException e) 
