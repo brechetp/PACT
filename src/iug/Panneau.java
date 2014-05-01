@@ -82,6 +82,7 @@ public class Panneau extends JPanel {
 	int pointsTotal2;
 	String annoncelol;
 	
+	String message = null;
 	
 	int placement = 0;
 	int yCarte = 0;
@@ -135,7 +136,12 @@ public class Panneau extends JPanel {
 		    	g.setColor(new Color(255,153,51));
 		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 		    	FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("Reglage des Settings en cours", (this.getWidth()/2)-(metrics.stringWidth("Reglage des Settings en cours")/2) , (int) ((this.getHeight())*0.5));
+		    	if (message==null){
+		    		g.drawString("Reglage des Settings en cours", (this.getWidth()/2)-(metrics.stringWidth("Reglage des Settings en cours")/2) , (int) ((this.getHeight())*0.1));
+		    	}
+		    	else{
+		    		g.drawString(message, (this.getWidth()/2)-(metrics.stringWidth(message)/2) , (int) ((this.getHeight())*0.1));
+		    	}
 		    }
 		    
 		    
@@ -1153,6 +1159,10 @@ public class Panneau extends JPanel {
 
 	public void setCartesDistribuees(int cartesDistribuees) {
 		this.cartesDistribuees = cartesDistribuees;
+	}
+	
+	public void setMessage(String message){
+		this.message = message;
 	}
 
 }
