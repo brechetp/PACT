@@ -149,13 +149,23 @@ public class Panneau extends JPanel {
 		    /**                                         MODE A PROPOS                                            **/
 		    /******************************************************************************************************/
 		    
+		    Image rapact = ImageIO.read(new File("./Cartes/rapact.png"));
+		    g.drawImage(rapact, (this.getWidth()/2)-(rapact.getWidth(null)/2), (int) ((this.getHeight())*0.15), this);
 		    if (modeActuel == 777){
 		    	g.setColor(new Color(255,153,51));
-		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
 		    	FontMetrics metrics = g.getFontMetrics();
-		    	g.drawString("RA'PACT", (this.getWidth()/2)-(metrics.stringWidth("RA'PACT")/2) , (int) ((this.getHeight())*0.3));
-		    	g.drawString("InsÃ©rer le texte descriptif et la photo ici", (this.getWidth()/2)-(metrics.stringWidth("Insï¿½rer le texte descriptif et la photo ici")/2) , (int) ((this.getHeight())*0.6));
-		    
+		    	g.drawString("Nous sommes les RA'PACT", (this.getWidth()/2)-(metrics.stringWidth("Nous sommes les RA'PACT")/2) , (int) ((this.getHeight())*0.1));
+		    	g.drawString("Geste -Quitter- pour revenir aux menus", (this.getWidth()/2)-(metrics.stringWidth("Geste -Quitter- pour revenir aux menus")/2) , (int) ((this.getHeight())*0.95));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+		    	FontMetrics metricslol = g.getFontMetrics();
+		    	g.drawString("Julia la buse : elle part à la chasse aux paresseux", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pécheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.55));
+		    	g.drawString("Pierre le busard pécheur : il hameçonne les experts à coups de mails pour ne plus les lâcher", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pécheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.6));
+		    	g.drawString("Michaël l’aigle : sa vue perçante décode la moindre erreur de Java", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pécheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.65));
+		    	g.drawString("Benjamin la chouette : il trouve ça mignon", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pécheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.7));
+		    	g.drawString("Edouard M le vautour : son ombre plane autour des réunions agonisantes", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pécheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.75));
+		    	g.drawString("Edouard E le hibou : lui vit la nuit et dort le jour", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pécheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.80));
+		    	g.drawString("Timothée le condor : c’en est déjà un beau spécimen", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pécheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.85));
 		    }
 		    
 		    

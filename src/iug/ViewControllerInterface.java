@@ -106,4 +106,6 @@ public interface ViewControllerInterface
 
 	public void modeSettings();
 
+	public void modeAPropos();
+
 }

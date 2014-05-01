@@ -7,6 +7,8 @@ public class IUGMain {
 		int k = 0;
 		
 		ViewController vc = new ViewController();
+		vc.modeAPropos();
+		Thread.sleep(1000000);
 		/*
 		Thread.sleep(10000);
 		vc.modeMenu();
