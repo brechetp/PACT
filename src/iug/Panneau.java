@@ -385,7 +385,7 @@ public class Panneau extends JPanel {
 			    	g.setColor(new Color(204, 255, 102));
 			    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 			    	FontMetrics metrics = g.getFontMetrics();
-			    	g.drawString("C'est au joueur " + j + " de jouer !", (this.getWidth()/2)-(metrics.stringWidth("C'est au joueur " + j + " de jouer !")/2) , (int) ((this.getHeight()*0.7)));
+			    	g.drawString("C'est au joueur " + j + " de jouer !", (this.getWidth()/2)-(metrics.stringWidth("C'est au joueur " + j + " de jouer !")/2) , (int) ((this.getHeight()*0.2)));
 			    }
 			    if (j!=0 && h==1){
 			    	g.setColor(new Color(0,153,153));
@@ -432,7 +432,7 @@ public class Panneau extends JPanel {
 			    		g.setColor(new Color(255,153,51));
 				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
 				    	FontMetrics metricsX = g.getFontMetrics();
-				    	g.drawString("Annonce actuelle : " + s1 + " - " + s2, (this.getWidth()/2)-(metricsX.stringWidth("Annonce actuelle : " + s1 + " - " + s2)/2) , (int) ((this.getHeight()*0.8)));
+				    	g.drawString("Annonce actuelle : " + s1 + " - " + s2, (this.getWidth()/2)-(metricsX.stringWidth("Annonce actuelle : " + s1 + " - " + s2)/2) , (int) ((this.getHeight()*0.1)));
 			    	}
 			    }
 			    
