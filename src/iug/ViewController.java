@@ -457,4 +457,9 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setStrings(null, null);
 		fen.repaint();
 	}
+	
+	public void modeSettings(){
+		fen.getPan().setModeActuel(10001);
+		fen.repaint();
+	}
 }

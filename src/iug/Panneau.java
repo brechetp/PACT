@@ -127,6 +127,17 @@ public class Panneau extends JPanel {
 		    Image img = ImageIO.read(new File("./Cartes/ARRIEREPLAN2.png"));
 		    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		    
+		    /******************************************************************************************************/
+		    /**                                         MODE SETTINGS                                            **/
+		    /******************************************************************************************************/
+		    
+		    if (modeActuel == 10001){
+		    	g.setColor(new Color(255,153,51));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+		    	FontMetrics metrics = g.getFontMetrics();
+		    	g.drawString("Reglage des Settings en cours", (this.getWidth()/2)-(metrics.stringWidth("Reglage des Settings en cours")/2) , (int) ((this.getHeight())*0.5));
+		    }
+		    
 		    
 		    /******************************************************************************************************/
 		    /**                                         MODE A PROPOS                                            **/
