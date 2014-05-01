@@ -7,9 +7,6 @@ public class IUGMain {
 		int k = 0;
 		
 		ViewController vc = new ViewController();
-		vc.modeAPropos();
-		Thread.sleep(1000000);
-		/*
 		Thread.sleep(10000);
 		vc.modeMenu();
 		vc.init(new ImageMenu(2), new ImageMenu(1), new ImageMenu(3));
@@ -37,7 +34,6 @@ public class IUGMain {
 		vc.timeOutJD(12);
 		Thread.sleep((1000));
 		vc.timeOutJD(11);
-		*/
 		vc.modePartie();
 		vc.distribution(0);
 		Thread.sleep(1000);
