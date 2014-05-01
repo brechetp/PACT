@@ -430,7 +430,7 @@ public class BinaryImage extends GrayImage {
 
 		int [][] tab = connectedComponents();
 		int tag;
-		if (tab[150][150] != 0){
+		if (tab[160][170] != 0){
 		tag = Math.min(tab[160][170], tab[450][317]);
 		} else 
 			tag = tab[450][317];
