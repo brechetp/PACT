@@ -23,7 +23,7 @@ public interface JoueurDistantInterface
 	public boolean aHuitCarte();
 	
 	//indique que la partie est terminer
-	public void partieTerminer();
+	public void partieTerminer(int i);
 
 	//indique que le mode annonce est fini
 	public void sendFinAnnonce();
@@ -44,4 +44,7 @@ public interface JoueurDistantInterface
 	public void mancheTerminer(int premierAJouer);
 	
 	public void sendCoinche(int i);
+
+	public void enoyerScore(int i, int j, int pointsTeamPair,
+			int pointsTeamImpair);
 }

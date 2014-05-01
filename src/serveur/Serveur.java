@@ -116,12 +116,12 @@ public class Serveur
 		}
 	}
 	
-	public void envoiPartieTerminer()
+	public void envoiPartieTerminer(int i)
 	{
 		try 
 		{
 			PrintWriter out =new PrintWriter(socket.getOutputStream());
-			Thread t2 = new Thread(new ServeurEmission(out,"fin_de_partie"));
+			Thread t2 = new Thread(new ServeurEmission(out,"fin_de_partie "+i));
 			t2.start();
 		} 
 		catch (IOException e) 
@@ -192,6 +192,22 @@ public class Serveur
 		}
 	}
 
+	public void envoiScore(int i, int j, int pointsTeamPair,
+			int pointsTeamImpair) 
+	{
+		try 
+		{
+			PrintWriter out =new PrintWriter(socket.getOutputStream());
+			Thread t2 = new Thread(new ServeurEmission(out,"score_partie "+pointsTeamPair+" "+pointsTeamImpair+" score_manche "+i+" "+j));
+			t2.start();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
 	public void stop() 
 	{
 		try {
@@ -202,4 +218,5 @@ public class Serveur
 			e.printStackTrace();
 		}
 	}
+
 }

@@ -143,7 +143,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		}
 	}
 
-	public void mancheTerminer(ViewControllerInterface vci) 
+	public void mancheTerminer(ViewControllerInterface vci,JoueurDistantInterface joueurD,int premierAJouer) 
 	{
 		if(this.numJoueur%2==0)
 			this.TeamPair.dernierPli();
@@ -157,6 +157,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		System.out.println("Point carte team 2-4 = "+teamPairPoint);
 		//
 		
+		joueurD.mancheTerminer(premierAJouer);
 		int teamG = annonce.getTeam();
 		if (teamG==0)
 		{
@@ -166,16 +167,19 @@ public class EtatDuJeu implements EtatDuJeuInterface
 				this.pointsTeamImpair = pointsTeamImpair + teamImpairPoint + pointAnnonceTeamImpair;
 				vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, 
 						teamImpairPoint+pointAnnonceTeamImpair, teamPairPoint+pointAnnonceTeamPair+valeurAnnonce(), pointsTeamImpair, 
-						pointsTeamPair, ""+valeurAnnonce());
+						pointsTeamPair, ""+valeurAnnonce()+" "+getAtout());
+				joueurD.enoyerScore(teamPairPoint+pointAnnonceTeamPair+valeurAnnonce(),teamImpairPoint+pointAnnonceTeamImpair,pointsTeamPair,pointsTeamImpair);
 			}
-			else
+			else 
 			{
 				pointAnnonceTeamImpair+=pointAnnonceTeamPair;
 				pointAnnonceTeamPair=0;
 				this.pointsTeamImpair = pointsTeamImpair + coefCoinche*(162 + annonce.getValue())+pointAnnonceTeamImpair+pointAnnonceTeamPair;
 				vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, 
 						teamImpairPoint+pointAnnonceTeamImpair+valeurAnnonce(), 0, pointsTeamImpair, 
-						pointsTeamPair, ""+valeurAnnonce());
+						pointsTeamPair, ""+valeurAnnonce()+" "+getAtout());
+				joueurD.enoyerScore(0,teamImpairPoint+pointAnnonceTeamImpair+valeurAnnonce(),pointsTeamPair,pointsTeamImpair);
+
 			}
 		}
 		else
@@ -186,7 +190,8 @@ public class EtatDuJeu implements EtatDuJeuInterface
 				this.pointsTeamPair = pointsTeamPair + teamPairPoint + pointAnnonceTeamPair;
 				vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, 
 						teamImpairPoint+pointAnnonceTeamImpair+valeurAnnonce(), teamPairPoint+pointAnnonceTeamPair, pointsTeamImpair, 
-						pointsTeamPair, ""+valeurAnnonce());
+						pointsTeamPair, ""+valeurAnnonce()+" "+getAtout());
+				joueurD.enoyerScore(teamPairPoint+pointAnnonceTeamPair,teamImpairPoint+pointAnnonceTeamImpair+valeurAnnonce(),pointsTeamPair,pointsTeamImpair);
 			}
 			else
 			{
@@ -195,14 +200,15 @@ public class EtatDuJeu implements EtatDuJeuInterface
 				this.pointsTeamPair = pointsTeamPair + coefCoinche*(162 + annonce.getValue())+pointAnnonceTeamImpair+pointAnnonceTeamPair;
 				vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, 
 						0, teamPairPoint+pointAnnonceTeamPair+valeurAnnonce(), pointsTeamImpair, 
-						pointsTeamPair, ""+valeurAnnonce());
+						pointsTeamPair, ""+valeurAnnonce()+" "+getAtout());
+				joueurD.enoyerScore(teamPairPoint+pointAnnonceTeamPair+valeurAnnonce(),0,pointsTeamPair,pointsTeamImpair);
 			}
 		}
 		//pour les tests
 		System.out.println("Point team 1-3 = "+this.pointsTeamImpair);
 		System.out.println("Point team 2-4 = "+this.pointsTeamPair);
 		
-		vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, teamImpairPoint+pointAnnonceTeamImpair+valeurAnnonce(), teamPairPoint, pointsTeamImpair, pointsTeamPair, ""+valeurAnnonce());
+		vci.finManche(teamImpairPoint, teamPairPoint, pointAnnonceTeamImpair, pointAnnonceTeamPair, teamImpairPoint+pointAnnonceTeamImpair+valeurAnnonce(), teamPairPoint, pointsTeamImpair, pointsTeamPair, ""+valeurAnnonce()+" "+getAtout());
 		
 		//reinitialisation des variable de manche
 		this.playedCard = new CarteList();
@@ -216,10 +222,12 @@ public class EtatDuJeu implements EtatDuJeuInterface
 		if (this.pointsTeamPair>this.valeurFinPartie)
 			{
 				vci.partieTerminer();
+				joueurD.partieTerminer(0);
 			}
 		else if (this.pointsTeamImpair>this.valeurFinPartie)
 			{
 				vci.partieTerminer();
+				joueurD.partieTerminer(1);
 			}
 			
 			

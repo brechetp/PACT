@@ -29,7 +29,7 @@ public interface EtatDuJeuInterface
 	public void finpli(ViewControllerInterface vci,JoueurDistantInterface joueurD);
 
 	//Termine la manche
-	public void mancheTerminer(ViewControllerInterface vci);
+	public void mancheTerminer(ViewControllerInterface vci,JoueurDistantInterface joueurD,int premierAJouer);
 	
 	//Donne le num�ro de l'equipe que a jouer la carte "carte"
 	public int numTeamCarte(CarteInterface carte);

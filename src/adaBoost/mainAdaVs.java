@@ -7,8 +7,9 @@ public class mainAdaVs {
 	{
 		int nbGeste = 2;
 		int[] Y = { 
-				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-				1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+				1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+				3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
+		};
 		
 		/*int[] Y_test = {
 					0,0,0,0,0,0,0,0,0,
@@ -23,7 +24,7 @@ public class mainAdaVs {
 		ClassiFinauxListe tab = new ClassiFinauxListe(classi);
 		
 		//creation des classis
-		for (int i=0;i<nbGeste;i++)
+		for (int i=1;i<4;i=i+2)
 		{
 			int[] Y2 = new int[Y.length];
 			for(int j=0;j<Y.length;j++)
@@ -32,8 +33,9 @@ public class mainAdaVs {
 					Y2[j]=1;
 				else Y2[j]=-1;
 			}
-			classi[i] =AdaBoost.adaBoost(X, Y2, T);
-			classi[i].normaliser();
+			classi[(i-1)/2] =AdaBoost.adaBoost(X, Y2, T);
+			classi[(i-1)/2].normaliser();
 		}
+		return classi;
 	}
 }

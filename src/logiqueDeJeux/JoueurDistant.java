@@ -50,9 +50,9 @@ public class JoueurDistant implements JoueurDistantInterface
 		return cardList.size()==8;
 	}
 
-	public void partieTerminer() 
+	public void partieTerminer(int i) 
 	{
-		serveur.envoiPartieTerminer();
+		serveur.envoiPartieTerminer(i);
 	}
 
 	public void sendFinAnnonce() 
@@ -92,6 +92,12 @@ public class JoueurDistant implements JoueurDistantInterface
 	public void sendCoinche(int i) 
 	{
 		serveur.envoiCoinche(i);
+		
+	}
+
+	public void enoyerScore(int i, int j, int pointsTeamPair,
+			int pointsTeamImpair) {
+		serveur.envoiScore(i,j,pointsTeamPair,pointsTeamImpair);
 		
 	}
 

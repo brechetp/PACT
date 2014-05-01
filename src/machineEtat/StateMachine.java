@@ -521,9 +521,8 @@ public class StateMachine
 		{
 		case ResteDesTours:
 			captureCarte.stop();
-			etat.mancheTerminer(vci);
 			this.premierAJouer++;
-			joueurD.mancheTerminer(premierAJouer);
+			etat.mancheTerminer(vci,joueurD,premierAJouer);
 			this.state = State.MancheTermine;
 		default:
 			break;

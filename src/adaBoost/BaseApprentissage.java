@@ -444,9 +444,10 @@ public class BaseApprentissage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ClassiFinal[] classi2 = test.main(basevs, basevs);
+		mainAdaVs test2 = new mainAdaVs();
+		ClassiFinal[] classi2 = test2.main(basevs);
 		
-		return classi;
+		return classi2;
 	}
 
 }
