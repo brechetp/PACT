@@ -64,6 +64,7 @@ public class MenuBelote extends menu {
 //			belote.nouveauGeste(new MouvementEvent("quitter"));
 			
 		} catch (IOException e) {
+			e.printStackTrace();
 			this.stopBelote(null);
 		}
 	}

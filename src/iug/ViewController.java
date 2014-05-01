@@ -403,6 +403,7 @@ public class ViewController implements ViewControllerInterface
 	}
 
 	public void validerOptions(){
+		fen.getPan().setSecJD(15);
 		fen.getPan().setOptionEnCours(5);
 		fen.repaint();
 	}

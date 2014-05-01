@@ -3,7 +3,7 @@ package leapmotion.main;
 import java.io.*;
 
 import adaBoost.Classification;
-import camera.MainThreadImage;
+//import camera.MainThreadImage;
 
 import com.leapmotion.leap.*;
 

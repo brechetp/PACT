@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketOptions;
 import java.net.SocketTimeoutException;
 
 import structure.AnnonceInterface;
@@ -17,6 +16,7 @@ public class Serveur
 {
 	private Socket socket=null;
 	private BeloteCoinche belote;
+	private ServerSocket socketserver;
 
 	public Serveur(BeloteCoinche belote)
 	{
@@ -26,10 +26,15 @@ public class Serveur
 	public void start() throws IOException
 	{
 
-		ServerSocket socketserver = new ServerSocket(6665);
+		socketserver = new ServerSocket(6665);
 		System.out.println("attente de connexion");
 		socketserver.setSoTimeout(15000);
-		socket = socketserver.accept();
+		try {
+			socket = socketserver.accept();
+		} catch (SocketTimeoutException e) {
+			socketserver.close();
+			throw new SocketTimeoutException();
+		}
 		socket.setSoTimeout(0);
 		socketserver.setSoTimeout(0);
 		System.out.println("connexion etablie");
@@ -179,6 +184,7 @@ public class Serveur
 	{
 		try {
 			socket.close();
+			socketserver.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

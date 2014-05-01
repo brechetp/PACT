@@ -24,8 +24,8 @@ public class MainFinal {
 		ClassiFinal[] classilol = BaseApprentissage.main(null);
 		Classification classi = new Classification(classilol);
 		
-		Initialisation.setSymbolDatabase("data/database/symbols/text");
-		Initialisation.setLetterDatabase("data/database/letters/text");
+		//Initialisation.setSymbolDatabase("data/database/symbols/text");
+		//Initialisation.setLetterDatabase("data/database/letters/text");
 		
 		vc.modeMenu();
 		

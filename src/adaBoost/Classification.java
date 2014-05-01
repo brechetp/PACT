@@ -24,7 +24,7 @@ public class Classification
 	
 	public void onFrame(double[] frame)
 	{
-		compteur++;
+		
 		//System.out.println(compteur);
 		this.ajoute(frame);
 		
@@ -33,8 +33,10 @@ public class Classification
 //			//this.ajouteNext(frame);
 //		}
 		
-		if (compteur == 60)
+		if (compteur == 59)
 		{
+			this.ajoute(frame);
+			normaliser();
 			determineClasse(this.moyenneVecteur);
 			this.moyenneVecteur = new double[Classification.NOMBRE_DE_FEATURES]; //this.nextMoyenneVecteur;
 			//this.nextMoyenneVecteur = new double[NOMBRE_DE_FEATURES];
@@ -44,11 +46,11 @@ public class Classification
 	
 	public void determineClasse (double[] mvment)
 	{
-		if (mvment[1]<1) 
+		if (mvment[1]<0.3) 
 		{
-			envoiMouvement(4);
+			envoiMouvement(2);
 		}
-		else if (mvment[0]>1.8&&mvment[1]>5) 
+		else if (mvment[0]>1.9&&mvment[1]>6) 
 		{
 			envoiMouvement(4);
 		}
@@ -76,6 +78,7 @@ public class Classification
 	
 	public void ajoute(double[] frame)
 	{
+		compteur++;
 		for (int j=0;j<this.moyenneVecteur.length;j++)
 		{
 			this.moyenneVecteur[j]=this.moyenneVecteur[j]+frame[j];
