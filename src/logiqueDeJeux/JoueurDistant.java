@@ -75,7 +75,8 @@ public class JoueurDistant implements JoueurDistantInterface
 	@Override
 	public int nbCard() {
 		return cardList.size();
-
+	}
+	
 	public void finDePli(int numJoueur) 
 	{
 		serveur.envoiFinDeTour(numJoueur);

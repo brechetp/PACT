@@ -266,7 +266,7 @@ public class BaseApprentissage {
 		/******************************** Classi passer vs accepter ************************************/
 		
 		try {
-			
+			compteur = 0 ;
 			double[][] basevs = new double[62+78][14];
 			for (int k = 5; k<5+6;k++)
 			{
@@ -442,6 +442,7 @@ public class BaseApprentissage {
 			e.printStackTrace();
 		}
 		
+		return classi;
 	}
 
 }
