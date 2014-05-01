@@ -429,7 +429,7 @@ public class BinaryImage extends GrayImage {
 	public int[] componentsNumberAndFirst(){
 
 		int [][] tab = connectedComponents();
-
+		int tag = Math.min(tab[150][150], tab[450][317]);
 		int[][] compteur = new int[nbTags][2];
 		for (int i=0; i<nbTags; i++){
 			compteur[i][0]=0;
@@ -440,7 +440,7 @@ public class BinaryImage extends GrayImage {
 			for (int j = 0; j < width; j++) {
 				if (tab[i][j] !=0) {
 					compteur[tab[i][j]][0]++ ;
-					if (j < SYMBOL_LIMIT || i > SYMBOL_LIMIT){
+					if (tab[i][j] == tag){
 						compteur[tab[i][j]][1] = 1;
 					}
 				}

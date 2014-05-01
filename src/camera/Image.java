@@ -19,10 +19,10 @@ public class Image {
 
 
 	
-	public static final int DISTANCE_THRESHOLD = 30; // pour la distance entre deux images
+	public static final int DISTANCE_THRESHOLD = 40; // pour la distance entre deux images
 	private static final int NEIGHBOUR_NUMBER = 0; // pour l'algorithme de distance
 
-	private static int[] WHITE_VECTOR = new int[]{220, 220, 220};
+	private static int[] WHITE_VECTOR = new int[]{230, 230, 230};
 	private static int[] GRAY_VECTOR = new int[]{100, 180, 180};
 	private static final int COLOR_THRESHOLD = 10;
 	private static final int[] RED_VECTOR = new int[]{87,88, 200};

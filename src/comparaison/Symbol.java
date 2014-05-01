@@ -18,9 +18,9 @@ import camera.Card;
 public class Symbol {
 
 	
-	private static final double RED_OO = 36000;//37790;
+	private static final double RED_OO = 30000;//37790;
 	private static final double BLACK_OO = -4910.2;
-	private static final double RED_COEFF =0.7009;
+	private static final double RED_COEFF =1.0602;
 	private static final double BLACK_COEFF = 0.9831; 
 	private static ArrayList<ArrayList<Double>> SYMBOL_DATABASE =
 			new ArrayList<ArrayList<Double>>();

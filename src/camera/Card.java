@@ -210,7 +210,7 @@ public class Card extends Image{
 		try {
 			FileWriter fw = new FileWriter(fileName,true);
 			String infos = colorAverage[0] +" "+ colorAverage[1] +" "+ colorAverage[2]+" ";
-			infos += number +" "+compt+" "+ letter.momentum(2)+" ";
+			infos += number +" "+compt+" ";
 			if(isRed(colorAverage))
 				infos += symbol.getMatchTable("1")[0]+" " +symbol.getMatchTable("1")[1]+" ";
 			else
