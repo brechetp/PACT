@@ -1,5 +1,7 @@
 package machineEtat;
 
+import com.googlecode.javacv.cpp.opencv_highgui;
+
 import camera.CaptureLive;
 import camera.CaptureLiveDistribution;
 import iug.ViewControllerInterface;
@@ -34,14 +36,14 @@ public class StateMachine
 	public static int numJoueurDistant=4;
 	private CarteListInterface carteAnnonce = new CarteList();
 	private BeloteCoinche belote;
-	private Thread threadCaptureQrCode;
-	private Thread threadCaptureCarte;
+	private CaptureLiveDistribution CaptureQrCode;
+	private CaptureLive CaptureCarte;
 	
 	public StateMachine(JoueurDistantInterface joueurD,ViewControllerInterface vci, BeloteCoinche beloteCoinche) 
 	{
 		this.belote = beloteCoinche;
-		this.threadCaptureQrCode = new Thread(new CaptureLiveDistribution(belote));
-		this.threadCaptureQrCode.start();
+		this.CaptureQrCode = new CaptureLiveDistribution(belote);
+		new Thread(CaptureQrCode).start();
 		this.state = State.Distribution;
 		this.etat = new EtatDuJeu(this);
 		this.joueurD = joueurD;
@@ -60,9 +62,9 @@ public class StateMachine
 				vci.distribution(joueurD.nbCard());
 				if (joueurD.aHuitCarte())
 				{
-					threadCaptureQrCode.interrupt();
-					threadCaptureCarte = new Thread(new CaptureLive(belote));
-					threadCaptureCarte.start();
+					CaptureQrCode.stop();
+					CaptureCarte = new CaptureLive(belote);
+					new Thread(CaptureCarte).start();
 					this.state = State.Annonce;
 					vci.modeAnnonce();
 					vci.joueurEnCours(premierAJouer);
@@ -396,16 +398,16 @@ public class StateMachine
 		 case MancheTermine:
 			 etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
 			 vci.distribution(0);
-			 threadCaptureQrCode = new Thread(new CaptureLiveDistribution(belote));
-			 threadCaptureQrCode.start();
+			 CaptureQrCode = new CaptureLiveDistribution(belote);
+			 new Thread(CaptureQrCode).start();
 			 this.state=State.Distribution;
 			 break;
 /******************************* Quitter *****************************/
 		 case Quit:
-			 if (threadCaptureCarte!=null)
-				 threadCaptureCarte.interrupt();
-			 if(threadCaptureQrCode!=null)
-				 threadCaptureQrCode.interrupt();
+			 if (CaptureCarte!=null)
+				 CaptureCarte.stop();
+			 if(CaptureQrCode!=null)
+				 CaptureQrCode.stop();
 			 t1.interrupt();
 		 default:
 			break;
@@ -524,7 +526,7 @@ public class StateMachine
 		switch (this.state)
 		{
 		case ResteDesTours:
-			threadCaptureCarte.interrupt();
+			CaptureCarte.stop();
 			this.premierAJouer++;
 			etat.mancheTerminer(vci,joueurD,premierAJouer);
 			this.state = State.MancheTermine;
@@ -584,38 +586,8 @@ public class StateMachine
 			}
 			break;
 		case AnnonceAFaire2:
-			if (nbPasse==0&&getEtat().annonceFaite())
-			{
-				vci.effaceAnnonce();
-				getEtat().actualiseAnnonce(vci);
-				this.state=State.AnnonceFaite;
-			}	
-			else if (nbPasse==0)
-			{
-				vci.effaceAnnonce();
-				getEtat().setAnnonceNull();
-				vci.actualiseAnnonce(null, null);
-				this.state=State.Annonce;
-			}
-			else if (nbPasse==1)
-			{
-				vci.effaceAnnonce();
-				getEtat().actualiseAnnonce(vci);
-				this.state=State.AnnoncePasse1;
-			}
-			else if (nbPasse==2)
-			{
-				vci.effaceAnnonce();
-				getEtat().actualiseAnnonce(vci);
-				this.state=State.AnnoncePasse2;
-			}
-			else if (nbPasse==3)
-			{
-				vci.effaceAnnonce();
-				getEtat().actualiseAnnonce(vci);
-				this.state=State.AnnoncePasse3;
-			}
-			break;
+			vci.annulleCouleurAnnonce();
+			this.state=State.AnnonceAFaire;
 		case Annonce:
 			break;
 		case AnnonceFaite:

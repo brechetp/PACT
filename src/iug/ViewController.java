@@ -467,4 +467,12 @@ public class ViewController implements ViewControllerInterface
 		fen.getPan().setMessage(message);
 		fen.repaint();
 	}
+
+	@Override
+	public void annulleCouleurAnnonce() {
+		if(fen.getPan().getY()==2){
+			fen.getPan().setY(1);
+		}
+		fen.repaint();
+	}
 }

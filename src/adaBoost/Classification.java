@@ -45,8 +45,9 @@ public class Classification
 	}
 	
 	public void determineClasse (double[] mvment)
-	{
-		if (mvment[1]<0.3) 
+	{		
+		//System.out.println(mvment[0]+" "+mvment[1]);
+		if (mvment[1]<0.9) 
 		{
 			envoiMouvement(2);
 		}
@@ -54,7 +55,15 @@ public class Classification
 		{
 			envoiMouvement(4);
 		}
-		else 
+		else if (mvment[1]<2.1)
+		{
+			envoiMouvement(1);
+		}
+		else if (mvment[1]>3) 
+		{
+			envoiMouvement(3);
+		}
+		else
 		{
 			ArrayList<Integer> classesRetour = new ArrayList<Integer>();
 			double resultMax = 0;
@@ -75,7 +84,6 @@ public class Classification
 //				envoiMouvement(indice);
 			double result = classi[0].result(mvment);
 			double result2 = classi[1].result(mvment);
-			
 			if (result*result2>0)
 				System.out.println("Non !");
 			else if(result>0)
@@ -131,7 +139,6 @@ public class Classification
 			break;
 		case 1:
 			//envoiMouvement(new MouvementEvent("retour"));
-			System.out.println("passer");
 			envoiMouvement(new MouvementEvent("passer"));
 			break;
 		case 2:
@@ -157,7 +164,7 @@ public class Classification
 
 	public void lancerClassi() 
 	{
-		if (compteur>20)
+		if (compteur>30)
 		{
 			normaliser();
 			determineClasse(this.moyenneVecteur);

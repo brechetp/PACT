@@ -108,4 +108,6 @@ public interface ViewControllerInterface
 
 	public void modeAPropos();
 
+	public void annulleCouleurAnnonce();
+
 }

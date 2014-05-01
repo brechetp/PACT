@@ -19,9 +19,12 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class BinaryImage extends GrayImage {
 
 	private static final int COMPONENT_THRESHOLD = (int) Math.round(Card.getWIDTH()*Card.getHEIGHT()/5);
-	private static final int SIZE_MIN = 8000;
+	private static final int SIZE_MIN = 9000;
 	private static final int SIZE_MAX = 20000;
 	private static final int SYMBOL_LIMIT = 150;
+	private static final int HEIGHT_LIMIT = 200;
+	private static final int R_WIDTH_LIMIT = 150;
+	private static final int L_WIDTH_LIMIT = 200;
 	protected int[][] binaryMatrix ;
 	protected boolean[][] booleanMatrix;
 	private IplImage binaryImage;
@@ -455,7 +458,7 @@ public class BinaryImage extends GrayImage {
 		for (int i=0; i<nbTags; i++){
 			if (compteur[i][0] >= SIZE_MIN){
 				res[0]++;
-				if(res[1] == -1 && compteur[i][0] <= SIZE_MAX && compteur[i][1]==1){
+				if(res[1] == -1 && compteur[i][0] <= SIZE_MAX  &&compteur[i][1]==1){
 					res[1] = i;
 				}
 

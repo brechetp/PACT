@@ -19,7 +19,7 @@ public class CaptureLive extends Capture implements Runnable  {
 	private static final int DIF_NUM =  20; // nombre de pixels qui doivent etre differents
 
 	private BeloteCoinche belote;
-
+	private CvCapture capture;
 	private boolean run = true;
 
 	public CaptureLive(BeloteCoinche belote){
@@ -27,14 +27,13 @@ public class CaptureLive extends Capture implements Runnable  {
 	}
 
 	public void run(){	
-		CvCapture capture=null;
 		try{ 
 
 
-			capture = opencv_highgui.cvCreateCameraCapture(getWebcam());
+			setCapture(opencv_highgui.cvCreateCameraCapture(getWebcam()));
 
-			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
-			opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
+			opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
+			opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
 
 
 
@@ -53,15 +52,21 @@ public class CaptureLive extends Capture implements Runnable  {
 			CvMemStorage storage = CvMemStorage.create();
 			System.out.println("Début de capture");
 
-			while ((image2 = opencv_highgui.cvQueryFrame(capture)) != null && run) {
+			while ((image2 = opencv_highgui.cvQueryFrame(getCapture())) != null && run) {
+				if(!run)
+				{
+					Thread.currentThread().interrupt();
+					Thread.sleep(1);
+				}
+				
 				cvSaveImage("data/courant/capture/capture"+compteur%1000+".jpg", image2);
 				if (compteur == 10){
-					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
-					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
+					opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
+					opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
 					imageA = image2.clone();
 					//	cvSaveImage("data/courant/compare/A.jpg", imageA);			
-					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
-					opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
+					opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
+					opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
 
 
 
@@ -84,15 +89,15 @@ public class CaptureLive extends Capture implements Runnable  {
 
 
 
-							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 1080);
-							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 1920);
+							opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 1080);
+							opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 1920);
 
-							largeImage =	opencv_highgui.cvQueryFrame(capture).clone();
+							largeImage =	opencv_highgui.cvQueryFrame(getCapture()).clone();
 							//cvClearMemStorage(storage);
 
-							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
-							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
-							imageB = opencv_highgui.cvQueryFrame(capture).clone();
+							opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 360);
+							opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 640);
+							imageB = opencv_highgui.cvQueryFrame(getCapture()).clone();
 							//cvClearMemStorage(storage);
 
 							//	cvSaveImage("data/courant/compare/imageA"+comptA+".jpg",imageA);
@@ -102,11 +107,11 @@ public class CaptureLive extends Capture implements Runnable  {
 							new Thread(new Match(imageA, imageB, largeImage, comptA ,getBelote())).start();
 							imageA = imageB.clone();
 
-							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
-							opencv_highgui.cvSetCaptureProperty(capture, opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
+							opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_HEIGHT, 36);
+							opencv_highgui.cvSetCaptureProperty(getCapture(), opencv_highgui.CV_CAP_PROP_FRAME_WIDTH, 64);
 
 							//cvClearMemStorage(storage);
-							image2 = opencv_highgui.cvQueryFrame(capture);
+							image2 = opencv_highgui.cvQueryFrame(getCapture());
 
 
 						}
@@ -129,12 +134,8 @@ public class CaptureLive extends Capture implements Runnable  {
 
 				Thread.sleep(1);
 			}
-			//nettoyage des ressources        
-			opencv_highgui.cvReleaseCapture(capture);
 			// rgb_frame.dispose();
 		} catch(Exception e){
-			//nettoyage des ressources        
-			opencv_highgui.cvReleaseCapture(capture);
 			System.out.println(e.getStackTrace());
 		}       
 	}
@@ -245,8 +246,17 @@ public class CaptureLive extends Capture implements Runnable  {
 		run = false;
 	}
 
+	public CvCapture getCapture()
+	{
+		return capture;
+	}
+	
 	public static int getDifNum() {
 		return DIF_NUM;
+	}
+
+	public void setCapture(CvCapture capture) {
+		this.capture = capture;
 	}
 
 

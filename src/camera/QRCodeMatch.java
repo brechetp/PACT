@@ -37,24 +37,7 @@ public class QRCodeMatch implements Runnable {
 	public void run() {
 
 		Image image = new Image(largeImage);
-		LuminanceSource source = new BufferedImageLuminanceSource(image.getRgbImage().getBufferedImage());
-		BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-		Result[] result = null;
-		try {
-			result = new QRCodeMultiReader().decodeMultiple(bitmap);
-		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(result != null){
-			for(Result res : result){
-				//System.out.println(res.getText());
-				String[] card = res.getText().split(" ");
-				belote.nouvelleCarte(new CardEvent(new Carte(card[0],card[1], belote.getEtat())));
-			}
-		}else{
-			System.out.println("Pas de QRCode trouvé");
-		}
+		
 	}
 
 
