@@ -14,7 +14,7 @@ public class BaseApprentissage {
 	public static ClassiFinal[] main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		double[][] base = new double[339][14] ;	
+		double[][] base = new double[331][14] ;	
 		double[][] base_test = new double[54][14];	
 		ArrayList<File> tableau_fichiers = new ArrayList<File>() ;
 		
