@@ -24,9 +24,22 @@ public class MainFinal {
 		ClassiFinal[] classilol = BaseApprentissage.main(null);
 		Classification classi = new Classification(classilol);
 		
-		//Initialisation.setSymbolDatabase("data/database/symbols/text");
-		//Initialisation.setLetterDatabase("data/database/letters/text");
+		try {
+			//Capture.cardSize("data/database/size/");
+			Initialisation.setCardSize("data/database/size/size.txt");
 		
+		} catch (NumberFormatException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try { // Initialisation de la base des bases de données
+			
+			Initialisation.setSymbolDatabase("data/database/symbols/text");
+			Initialisation.setLetterDatabase("data/database/letters/text");
+		} catch (NumberFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		vc.modeMenu();
 		
 		//Creation menus
