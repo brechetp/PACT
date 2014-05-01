@@ -18,6 +18,8 @@ public class MenuSettings extends menu {
 
 	@Override
 	public void run() {
+		
+		getVci().modeSettings();
 		try {
 			Capture.cardSize("data/database/size/");
 			Initialisation.setCardSize("data/database/size/size.txt");

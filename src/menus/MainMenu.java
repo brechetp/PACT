@@ -22,7 +22,7 @@ public class MainMenu implements GlobalListener
 		
 		tab[0] = new MenuTest(new ImageMenu(2), vci, classi);
 		tab[1] = new MenuBelote(new ImageMenu(1), vci, classi,this);
-		tab[2] = new MenuTest(new ImageMenu(3), vci, classi);
+		tab[2] = new MenuSettings(new ImageMenu(3), vci, classi);
 		tab[3] = new MenuQuitter(new ImageMenu(4), vci, classi);
 		
 		this.liste = menus;

@@ -25,7 +25,7 @@ public class BeloteCoinche implements GlobalListener
 		String label = carte.getCarte().getLabelNum();
 		String suit = carte.getCarte().getSuit();
 		
-		String newCarte;
+		String newCarte = label+" "+suit;
 		if (!isStateDistrib()) 
 		{
 			newCarte = (String) JOptionPane.showInputDialog(null, "Carte: ",

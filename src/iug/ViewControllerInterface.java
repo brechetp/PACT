@@ -47,10 +47,10 @@ public interface ViewControllerInterface
 	//Initialisation des menus
 	public void init(ImageMenu imageMenuGauche, ImageMenu imageMenuCentre, ImageMenu imageMenuDroite);
 	
-	//faire défiler les menus vers la droite
+	//faire dï¿½filer les menus vers la droite
 	public void droite(ImageMenu imageMenuNew);
 	
-	//faire défiler les menus vers la gauche
+	//faire dï¿½filer les menus vers la gauche
 	public void gauche(ImageMenu imageMenuNew);
 	
 	//passer en mode menu
@@ -65,7 +65,7 @@ public interface ViewControllerInterface
 	//valide le menu au centre
 	public void validerMenu();
 	
-	//accede à l'option k
+	//accede ï¿½ l'option k
 	public void option(int k);
 	
 	//modifie option 1
@@ -83,7 +83,7 @@ public interface ViewControllerInterface
 	//valide les options
 	public void validerOptions();
 	
-	//début distribution
+	//dï¿½but distribution
 	public void distribution(int k);
 	
 	//message faites vos annonces
@@ -98,8 +98,12 @@ public interface ViewControllerInterface
 	//marque la seconde pour l'attente du joueur distant
 	public void timeOutJD(int sec);
 	
-	//affiche les points à la fin de la manche
+	//affiche les points ï¿½ la fin de la manche
 	public void finManche(int points1, int points2, int pointsAnnonce1, int pointsAnnonce2, int pointsPartie1, int pointsPartie2, int pointsTotal1, int pointsTotal2, String annoncelol);
 
+
 	public void messageSettings(String message);
+
+	public void modeSettings();
+
 }
