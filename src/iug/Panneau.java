@@ -444,6 +444,19 @@ public class Panneau extends JPanel {
 				    	g.setColor(new Color(255,0,0));
 				    	g.drawString(s2, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1 + " - ") , (int) ((this.getHeight()*0.8)));
 			    	}
+			    	if(y==3){
+			    		g.setColor(new Color(255,153,51));
+				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+				    	g.drawString(" - ", (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1), (int) ((this.getHeight()*0.8)));
+				    	g.setColor(new Color(255,0,0));
+				    	g.drawString(s1, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : ") , (int) ((this.getHeight()*0.8)));
+				    	g.drawString(s2, (this.getWidth()/2)-(metrics.stringWidth("Annonce en cours : " + s1 + " - " + s2)/2)+metrics.stringWidth("Annonce en cours : " + s1 + " - ") , (int) ((this.getHeight()*0.8)));
+				    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
+			    		FontMetrics metricsK = g.getFontMetrics();
+			    		g.setColor(new Color(255,153,51));
+				    	g.drawString("Voulez-vous valider cette annonce ? (Quitter pour refuser)", (this.getWidth()/2)-(metricsK.stringWidth("Voulez-vous valider cette annonce ? (Quitter pour refuser)")/2), (int) ((this.getHeight()*0.85)));
+			    	
+			    	}
 			    }
 			    if (y==0){
 			    	

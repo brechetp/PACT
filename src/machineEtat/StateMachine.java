@@ -12,7 +12,7 @@ import menus.MenuOptions;
 public class StateMachine 
 {
 	private enum State {Distribution,
-						Annonce,AnnoncePasse1,AnnonceFaite,AnnoncePasse2,AnnoncePasse3,AnnonceAFaire,AnnonceAFaire2,
+						Annonce,AnnoncePasse1,AnnonceFaite,AnnoncePasse2,AnnoncePasse3,AnnonceAFaire,AnnonceAFaire2,AnnonceAValider,
 						DebutTour,DebutTour1,DebutTour2,DebutTour3,DebutTour4,
 						SecondTour,SecondTour1, SecondTour2, SecondTour3, SecondTour4,
 						MontreCarte1,MontreCarte2,MontreCarte3,MontreCarte4,
@@ -327,6 +327,11 @@ public class StateMachine
 			 break;
 		 
 		 case AnnonceAFaire2:
+			 vci.valideAnnonceFinal();
+			 System.out.println("boooooooooooooooooooooooooooooooooooooo");
+			 this.state= State.AnnonceAValider;
+			 break;
+		 case AnnonceAValider:
 			 nbPasse=0;
 			 etat.valideAnnonce(vci);
 			 joueurD.sendAnnonce(etat.getAnnonce(), etat.getNumJoueur());
@@ -585,6 +590,11 @@ public class StateMachine
 		case AnnonceAFaire2:
 			vci.annulleCouleurAnnonce();
 			this.state=State.AnnonceAFaire;
+			break;
+		case AnnonceAValider:
+			vci.backAnnonce();
+			this.state=State.AnnonceAFaire2;
+			break;
 		case Annonce:
 			break;
 		case AnnonceFaite:

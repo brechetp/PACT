@@ -476,4 +476,14 @@ public class ViewController implements ViewControllerInterface
 		}
 		fen.repaint();
 	}
+	
+	public void backAnnonce(){
+		fen.getPan().setY(2);
+		fen.repaint();
+	}
+	
+	public void valideAnnonceFinal(){
+		fen.getPan().setY(3);
+		fen.repaint();
+	}
 }

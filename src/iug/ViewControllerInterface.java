@@ -109,5 +109,9 @@ public interface ViewControllerInterface
 	public void modeAPropos(int secAD);
 
 	public void annulleCouleurAnnonce();
+	
+	public void backAnnonce();
+	
+	public void valideAnnonceFinal();
 
 }
