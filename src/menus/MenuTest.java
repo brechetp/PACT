@@ -7,9 +7,9 @@ import iug.ViewControllerInterface;
 public class MenuTest extends menu{
 	
 	
-	public MenuTest(ImageMenu image, ViewControllerInterface vci, Classification classi)
+	public MenuTest(ImageMenu image, ViewControllerInterface vci, Classification classi, MainMenu mainMenu)
 	{
-		super(image, vci, classi);
+		super(image, vci, classi, mainMenu);
 	}
 
 	@Override
@@ -17,5 +17,4 @@ public class MenuTest extends menu{
 		System.out.println("boo");
 		
 	}
-
 }

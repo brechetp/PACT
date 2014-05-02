@@ -1,7 +1,5 @@
 package machineEtat;
 
-import com.googlecode.javacv.cpp.opencv_highgui;
-
 import camera.CaptureLive;
 import camera.CaptureLiveDistribution;
 import iug.ViewControllerInterface;
@@ -294,7 +292,6 @@ public class StateMachine
 	 
 	public void eventGesteAccept()
 	{
-		nbPasse=0;
 		 switch(this.state) 
 		 {
 		 
@@ -550,6 +547,7 @@ public class StateMachine
 	
 	public void eventQuit() 
 	 {
+		System.out.println(nbPasse);
 		switch(this.state)
 		{
 		case AnnonceAFaire:

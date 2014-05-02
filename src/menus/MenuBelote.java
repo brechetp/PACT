@@ -18,16 +18,15 @@ import iug.ViewControllerInterface;
 
 public class MenuBelote extends menu {
 
-	private MainMenu mainMenu;
 	public MenuBelote(ImageMenu image, ViewControllerInterface vci, Classification classi,MainMenu mainMenu) {
-		super(image, vci, classi);
-		this.mainMenu = mainMenu;
+		super(image, vci, classi,mainMenu);
+	
 	}
 
 	@Override
 	public void run() 
 	{
-		getClassi().removeListener(mainMenu);
+		getClassi().removeListener(getMainMenu());
 		MenuOptions menuOptions = new MenuOptions(getVci(),this);
 		menuOptions.init();
 		getClassi().addListener(menuOptions);
@@ -70,7 +69,7 @@ public class MenuBelote extends menu {
 	}
 
 	public void stopBelote(BeloteCoinche belote){
-		getClassi().addListener(mainMenu);
+		getClassi().addListener(getMainMenu());
 		getVci().modeMenu();
 		getVci().supprimerMessage();
 		try {

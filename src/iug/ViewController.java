@@ -438,8 +438,9 @@ public class ViewController implements ViewControllerInterface
 		fen.repaint();
 	}
 	
-	public void modeAPropos(){
+	public void modeAPropos(int secAD){
 		fen.getPan().setModeActuel(777);
+		fen.getPan().setSecAD(secAD);
 		fen.repaint();
 	}
 	

@@ -11,14 +11,15 @@ import adaBoost.Classification;
 public class MenuSettings extends menu {
 
 	public MenuSettings(ImageMenu image, ViewControllerInterface vci,
-			Classification classi) {
-		super(image, vci, classi);
+			Classification classi, MainMenu mainMenu) {
+		super(image, vci, classi, mainMenu);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void run() {
 		
+		getClassi().removeListener(getMainMenu());
 		getVci().modeSettings();
 		try {
 			Capture.cardSize("data/database/size/", getVci());
@@ -38,8 +39,10 @@ public class MenuSettings extends menu {
 			// TODO Auto-generated catch block
 			getVci().messageSettings("Erreur lors de la capture des bases de données");
 		}
-		
+		getClassi().addListener(getMainMenu());
+		getVci().modeMenu();
 	}
+
 	
 
 }

@@ -9,12 +9,14 @@ public abstract class menu
 	private ImageMenu image;
 	private ViewControllerInterface vci;
 	private Classification classi;
+	private MainMenu mainMenu;
 	
-	public menu(ImageMenu image, ViewControllerInterface vci,Classification classi) 
+	public menu(ImageMenu image, ViewControllerInterface vci,Classification classi, MainMenu mainMenu) 
 	{
 		this.image = image;
 		this.setVci(vci);
 		this.setClassi(classi);
+		this.setMainMenu(mainMenu);
 	}
 
 	public abstract void run();
@@ -38,5 +40,13 @@ public abstract class menu
 
 	public void setClassi(Classification classi) {
 		this.classi = classi;
+	}
+
+	public MainMenu getMainMenu() {
+		return mainMenu;
+	}
+
+	public void setMainMenu(MainMenu mainMenu) {
+		this.mainMenu = mainMenu;
 	}
 }

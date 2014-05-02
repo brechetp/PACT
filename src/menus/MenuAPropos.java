@@ -7,14 +7,22 @@ import adaBoost.Classification;
 public class MenuAPropos extends menu{
 
 	public MenuAPropos(ImageMenu image, ViewControllerInterface vci,
-			Classification classi) {
-		super(image, vci, classi);
-		// TODO Auto-generated constructor stub
+			Classification classi,MainMenu mainMenu) {
+		super(image, vci, classi, mainMenu);
 	}
 
 	@Override
 	public void run() {
-		getVci().modeAPropos();
+		for (int secAD = 0 ; secAD < 10 ; secAD ++)
+		{
+			getVci().modeAPropos(secAD);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		getVci().modeMenu();
+		getVci().supprimerMessage();
 	}
-
 }
