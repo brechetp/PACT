@@ -47,7 +47,7 @@ public class Classification
 	public void determineClasse (double[] mvment)
 	{		
 		//System.out.println(mvment[0]+" "+mvment[1]);
-		if (mvment[1]<0.9) 
+		if (mvment[1]<0.7) 
 		{
 			envoiMouvement(2);
 		}

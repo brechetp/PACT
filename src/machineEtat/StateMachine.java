@@ -206,7 +206,6 @@ public class StateMachine
 		 
 	public void eventGestePasser()
 	{
-		nbPasse++;
 		switch(this.state) 
 		{
 		
