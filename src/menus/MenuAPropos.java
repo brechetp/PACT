@@ -15,7 +15,7 @@ public class MenuAPropos extends menu{
 	public void run() {
 		for (int secAD = 0 ; secAD < 10 ; secAD ++)
 		{
-			getVci().modeAPropos(secAD);
+			getVci().modeAPropos(10-secAD);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

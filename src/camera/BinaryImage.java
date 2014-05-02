@@ -19,7 +19,7 @@ import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
 public class BinaryImage extends GrayImage {
 
 	private static final int COMPONENT_THRESHOLD = (int) Math.round(Card.getWIDTH()*Card.getHEIGHT()/5);
-	private static final int SIZE_MIN = 9000;
+	private static final int SIZE_MIN = 8000;
 	private static final int SIZE_MAX = 20000;
 	private static final int SYMBOL_LIMIT = 150;
 	private static final int HEIGHT_LIMIT = 200;
@@ -432,11 +432,11 @@ public class BinaryImage extends GrayImage {
 	public int[] componentsNumberAndFirst(){
 
 		int [][] tab = connectedComponents();
-		int tag;
-		if (tab[160][170] != 0){
-		tag = Math.min(tab[160][170], tab[450][317]);
-		} else 
-			tag = tab[450][317];
+//		int tag;
+//		if (tab[160][170] != 0 && tab[450][317] !=0 ){
+//		tag = Math.min(tab[160][170], tab[450][317]);
+//		} else 
+//			tag = tab[450][317];
 		int[][] compteur = new int[nbTags][2];
 		for (int i=0; i<nbTags; i++){
 			compteur[i][0]=0;
@@ -447,9 +447,9 @@ public class BinaryImage extends GrayImage {
 			for (int j = 0; j < width; j++) {
 				if (tab[i][j] !=0) {
 					compteur[tab[i][j]][0]++ ;
-					if (tab[i][j] == tag){
-						compteur[tab[i][j]][1] = 1;
-					}
+//					if (tab[i][j] == tag){
+//						compteur[tab[i][j]][1] = 1;
+//					}
 				}
 			}
 		}
@@ -458,7 +458,7 @@ public class BinaryImage extends GrayImage {
 		for (int i=0; i<nbTags; i++){
 			if (compteur[i][0] >= SIZE_MIN){
 				res[0]++;
-				if(res[1] == -1 && compteur[i][0] <= SIZE_MAX  &&compteur[i][1]==1){
+				if(res[1] == -1 && compteur[i][0] <= SIZE_MAX  /*&&compteur[i][1]==1*/){
 					res[1] = i;
 				}
 

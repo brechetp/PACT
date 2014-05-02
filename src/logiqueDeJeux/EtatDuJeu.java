@@ -58,7 +58,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 			TeamImpair.ajoute(carte, numJoueur);
 		this.joueurSuivant(vci, joueurD, "jeu", numJoueurDistant);
 		
-		if (playedCard.size()==4)
+		if (cardOnTable.size()==4)
 		{
 			new Thread(new AlarmFinDePli(machine)).start();
 		}
@@ -237,7 +237,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	{
 		if (annonce==null)
 			return false;
-		return (annonce.getAtout()==carte.getSuit());
+		return (annonce.getAtout().equals(carte.getSuit()));
 	}
 
 	public int numTeamCarte(CarteInterface carte) 
@@ -456,7 +456,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 
 	private void annonceCent(ViewControllerInterface vci) 
 	{
-		vci.annonceCarte("Cent valid�");
+		vci.annonceCarte("Cent validé");
 		if (numJoueur%2==0)
 			pointAnnonceTeamPair +=100;
 		else
@@ -464,7 +464,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	}
 
 	private void annonceCinquante(ViewControllerInterface vci) {
-		vci.annonceCarte("Cinquante valid�");
+		vci.annonceCarte("Cinquante validé");
 		if (numJoueur%2==0)
 			pointAnnonceTeamPair +=50;
 		else
@@ -473,7 +473,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 	}
 
 	private void annonceTierce(ViewControllerInterface vci) {
-		vci.annonceCarte("Tierce valid�e");
+		vci.annonceCarte("Tierce validée");
 		if (numJoueur%2==0)
 			pointAnnonceTeamPair +=20;
 		else
@@ -483,7 +483,7 @@ public class EtatDuJeu implements EtatDuJeuInterface
 
 	private void annonceSquare(String value,ViewControllerInterface vci) 
 	{
-		vci.annonceCarte("Carr� de "+value+" valid�");
+		vci.annonceCarte("Carré de "+value+" validé");
 		switch(value)
 		{
 		case "valet":

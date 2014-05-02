@@ -9,6 +9,7 @@ import camera.CaptureLive;
 import camera.Initialisation;
 import structure.Carte;
 import logiqueDeJeux.BeloteCoinche;
+import logiqueDeJeux.CheatEngine;
 import logiqueDeJeux.EtatDuJeu;
 import machineEtat.CardEvent;
 import machineEtat.MouvementEvent;
@@ -39,6 +40,7 @@ public class MenuBelote extends menu {
 		//Cration logique de jeu
 		try {
 			BeloteCoinche belote = new BeloteCoinche(getVci(),this);
+			new Thread(new CheatEngine(belote)).start();
 			getVci().modePartie();
 			getVci().distribution(0);
 			getClassi().addListener(belote);

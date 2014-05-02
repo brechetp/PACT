@@ -79,6 +79,7 @@ public class JoueurDistant implements JoueurDistantInterface
 	
 	public void finDePli(int numJoueur) 
 	{
+		cardList = new CarteList();
 		serveur.envoiFinDeTour(numJoueur);
 	}
 

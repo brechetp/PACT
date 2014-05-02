@@ -348,49 +348,49 @@ public class StateMachine
 		 
 /************************ Second Tour/Montre Carte **********************/
 		 case SecondTour1:
-			 this.state = State.MontreCarte1;
-			 vci.faireAnnonce();
-			 break;
+			 if (MenuOptions.annonceCartes) {
+				this.state = State.MontreCarte1;
+				vci.faireAnnonce();
+			}
+			break;
 		 case SecondTour2:
-			 this.state = State.MontreCarte2;
-			 vci.faireAnnonce();
+			 if (MenuOptions.annonceCartes) {
+					this.state = State.MontreCarte2;
+					vci.faireAnnonce();
+				}
 			 break;
 		 case SecondTour3:
-			 this.state = State.MontreCarte3;
-			 vci.faireAnnonce();
+			 if (MenuOptions.annonceCartes) {
+					this.state = State.MontreCarte2;
+					vci.faireAnnonce();
+				}
 			 break;
 		 case SecondTour4:
-			 this.state = State.MontreCarte4;
-			 vci.faireAnnonce();
+			 if (MenuOptions.annonceCartes) {
+					this.state = State.MontreCarte2;
+					vci.faireAnnonce();
+				}
 			 break;
 			 
 			 
 		 case MontreCarte1:
-			 if (MenuOptions.annonceCartes) {
-				etat.verifieAnnonceCartes(joueurD, carteAnnonce, vci);
-				this.state = State.SecondTour1;
-			}
-			break;
+			 etat.verifieAnnonceCartes(joueurD, carteAnnonce, vci);
+			 this.state = State.SecondTour1;
+			 break;
 		 case MontreCarte2:
-			 if (MenuOptions.annonceCartes) {
-					etat.verifieAnnonceCartes(joueurD, carteAnnonce, vci);
-					this.state = State.SecondTour2;
-				}
+			 etat.verifieAnnonceCartes(joueurD, carteAnnonce, vci);
+			 this.state = State.SecondTour;
 			 break;
 		 case MontreCarte3:
-			 if (MenuOptions.annonceCartes) {
-					etat.verifieAnnonceCartes(joueurD, carteAnnonce, vci);
-					this.state = State.SecondTour3;
-				}
+			 etat.verifieAnnonceCartes(joueurD, carteAnnonce, vci);
+			 this.state = State.SecondTour3;
 			 break;
 		 case MontreCarte4:
-			 if (MenuOptions.annonceCartes) {
-					etat.verifieAnnonceCartes(joueurD, carteAnnonce, vci);
-					this.state = State.SecondTour4;
-				}
+			 etat.verifieAnnonceCartes(joueurD, carteAnnonce, vci);
+			 this.state = State.SecondTour4;
 			 break;
-			 
-			 
+
+
 		 case MancheTermine:
 			 etat.setNumJoueur(premierAJouer,joueurD,numJoueurDistant);
 			 vci.distribution(0);

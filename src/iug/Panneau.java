@@ -157,15 +157,15 @@ public class Panneau extends JPanel {
 		    	FontMetrics metrics = g.getFontMetrics();
 		    	g.drawString("Nous sommes les RA'PACT", (this.getWidth()/2)-(metrics.stringWidth("Nous sommes les RA'PACT")/2) , (int) ((this.getHeight())*0.1));
 		    	g.drawString("Ce menu s'auto-détruira dans " + secAD + " secondes", (this.getWidth()/2)-(metrics.stringWidth("Ce menu s'auto-détruira dans " + secAD + " secondes")/2) , (int) ((this.getHeight())*0.95));
-		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+		    	g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		    	FontMetrics metricslol = g.getFontMetrics();
-		    	g.drawString("Julia la buse : elle part � la chasse aux paresseux", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard p�cheur : il hame�onne les experts � coups de mails pour ne plus les l�cher")/2) , (int) ((this.getHeight())*0.55));
-		    	g.drawString("Pierre le busard p�cheur : il hame�onne les experts � coups de mails pour ne plus les l�cher", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard p�cheur : il hame�onne les experts � coups de mails pour ne plus les l�cher")/2) , (int) ((this.getHeight())*0.6));
-		    	g.drawString("Micha�l l�aigle : sa vue per�ante d�code la moindre erreur de Java", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard p�cheur : il hame�onne les experts � coups de mails pour ne plus les l�cher")/2) , (int) ((this.getHeight())*0.65));
-		    	g.drawString("Benjamin la chouette : il trouve �a mignon", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard p�cheur : il hame�onne les experts � coups de mails pour ne plus les l�cher")/2) , (int) ((this.getHeight())*0.7));
-		    	g.drawString("Edouard M le vautour : son ombre plane autour des r�unions agonisantes", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard p�cheur : il hame�onne les experts � coups de mails pour ne plus les l�cher")/2) , (int) ((this.getHeight())*0.75));
-		    	g.drawString("Edouard E le hibou : lui vit la nuit et dort le jour", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard p�cheur : il hame�onne les experts � coups de mails pour ne plus les l�cher")/2) , (int) ((this.getHeight())*0.80));
-		    	g.drawString("Timoth�e le condor : c�en est d�j� un beau sp�cimen", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard p�cheur : il hame�onne les experts � coups de mails pour ne plus les l�cher")/2) , (int) ((this.getHeight())*0.85));
+		    	g.drawString("Julia la buse : elle part à la chasse aux paresseux", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pêcheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.61));
+		    	g.drawString("Pierre le busard pêcheur : il hameçonne les experts à coups de mails pour ne plus les lâcher", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pêcheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.65));
+		    	g.drawString("Michaël l'aigle : sa vue perçante décode la moindre erreur de Java", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pêcheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.69));
+		    	g.drawString("Benjamin la chouette : il trouve ça mignon", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pêcheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.73));
+		    	g.drawString("Edouard M le vautour : son ombre plane autour des réunions agonisantes", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pêcheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.77));
+		    	g.drawString("Edouard E le hibou : lui vit la nuit et dort le jour", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pêcheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.81));
+		    	g.drawString("Timothée le condor : c'en est déjà un beau spécimen", (this.getWidth()/2)-(metricslol.stringWidth("Pierre le busard pêcheur : il hameçonne les experts à coups de mails pour ne plus les lâcher")/2) , (int) ((this.getHeight())*0.85));
 		    }
 		    
 		    
@@ -324,7 +324,7 @@ public class Panneau extends JPanel {
 					FontMetrics metrics = g.getFontMetrics();
 			    	g.drawString("Distribution des cartes", (this.getWidth()/2)-(metrics.stringWidth("Distribution des cartes")/2), (this.getHeight()/2));
 			    	if (cartesDistribuees != 0){
-			    		g.drawString(cartesDistribuees + " cartes distribu�es", (this.getWidth()/2)-(metrics.stringWidth(cartesDistribuees + " cartes distribu�es")/2), (int) (this.getHeight()*0.6));
+			    		g.drawString(cartesDistribuees + " cartes distribuées", (this.getWidth()/2)-(metrics.stringWidth(cartesDistribuees + " cartes distribu�es")/2), (int) (this.getHeight()*0.6));
 			    	}
 			    }
 			    if (k==11){
